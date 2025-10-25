@@ -99,4 +99,4 @@ ISO_CODE="wmb"
 LKB_SCRIPT_FILE="lkb/script"
 CHEAP_GRM_FILE_NAME=""
 ACE_CONFIG_FILE="ace/config.tdl"
-TSDB_ROOTS="../tsdb/home/aux+vc-gold"
+TSDB_ROOTS= [ "../tsdb/home/aux+vc-gold" ]

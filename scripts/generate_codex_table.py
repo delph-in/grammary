@@ -26,4 +26,4 @@ def generate_html_table(toml_file, output_html):
         out.write("  </tbody>\n</table>\n")
 
 if __name__ == "__main__":
-    generate_html_table("codex.toml", "codex-table.md")
+    generate_html_table("grammary.toml", "grammary-table.md")

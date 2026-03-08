@@ -1,9 +1,9 @@
-# codex
+# grammary
 A collection of grammars, made as accessible as possible
 
-## 🗂 Codex Table
+## 🗂 Grammary Table
 
-See [codex-table.md](codex-table.md) for a list of all grammars and their settings.
+See [grammary-table.md](grammary-table.md) for a list of all grammars and their settings.
 
 ## Setup
 
@@ -16,19 +16,19 @@ $ bash compile.sh
 
 ### Download grammars with:
 
-$ python scripts/download_grammars.py codex.toml build
+$ python scripts/download_grammars.py grammary.toml build
 
 ### Compile ltdb with
 
-$ bash scripts/build-ace.sh build
+$ bash scripts/build-ltdb.sh build
 
 ### Compile grammars using ace
 
 $ bash scripts/build-ace.sh build
 
-### codex.toml
+### grammary.toml
 
-Grammars are listed in the file `codex.toml`
+Grammars are listed in the file `grammary.toml`
 
  * `vcs` is the way to download the grammar
  * `tree` is the treebank (if it is seperate, we only handle this for the SRG)
@@ -47,7 +47,7 @@ Very rough distinctions so that people can have a general idea about how big the
 
 ### Make grew corpora
 
-*Unfinished*
+*Unfinished*  We are working on making the trees and semantic searchable with grew
 
 First install `grew`: https://grew.fr/usage/install/
 and `grewpy`: https://grew.fr/usage/python/

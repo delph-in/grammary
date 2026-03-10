@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9][0-9][0-9][0-9]-[0-9][0-9]*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to build (e.g. 2026-03)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: sudo apt-get install -y subversion p7zip-full
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Build grammars
+        run: bash compile.sh
+
+      # Delete any archives copied into build/ (e.g. build/burger.7z from local/)
+      # before we create the release archive.
+      - name: Remove downloaded archives from build/
+        run: |
+          find build/ -maxdepth 3 -type f \
+            \( -name '*.7z' -o -name '*.zip' -o -name '*.tar.gz' \
+               -o -name '*.tgz' -o -name '*.tar.bz2' -o -name '*.tar.xz' \) \
+            -print -delete
+
+      - name: Generate grammar summary
+        run: |
+          python scripts/make_summary.py \
+            --db-dir build/DBS \
+            --tag "$TAG" \
+            --output "summary-${TAG}.md"
+
+      # Bundle source + compiled databases into one deployable archive.
+      # xz gives significantly better compression than gz for this content.
+      - name: Create release archive
+        run: |
+          STAGING="staging/grammary-${TAG}"
+          mkdir -p "$STAGING"
+          git archive HEAD | tar -x -C "$STAGING"
+          cp -r build/DBS "$STAGING/build/"
+          tar -cJf "grammary-${TAG}.tar.xz" -C staging "grammary-${TAG}/"
+
+      - name: Create release if absent
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "$TAG" &>/dev/null \
+            || gh release create "$TAG" --title "Grammary $TAG" --generate-notes
+
+      - name: Remove old archives from release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "$TAG" --json assets -q '.assets[].name' \
+            | grep -E '\.(tar\.xz|tar\.gz|zip|7z)$' \
+            | xargs -r -I{} gh release delete-asset "$TAG" {} --yes \
+            || true
+
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "$TAG" \
+            "grammary-${TAG}.tar.xz" \
+            "summary-${TAG}.md" \
+            --clobber
+          for db in build/DBS/*.db; do
+            gh release upload "$TAG" "$db" --clobber
+          done

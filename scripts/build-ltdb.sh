@@ -14,8 +14,11 @@ LTDBDIR="${TMPDIR}/ltdb"
 
 # Ensure required repositories are available
 if [ ! -d "${LTDBDIR}" ]; then
-    git clone --branch "flask" --single-branch  https://github.com/fcbond/ltdb.git "${LTDBDIR}"
+    git clone https://github.com/fcbond/ltdb.git "${LTDBDIR}"
 fi
+
+# Ensure ACE binary is available (installs to etc/ltdb/etc/ace-*/)
+python "${LTDBDIR}/scripts/setup_ace.py"
 
 get_toml() {
   local file="$1"
@@ -45,7 +48,7 @@ for file in $files; do
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
 	python etc/ltdb/scripts/grm2db.py \
-	--outdir build/DBS "${file}" || true
+	--outdir build/DBS --ace "${file}" || true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi
@@ -57,5 +60,7 @@ echo "🚀 Successfully created the following grammars"
 find build/DBS -type f -name '*.db' -size +0c -exec du -h {} + | sort -h
 
 echo
-echo "🏗️Copying to etc/ltdb/web/db/"
+echo "🏗️ Copying to etc/ltdb/web/db/"
 find build/DBS -type f -name '*.db' -size +0c -exec cp {} etc/ltdb/web/db/ \;
+find build/DBS -type f -name '*.dat' -size +0c -exec cp {} etc/ltdb/web/db/ \;
+chmod 644 etc/ltdb/web/db/*.db etc/ltdb/web/db/*.dat 2>/dev/null || true

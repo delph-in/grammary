@@ -44,17 +44,7 @@ echo "🚀 Compile with ltdb"
 
 bash scripts/build-ltdb.sh "${BUILD}"
 
-echo
-echo "🏗️   Copying to etc/ltdb/web/db/"
-find "${BUILD}/DBS" -type f -name '*.db' -size +0c -exec cp {} etc/ltdb/web/db/ \;
 
-
-# Step 5: Compile grammars with ace
-echo "🚀 Compile with ace"
-
-bash scripts/build-ace.sh "${BUILD}"
-
-echo
 echo "To see the ltdb:"
 echo "cd etc/ltdb; bash deploy.sh"
 echo

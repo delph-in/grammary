@@ -74,6 +74,12 @@ jobs:
             | xargs -r -I{} gh release delete-asset "$TAG" {} --yes \
             || true
 
+      - name: Compress individual databases and ACE files
+        run: |
+          for f in build/DBS/*.db build/DBS/*.dat; do
+            [ -f "$f" ] && xz -T0 -9 --keep "$f"
+          done
+
       - name: Upload release assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -82,6 +88,6 @@ jobs:
             "grammary-${TAG}.tar.xz" \
             "summary-${TAG}.md" \
             --clobber
-          for db in build/DBS/*.db; do
-            gh release upload "$TAG" "$db" --clobber
+          for f in build/DBS/*.db.xz build/DBS/*.dat.xz; do
+            [ -f "$f" ] && gh release upload "$TAG" "$f" --clobber
           done

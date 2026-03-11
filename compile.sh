@@ -45,6 +45,15 @@ echo "🚀 Compile with ltdb"
 bash scripts/build-ltdb.sh "${BUILD}"
 
 
+# Step 5: Generate grammar summary
+echo "📋 Generating grammar summary"
+mkdir -p docs
+python scripts/make_summary.py \
+  --db-dir build/DBS \
+  --ltdb-dir etc/ltdb \
+  --output docs/summary.md
+echo "Summary written to docs/summary.md"
+
 echo "To see the ltdb:"
 echo "cd etc/ltdb; bash deploy.sh"
 echo

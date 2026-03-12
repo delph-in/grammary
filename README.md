@@ -7,7 +7,7 @@ See [grammary-table.md](grammary-table.md) for a list of all grammars and their 
 
 ## Releases
 
-Release tags are date-based: `YYYY-MM` (monthly) or `YYYY-MM-DD` (daily).
+Release tags are date-based: `YYYY.MM` (monthly) or `YYYY.MM.DD` (daily).
 Pushing a tag triggers the [release workflow](.github/workflows/release.yml), which:
 
 1. Runs `compile.sh` to download all grammars and build the ltdb databases.
@@ -19,8 +19,8 @@ Pushing a tag triggers the [release workflow](.github/workflows/release.yml), wh
 5. Generates `summary-{tag}.md` — a Markdown table of grammar statistics.
 
 ```bash
-git tag 2026-03
-git push origin 2026-03
+git tag 2026.03
+git push origin 2026.03
 ```
 
 The build is slow (~hours) because all grammars are downloaded and compiled from
@@ -30,7 +30,7 @@ release are replaced before uploading.
 To generate a summary locally:
 
 ```bash
-python scripts/make_summary.py --db-dir build/DBS --tag 2026-03
+python scripts/make_summary.py --db-dir build/DBS --tag 2026.03
 ```
 
 ## Setup

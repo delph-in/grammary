@@ -100,3 +100,6 @@ LKB_SCRIPT_FILE="lkb/script"
 CHEAP_GRM_FILE_NAME=""
 ACE_CONFIG_FILE="ace/config.tdl"
 TSDB_ROOTS= [ "../tsdb/home/aux+vc-gold" ]
+
+## Example sentences for demo
+EXAMPLES=["Janganja gininga ngurra yangadinka wagalamarrinini."]

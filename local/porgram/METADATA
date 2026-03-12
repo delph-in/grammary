@@ -20,24 +20,22 @@
 ## tsdb/gold 
 ## tsdb/skeletons
 
-
-
 ## Grammar maintainers and contributors
 
-MAINTAINER="Lars Hellan"
-CONTRIBUTORS="Lars Hellan, Dorothee Beerman, Tore Bruland, Petter Haugereid, Elias Aamot, Mats Sandøy"
-CONTACT_EMAIL="lars.hellan@ntnu.no"
+MAINTAINER="Alexandre Rademaker"
+CONTRIBUTORS="Leonel Figueiredo de Alencar, Alexandre Rademaker, Dan Flickinger"
+CONTACT_EMAIL=""
 
 ## Grammar name and web presence
 ## Note: if SHORT_GRAMMAR_NAME is not defined, the directory name is used.
 
-GRAMMAR_NAME="Norwegian HPSG grammar"
-SHORT_GRAMMAR_NAME="NorSource"
-WEBSITE="http://www.typecraft.org/tc2wiki/Norwegian_HPSG_grammar_NorSource"
-DEMO_WEBSITE="http://august.hf.ntnu.no:8200/norsource"
-#DOCUMENTATION_URL=""
-ISSUE_TRACKER=""
-LICENSE="LGPLLR"
+GRAMMAR_NAME="PorGram"
+SHORT_GRAMMAR_NAME="porgram"
+WEBSITE="https://github.com/LR-POR/PorGram"
+DEMO_WEBSITE=""
+DOCUMENTATION_URL=""
+ISSUE_TRACKER="https://github.com/LR-POR/PorGram/issues"
+LICENSE="MIT"
 
 ## You may optionally specify a release date for the grammar. If unspecified,
 ## the grammar catalogue script will attempt to extract a date from the
@@ -55,7 +53,7 @@ CITE=""
 ## If this is not provided, it is automatically extracted from the
 ## local version control info. You only need to modify this if the
 ## version control URL you use locally is not the one you want published
-VCS=""
+VCS="https://github.com/LR-POR/PorGram.git"
 
 ## Semi-colon separated list of required external resources 
 ## e.g.
@@ -81,26 +79,24 @@ ASSOCIATED_RESOURCES=""
 
 
 ## Uncomment one:
-GRAMMAR_TYPE="Resource grammar"
+#GRAMMAR_TYPE="Resource grammar"
 #GRAMMAR_TYPE="Treebank trained grammar"
-#GRAMMAR_TYPE="Medium-sized lingiustic grammar"
+#GRAMMAR_TYPE="Medium-sized linguistic grammar"
 #GRAMMAR_TYPE="Experimental grammar"
 
 
 ## Language identification
 ## Iso-codes can be looked up at http://www.sil.org/iso639-3/codes.asp
 
-LANGUAGE_NAME="Norwegian"
-ISO_CODE="nor"
+LANGUAGE_NAME=""
+ISO_CODE=""
 
 ## File locations of LKB script file and .grm file read by cheap
 ## Paths relative to top of grammar directory
 
-LKB_SCRIPT_FILE="lkb/script"
+LKB_SCRIPT_FILE=""
 CHEAP_GRM_FILE_NAME=""
-ACE_CONFIG_FILE="ace/norsource_config.tdl"
-
-PROFILES=["norm_bon_776_complex_ad_ace", "norm_bon_776_igtest_ace", "norm_bon_776_mcp_ace"]
+ACE_CONFIG_FILE="ace/my-config.tdl"
 
 ## Example sentences for demo
-EXAMPLES=["Hunden kommer til å bjeffe hvis Per ankommer."]
+EXAMPLES=["A janela abriu-se."]

@@ -99,3 +99,8 @@ ISO_CODE="nor"
 LKB_SCRIPT_FILE="lkb/script"
 CHEAP_GRM_FILE_NAME=""
 ACE_CONFIG_FILE="ace/config.tdl"
+
+## Example sentences for demo
+EXAMPLES=["Hunden kommer til å bjeffe hvis Per ankommer."]
+
+

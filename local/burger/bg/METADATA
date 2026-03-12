@@ -99,3 +99,6 @@ ISO_CODE="bul"
 LKB_SCRIPT_FILE="lkb/script"
 CHEAP_GRM_FILE_NAME=""
 ACE_CONFIG_FILE="ace/config.tdl"
+
+## Example sentences for demo
+EXAMPLES=["Кучето, което Браун преследваше, лаеше."]

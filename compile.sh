@@ -43,12 +43,18 @@ echo "🚀 Compile with ltdb"
 bash scripts/build-ltdb.sh "${BUILD}"
 
 
-# Step 5: Generate grammar summary
-echo "📋 Generating grammar summary"
+# Step 5: Generate grammar table and summary
+echo "📋 Generating grammar table"
 mkdir -p docs
+uv run python scripts/generate_table.py \
+  --toml grammary.toml \
+  --output docs/grammary.md
+
+echo "📋 Generating grammar summary"
 uv run python scripts/make_summary.py \
   --db-dir build/DBS \
   --ltdb-dir etc/ltdb \
+  --tag latest \
   --output docs/summary.md
 echo "Summary written to docs/summary.md"
 

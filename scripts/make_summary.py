@@ -1,5 +1,7 @@
 """Generate a Markdown grammar summary table from ltdb database files."""
 
+from __future__ import annotations
+
 import argparse
 import sqlite3
 import subprocess

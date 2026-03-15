@@ -17,8 +17,6 @@ if [ ! -d "$VENV_DIR" ]; then
   uv venv "$VENV_DIR" --python 3.13
 fi
 
-source .venv/bin/activate
-
 # Step 2: Install dependencies
 echo "📦 Installing requirements..."
 uv pip install -r requirements.txt
@@ -26,7 +24,7 @@ uv pip install -r requirements.txt
 # Step 3: Download grammars
 echo "🚀 Download grammars"
 
-python scripts/download_grammars.py grammary.toml "${BUILD}"
+uv run python scripts/download_grammars.py grammary.toml "${BUILD}"
 
 echo "🩹 Overlay local files"
 
@@ -48,7 +46,7 @@ bash scripts/build-ltdb.sh "${BUILD}"
 # Step 5: Generate grammar summary
 echo "📋 Generating grammar summary"
 mkdir -p docs
-python scripts/make_summary.py \
+uv run python scripts/make_summary.py \
   --db-dir build/DBS \
   --ltdb-dir etc/ltdb \
   --output docs/summary.md

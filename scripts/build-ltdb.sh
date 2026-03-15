@@ -18,14 +18,14 @@ if [ ! -d "${LTDBDIR}" ]; then
 fi
 
 # Ensure ACE binary is available (installs to etc/ltdb/etc/ace-*/)
-python "${LTDBDIR}/scripts/setup_ace.py"
+uv run python "${LTDBDIR}/scripts/setup_ace.py"
 
 get_toml() {
   local file="$1"
   shift
   local key_expr="$*"
 
-  python -c "
+  uv run python -c "
 import toml, sys
 data = toml.load(open('$file', 'r'))
 try:
@@ -47,7 +47,7 @@ for file in $files; do
     config_rel=$(get_toml "$file" "['ACE_CONFIG_FILE']")
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
-	python etc/ltdb/scripts/grm2db.py \
+	uv run python etc/ltdb/scripts/grm2db.py \
 	--outdir build/DBS --ace "${file}" || true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"

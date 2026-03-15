@@ -1,9 +1,22 @@
-# grammary
-A collection of grammars, made as accessible as possible
+# The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks
+
+
+A collection of grammars, made as accessible as possible. 
+
+The grammars are processed with the <a href='https://github.com/fcbond/ltdb/'>Linguistic Type Data-Base (LTDB)</> and can be accessed here: <https://compling.upol.cz/ltdb>, where you can browse the grammar and interactively parse (and for some grammars generate).
+
+Gathered together and revived by Francis Bond and Dan Flickinger.
+
 
 ## 🗂 Grammary Table
 
-See [grammary-table.md](grammary-table.md) for a list of all grammars and their settings.
+See [grammary-table.md](grammary-table.md) for a list of all the grammars.
+
+
+## Citations
+
+Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks. In *15th International Conference on Language Resources and Evaluation* (LREC 2026) (to appear)
+
 
 ## Releases
 

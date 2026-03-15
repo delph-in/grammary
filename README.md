@@ -10,8 +10,9 @@ Gathered together and revived by Francis Bond and Dan Flickinger.
 
 ## 🗂 Grammary Table
 
-See [grammary-table.md](grammary-table.md) for a list of all the grammars.
+See [docs/grammary.md](grammary.md) for a list of all the grammar repositories (made from grammary.toml).
 
+See [docs/summary.md](summary.md) for a list of all the grammars, with their sizes and links to the compiled ltdb (db) and ace (dat) files.
 
 ## Citations
 

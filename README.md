@@ -10,14 +10,15 @@ Gathered together and revived by Francis Bond and Dan Flickinger.
 
 ## 🗂 Grammary Table
 
-See [docs/grammary.md](grammary.md) for a list of all the grammar repositories (made from grammary.toml).
+See [docs/grammary.md](docs/grammary.md) for a list of all the grammar repositories (made from grammary.toml).
 
-See [docs/summary.md](summary.md) for a list of all the grammars, with their sizes and links to the compiled ltdb (db) and ace (dat) files.
+See [docs/summary.md](docs/summary.md) for a list of all the grammars, with their sizes and links to the compiled ltdb (db) and ace (dat) files.
 
 ## Citations
 
 Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks. In *15th International Conference on Language Resources and Evaluation* (LREC 2026) (to appear)
 
+Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks (2026.03.15) [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.19040902>
 
 ## Releases
 
@@ -33,9 +34,11 @@ Pushing a tag triggers the [release workflow](.github/workflows/release.yml), wh
 5. Generates `summary-{tag}.md` — a Markdown table of grammar statistics.
 
 ```bash
-git tag 2026.03
-git push origin 2026.03
+git tag 2026.03.15
+git push origin 2026.03.15
 ```
+
+After the release you should add `grammary-{tag}.tar.xz` to Zenodo by hand.
 
 The build is slow (~hours) because all grammars are downloaded and compiled from
 scratch. Re-running the workflow for the same tag is safe: old archives on the

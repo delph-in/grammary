@@ -77,7 +77,7 @@ jobs:
       - name: Compress individual databases and ACE files
         run: |
           for f in build/DBS/*.db build/DBS/*.dat; do
-            [ -f "$f" ] && xz -T0 -9 --keep "$f"
+            [ -f "$f" ] && xz -T0 -6 --keep "$f"
           done
 
       - name: Upload release assets

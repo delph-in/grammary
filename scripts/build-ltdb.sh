@@ -64,6 +64,8 @@ find build/DBS -type f -name '*.dat' -size +0c -exec du -h {} + | sort -h
 
 echo
 echo "🏗️ Copying to etc/ltdb/web/db/"
+mkdir -p etc/ltdb/web/db
+find etc/ltdb/web/db -maxdepth 1 -type f \( -name '*.db' -o -name '*.dat' \) -delete
 find build/DBS -type f -name '*.db' -size +0c -exec cp {} etc/ltdb/web/db/ \;
 find build/DBS -type f -name '*.dat' -size +0c -exec cp {} etc/ltdb/web/db/ \;
 chmod 644 etc/ltdb/web/db/*.db etc/ltdb/web/db/*.dat 2>/dev/null || true

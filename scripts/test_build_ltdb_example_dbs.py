@@ -3,21 +3,16 @@
 from __future__ import annotations
 
 import sqlite3
-from pathlib import Path
-
-import pytest
 
 from build_ltdb_example_dbs import (
-    add_type_examples,
     build_one,
     calculate_offset_limit,
     create_schema,
-    get_lexids,
     get_sentence_data,
-    get_type_rows,
-    insert_example,
+    has_required_tables,
     selected_by_lexids,
     selected_by_type,
+    shared_example_selection,
 )
 
 
@@ -26,7 +21,9 @@ from build_ltdb_example_dbs import (
 # ---------------------------------------------------------------------------
 
 
-def _make_src(sentences: list[dict], types: list[dict] | None = None) -> sqlite3.Connection:
+def _make_src(
+    sentences: list[dict], types: list[dict] | None = None
+) -> sqlite3.Connection:
     """Create an in-memory source database resembling the LTDB schema.
 
     Args:
@@ -268,6 +265,89 @@ class TestGetSentenceData:
 
 
 class TestBuildOne:
+    def test_has_required_tables_rejects_empty_db(self, tmp_path):
+        path = tmp_path / "empty.db"
+        path.write_bytes(b"")
+        assert not has_required_tables(path)
+
+    def test_has_required_tables_accepts_ltdb_shape(self, tmp_path):
+        path = tmp_path / "test.db"
+        conn = sqlite3.connect(path)
+        conn.executescript(
+            """
+            CREATE TABLE gold (x);
+            CREATE TABLE lex (x);
+            CREATE TABLE lexfreq (x);
+            CREATE TABLE sent (x);
+            CREATE TABLE types (x);
+            CREATE TABLE typind (x);
+            """
+        )
+        conn.close()
+        assert has_required_tables(path)
+
+    def test_shared_strategy_reuses_sentence_across_types(self, tmp_path):
+        src_path = tmp_path / "test.db"
+        out_path = tmp_path / "out" / "test.examples.sqlite"
+        src = sqlite3.connect(src_path)
+        src.executescript(
+            """
+            CREATE TABLE types (typ TEXT PRIMARY KEY, status TEXT NOT NULL);
+            CREATE TABLE lex (lexid TEXT NOT NULL, typ TEXT NOT NULL);
+            CREATE TABLE lexfreq (lexid TEXT PRIMARY KEY, freq INTEGER);
+            CREATE TABLE sent (profile TEXT, sid INTEGER, wid INTEGER,
+                               word TEXT, lexid TEXT, PRIMARY KEY(profile,sid,wid));
+            CREATE TABLE typind (profile TEXT, sid INTEGER, typ TEXT,
+                                 kara INTEGER, made INTEGER);
+            CREATE TABLE gold (profile TEXT, sid INTEGER, sent TEXT,
+                               deriv TEXT, mrs TEXT, PRIMARY KEY(profile,sid));
+            INSERT INTO types VALUES ('type_a', 'rule');
+            INSERT INTO types VALUES ('type_b', 'rule');
+            INSERT INTO sent VALUES ('p1', 1, 0, 'shared', 'x');
+            INSERT INTO sent VALUES ('p1', 2, 0, 'solo', 'y');
+            INSERT INTO typind VALUES ('p1', 1, 'type_a', 0, 1);
+            INSERT INTO typind VALUES ('p1', 1, 'type_b', 0, 1);
+            INSERT INTO typind VALUES ('p1', 2, 'type_a', 0, 1);
+            """
+        )
+        src.commit()
+        src.close()
+
+        counts = build_one(
+            src_path,
+            out_path,
+            ("rule",),
+            1,
+            0,
+            strategy="shared",
+            candidate_limit=8,
+        )
+
+        assert counts["types"] == 2
+        assert counts["examples"] == 1
+        assert counts["links"] == 2
+
+    def test_shared_selection_repairs_types_not_covered_by_greedy_winner(self):
+        conn = _make_src(
+            [
+                {"profile": "p1", "sid": 1, "wid": 0, "word": "a", "lexid": "a"},
+                {"profile": "p1", "sid": 2, "wid": 0, "word": "b", "lexid": "b"},
+            ],
+            [{"typ": "type_a", "status": "rule"}, {"typ": "type_b", "status": "rule"}],
+        )
+        conn.execute("INSERT INTO typind VALUES ('p1', 1, 'type_a', 0, 1)")
+        conn.execute("INSERT INTO typind VALUES ('p1', 2, 'type_b', 0, 1)")
+
+        selected = shared_example_selection(
+            conn,
+            [("type_a", "rule"), ("type_b", "rule")],
+            example_lim=1,
+            candidate_limit=8,
+        )
+
+        assert len(selected["type_a"]) == 1
+        assert len(selected["type_b"]) == 1
+
     def test_creates_output_file(self, tmp_path):
         src_path = tmp_path / "test.db"
         out_path = tmp_path / "out" / "test.examples.sqlite"
@@ -327,7 +407,7 @@ class TestBuildOne:
         src.close()
 
         lex_lim = 3
-        counts = build_one(src_path, out_path, ("lex-type",), 8, lex_lim)
+        build_one(src_path, out_path, ("lex-type",), 8, lex_lim)
         out = sqlite3.connect(out_path)
         secondary = out.execute(
             "SELECT COUNT(*) FROM type_examples WHERE source LIKE 'lex-entry:%'"
@@ -359,7 +439,12 @@ class TestBuildOne:
 
         build_one(src_path, out_path, ("lex-type",), 8, 5)
         out = sqlite3.connect(out_path)
-        tables = {r[0] for r in out.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        tables = {
+            r[0]
+            for r in out.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            )
+        }
         out.close()
         assert "examples" in tables
         assert "type_examples" in tables

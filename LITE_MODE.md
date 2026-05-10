@@ -174,13 +174,45 @@
     build scripts and push the output to GitHub Pages. Keep this separate from
     the first working implementation.
 
-13. **TODO: Prefer Shared Example Sentences**
-    The current example DB schema deduplicates stored examples after selection,
-    but selection itself should also try to reuse sentences already chosen for
-    the grammar. Improve `scripts/build_ltdb_example_dbs.py` so each type first
-    looks for examples among already-selected sentences, then fills any
-    remaining slots with new sentences. Coordinate lex-type examples and their
-    secondary lex-entry examples so lex-entry coverage prefers sentences already
-    selected for the parent lex-type or other nearby lexical types where
-    possible. This should reduce the total SQLite size while preserving useful
-    coverage.
+13. **Shared Example Sentence Selection**
+    `scripts/build_ltdb_example_dbs.py` now supports
+    `--strategy shared --candidate-limit N`. This builds a candidate pool per
+    type, greedily selects sentences that satisfy the most unmet type needs
+    with a rare-type bonus and sentence-size penalty, then repairs any
+    remaining type gaps. The old behavior remains available as
+    `--strategy per-type`.
+
+    Initial ERG benchmark with the default status set
+    (`lex-type,rule,lex-rule,root`), `--example-lim 8`,
+    `--candidate-limit 64`, and no secondary lex-entry pass:
+
+    - old per-type output: 11,151 examples, 12,612 links, 167 MiB
+    - shared output: 4,594 examples, 10,964 links, 73 MiB
+
+    The shared path currently coordinates lex-type examples at the sentence
+    level but does not yet reimplement the secondary `lex-entry:*` examples;
+    that should be the next refinement if we need more lexical diversity.
+
+14. **Deployment Resume Point**
+    When returning to deployment work, use this as the preferred path:
+    1. Stop committing/freezing every type page. The all-non-lex static build
+       is too large for GitHub Pages.
+    2. Keep one static shell per grammar/type viewer instead of one HTML file
+       per type.
+    3. Ship compact per-grammar SQLite DBs:
+       - ERG non-lex type DB: ~5.2M, gzip ~1.3M
+       - Hebrew non-lex type DB: ~9.9M, gzip ~3.1M
+    4. Use `sql.js` to load the compact grammar DB and render type pages
+       client-side.
+    5. Keep examples in separate DBs, preferably using `--strategy shared`.
+    6. Rebuild examples with shared selection for all grammars.
+    7. Add routing fallback for GitHub Pages, probably either
+       `type.html?grammar=ERG_2025&type=word_or_infl_rule` or hash routing.
+    8. Add a CI/build script that:
+       - builds compact type DBs
+       - builds shared example DBs
+       - copies assets
+       - validates generated shell/index pages
+    9. Decide whether ERG examples stay as raw SQLite, gzip-compressed
+       SQLite, or are split into chunks. ERG examples are still the largest
+       piece.

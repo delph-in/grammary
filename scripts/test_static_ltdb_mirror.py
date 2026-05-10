@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from html.parser import HTMLParser
+import json
 from pathlib import Path
 import subprocess
 
@@ -42,6 +43,11 @@ def test_static_ltdb_index_grammar_hrefs_exist() -> None:
         assert (MIRROR_ROOT / href).is_file(), href
 
 
+def test_ltdb_tree_parser_and_layout() -> None:
+    """Exercise the browser tree parser and vertical layout invariants."""
+    subprocess.run(["node", "scripts/test_ltdb_tree.js"], cwd=ROOT, check=True)
+
+
 @pytest.mark.slow
 def test_static_ltdb_index_html5_validates() -> None:
     """Run the Nu HTML checker wrapper on the frozen index page."""
@@ -58,5 +64,44 @@ def test_static_ltdb_index_html5_validates() -> None:
             "--format",
             "text",
         ],
+        check=True,
+    )
+
+
+@pytest.mark.slow
+def test_static_ltdb_derivations_parse_as_browser_trees(tmp_path: Path) -> None:
+    """Run every stored raw derivation through the browser-side JS parser."""
+    derivs = tmp_path / "derivations.jsonl"
+    count = 0
+    with derivs.open("w", encoding="utf-8") as out:
+        for db_path in sorted((MIRROR_ROOT / "db").glob("*.examples.sqlite")):
+            import sqlite3
+
+            with sqlite3.connect(db_path) as conn:
+                rows = conn.execute(
+                    """
+                    SELECT example_id, deriv
+                    FROM examples
+                    WHERE deriv IS NOT NULL AND deriv != ''
+                    ORDER BY example_id
+                    """
+                )
+                for example_id, deriv in rows:
+                    out.write(
+                        json.dumps(
+                            {
+                                "db": db_path.name,
+                                "example_id": example_id,
+                                "deriv": deriv,
+                            }
+                        )
+                    )
+                    out.write("\n")
+                    count += 1
+
+    assert count > 0
+    subprocess.run(
+        ["node", "scripts/validate_ltdb_derivations.js", str(derivs)],
+        cwd=ROOT,
         check=True,
     )

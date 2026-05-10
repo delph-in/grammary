@@ -4,6 +4,7 @@
 build/
 etc/
 docs/_build/
+latex/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

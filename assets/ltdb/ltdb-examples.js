@@ -94,14 +94,17 @@
           ? `<small class="text-muted"> ${escapeHtml(row.source)}</small>`
           : "";
         const mrs = row.mrs
-          ? `<details class="mt-2"><summary>MRS</summary><pre>${escapeHtml(
-              row.mrs
-            )}</pre></details>`
+          ? `<details class="mt-2 ltdb-mrs-details"><summary>MRS</summary>
+              <div class="ltdb-mrs-view" data-mrs="${escapeHtml(row.mrs)}"></div>
+              <details class="mt-1 ltdb-dmrs-details"><summary>DMRS</summary>
+                <div class="ltdb-dmrs-view" data-mrs="${escapeHtml(row.mrs)}"></div>
+              </details>
+             </details>`
           : "";
         const deriv = row.deriv
-          ? `<details class="mt-2"><summary>Tree</summary><pre>${escapeHtml(
-              row.deriv
-            )}</pre></details>`
+          ? `<details class="mt-2 ltdb-tree-details"><summary>Tree</summary>
+              <div class="ltdb-tree" data-deriv="${escapeHtml(row.deriv)}"></div>
+             </details>`
           : "";
         return `
           <li>
@@ -138,5 +141,61 @@
     document.querySelectorAll(".ltdb-examples").forEach((container) => {
       hydrate(container);
     });
+    document.addEventListener("toggle", (event) => {
+      const details = event.target;
+      if (!details.open) return;
+
+      if (details.classList.contains("ltdb-tree-details")) {
+        const tree = details.querySelector(".ltdb-tree");
+        if (!tree || tree.dataset.rendered) return;
+        try {
+          const parsed = window.LTDBTree.parseDerivation(tree.dataset.deriv);
+          const examples = tree.closest(".ltdb-examples");
+          window.LTDBTree.renderTree(tree, parsed, {
+            highlightType: examples ? examples.dataset.type : "",
+            typeBaseHref: ".",
+          });
+          tree.dataset.rendered = "true";
+        } catch (error) {
+          tree.innerHTML = `<p class="text-muted">Tree unavailable: ${escapeHtml(
+            error.message
+          )}</p><pre>${escapeHtml(tree.dataset.deriv || "")}</pre>`;
+        }
+        return;
+      }
+
+      if (details.classList.contains("ltdb-mrs-details")) {
+        const view = details.querySelector(".ltdb-mrs-view");
+        if (!view || view.dataset.rendered) return;
+        try {
+          const mrs = window.LTDBMrs.parseMrs(view.dataset.mrs);
+          window.LTDBMrs.renderMrs(view, mrs);
+          view.dataset.rendered = "true";
+        } catch (error) {
+          view.innerHTML = `<pre>${escapeHtml(view.dataset.mrs || "")}</pre>`;
+          view.dataset.rendered = "true";
+        }
+        return;
+      }
+
+      if (details.classList.contains("ltdb-dmrs-details")) {
+        const view = details.querySelector(".ltdb-dmrs-view");
+        if (!view || view.dataset.rendered) return;
+        try {
+          const mrs = window.LTDBMrs.parseMrs(view.dataset.mrs);
+          window.LTDBMrs.renderDmrs(view, mrs);
+          view.dataset.rendered = "true";
+        } catch (error) {
+          view.innerHTML = `<p class="text-muted" style="font-size:12px">DMRS unavailable: ${escapeHtml(
+            error.message
+          )}</p>`;
+          view.dataset.rendered = "true";
+        }
+      }
+    }, true);
   });
+
+  window.LTDBExamples = {
+    hydrate,
+  };
 })();

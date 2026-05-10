@@ -34,7 +34,20 @@ def import_ltdb():
 
 def grammar_stems(db_dir: Path) -> list[str]:
     """Return available grammar stems from an LTDB db directory."""
-    return sorted(p.stem for p in db_dir.glob("*.db"))
+    stems = []
+    for path in sorted(db_dir.glob("*.db")):
+        if path.stat().st_size == 0:
+            continue
+        with sqlite3.connect(path) as conn:
+            tables = {
+                row[0]
+                for row in conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table'"
+                )
+            }
+        if {"gold", "lexfreq", "meta", "sent", "types"}.issubset(tables):
+            stems.append(path.stem)
+    return stems
 
 
 def mirror_type_rows(
@@ -66,6 +79,7 @@ def configure_freezer(
     db_dir: Path,
     statuses: set[str],
     include_lex_entries: bool,
+    type_mode: str,
 ) -> None:
     """Register Frozen-Flask URL generators for static LTDB mirror routes."""
 
@@ -89,7 +103,14 @@ def configure_freezer(
             yield {"grm": grm}
 
     @freezer.register_generator
+    def mirror_type_shell():
+        if type_mode == "shell":
+            yield {}
+
+    @freezer.register_generator
     def mirror_type():
+        if type_mode == "shell":
+            return
         for grm in grammar_stems(db_dir):
             for query in mirror_type_rows(
                 db_dir / f"{grm}.db", statuses, include_lex_entries
@@ -141,6 +162,15 @@ def main() -> None:
             "non-lex-entry type."
         ),
     )
+    parser.add_argument(
+        "--type-mode",
+        choices=("shell", "static"),
+        default="shell",
+        help=(
+            "Use one client-rendered type.html shell, or freeze individual type "
+            "pages. Default: shell."
+        ),
+    )
     args = parser.parse_args()
 
     if not args.db_dir.is_dir():
@@ -149,12 +179,17 @@ def main() -> None:
     args.destination = args.destination.resolve()
 
     os.environ["FULL_LTDB_BASE_URL"] = args.full_ltdb_base_url
+    all_non_lex = args.statuses == "all-non-lex"
     statuses = (
         set()
-        if args.statuses == "all-non-lex"
+        if all_non_lex
         else {s.strip() for s in args.statuses.split(",") if s.strip()}
     )
     os.environ["STATIC_MIRROR_STATUSES"] = ",".join(sorted(statuses))
+    os.environ["STATIC_MIRROR_ALL_NON_LEX"] = "1" if all_non_lex else "0"
+    os.environ["STATIC_MIRROR_DYNAMIC_TYPES"] = (
+        "1" if args.type_mode == "shell" else "0"
+    )
     create_app, Freezer, missing_url_warning = import_ltdb()
     warnings.filterwarnings("ignore", category=missing_url_warning)
     app = create_app()
@@ -166,7 +201,14 @@ def main() -> None:
     )
 
     freezer = Freezer(app, with_no_argument_rules=False, log_url_for=False)
-    configure_freezer(app, freezer, args.db_dir, statuses, args.include_lex_entries)
+    configure_freezer(
+        app,
+        freezer,
+        args.db_dir,
+        statuses,
+        args.include_lex_entries,
+        args.type_mode,
+    )
     freezer.freeze()
     copy_mirror_assets(args.destination)
 

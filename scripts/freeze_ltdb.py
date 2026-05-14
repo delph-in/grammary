@@ -19,7 +19,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LTDB = ROOT / "etc" / "ltdb"
 WEB_DB = LTDB / "web" / "db"
+LTDB_STATIC_JS = LTDB / "web" / "static" / "js"
 MIRROR_ASSETS = ROOT / "assets" / "ltdb"
+
+# JS renderers that live in the ltdb repo and are copied from there.
+# Everything else in assets/ltdb/ (sql-wasm, mrs2dmrs) stays in grammary.
+_LTDB_JS = ["ltdb-tree.js", "ltdb-mrs.js", "ltdb-examples.js"]
 
 
 def import_ltdb():
@@ -119,14 +124,27 @@ def configure_freezer(
 
 
 def copy_mirror_assets(destination: Path) -> None:
-    """Copy mirror-only JS/CSS assets into docs/ltdb/assets."""
-    if not MIRROR_ASSETS.is_dir():
-        return
+    """Copy mirror-only JS/CSS assets into docs/ltdb/assets.
+
+    JS renderers (ltdb-*.js) are sourced from the vendored ltdb repo so there
+    is a single canonical copy.  sql-wasm and mrs2dmrs come from assets/ltdb/.
+    """
     out = destination / "ltdb" / "assets"
     out.mkdir(parents=True, exist_ok=True)
-    for asset in MIRROR_ASSETS.iterdir():
-        if asset.is_file():
-            shutil.copy2(asset, out / asset.name)
+
+    # ltdb JS renderers — authoritative copy lives in etc/ltdb/web/static/js/
+    for name in _LTDB_JS:
+        src = LTDB_STATIC_JS / name
+        if src.is_file():
+            shutil.copy2(src, out / name)
+        else:
+            print(f"WARNING: {src} not found; run build-ltdb.sh first", file=sys.stderr)
+
+    # Remaining assets (sql-wasm, mrs2dmrs) kept in assets/ltdb/
+    if MIRROR_ASSETS.is_dir():
+        for asset in MIRROR_ASSETS.iterdir():
+            if asset.is_file() and asset.name not in _LTDB_JS:
+                shutil.copy2(asset, out / asset.name)
 
 
 def main() -> None:

@@ -42,17 +42,31 @@
       .join(" ");
   }
 
+  // Fetch a SQLite DB, trying the gzip-compressed variant first (.sqlite.gz)
+  // so that production serves compressed files while local dev works with raw ones.
+  async function fetchDbBytes(url) {
+    const gzUrl = url + ".gz";
+    const gzResponse = await fetch(gzUrl);
+    if (gzResponse.ok) {
+      if (typeof DecompressionStream === "undefined") {
+        throw new Error("Browser does not support DecompressionStream; cannot load compressed DB");
+      }
+      const stream = gzResponse.body.pipeThrough(new DecompressionStream("gzip"));
+      return new Uint8Array(await new Response(stream).arrayBuffer());
+    }
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Could not fetch examples DB: ${response.status}`);
+    }
+    return new Uint8Array(await response.arrayBuffer());
+  }
+
   async function loadDb(grammar, dbUrl) {
     if (dbCache.has(grammar)) {
       return dbCache.get(grammar);
     }
     const SQL = await getSql();
-    const response = await fetch(dbUrl);
-    if (!response.ok) {
-      throw new Error(`Could not fetch examples DB: ${response.status}`);
-    }
-    const bytes = new Uint8Array(await response.arrayBuffer());
-    const db = new SQL.Database(bytes);
+    const db = new SQL.Database(await fetchDbBytes(dbUrl));
     dbCache.set(grammar, db);
     return db;
   }
@@ -96,9 +110,9 @@
         const mrs = row.mrs
           ? `<details class="mt-2 ltdb-mrs-details"><summary>MRS</summary>
               <div class="ltdb-mrs-view" data-mrs="${escapeHtml(row.mrs)}"></div>
-              <details class="mt-1 ltdb-dmrs-details"><summary>DMRS</summary>
-                <div class="ltdb-dmrs-view" data-mrs="${escapeHtml(row.mrs)}"></div>
-              </details>
+             </details>
+             <details class="mt-1 ltdb-dmrs-details"><summary>DMRS</summary>
+               <div class="ltdb-dmrs-view" data-mrs="${escapeHtml(row.mrs)}"></div>
              </details>`
           : "";
         const deriv = row.deriv
@@ -151,10 +165,20 @@
         try {
           const parsed = window.LTDBTree.parseDerivation(tree.dataset.deriv);
           const examples = tree.closest(".ltdb-examples");
-          window.LTDBTree.renderTree(tree, parsed, {
+          const grammar = examples ? examples.dataset.grammar : "";
+          const treeOpts = {
             highlightType: examples ? examples.dataset.type : "",
-            typeBaseHref: ".",
-          });
+          };
+          if (grammar) {
+            const base = window.location.pathname.endsWith("/type.html")
+              ? "type.html"
+              : "../type.html";
+            treeOpts.typeHref = (typ) => {
+              const params = new URLSearchParams({ grammar, type: typ });
+              return `${base}?${params.toString()}`;
+            };
+          }
+          window.LTDBTree.renderTree(tree, parsed, treeOpts);
           tree.dataset.rendered = "true";
         } catch (error) {
           tree.innerHTML = `<p class="text-muted">Tree unavailable: ${escapeHtml(

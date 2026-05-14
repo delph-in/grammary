@@ -43,6 +43,16 @@ def test_static_ltdb_index_grammar_hrefs_exist() -> None:
         assert (MIRROR_ROOT / href).is_file(), href
 
 
+def test_static_ltdb_uses_single_type_shell() -> None:
+    """The shell mirror should not freeze one HTML file per type."""
+    assert (MIRROR_ROOT / "type.html").is_file()
+    assert not list(MIRROR_ROOT.glob("*/type/*.html"))
+
+    rules = MIRROR_ROOT / "ERG_2025" / "rules.html"
+    text = rules.read_text(encoding="utf-8")
+    assert "../type.html?grammar=ERG_2025&amp;type=" in text
+
+
 def test_ltdb_tree_parser_and_layout() -> None:
     """Exercise the browser tree parser and vertical layout invariants."""
     subprocess.run(["node", "scripts/test_ltdb_tree.js"], cwd=ROOT, check=True)

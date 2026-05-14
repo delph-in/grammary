@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import heapq
+import shutil
 import sqlite3
 from collections import defaultdict
 from pathlib import Path
@@ -574,6 +576,12 @@ def main() -> None:
         default=",".join(DEFAULT_STATUSES),
         help="Comma-separated type statuses to extract examples for.",
     )
+    parser.add_argument(
+        "--gzip",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Gzip output files (default: on). Required for files >100 MB.",
+    )
     args = parser.parse_args()
 
     statuses = tuple(s.strip() for s in args.statuses.split(",") if s.strip())
@@ -592,11 +600,18 @@ def main() -> None:
             strategy=args.strategy,
             candidate_limit=args.candidate_limit,
         )
+        if args.gzip:
+            gz_path = Path(str(out_path) + ".gz")
+            with open(out_path, "rb") as f_in, gzip.open(gz_path, "wb", compresslevel=6) as f_out:
+                shutil.copyfileobj(f_in, f_out)
+            out_path.unlink()
+            counts["bytes"] = gz_path.stat().st_size
         for key, value in counts.items():
             totals[key] += value
+        label = ".gz" if args.gzip else ""
         print(
             f"{src_path.name}: {counts['examples']} examples, "
-            f"{counts['links']} links, {counts['bytes'] / 1048576:.1f} MiB"
+            f"{counts['links']} links, {counts['bytes'] / 1048576:.1f} MiB{label}"
         )
     print(
         f"TOTAL: {totals['examples']} examples, {totals['links']} links, "

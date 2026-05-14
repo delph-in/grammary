@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import gzip
+import shutil
 import sqlite3
 from pathlib import Path
-
-import orjson
-
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB_DIR = ROOT / "etc" / "ltdb" / "web" / "db"
@@ -133,92 +132,49 @@ def copy_types(out: sqlite3.Connection) -> None:
     )
 
 
-def _holders(count: int) -> str:
-    return ",".join("?" for _ in range(count))
-
-
-def _words_for_lexids(
-    src: sqlite3.Connection, lexids: list[str], limit: int
-) -> dict[str, str]:
-    if not lexids:
-        return {}
-    rows = src.execute(
-        f"""
-        SELECT lexid, word, freq
-        FROM (
-          SELECT lexid, word, COUNT(*) AS freq,
-                 ROW_NUMBER() OVER (
-                   PARTITION BY lexid
-                   ORDER BY COUNT(*) DESC, word
-                 ) AS rank
-          FROM lexfreq
-          WHERE lexid IN ({_holders(len(lexids))})
-          GROUP BY lexid, word
-        )
-        WHERE rank <= ?
-        ORDER BY lexid, rank
-        """,
-        lexids + [limit],
-    ).fetchall()
-    grouped: dict[str, list[dict[str, int | str]]] = {lexid: [] for lexid in lexids}
-    for lexid, word, freq in rows:
-        grouped[lexid].append({"word": word, "freq": freq})
-    return {lexid: orjson.dumps(words).decode() for lexid, words in grouped.items()}
-
-
 def copy_lex_type_words(
-    src: sqlite3.Connection,
     out: sqlite3.Connection,
     lex_limit: int,
-    word_limit: int,
 ) -> None:
-    """Copy a bounded list of representative lexical entries per lexical type."""
-    lex_types = [
-        row[0]
-        for row in out.execute(
-            "SELECT typ FROM types WHERE status = 'lex-type' ORDER BY typ"
-        )
-    ]
-    for typ in lex_types:
-        rows = src.execute(
-            """
-            SELECT lex.lexid, lex.orth, COALESCE(SUM(lexfreq.freq), 0) AS freq
-            FROM lex
-            LEFT JOIN lexfreq ON lex.lexid = lexfreq.lexid
-            WHERE lex.typ = ?
-            GROUP BY lex.lexid, lex.orth
+    """Copy a bounded list of representative lexical entries per grammar."""
+    out.execute(
+        """
+        INSERT INTO lex_type_words(typ, rank, lexid, orth, freq, words_json)
+        SELECT typ, rank, lexid, orth, freq, '[]'
+        FROM (
+          SELECT
+            selected.typ,
+            selected.lexid,
+            selected.orth,
+            selected.freq,
+            ROW_NUMBER() OVER (
+              PARTITION BY selected.typ
+              ORDER BY selected.freq DESC, selected.orth, selected.lexid
+            ) AS rank
+          FROM (
+            SELECT
+              lex.typ,
+              lex.lexid,
+              lex.orth,
+              COALESCE(SUM(lexfreq.freq), 0) AS freq
+            FROM src.lex AS lex
+            LEFT JOIN src.lexfreq AS lexfreq ON lex.lexid = lexfreq.lexid
+            JOIN types ON types.typ = lex.typ AND types.status = 'lex-type'
+            GROUP BY lex.typ, lex.lexid, lex.orth
             ORDER BY freq DESC, lex.orth, lex.lexid
             LIMIT ?
-            """,
-            (typ, lex_limit),
-        ).fetchall()
-        words_by_lexid = _words_for_lexids(
-            src, [lexid for lexid, _, _ in rows], word_limit
+          ) AS selected
         )
-        out.executemany(
-            """
-            INSERT INTO lex_type_words(typ, rank, lexid, orth, freq, words_json)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            [
-                (
-                    typ,
-                    rank,
-                    lexid,
-                    orth,
-                    freq,
-                    words_by_lexid.get(lexid, "[]"),
-                )
-                for rank, (lexid, orth, freq) in enumerate(rows, start=1)
-            ],
-        )
+        ORDER BY typ, rank
+        """,
+        (lex_limit,),
+    )
 
 
 def build_one(
     src_path: Path,
     out_path: Path,
     lex_limit: int,
-    word_limit: int,
 ) -> None:
     """Build one compact type database from one LTDB source database."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -233,7 +189,7 @@ def build_one(
         out.execute("ATTACH DATABASE ? AS src", (str(src_path),))
         copy_meta(out)
         copy_types(out)
-        copy_lex_type_words(src, out, lex_limit, word_limit)
+        copy_lex_type_words(out, lex_limit)
         out.commit()
         out.execute("DETACH DATABASE src")
         out.execute("VACUUM")
@@ -261,13 +217,13 @@ def main() -> None:
         "--lex-limit",
         type=int,
         default=10000,
-        help="Maximum lexical entries retained per lexical type.",
+        help="Maximum lexical entries retained per grammar.",
     )
     parser.add_argument(
-        "--word-limit",
-        type=int,
-        default=5,
-        help="Maximum observed word forms retained per lexical entry.",
+        "--gzip",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Gzip output files (default: on).",
     )
     parser.add_argument(
         "grammars",
@@ -284,8 +240,15 @@ def main() -> None:
             print(f"{src_path.name}: skipped, not an LTDB source database")
             continue
         out_path = args.output_dir / f"{src_path.stem}.grammar.sqlite"
-        build_one(src_path, out_path, args.lex_limit, args.word_limit)
-        print(f"{src_path.name}: wrote {out_path}")
+        build_one(src_path, out_path, args.lex_limit)
+        if args.gzip:
+            gz_path = Path(str(out_path) + ".gz")
+            with open(out_path, "rb") as f_in, gzip.open(gz_path, "wb", compresslevel=6) as f_out:
+                shutil.copyfileobj(f_in, f_out)
+            out_path.unlink()
+            print(f"{src_path.name}: {gz_path.stat().st_size / 1048576:.1f} MiB (gzipped)")
+        else:
+            print(f"{src_path.name}: {out_path.stat().st_size / 1048576:.1f} MiB")
 
 
 if __name__ == "__main__":

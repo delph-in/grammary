@@ -58,16 +58,31 @@
     );
   }
 
+  async function fetchDbBytes(url) {
+    const gzUrl = url + ".gz";
+    const gzResponse = await fetch(gzUrl);
+    if (gzResponse.ok) {
+      if (typeof DecompressionStream === "undefined") {
+        throw new Error("Browser does not support DecompressionStream; cannot load compressed DB");
+      }
+      const stream = gzResponse.body.pipeThrough(new DecompressionStream("gzip"));
+      return new Uint8Array(await new Response(stream).arrayBuffer());
+    }
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Could not fetch grammar DB: ${response.status}`);
+    }
+    return new Uint8Array(await response.arrayBuffer());
+  }
+
   async function loadDb(grammar) {
     if (dbCache.has(grammar)) {
       return dbCache.get(grammar);
     }
     const SQL = await getSql();
-    const response = await fetch(`db/${encodeURIComponent(grammar)}.grammar.sqlite`);
-    if (!response.ok) {
-      throw new Error(`Could not fetch grammar DB: ${response.status}`);
-    }
-    const db = new SQL.Database(new Uint8Array(await response.arrayBuffer()));
+    const db = new SQL.Database(
+      await fetchDbBytes(`db/${encodeURIComponent(grammar)}.grammar.sqlite`)
+    );
     dbCache.set(grammar, db);
     return db;
   }

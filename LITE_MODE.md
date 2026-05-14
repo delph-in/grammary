@@ -216,3 +216,33 @@
     9. Decide whether ERG examples stay as raw SQLite, gzip-compressed
        SQLite, or are split into chunks. ERG examples are still the largest
        piece.
+
+15. **Deployment Progress**
+    Implemented after resuming from the deployment point:
+    - `scripts/freeze_ltdb.py --type-mode shell` now freezes one
+      `/ltdb/type.html` shell and no per-type HTML files.
+    - Static grammar/rule/ltype pages now link to
+      `../type.html?grammar=<grammar>&type=<type>`.
+    - `scripts/build_ltdb_type_dbs.py` builds compact
+      `<grammar>.grammar.sqlite` files with non-lex-entry type information and
+      up to 10,000 representative lexical entries per grammar.
+    - Browser-side `ltdb-type.js` loads the compact grammar DB with `sql.js`
+      and renders type pages client-side.
+    - `ltdb-examples.js` exposes a hydrate function so the shell-rendered type
+      page can attach examples after the type metadata is rendered.
+    - `docs/ltdb` was rebuilt in shell mode. Current generated shape:
+      119 files, 0 frozen per-type pages, 211M total, with `docs/ltdb/db`
+      taking 205M.
+    - Shared example DBs were rebuilt for all valid grammars:
+      13,737 examples, 24,339 links, 142.8 MiB total. ERG remains the largest
+      example DB at 122.5 MiB raw, about 12.4M gzipped.
+    - Compact type DB size checks:
+      ERG `5.0M` raw / `1.24M` gzipped; Hebrew `8.9M` raw / `2.62M` gzipped.
+
+    Remaining deployment decisions:
+    - Decide whether ERG examples should be served raw, gzip-compressed, or
+      split into chunks.
+    - Add a single documented build command or CI script that runs freeze,
+      type DB build, example DB build, and validation in order.
+    - Decide whether to commit generated `docs/ltdb/db/*.sqlite` files or push
+      them only as GitHub Pages build artifacts.

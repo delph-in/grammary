@@ -104,6 +104,19 @@ function testShiftClickHrefDoesNotCheckTypeExistence() {
     }),
     "./head%20subject.html"
   );
+  assert.equal(
+    typeHrefForNode(
+      { name: "aj-hdn_norm_c", entity: "aj-hdn_norm_c" },
+      {
+        typeHref: (typ) =>
+          `type.html?${new URLSearchParams({
+            grammar: "ERG_2025",
+            type: typ,
+          }).toString()}`,
+      }
+    ),
+    "type.html?grammar=ERG_2025&type=aj-hdn_norm_c"
+  );
 }
 
 function testNodeClassificationAndHighlight() {

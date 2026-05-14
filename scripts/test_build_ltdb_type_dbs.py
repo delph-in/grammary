@@ -143,7 +143,7 @@ def test_build_one_copies_non_lex_types_and_limited_lex_words(tmp_path: Path) ->
     out = tmp_path / "compact.sqlite"
     make_source(src)
 
-    build_one(src, out, lex_limit=1, word_limit=1)
+    build_one(src, out, lex_limit=1)
 
     with sqlite3.connect(out) as conn:
         types = conn.execute(
@@ -168,5 +168,4 @@ def test_build_one_copies_non_lex_types_and_limited_lex_words(tmp_path: Path) ->
             "SELECT typ, lexid, orth, freq, words_json FROM lex_type_words"
         ).fetchone()
         assert row[:4] == ("n_le", "dog_n_1", "dog", 5)
-        assert '"dog"' in row[4]
-        assert '"dogs"' not in row[4]
+        assert row[4] == "[]"

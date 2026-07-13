@@ -1,0 +1,457 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;    
+;;;  enlexicon.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  English lexicon for BiTSE
+;;;
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Nouns
+
+dog := common-noun-lex &
+  [ STEM < "dog" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "dog_n_rel" ] .
+
+cat := common-noun-lex &
+  [ STEM < "cat" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "cat_n_rel" ] .
+
+lion := common-noun-lex &
+  [ STEM < "lion" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "lion_n_rel" ] .
+
+    
+grandmother := common-noun-lex &
+  [ STEM < "grandmother" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "grandmother_n_rel" ] .
+
+girl := common-noun-lex &
+  [ STEM < "girl" >,
+    LANG en,
+ SYNSEM.LKEYS.KEYREL.PRED "girl_n_rel" ] .
+
+story := common-noun-lex &
+  [ STEM < "story" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "story_n_rel" ] .
+
+
+gun := common-noun-lex &
+  [ STEM < "gun" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "gun_n_rel" ] .
+
+apple := common-noun-lex &
+  [ STEM < "apple" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "apple_n_rel" ] .
+
+
+uniform := common-noun-lex &
+  [ STEM < "uniform" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "uniform_n_rel" ] .
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Proper nouns
+
+helsinki := proper-noun-lex-thing &
+   [ STEM < "Helsinki" >,
+     LANG en,
+     SYNSEM [ LKEYS.KEYREL.CARG "Helsinki" ] ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Pronouns
+
+i := nom-pronoun-lex &
+  [ STEM < "I" >,
+    LANG en, 
+    SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ].
+he := nom-pronoun-lex &
+  [ STEM < "he" >,
+    LANG en, 
+    SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ] .
+
+we := nom-pronoun-lex &
+  [ STEM < "we" >,
+    LANG en, 
+SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM plur ] ] .
+
+me := acc-pronoun-lex &
+  [ STEM < "me" >,
+    LANG en, 
+SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ] .
+
+him := acc-pronoun-lex &
+  [ STEM < "him" >,
+    LANG en, 
+SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ] .
+
+us := acc-pronoun-lex &
+  [ STEM < "us" >,
+    LANG en, 
+ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM plur ] ].
+
+myself := refl-pronoun-lex &
+  [ STEM < "myself" >,
+    LANG en, 
+SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ].
+
+himself := refl-pronoun-lex &
+  [ STEM < "himself" >,
+    LANG en, 
+ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ].
+
+myself-0 := empty-refl-pronoun-lex &
+  [ STEM < "myself" >,
+    LANG en, 
+ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ] .
+
+himself-0 := empty-refl-pronoun-lex &
+  [ STEM < "himself" >,
+    LANG en, 
+ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ] .
+
+ourselves := refl-pronoun-lex &
+  [ STEM < "ourselves" >,
+    LANG en, 
+SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM plur ] ] .
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Determiners
+
+a := det-lex &
+  [ STEM < "a" >,
+    LANG en, 
+SYNSEM [LKEYS.KEYREL.PRED undef_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg ] ] ] ].
+
+an := det-lex &
+  [ STEM < "an" >,
+    LANG en, 
+SYNSEM [LKEYS.KEYREL.PRED undef_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg ] ] ] ].
+
+the := def-det-lex &
+  [ STEM < "the" >,
+    LANG en, 
+ SYNSEM.LKEYS.KEYREL.PRED def_q_rel ] .
+
+this_pr := def-det-lex &
+  [ STEM < "this" >,
+    LANG en, 
+  SYNSEM [ LKEYS.KEYREL.PRED dem_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg ] ] ] ].
+
+these := def-det-lex &
+  [ STEM < "these" >,
+    LANG en, 
+    SYNSEM [ LKEYS.KEYREL.PRED dem_q_rel ,
+	     LOCAL.CONT.HOOK.INDEX [ PNG [ NUM plur ] ] ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Verbs
+
+sleep := intrans-verb-lex &
+  [ STEM < "sleep" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "sleep_v_rel" ] .
+
+insist := intrans-verb-lex &
+  [ STEM < "insist" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "insist_v_rel" ] .
+
+break := intrans-verb-lex &
+  [ STEM < "break" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "break_v_rel" ] .
+
+succeed := intrans-verb-lex &
+  [ STEM < "succeed" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "succeed_v_rel" ] .
+
+run := intrans-verb-lex &
+  [ STEM < "run" >,
+    LANG en, 
+SYNSEM [LKEYS.KEYREL.PRED "run_v_rel",
+	     LOCAL.CONT.HOOK.INDEX.E.ASPECT dyn-atel ] ].
+
+hunt := opt-obj-trans-verb-lex &
+  [ STEM < "hunt" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "hunt_v_rel" ] .
+
+
+endure := non-opt-obj-trans-verb-lex &
+  [ STEM < "endure" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "endure_v_rel" ] .
+
+eat := opt-obj-trans-verb-lex &
+  [ STEM < "eat" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "eat_v_rel" ] .
+
+
+dress := opt-refl-obj-trans-verb-lex &
+  [ STEM < "dress" >,
+    LANG en, SYNSEM.
+LKEYS.KEYREL.PRED "dress_v_rel" ] .
+
+shave := opt-refl-obj-trans-verb-lex &
+  [ STEM < "shave" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "shave_v_rel" ] .
+
+
+trust := non-opt-obj-trans-verb-lex &
+  [ STEM < "trust" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "trust_v_rel" ] .
+
+greet := non-opt-obj-trans-verb-lex &
+  [ STEM < "greet" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "greet_v_rel" ] .
+
+remember := opt-obj-trans-verb-lex &
+  [ STEM < "remember" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "remember_v_rel" ] .
+
+delete := non-opt-obj-trans-verb-lex &
+  [ STEM < "delete" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "delete_v_rel" ] .
+
+visit := non-opt-obj-trans-verb-lex &
+  [ STEM < "visit" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "visit_v_rel" ] .
+
+behave := intrans-refl-comp-verb-lex &
+  [ STEM < "behave" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "behave_v_rel" ] .
+
+revenge := trans-refl-pobj-verb-lex &
+  [ STEM < "revenge" >,
+    LANG en, 
+    SYNSEM [ LOCAL.CAT.HEAD.GOVPR on-pf,
+	     LKEYS.KEYREL.PRED "revenge_v_rel" ] ].
+
+
+can := modal-verb-lex &
+  [ STEM < "can" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "can_v_rel" ] .
+
+
+give := en-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "give" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "give_v_rel" ].  
+
+
+tell := en-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "tell" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "tell_v_rel" ].  
+
+promise := en-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "promise" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "promise_v_rel" ]. 
+
+rent := en-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "rent" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "rent_v_rel" ]. 
+
+bring := en-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "bring" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "bring_v_rel" ]. 
+
+issue := ditrans-io-do-verb-lex &
+  [ STEM < "issue" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "issue_v_rel" ].  
+
+recomend := en-ditrans-do-lpio-verb-lex &
+  [ STEM < "recommend" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "recommend_v_rel" ].
+
+deliver := en-ditrans-do-lpio-verb-lex &
+  [ STEM < "deliver" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "deliver_v_rel" ].
+
+put := ditrans-do-loc-fpio-verb-lex &
+  [ STEM < "put" >,
+    LANG en,
+ SYNSEM.LKEYS.KEYREL.PRED "put_v_rel" ] .  
+
+look := intrans-lex-pp-comp-verb-lex &
+  [ STEM < "look" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.GOVPR at-pf,
+	     LKEYS.KEYREL.PRED "look#at_v_rel" ] ].
+
+
+hawk-v:= intrans-verb-lex &
+  [ STEM < "hawk" >,
+    LANG en, 
+SYNSEM [ LKEYS.KEYREL.PRED "hawk_v_rel",
+	     LOCAL.CONT.HOOK.INDEX.E.ASPECT activity ] ]. 
+
+;;Removed temporarily because it slows generation down awfully
+;;to be fixed by trigger rules in next release
+;;do := do-support-lex &
+;;   [ STEM < "do" >,
+;;     LANG en ]. 
+
+wonder := clausal-que-comp-verb-lex &
+ [ STEM < "wonder" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "wonder_v_rel" ] .  
+
+hope := clausal-prop-comp-verb-lex &
+ [ STEM < "hope" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "hope_v_rel" ] .  
+
+know := clausal-comp-verb-lex &
+ [ STEM < "know" >,
+    LANG en, 
+SYNSEM.LKEYS.KEYREL.PRED "know_v_rel" ] . 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Complementizers
+
+that-cp := that-comp-lex &
+  [ STEM < "that" >,
+    LANG en ].
+
+whether := whether-comp-lex &
+  [ STEM < "whether" >,
+    LANG en ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Adjectives
+
+big := en-adjective-lex &
+  [ STEM < "big" >,
+    LANG en, SYNSEM.   
+	     LKEYS.KEYREL.PRED "big_j_rel" ] .
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Adverbs
+
+really := en-adverb-lex &
+  [ STEM < "really" >,
+    SYNSEM [ LOCAL.CONT.RELS <! [ PRED emphasis_rel ] !> ] ].
+
+;;alternative version that works for head inversion divergences
+really2 := en-adverb-lex2 &
+  [ STEM < "really" >,
+    SYNSEM [ LOCAL.CONT.RELS <! [ PRED emphasis_rel ] !> ] ].
+
+
+usually := en-adverb-lex &
+  [ STEM < "usually" >,
+    SYNSEM [ LOCAL.CONT.RELS <! [ PRED "usually_rel" ] !> ] ].
+
+;;alternative version that works for head inversion divergences
+usually2 := en-adverb-lex2 &
+  [ STEM < "usually" >,
+    SYNSEM [ LOCAL.CONT.RELS <! [ PRED "usually_rel" ] !> ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Prepositions
+
+on-prep-f := cont-prep-lex &
+  [ STEM < "on" >,
+    LANG en, 
+    SYNSEM.LKEYS.KEYREL.PRED on_p_rel ] .
+
+
+on-prep-l := empty-prep-lex &
+  [ STEM < "on" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM on-pf ] ].
+
+to-prep-f := cont-prep-lex &
+  [ STEM < "to" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM to-pf,
+	     LKEYS.KEYREL.PRED "to_p_rel" ] ].
+
+with-prep-f := cont-prep-lex &
+  [ STEM < "with" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM with-pf,
+	     LKEYS.KEYREL.PRED "with_p_rel" ] ].
+
+to-prep-l  := empty-prep-lex &
+  [ STEM < "to" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM to-pf ] ].
+
+at-prep-l  := empty-prep-lex &
+  [ STEM < "at" >,
+    LANG en,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM at-pf ] ].
+
+
+en-under-prep-f  := cont-prep-lex &
+  [ STEM < "under" >,
+    LANG en,
+    SYNSEM [ LKEYS.KEYREL.PRED under_p_rel ] ].
+

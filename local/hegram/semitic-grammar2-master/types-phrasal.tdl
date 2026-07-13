@@ -1,0 +1,1096 @@
+;;; $Id: types-phrasal.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;===============================================
+; =============== PHRASAL TYPES=================
+;===============================================
+
+;============================================
+;NON-LOCAL DEPENDENCIES
+;============================================
+
+que-percolate-phrase := headed-phrase &
+  [ SYNSEM.NON-LOCAL.QUE #que,
+    HEAD-DTR.SYNSEM.NON-LOCAL.QUE #que ].
+
+rel-percolate-phrase := headed-phrase &
+  [ SYNSEM.NON-LOCAL.REL #rel,
+    HEAD-DTR.SYNSEM.NON-LOCAL.REL #rel ].
+
+slash-percolate-phrase := headed-phrase &
+  [ SYNSEM.NON-LOCAL.SLASH #slash,
+    HEAD-DTR.SYNSEM.NON-LOCAL.SLASH #slash ].
+
+que-rel-percolate-phrase := que-percolate-phrase & rel-percolate-phrase.
+
+rel-slash-percolate-phrase := slash-percolate-phrase & rel-percolate-phrase.
+
+que-slash-percolate-phrase := que-percolate-phrase & slash-percolate-phrase.
+
+que-rel-slash-percolate-phrase := que-percolate-phrase & rel-percolate-phrase & slash-percolate-phrase.
+
+;NURIT hopefully the final version
+no-non-local-phrase := headed-phrase &
+  [ SYNSEM.NON-LOCAL [ SLASH 0-dlist & [ LIST #slist & 0-1-list,
+	                                 LAST #slist ],
+                       QUE 0-dlist & [ LIST #qlist & 0-1-list,
+                                   LAST #qlist ],
+                       REL 0-dlist & [ LIST #rlist & 0-1-list,
+                                   LAST #rlist ] ] ].
+
+
+;NURIT-QUE
+no-slash-phrase := headed-phrase &
+  [ SYNSEM.NON-LOCAL [ SLASH 0-dlist,
+  			REL 0-dlist ] ].
+
+;Separating non-local concatenation 01/07                                    
+non-local-concat-phrase := basic-binary-headed-phrase &
+  [ SYNSEM.NON-LOCAL [ SLASH [ LIST #sfirst,
+                               LAST #slast ],
+                       QUE [ LIST #qfirst,
+                             LAST #qlast ],
+                       REL [ LIST #rfirst,
+                             LAST #rlast ] ],
+    HEAD-DTR.SYNSEM.NON-LOCAL [ SLASH [ LIST #sfirst,
+                                        LAST #smiddle ],
+                                QUE [ LIST #qfirst,
+                                      LAST #qmiddle ],
+                                REL [ LIST #rfirst,
+                                      LAST #rmiddle ] ],
+    NON-HEAD-DTR.SYNSEM.NON-LOCAL [ SLASH [ LIST #smiddle,
+                                            LAST #slast ],
+                                    QUE [ LIST #qmiddle,
+                                          LAST #qlast ],
+                                    REL [ LIST #rmiddle,
+                                          LAST #rlast ] ] ].
+
+
+;============================================
+;THE SUBJECT-HEAD HIERARCHY
+;============================================
+
+; TAG 29/1/15: changed the phrase name into cncrd-agr-phrase. 
+;LHS 14/01: CNCRD with subject (general type)
+cncrd-agr-phrase := binary-headed-phrase &
+[ HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.CNCRD #png ] ],
+  NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png ] ].
+
+;LHS 22/10/15: set the SUBJ-DEP.REAL of the mother to be arg12, to mark that the subject has been realized (it is either arg1+ or arg2+).
+; TAG 29/1/15: moved the phr-synsem specification of the HEAD-DTR from the basic-head-subj-phrase to allow V NP rather than VP NP (for VS order) in Arabic.	
+;              The basic-head-subj-phrase no longer inherits from the cncrd-agr-phrase, because it is general for Heb. and Ara.
+;LHS 14/01: now includes CNCRD with subject
+;SUBJ-ARG: supertype for all head-subj-phrases regardless of whether their subject is arg2 or arg1.
+;LHS: added that MC of mother is +. As long as complementizers carry an MC-, 
+;this should preclude CPs from being standalone sentences, assuming the root requires MC+.
+;LHS: Head daughter must be finite (influences both head-subj-phrase and que-head-subj-phrase)
+basic-head-subj-phrase := head-compositional & non-local-concat-phrase &
+			  head-icons-phrase & no-ccont-rule & 
+  [ SYNSEM phr-synsem & 
+        [ LOCAL.CAT [ POSTHEAD +,
+		      HC-LIGHT -,
+		      VAL [ SUBJ-DEP.REAL arg12,
+					SUBJ-ARG #subjarg,
+			    DEP3 #dep3,
+			    DEP4 #dep4,
+	                    DEP5 #dep5,
+   	                    DEP6 #dep6 ] ] ],
+	HEAD-DTR [ SYNSEM [ LOCAL [ CAT.VAL [ SUBJ-ARG #subjarg,
+							   DEP3 #dep3,
+                                               		   DEP4 #dep4,
+                                               		   DEP5 #dep5,
+                                               		   DEP6 #dep6 ],
+                                         	CONT [ HOOK [ INDEX [ E.TENSE finite ] ] ] ] ] ],
+	NON-HEAD-DTR [ SYNSEM phr-synsem &
+					[ NON-LOCAL.QUE 0-dlist,
+					  LOCAL [ CAT [ HEAD.CASE nom,
+			                                VAL.R-FRAME no-arg ],
+                                                  CONT.HOOK.INDEX ref-ind ] ] ] ].
+
+; TAG 29/1/15: moved the canon-basic-head-subj-phrase and its daughters to heb-types-phrasal										  
+; TAG 29/1/15: moved the phr-synsem specification of the HEAD-DTR from the basic-head-subj-phrase to allow V NP rather than VP NP (for VS order) in Arabic.	
+;               The phrase now inherits from cncrd-agr-phrase, because full agreement is found only in Hebrew canon order. 
+;canon-basic-head-subj-phrase := basic-head-subj-phrase & cncrd-agr-phrase &
+;  [ SYNSEM phr-synsem & 
+;        [ LOCAL.CAT [ MC +,
+;		      VAL [ R-FRAME #link ] ] ],
+;	HEAD-DTR [ SYNSEM phr-synsem & [ LOCAL [ CAT.VAL [ R-FRAME #link,
+;                                               		   DEP3.REAL #link,
+;                                               		   DEP4.REAL #link,
+;                                               		   DEP5.REAL #link,
+;                                               		   DEP6.REAL #link ] ] ] ] ].
+
+;SUBJ-ARG: supertype for head-subj phrases whose syntactic subject is arg1 (added SUBJ-ARG arg1).
+;No longer includes CNCRD between subject (arg1) and the verb (it's in types-deps-lxm)
+;Nurit 26/10
+;;; RAISING VERBS ;;;; distinguish between regular subjects and raised subjects, which shouldn't be linked to an ARG1
+;;; the difference is in the S-FRAME of the head daughter. If it's unifiable with arg1+ then basic-head-subj1-phrase applies, 
+;;; if arg1- then raising-head-subj1-phrase applies
+;canon-basic-head-subj1-phrase := canon-basic-head-subj-phrase &
+;[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+;                         DEP1 [ REAL #link & arg1+ ],
+;                         DEP2 #dep2 ],
+;	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+;					    S-FRAME arg1+,
+;                                   SUBJ-ARG arg1,
+;                                    DEP1 [ DEP #synsem,
+;					   REAL arg1- ] ,
+;                                    DEP2 #dep2 & [ REAL #link ] ] ],
+;                          CONT.HOOK [ TOPREL.ARG1 #ind1 ] ],
+;	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind1 ] ] ] ].
+
+;canon-raising-head-subj1-phrase := canon-basic-head-subj-phrase &
+;[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+;			 DEP1 [ REAL #link & arg1+ ],
+;                         DEP2 #dep2 ],
+;	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+;		                            S-FRAME arg1-,	
+;		                            SUBJ-ARG arg1,
+;		                            DEP1 [ DEP #synsem,
+;						   REAL arg1- ] ,
+;		                            DEP2 #dep2 & [ REAL #link ] ] ] ],
+;	NON-HEAD-DTR.SYNSEM #synsem ].
+
+
+;SUBJ-ARG: added new supertype for head-subj phrases whose syntactic subject is arg2, and changed elements accordingly.
+;No longer includes CNCRD between subject (arg2) and the verb (it's in types-deps-lxm)
+;Note: There's structure sharing of the non-head daughter's local.cont.hook.index with that of the head daughter's local.cont.hook.toprel.arg2 (as opposed to arg1 in basic-head-subj1-phrase).
+;canon-basic-head-subj2-phrase := canon-basic-head-subj-phrase &
+;[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+;                         DEP2 [ REAL #link & arg2+ ],
+;                         DEP1 #dep1 ],
+;	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+;                                   SUBJ-ARG arg2,
+;                                    DEP2 [ DEP #synsem,
+;					   REAL arg2- ] ,
+;                                   DEP1 #dep1 & [ REAL #link ] ] ],
+;                          CONT.HOOK [ TOPREL.ARG2 #ind2 ] ],
+;	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind2 ] ] ] ].
+
+;Update: LHS took out que percolation because it inherits from basic-head-subj-phrase which inherits from non-local-concat-phrase.
+;LHS added que percolation to avoid spurious parses
+;LHS V2									
+;  TAG 29/1/15: moved the MC structure-sharing to the Hebrew version of the rule.
+;  Changed the non-canon rule name to "VS", abd all its daughter rules.
+; TAG 27/1/15: moved the constraint that the verb must be extracted to heb-types-phrasal. 
+VS-basic-head-subj-phrase := basic-head-subj-phrase &
+  [ SYNSEM.LOCAL.CAT [ VAL [ PPSORT #ppsort,
+                             S-FRAME #sframe ] ],
+    HEAD-DTR [ SYNSEM.LOCAL.CAT [ VAL [ PPSORT #ppsort,
+                                        S-FRAME #sframe ] ] ] ].	
+										
+VS-basic-head-subj1-phrase := VS-basic-head-subj-phrase &
+[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+                         DEP1 [ REAL #link & arg1+ ],
+                         DEP2 #dep2 ],
+	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+					    S-FRAME arg1+,
+                                    SUBJ-ARG arg1,
+                                    DEP1 [ DEP #synsem,
+					   REAL arg1- ] ,
+                                    DEP2 #dep2 ] ],
+                          CONT.HOOK [ TOPREL.ARG1 #ind1 ] ],
+	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind1 ] ] ] ].
+VS-basic-head-subj2-phrase := VS-basic-head-subj-phrase &
+[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+                         DEP2 [ REAL #link & arg2+ ],
+                         DEP1 #dep1 ],
+	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+                                    SUBJ-ARG arg2,
+                                    DEP2 [ DEP #synsem,
+					   REAL arg2- ] ,
+                                    DEP1 #dep1 ] ],
+                          CONT.HOOK [ TOPREL.ARG2 #ind2 ] ],
+	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind2 ] ] ] ].
+
+
+;NURIT-QUE commented out because clashes with SF above. Not sure what this is for anyway.
+;imp-head-subj-phrase := basic-head-subj-phrase & imperative-clause.
+
+;LHS: QUE added in order to enable real interrogative clauses (once the que-filler is added)
+;LHS 1905 REVIVED and added the type non-declarative-clause.
+
+;Commented out because they are no longer used (LHS 2809)
+;que-head-subj-phrase := basic-head-subj-phrase & non-declarative-clause.
+;decl-head-subj-phrase := basic-head-subj-phrase & declarative-clause.
+
+non-declarative-clause := head-compositional & phrasal &
+  [ SYNSEM.NON-LOCAL [ QUE 1-dlist,
+                       REL 0-dlist ],
+    HEAD-DTR.SYNSEM.NON-LOCAL [ REL 0-dlist ],
+    C-CONT [ RELS <! !>,
+             HCONS <! !>,
+	     ICONS <! !> ] ].
+
+;SUBJ-ARG: changed subj-head-phrase and its supertype to inherit from basic-head-subj1-phrase and added the subj2 version.
+;Bypassing decl/que head-subj-phrase:
+; TAG 29/1/15: moved to heb-types-phrasal with all the rules that inherit from canon-basic-head-subj-phrase
+; subj1-head-phrase := canon-basic-head-subj1-phrase & head-final.
+; subj2-head-phrase := canon-basic-head-subj2-phrase & head-final.
+
+;subj-head-phrase := decl-head-subj-phrase & head-final.
+
+;LHS V2:
+head-subj1-phrase := VS-basic-head-subj1-phrase & head-initial.
+head-subj2-phrase := VS-basic-head-subj2-phrase & head-initial.
+
+; TAG 29/1/15: moved to heb-types-phrasal with all the rules that inherit from canon-basic-head-subj-phrase
+;Nurit 26/10
+;;; RAISING VERBS ;;;;
+; raising-subj1-head-phrase := canon-raising-head-subj1-phrase & head-final.
+
+;NURIT-QUE
+;que-subj-head-phrase := que-head-subj-phrase & head-final.
+;
+;============================================
+;THE HEAD-COMP HIERARCHY
+;============================================
+;Constraint on MC used to be part of matrix.tdl
+;;it applies to all wo implementations, except for v2
+;LHS took out basic-binary-headed-phrase because it's redundant (it's an ancestor of non-local-concat-phrase)
+;basic-head-comp-phrase := head-compositional & non-local-concat-phrase &
+
+;SUBJ-ARG: added percolation of SUBJ-ARG from head-daughter
+;NM 3/9/15: subj1-subj2 fix: added percolation of SUBJ-DEP from head-daughter
+basic-head-comp-phrase := head-compositional & non-local-concat-phrase & no-icons-ccont-rule & no-rels-ccont-rule &
+  [ SYNSEM phr-synsem-min &
+    	   [ LOCAL.CAT [ MC #mc,
+	       	       	VAL [ 	S-FRAME #sframe,
+				PPSORT #ppsort,
+	       	             	DEP1 #subj,
+                            SUBJ-DEP #subjdep,
+                			SUBJ-ARG #subjarg ],
+                			POSTHEAD #ph,
+                        HC-LIGHT #light ],
+             LIGHT #light ],
+    HEAD-DTR [ SYNSEM [ LOCAL.CAT [ MC #mc,
+                              VAL [ S-FRAME #sframe,
+				    PPSORT #ppsort,
+                                    DEP1 #subj,
+                                    SUBJ-DEP #subjdep,
+				                    SUBJ-ARG #subjarg ],
+                                  POSTHEAD #ph,
+                                  HC-LIGHT #light ] ] ],
+    NON-HEAD-DTR [ SYNSEM phr-synsem ] ].
+
+basic-head-init-comp-phrase := basic-head-comp-phrase & head-initial.
+
+;=============== DEP1 RULES ====================
+;SUBJ-ARG: new section, to enable DEP1 arguments as complements of the verb (in passive sentences with a by-phrase).
+;SUBj-ARG: check that the complement is not the subject.
+head-comp1-phrase := basic-head-init-comp1-phrase & no-hcons-ccont-rule & 
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+			     S-FRAME #sframe,
+			     SUBJ-ARG #subjarg,
+    	     		     DEP1 [ REAL #link & arg1+ ] ,
+			     DEP3 #dep3,
+			     DEP2 #dep2,
+			     DEP4 #dep4,
+			     DEP5 #dep5,
+			     DEP6 #dep6 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+					S-FRAME #sframe,
+					SUBJ-ARG #subjarg,
+  				        DEP1 [ DEP #synsem, 
+					       REAL #subjarg & arg1- ],
+					DEP3 #dep3,
+    				        DEP2 #dep2,
+				        DEP4 #dep4,
+				        DEP5 #dep5,
+				        DEP6 #dep6 ],
+			      CONT.HOOK.TOPREL [ ARG1 #ind1 ] ] ],
+    NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK.TOPREL [ ARG2 ref-ind & #ind1 ],
+					    CAT.HEAD adp ] ] ].
+;SUBJ-ARG: had to add this as a supertype instead of basic-head-comp-phrase, because otherwise, they clash 
+;(the latter requires DEP1 of the mother to be structure shared with the head daughter). It also mirrors basic-head-comp-phrase.
+basic-head-init-comp1-phrase := head-compositional & non-local-concat-phrase & no-icons-ccont-rule & no-rels-ccont-rule & head-initial &
+  [ SYNSEM phr-synsem-min &
+    	   [ LOCAL.CAT [ MC #mc,
+	       	       	VAL [ 	PPSORT #ppsort ],
+			POSTHEAD #ph,
+                        HC-LIGHT #light ],
+             LIGHT #light ],
+    HEAD-DTR [ SYNSEM [ LOCAL.CAT [ MC #mc,
+                              VAL [ PPSORT #ppsort ],
+                                  POSTHEAD #ph,
+                                  HC-LIGHT #light ] ] ],
+    NON-HEAD-DTR.SYNSEM phr-synsem ].
+
+
+
+;=============== DEP2 RULES ====================
+
+;Nurit 26/10 - raising - as a first step I defined S-FRAME inheritance here so that when a raising verb combines with its VP the resulting VP will have the raising verb's S-FRAME
+;  value, which doesn't have arg1+. This controls the type of head-subject rule that will apply.
+; This will probably need to be refined.
+
+;SUBj-ARG: check that the complement is not the subject.
+head-comp2-phrase := basic-head-init-comp-phrase &
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+                             DEP2 [ REAL #link & arg2+ ] ,
+                             DEP3 #dep3,
+                             DEP4 #dep4,
+                             DEP5 #dep5,
+                             DEP6 #dep6 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+					SUBJ-ARG #subj,
+                                        DEP2 [ DEP #synsem,
+					       REAL #subj & arg2- ] ,
+                                        DEP3 #dep3,
+                                        DEP4 #dep4,
+                                        DEP5 #dep5,
+                                        DEP6 #dep6 ] ] ],
+   NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL.CONT.HOOK.INDEX  event-or-ref-index ] ].
+
+
+
+;--------------- NP in DEP2 --------------------
+;LHS: to enable DEP2 NPs as complements
+head-np-comp2-phrase := head-comp2-phrase & no-hcons-ccont-rule &
+  [   HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.TOPREL [ ARG2 #ind2 ],
+      NON-HEAD-DTR.SYNSEM.LOCAL [ CAT  [ HEAD noun,
+                                         VAL.R-FRAME no-arg ],
+                                  CONT.HOOK.INDEX  ref-ind & #ind2 ] ].
+
+;Specific for v+np
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+; TAG: 12/01/15: Moved to heb-types-phrasal since arabic does not have OBJ-MARK
+v-head-np-comp2-phrase := head-np-comp2-phrase &
+   [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL.S-FRAME arg2+,
+				                   HEAD v_pron_head ] ],
+     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.CASE acc
+				       ] ] ].
+
+; TAG 18/01/15: General rule for arabic and hebrew the CASE specification is non-acc
+;Specific for p+np
+ p-head-np-comp2-phrase := head-np-comp2-phrase &
+   [ SYNSEM.LOCAL.CAT.VAL fullval,
+     HEAD-DTR [ SYNSEM.LOCAL.CAT.HEAD adp ],
+     NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.CASE non-acc ].
+
+;Raising
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+; TAG: 12/01/15: Moved to heb-types-phrasal since arabic does not have OBJ-MARK
+raising-head-np-comp2-phrase := head-comp2-phrase & no-hcons-ccont-rule &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ S-FRAME arg2- ],
+				                  HEAD v_pron_head ] ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+				      
+				       VAL.R-FRAME no-arg ] ] ].
+
+
+;raising-head-np-comp2-phrase := basic-head-init-comp-phrase & no-hcons-ccont-rule &
+;  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+;                             DEP2 [ REAL #link & arg2+ ] ,
+;                             DEP3 #dep3,
+;                             DEP4 #dep4 ] ],
+;    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head,
+;				    VAL [ S-FRAME arg2-,
+;				        R-FRAME #link,
+;					SUBJ-ARG #subj,
+;                                        DEP2 [ DEP #synsem,
+;						REAL #subj & arg2- ] ,
+;                                        DEP3 #dep3,
+;                                        DEP4 #dep4 ] ] ] ],
+;   NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL.CAT [ HEAD noun & [ CASE acc ],
+;				         OBJ-MARK +,
+;					 VAL.R-FRAME no-arg ] ] ].
+
+
+
+;--------------- OTHER DEP2 COMPS --------------------
+;LHS 0510: adding PP to DEP2 (alongside PPSORT matching, taken out of head-pp-comp4-phrase):
+head-pp-comp2-phrase := head-comp2-phrase & no-hcons-ccont-rule &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.PPSORT.DEP2-P #ppsort,
+			    CONT.HOOK.TOPREL [ARG2 #ind2 ] ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [	CONT.HOOK.TOPREL [ PRED #ppsort,
+						   ARG2  ref-ind & #ind2 ],
+                                CAT.HEAD adp ] ].
+
+;LHS: to enable complementizers to connect with S (if we don't restrict the syntactic head it creates spurious parses for v+CP combinations)
+;c-head-comp2-phrase := head-comp2-phrase & no-hcons-ccont-rule & 
+;  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD comp,
+;    NON-HEAD-DTR [ SYNSEM.LOCAL.CAT.VAL.DEP1.REAL arg1+ ] ].
+;LHS 28/12: for an era where the subject isn't necessarily an arg1
+c-head-comp2-phrase := head-comp2-phrase & no-hcons-ccont-rule & 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD comp ].
+
+
+head-cp-comp2-phrase := head-comp2-phrase &  hcons-ccont-rule & 
+  [ C-CONT.HCONS <! [ HARG #harg,
+                            LARG #larg ] !> ,
+    HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.TOPREL [ ARG2 #harg ] ,
+    NON-HEAD-DTR [ SYNSEM.LOCAL [ CAT [ HEAD comp,
+                                        VAL fullval ],
+                                  CONT.HOOK [ LTOP  #larg ] ] ] ].
+
+;Nurit - 9/6 handle control separately
+;head-vp-comp2-phrase := head-comp2-phrase & hcons-ccont-rule & 
+;  [ C-CONT.HCONS <! [ HARG #harg,
+;                      LARG #larg ] !>,
+;    SYNSEM.LOCAL.CONT.HOOK.TOPREL [ ARG2 #harg ] ,
+;    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb,
+;                                CONT [ HOOK [   LTOP  #larg,
+;                                                TOPREL.ARG1 semarg,
+;                                                INDEX event & [ E.TENSE infinitive ] ] ] ] ].                                 	 
+;LHS restricting object control to get an object before the VP
+;NM 3/9/15: subj1-subj2 fix: don't force the VP complement to have arg1
+;head-vp-comp2-phrase := head-comp2-phrase & hcons-ccont-rule & 
+;  [ C-CONT.HCONS <! [ HARG #harg,
+;                      LARG #larg ] !>,
+;    SYNSEM.LOCAL [ CAT.VAL.R-FRAME #link,
+;		   CONT.HOOK.TOPREL [ ARG2 #harg ] ],
+;    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ DEP3.REAL #link,
+;				    DEP5.REAL #link ],
+;    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb,
+;                                CONT [ HOOK [   LTOP  #larg,
+;                                                TOPREL.ARG1 semarg,
+;                                                INDEX event & [ E.TENSE infinitive ] ] ] ] ]. 
+
+; TAG 21/10/15: Arabic manswb: moved the infinitive requirement to heb-types-phrasal
+head-vp-comp2-phrase := head-comp2-phrase & hcons-ccont-rule & 
+  [ C-CONT.HCONS <! [ HARG #harg,
+                      LARG #larg ] !>,
+    SYNSEM.LOCAL [ CAT.VAL.R-FRAME #link,
+		               CONT.HOOK.TOPREL [ ARG2 #harg ] ],
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ DEP3.REAL #link,
+				                            DEP5.REAL #link ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb,
+                                CONT [ HOOK [   LTOP  #larg,
+                                                INDEX event ] ] ] ]. 
+
+;--------------- Complex predicates --------------------
+;LHS 20/11/14 complex predicates (XCOMP)
+;Can't inherit from basic-head-comp or from head-compositional (the former has dep-related things that don't fit, and the latter 
+;requires the HOOK of the head-daughter to be unifiable with the C-CONT's hook)
+;LHS 30/12/14: added a constraint on the head-dtr to have a lex-synsem, so that it won't be able to apply after adjunct extraction takes place.
+head-xcomp-phrase := non-local-concat-phrase & no-icons-ccont-rule & no-rels-ccont-rule & head-initial & hcons-ccont-rule &
+  [ SYNSEM lex-synsem & [ LOCAL [ CONT.HOOK [ TOPREL #trel,
+                                              INDEX #ind ],
+                                  CAT.VAL #val ] ],
+    C-CONT.HCONS <! [ HARG #harg,
+                      LARG #larg ] !>,
+    HEAD-DTR.SYNSEM lex-synsem & [ LOCAL [	CAT.VAL [ XCOMP.DEP #xcomp,
+                                      R-FRAME argxc ],
+                            CONT.HOOK [ TOPREL.ARG2 #harg,
+                                        INDEX #ind ] ] ],
+    NON-HEAD-DTR.SYNSEM lex-synsem & #xcomp & [ LOCAL [ CONT.HOOK [ LTOP #larg,
+                                                                    TOPREL #trel,
+                                                                    INDEX event & [ E.TENSE infinitive ] ],
+                                                        CAT [ HEAD verb,
+                                                              VAL #val ] ] ] ].
+;The general index is not unifiable with any arg0:
+;head-xcomp-phrase := non-local-concat-phrase & no-icons-ccont-rule & no-rels-ccont-rule & head-initial & hcons-ccont-rule &
+;  [ SYNSEM lex-synsem & [ LOCAL [ CONT.HOOK [ TOPREL #trel,
+;                                              INDEX.E.TENSE #tense ],
+;                                  CAT.VAL #val ] ],
+;    C-CONT.HCONS <! [ HARG #harg,
+;                      LARG #larg ] !>,
+;    HEAD-DTR.SYNSEM.LOCAL [	CAT.VAL [ XCOMP #xcomp,
+;                                      R-FRAME xc ],
+;                            CONT.HOOK [ TOPREL.ARG2 #harg,
+;                                        INDEX.E.TENSE #tense ] ],
+;    NON-HEAD-DTR.SYNSEM lex-synsem & #xcomp & [ LOCAL [ CONT.HOOK [ LTOP #larg,
+;                                                                    TOPREL #trel,
+;                                                                    INDEX event & [ E.TENSE infinitive ] ],
+;                                                        CAT [ HEAD verb,
+;                                                              VAL #val ] ] ] ].                                                              
+
+
+
+;=============== DEP3 RULES ====================
+;SUBj-ARG: check that the complement is not the subject.
+head-comp3-phrase := basic-head-init-comp-phrase & no-hcons-ccont-rule & 
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+    	     		     DEP3 [ REAL #link & arg3+ ] ,
+			     DEP2 #dep2,
+			     DEP4 #dep4,
+			     DEP5 #dep5,
+			     DEP6 #dep6 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+					SUBJ-ARG #subj,
+  				        DEP3 [ DEP #synsem,
+					       REAL #subj & arg3- ] ,
+    				        DEP2 #dep2,
+				        DEP4 #dep4,
+				        DEP5 #dep5,
+				        DEP6 #dep6 ] ] ],
+    NON-HEAD-DTR.SYNSEM #synsem ].
+
+
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+;  Nurit 9/6: OBJ-MARK + is enough to get only ACC
+;  LHS 0210: returning ACC to the equation
+;  LHS 1812: added the S-FRAME constraint to distinguish from raising 
+head-np-comp3-phrase := head-comp3-phrase & 
+   [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.S-FRAME arg3+,
+		                     CONT.HOOK.TOPREL [ ARG3 #ind3 ] ],
+     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+                                       VAL.R-FRAME no-arg ],
+                                 CONT.HOOK.INDEX  ref-ind & #ind3 ] ].
+; ;Raising
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+raising-head-np-comp3-phrase := head-comp3-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ S-FRAME arg3- ] ] ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+				                      VAL.R-FRAME no-arg ] ] ].
+
+;PPSORT
+;LHS 0510: moved the restriction of TOPREL.PRED _l_p_rel to types-deps-lxm
+head-pp-comp3-phrase := head-comp3-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.TOPREL [ARG3 #ind3 ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [	CONT.HOOK.TOPREL [ ARG2  ref-ind & #ind3 ],
+                                CAT.HEAD adp ] ].
+
+;=============== DEP4 RULES ====================
+;SUBj-ARG: check that the complement is not the subject.
+;LHS 0210: added NP
+;LHS 1910: added VP (beinoni)
+;LHS 2010: ordering constraints (DEP4 can only appear after another DEP2/DEP3 complement, if there is one);
+;As far as we are aware, this restriction does not apply to DEP5/DEP6 complements that appear alongside DEP4 ones.
+head-comp4-phrase := basic-head-init-comp-phrase & no-hcons-ccont-rule &
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+    	     		     DEP4 [ REAL #link & arg4+ ] ,
+			     DEP3 #dep3,
+			     DEP2 #dep2,
+			     DEP5 #dep5,
+			     DEP6 #dep6 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+				    SUBJ-ARG #subj,
+    				    DEP4 [ DEP #synsem,
+					   REAL #subj & arg4- ] ,
+    				DEP3 #dep3 & [ REAL #link ],
+				    DEP2 #dep2 & [ REAL #link ],
+				    DEP5 #dep5,
+				    DEP6 #dep6 ],
+			      CONT.HOOK.TOPREL [ ARG4 #hand4 ] ] ],
+    NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK.LTOP handle & #hand4,
+                                                         CAT.HEAD +nvjrp ] ] ].
+
+;LHS 0210: added NP
+;LHS 2910: added a verbal head (otherwise 'mh dni' gets parses where 'mh' is a CP that takes an NP as a dep4 complement)
+;TAG 28/1/15: uncommented, the OBJ-MARK specification and the non-acc specification is removed and added in heb-types-phrasal
+;TAG 11/01/15: moved to heb-types-phrasal because Arabic does not have OBJ-MARK 
+v-head-np-comp4-phrase := head-comp4-phrase &
+	[ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD v_pron_head,
+     NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD noun,
+             	  		               VAL.R-FRAME no-arg ] ] ].
+
+;;LHS 1910: added VP (beinoni)
+;head-vp-comp4-phrase := head-comp4-phrase &
+;  [ NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb,
+;                                CONT [ HOOK [   TOPREL.ARG1 semarg,
+;                                                INDEX event & [ E.TENSE present ] ] ] ] ].      
+;;LHS 110915: expanding subj1-subj2 fix: don't force the VP complement to have arg1
+head-vp-comp4-phrase := head-comp4-phrase &
+  [ NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb,
+                                CONT [ HOOK [  INDEX event & [ E.TENSE present ] ] ] ] ].                                                      
+
+;LHS 0510: took out PPSORT matching and moved it to head-pp-comp2-phrase
+;LHS 0511: added the complex PPSORT matching (if we later decide that DEP4 PPs don't need it, it can be taken out)
+head-pp-comp4-phrase := head-comp4-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.PPSORT.DEP4-P #ppsort,
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD adp,
+                                CONT.HOOK.TOPREL.PRED #ppsort ] ].
+  
+head-advp-comp4-phrase := head-comp4-phrase &
+  [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adv ].
+
+head-adjp-comp4-phrase := head-comp4-phrase &
+  [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adj ].
+
+
+;=============== DEP5 RULES ====================
+head-comp5-phrase := basic-head-init-comp-phrase & no-hcons-ccont-rule &
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+    	     		     DEP5 [ REAL #link & arg5+ ] ,
+			     DEP3 #dep3,
+			     DEP2 #dep2,
+			     DEP4 #dep4,
+			     DEP6 #dep6 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+				    SUBJ-ARG #subj,
+    				    DEP5 [ DEP #synsem,
+					   REAL #subj & arg5- ] ,
+    				DEP3 #dep3,
+				    DEP2 #dep2,
+				    DEP4 #dep4,
+				    DEP6 #dep6 ],
+			      CONT.HOOK.TOPREL [ ARG5 #hand5 ] ] ],
+    NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK.LTOP handle & #hand5,
+                                                         CAT.HEAD +rp ] ] ].
+
+
+head-pp-comp5-phrase := head-comp5-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.PPSORT.DEP5-P #ppsort,
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD adp,
+                                CONT.HOOK.TOPREL.PRED #ppsort ] ].
+
+;LHS 15/02/15: MWE order constraints - no longer used (because we don't want to enforce this on such a general level)
+;head-idiom-pp-comp5-phrase := head-pp-comp5-phrase &
+;  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+;				    DEP2.REAL #link ],
+;    NON-HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.TOPREL.PRED i-rel ].
+;head-literal-pp-comp5-phrase := head-pp-comp5-phrase &
+;  [ NON-HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.TOPREL.PRED l-rel ].
+
+  
+head-advp-comp5-phrase := head-comp5-phrase &
+  [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adv ].
+  
+;=============== DEP6 RULES ====================
+
+; TAG 290916: the general head-comp6-phrase includes np-pp disjunction 
+head-comp6-phrase := basic-head-init-comp-phrase & no-hcons-ccont-rule &
+  [ SYNSEM [ LOCAL.CAT.VAL [ R-FRAME #link,
+    	     		     DEP6 [ REAL #link & arg6+ ] ,
+			     DEP3 #dep3,
+			     DEP2 #dep2,
+			     DEP4 #dep4,
+			     DEP5 #dep5 ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ R-FRAME #link,
+				    SUBJ-ARG #subj,
+    				    DEP6 [ DEP #synsem,
+					   REAL #subj & arg6- ] ,
+    				DEP3 #dep3,
+				    DEP2 #dep2,
+				    DEP4 #dep4,
+				    DEP5 #dep5 ],
+			      CONT.HOOK.TOPREL [ ARG6 #hand6 ] ] ],
+    NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK.LTOP handle & #hand6,
+                                                         CAT.HEAD +np ] ] ].
+
+head-pp-comp6-phrase := head-comp6-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.PPSORT.DEP6-P #ppsort,
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CONT.HOOK.TOPREL.PRED #ppsort ] ].
+  
+;=============== ZERO-COPULA ====================
+;zero-copula-phrase := unary-phrase &
+;	[ SYNSEM [ LOCAL [ CAT [ MC #mc,
+;	                         HEAD pron & [ MOD < > ],
+;                           VAL [ 	R-FRAME #frame & arg12-14,
+;                                  S-FRAME #frame,
+;				  SUBJ-ARG #subjarg,
+;                                  DEP1 [ REAL arg1-,
+;                                         DEP.LOCAL [ CAT [ HEAD noun,
+;                                                       VAL [ R-FRAME no-arg ] ],
+;                                                     CONT.HOOK [ INDEX #arg1,
+;								 TOPREL.PRED l-rel ] ] ],
+;                                  DEP3 [ REAL arg3- ],
+;                                  DEP5 [ REAL arg5- ],
+;                                  DEP6 [ REAL arg6- ] ] ],
+;                     CONT.HOOK [ INDEX #index & [ E.TENSE present ],
+;                                 LTOP #hand ] ],
+;		         NON-LOCAL [ SLASH #slash,
+;                         QUE #que,
+;                         REL #rel ] ],
+;	   ARGS.FIRST [ SYNSEM phr-synsem &
+;                  [ LOCAL.CAT [ VAL.SUBJ-ARG #subjarg,
+;				MC #mc ],
+;                    NON-LOCAL [    SLASH #slash,
+;                                  QUE #que,
+;                                  REL #rel ] ] ],
+;	   C-CONT.RELS <! [ PRED "_cop_rel",
+;                      LBL #hand,
+;                      ARG0 event & #index,
+;                      ARG1 #arg1,
+;		      ARG2 semarg,
+;		      ARG4 semarg ] !> ].
+
+;;LHS 170915: expanding subj1-subj2 fix: replaced SUBJ-ARG percolation with setting SUBJ-ARG of the mother to be arg1,
+;;as it should mimic copula/pron. Otherwise, there was no parse for zero pron sentences with a VP that has an arg2 subject.
+zero-copula-phrase := unary-phrase &
+	[ SYNSEM [ LOCAL [ CAT [ MC #mc,
+	                         HEAD pron & [ MOD < > ],
+                           VAL [ 	R-FRAME #frame & arg12-14,
+                                  S-FRAME #frame,
+				  SUBJ-ARG arg1,
+                                  DEP1 [ REAL arg1-,
+                                         DEP.LOCAL [ CAT [ HEAD noun,
+                                                       VAL [ R-FRAME no-arg ] ],
+                                                     CONT.HOOK [ INDEX #arg1,
+								 TOPREL.PRED l-rel ] ] ],
+                                  DEP3 [ REAL arg3- ],
+                                  DEP5 [ REAL arg5- ],
+                                  DEP6 [ REAL arg6- ] ] ],
+                     CONT.HOOK [ INDEX #index & [ E.TENSE present ],
+                                 LTOP #hand ] ],
+		         NON-LOCAL [ SLASH #slash,
+                         QUE #que,
+                         REL #rel ] ],
+	   ARGS.FIRST [ SYNSEM phr-synsem &
+                  [ LOCAL.CAT [ MC #mc ],
+                    NON-LOCAL [    SLASH #slash,
+                                  QUE #que,
+                                  REL #rel ] ] ],
+	   C-CONT.RELS <! [ PRED "_cop_rel",
+                      LBL #hand,
+                      ARG0 event & #index,
+                      ARG1 #arg1,
+		      ARG2 semarg,
+		      ARG4 semarg ] !> ].		      
+
+
+
+;~~~~~~~~~~~~~~~~~~~ DEP2 RULES ~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+zero-copula-dep2-phrase := zero-copula-phrase &
+	[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link & arg12,
+				 DEP2 [ REAL #link ],
+				 DEP4 [ REAL arg4- ] ] ].
+
+cp-zero-copula-phrase := zero-copula-dep2-phrase &
+	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT [ HEAD comp,
+                                    VAL.DEP2.REAL arg2+ ],
+		   		     CONT.HOOK [ LTOP  #ltop,
+                                                 INDEX event & [ E.TENSE finite ] ] ],
+	   C-CONT [ RELS <! [ARG2 #arg2 ] !>,
+	   	    HCONS <! [ HARG #arg2,
+                              LARG #ltop ] !> ] ].	    
+
+;;LHS 170915: expanding subj1-subj2 fix: don't force the VP to have arg1
+vp-zero-copula-phrase := zero-copula-dep2-phrase &
+	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT [ HEAD verb ],
+                              CONT [	HOOK [ 	LTOP  #ltop,
+                                              INDEX event & [ E.TENSE infinitive ] ] ] ],
+	   C-CONT [ RELS <! [ARG2 #arg2 ] !>,
+              HCONS <! [ HARG #arg2,
+                         LARG #ltop ] !> ] ].
+;vp-zero-copula-phrase := zero-copula-dep2-phrase &
+;	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT [ HEAD verb ],
+;                              CONT [	HOOK [ 	LTOP  #ltop,
+;                                              INDEX event & [ E.TENSE infinitive ],
+;                                              TOPREL.ARG1 semarg ] ] ],
+;	   C-CONT [ RELS <! [ARG2 #arg2 ] !>,
+;              HCONS <! [ HARG #arg2,
+;                         LARG #ltop ] !> ] ].
+		                            
+;~~~~~~~~~~~~~~~~~~~ DEP4 RULES ~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+zero-copula-dep4-phrase := zero-copula-phrase &
+	 [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link & arg14,
+                                  DEP2 [ REAL arg2- ],
+                                  DEP4 [ REAL #link ] ],
+	   ARGS.FIRST.SYNSEM.LOCAL.CONT.HOOK [ TOPREL.ARG1 #arg1,
+					       LTOP handle & #arg4 ],
+	   C-CONT.RELS <! [ ARG1 #arg1,
+			     ARG4 #arg4 ] !> ].
+; TAG 29/9/16: moved the non-acc specification back to the core grammar, as it is needed for Arabic
+; TAG 28/1/15: uncommented, the OBJ-MARK and non-acc specification is removed and added in heb-types-phrasal
+; TAG: moved to heb-phrasal because Arabic does not have OBJ-MARK
+np-zero-copula-phrase := zero-copula-dep4-phrase & no-hcons-ccont-rule &
+	[  ARGS.FIRST.SYNSEM.LOCAL [ CAT [ HEAD noun & [ CASE non-acc ],
+	
+					                   VAL.R-FRAME no-arg ] ] ].	
+
+pp-zero-copula-phrase := zero-copula-dep4-phrase & no-hcons-ccont-rule &
+	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT.HEAD adp ] ].
+
+adjp-zero-copula-phrase := zero-copula-dep4-phrase & no-hcons-ccont-rule &
+	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT.HEAD adj & [ DEF - ] ] ].
+
+advp-zero-copula-phrase := zero-copula-dep4-phrase & no-hcons-ccont-rule &
+	[ ARGS.FIRST.SYNSEM.LOCAL [ CAT.HEAD adv ] ].
+
+;============================================
+;BARE PHRASE RULES
+;============================================
+
+;To enable object-less verbs as complements.
+bare-vp-phrase := head-only & head-compositional & no-hcons-ccont-rule & no-rels-ccont-rule & que-percolate-phrase & no-slash-phrase &
+[ SYNSEM phr-synsem  & 
+      [ LOCAL.CAT.VAL #val ],
+  	HEAD-DTR.SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD verb,
+                                               VAL #val & [ DEP1.REAL arg1-,
+                                                            DEP2.REAL arg2-,
+                                                            DEP3.REAL arg3-,
+                                                            DEP4.REAL arg4-,
+                                                            DEP5.REAL arg5-,
+                                                            DEP6.REAL arg6- ] ] ] ] ].
+;;Nurit 
+bare-vp-arg1-phrase := bare-vp-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1 ].
+  
+bare-vp-arg2-phrase := bare-vp-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].                                                              
+                                                            
+;LHS to enable adjectives as complements
+bare-adjp-phrase := head-only & head-compositional & no-hcons-ccont-rule & no-rels-ccont-rule & que-percolate-phrase & no-slash-phrase &
+[ SYNSEM phr-synsem  & 
+      [ LOCAL.CAT.VAL #val ],
+  	HEAD-DTR.SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD adj,
+                                               VAL #val ] ] ] ].
+
+;LHS to enable adverbs as complements
+bare-advp-phrase := head-only & head-compositional & no-hcons-ccont-rule & no-rels-ccont-rule & que-percolate-phrase & no-slash-phrase &
+[ SYNSEM phr-synsem  & 
+      [ LOCAL.CAT.VAL #val ],
+  	HEAD-DTR.SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD adv,
+                                               VAL #val ] ] ] ].
+
+;LHS 1505 only in order to enable cp-qpart-lex-item as a complement (it is lex-synsem, so must convert to phr-synsem)
+bare-cp-phrase := head-only & head-compositional & no-hcons-ccont-rule & no-rels-ccont-rule & que-percolate-phrase & no-slash-phrase &
+[ SYNSEM phr-synsem  & 
+      [ LOCAL.CAT.VAL #val ],
+  	HEAD-DTR cp-qpart-lex-item & [ SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD comp,
+                                               VAL #val ] ] ] ] ].
+
+;-------------------------------------
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+; TAG 12/01/15: moved to heb-types-phrasal because arabic does not have OBJ-MARK
+; SSH 2012-03-03 ICONS
+; SSH 2013-02-19 deleting ICONS ?
+; Nurit 9/6 - copy OBJ-MARK from daughter to mother (used to be a HEAD feature)
+; 0710 LTOP of the phrase is structure shared with the LTOP of the daughter (instead of the LTOP of the quant relation)
+; 11/11 Replaced SPR requirements with the requirement that the head-daughter's R-FRAME is arg0, but the mother's is no-arg.
+; Accordingly, all phrasal rules that used to refer to empty SPRs now refer to R-FRAME no-arg.
+basic-bare-np-phrase := head-only & head-compositional &
+    [ SYNSEM phr-synsem & [ LOCAL.CAT [
+			  VAL [ R-FRAME no-arg ] ] ],
+      HEAD-DTR.SYNSEM [ LOCAL [ CAT [ CS -,
+				      HEAD noun & [ CLT no-clt ],
+				    VAL [ R-FRAME arg0 ] ],
+			      CONT.HOOK [ INDEX #index,
+					  LTOP #larg ] ] ],
+      C-CONT [ 	RELS <! quant-relation &
+			       [	ARG0 #index,
+				  RSTR #harg ] !>,
+		  HCONS <! qeq & 
+			        [ HARG #harg,
+				  LARG #larg ] !>,
+		  ICONS <! !>,
+		  HOOK [ 	INDEX #index,
+			 LTOP #larg ] ] ].
+
+; Bare NP phrase.  Consider modifying the PRED value of the quantifier relation
+; introduced to match the semantic effect of bare NPs in your language.
+;NURIT-QUE add que-percolate-phrase and take out no-non-local-phrase 
+;original;
+;bare-np-phrase := basic-bare-np-phrase &  que-percolate-phrase & no-slash-phrase &
+;  [ C-CONT.RELS <! [ PRED "exist_q_rel" ] !> ].
+
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal
+;  TAG 12/01/15: moved to heb-types-phrasal because arabic does not have OBJ-MARK
+; LHS - changed the PRED to reflect indefiniteness (OBJ-MARK added to mimic indefinite common nouns)
+indef-np-phrase := basic-bare-np-phrase &  que-percolate-phrase & no-slash-phrase &
+   [ HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD.DEF - ],
+     C-CONT.RELS <! [ PRED "indef_q_rel" ] !> ].
+
+; TAG 28/1/15: uncommented, the OBJ-MARK and CASE non-acc specification is removed and added in heb-types-phrasal
+;TAG - moved to heb.types.phrasal because Arabic does not have OBJ-MARK
+;LHS - added this type with a PRED that will reflect definiteness (OBJ-MARK and CASE added to mimic definite common nouns)
+def-np-phrase := basic-bare-np-phrase &  que-percolate-phrase & no-slash-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD [ DEF + ] ],
+    C-CONT.RELS <! [ PRED "def_q_rel" ] !> ].
+
+;POSS LHS 10/02/15: in order to be able to add a possession rel to words like "klbi" (nouns can only have one rel, so this has to be added later).
+poss-bare-np-phrase := head-only & head-compositional & que-percolate-phrase & no-slash-phrase &
+    [ SYNSEM phr-synsem & [ LOCAL.CAT [
+			  VAL [ R-FRAME no-arg ] ] ],
+      HEAD-DTR.SYNSEM [ LOCAL [ CAT [ CS -,
+				      HEAD noun & [ DEF +,
+						    CLT poss-clt ],
+				    VAL [ R-FRAME arg0 ] ],
+			      CONT.HOOK [ XARG #psr,
+					  INDEX #index,
+					  LTOP #larg ] ] ],
+      C-CONT [ 	RELS <! quant-relation &
+			       [  ARG0 #index,
+				  RSTR #harg,
+				  PRED "def_q_rel" ], poss-relation & [ PSR #psr,
+								  PSD #index ] !>,
+		  HCONS <! qeq & 
+			        [ HARG #harg,
+				  LARG #larg ] !>,
+		  ICONS <! !>,
+		  HOOK [ 	INDEX #index,
+			 LTOP #larg ] ] ].
+
+
+;============================================
+; MODIFIER PHRASES
+;============================================
+;; NURIT - I took out all the adj-initial phrases and kept only the adj-final phrases
+
+; ERB 2004-05-05 Allow modifiers to attach to things with
+; non-empty comps lists.  The head-mod-phrase will pass up
+; the COMPS requirement, whatever it was.
+
+;LHS 230815: temporary patch to avoid combining cs nouns (in the big lexicon) with modifiers
+
+head-mod-phrase := que-rel-percolate-phrase &
+  [ SYNSEM [ LOCAL.CAT.VAL #val,
+             MODIFIED hasmod ],
+    HEAD-DTR.SYNSEM [ LOCAL.CAT.VAL #val,
+                      NON-LOCAL [ REL 0-dlist ] ] ].
+
+basic-head-mod-phrase-simple := head-mod-phrase & binary-headed-phrase &
+  [ SYNSEM [ LOCAL.CAT.MC #hmc,
+	     NON-LOCAL [ SLASH [ LIST #first,
+				 LAST #last ],
+			 REL 0-dlist ] ],
+    HEAD-DTR.SYNSEM 
+           [ LOCAL [ CAT [ CS -,
+                           HEAD #head,
+                           VAL #val,
+                           POSTHEAD #ph,
+			   MC #hmc,
+			   HC-LIGHT - ],
+                     AGR #agr,
+                     CONT.HOOK #hdhook ],
+             NON-LOCAL #nonloc &
+                   [ SLASH [ LIST #middle,
+                             LAST #last ] ],
+			 LIGHT #light,
+			 MODIFIED #modif ],
+    NON-HEAD-DTR.SYNSEM 
+           [ LOCAL.CAT [ HEAD [ MOD < [ LOCAL local & 
+                                              [ CAT [ HEAD #head,
+                                                      VAL #val,
+                                                      POSTHEAD #ph,
+                                                      MC #hmc ],
+                                                AGR #agr,
+                                                CONT.HOOK #hdhook ],
+                                        NON-LOCAL #nonloc,
+					LIGHT #light,
+                                        MODIFIED #modif ] > ] ],
+             NON-LOCAL [ SLASH [ LIST #first,
+                                 LAST #middle ] ] ],
+    C-CONT.RELS <! !> ].
+;                         QUE 0-dlist & [ LIST null ] ] ],
+;    C-CONT.RELS <! !> ].
+
+
+head-initial-mod-phrase := basic-head-mod-phrase-simple & head-initial & phrasal &
+  [ SYNSEM [ LOCAL.CAT.POSTHEAD +,
+	     MODIFIED rmod ],
+    NON-HEAD-DTR.SYNSEM [ LOCAL.CAT [ POSTHEAD + ] ]].
+;			  NON-LOCAL.QUE 0-dlist ] ].
+
+; We split head-adj-phrase and adj-head-phrase into two each,
+; one for intersective modifiers and one for scopal modifiers, in order to
+; get desired results for recursive modification as in "apparently difficult
+; problem" (cf. Kasper '98).  This split is also used in generation, where
+; we delay construction of intersective modification, but not scopal.
+
+
+;--- scopal modifiers -----
+scopal-mod-phrase := basic-head-mod-phrase-simple &
+  [ NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD.MOD < [ LOCAL scopal-mod ] >,
+                                CONT.HOOK #hook ],
+    C-CONT [ HOOK #hook,
+             HCONS <! !>,
+			 ICONS <! !> ] ].
+
+head-initial-mod-scop-phrase := head-initial-mod-phrase & scopal-mod-phrase &
+  [ NON-HEAD-DTR.SYNSEM.NON-LOCAL.REL 0-dlist ].
+
+;--- intersective modifiers -----
+;LHS added phr-synsem-min so that when adjectives are modifiers, they only attach via bare-adjp-phrase;
+;Also, precluded que-part-lex-items from having adjectives attaching to them
+
+isect-mod-phrase := basic-head-mod-phrase-simple & head-compositional &
+  [ HEAD-DTR.SYNSEM.LOCAL.CONT [ HOOK.LTOP #hand ],
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD.MOD < [ LOCAL intersective-mod ] >,
+				CONT.HOOK.LTOP #hand ],
+    C-CONT [ HCONS <! !>,
+			 ICONS <! !> ] ].
+
+head-initial-mod-int-phrase := head-initial-mod-phrase & isect-mod-phrase  &
+  [ HEAD-DTR.SYNSEM.NON-LOCAL.QUE 0-dlist,
+    NON-HEAD-DTR.SYNSEM phr-synsem-min ].
+;    NON-HEAD-DTR [ SYNSEM phr-synsem-min & [ NON-LOCAL.QUE 0-dlist ] ] ].
+
+;LHS 28/12: added the distinction between adverbial and adjectival modification, because we need two phrase rules for
+;adverbs to distinguish between subjarg arg1 and subjarg arg2 verbs (to bar sentence level adverb modification):
+head-initial-adj-int-phrase := head-initial-mod-int-phrase &
+  [ NON-HEAD-DTR.SYNSEM [ LOCAL.CAT.HEAD adj,
+			  NON-LOCAL.QUE 0-dlist & [ LIST null ] ] ].
+
+;LHS 22/1/15: A better way to bar sentential level adverbial modification:
+head-initial-adv-int-phrase := head-initial-mod-int-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.MC -,
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adv ].
+
+;LHS 22/1/15: In order to enable adverbial modification for V2, we no longer use these: (we use MC - instead, see above)
+;head-initial-adv-int-arg1-phrase := head-initial-adv-int-phrase &
+;  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ SUBJ-ARG arg1,
+;				    DEP1.REAL arg1- ] ].
+;head-initial-adv-int-arg2-phrase := head-initial-adv-int-phrase &
+;  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ SUBJ-ARG arg2,
+;				    DEP2.REAL arg2- ] ].
+
+
+;NURIT-QUE original version
+;head-initial-mod-int-phrase := head-initial-mod-phrase & isect-mod-phrase & qpart-percolate-phrase &
+;  [ HEAD-DTR.QUE-PART -,
+;    NON-HEAD-DTR [ QUE-PART -,
+;		   SYNSEM phr-synsem-min ] ].
+
+
+
+;============================================
+;OTHER PHRASE RULES
+;============================================
+
+
+;;;LHS & NM: Commented out because of compilation error (relevant for pro-drop; when we do want to deal with
+;;;this, we'll need the ancestor decl-head-opt-subj-phrase, in previous versions of matrix.tdl)
+;context1-decl-head-opt-subj-phrase := decl-head-opt-subj-phrase &
+  ;[ HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX [ PNG.PER non-3rd,
+                                            ;E.TENSE past+future ] ].
+
+
+;-------------------------------------
+; TAG 11/01/15: moved to heb-types-phrasal because it is irrelevant for arabic: 
+;NM: The phrase rule for attaching AT to a noun - it copies everything from the noun daughter to the mother except CASE (changes to ACC) 
+; and OBJ-MARK (changes to +, so that the rule won't be applied recursively)
+;Nurit 9/6 - moved OBJ-MARK to CAT
+; acc-marking-phrase := phrase &
+ ; [ KEY-ARG #ka,
+   ; SYNSEM phr-synsem & [ LKEYS #lkeys,
+	    ; OPT #opt,
+	    ; OPT-CS #ocs,
+	    ; LOCAL [CAT [ HEAD [ DEF #def,
+				; KEYS #keys,
+				; CNCRD #cncrd,
+				; CASE acc ],
+			 ; OBJ-MARK +,
+			 ; VAL #val,
+			 ; MC #mc,
+			 ; MKG #mkg,
+			 ; HC-LIGHT #hl,
+			 ; POSTHEAD #ph
+			; ],
+		   ; CONT #cont,
+		   ; AGR #agr,
+		   ; COORD #coord,
+		   ; COORD-REL #cr,
+		   ; COORD-STRAT #cs ],
+	    ; NON-LOCAL #nloc,
+	    ; MODIFIED #mod ],
+   ; INFLECTED #inf,
+   ; C-CONT #cc,
+   ; ARGS < acc-marking-lex & [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP #noun ], sign & [ KEY-ARG #ka,
+									      ; SYNSEM #noun &
+										; [ LKEYS #lkeys,
+										  ; OPT #opt,
+										    ; OPT-CS #ocs,
+										    ; LOCAL [CAT [ HEAD [ DEF #def,
+													; KEYS #keys,
+													; CNCRD #cncrd ],
+												 ; VAL #val & [ R-FRAME no-arg ],
+												 ; MC #mc,
+												 ; MKG #mkg,
+												 ; HC-LIGHT #hl,
+												 ; POSTHEAD #ph
+												; ],
+											   ; CONT #cont,
+											   ; AGR #agr,
+											   ; COORD #coord,
+											   ; COORD-REL #cr,
+											   ; COORD-STRAT #cs ],
+										    ; NON-LOCAL #nloc,
+										    ; MODIFIED #mod ],
+									      ; INFLECTED #inf,
+									      ; C-CONT #cc  ] > 
+ ; ].
+

@@ -1,0 +1,144 @@
+;;  -*- Mode: TDL; Coding: utf-8; -*- 
+;;
+;;  Automatically derived types, that should be in types-deps, derived from the lexicon 
+;;  currently only for verbs
+;15/06/2016
+;=================================================
+;============Mimicking types-deps-lxm==============
+;=================================================
+arg1-15_p := arg1_np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-15 ].
+arg13_p := arg1_np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13 ].
+arg12-16-126_p_p := arg1_np & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg12-13-123_n_p := arg1_np & arg3_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg1-13-16-136_p_p := arg1_np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-13-16-136 ].
+arg1-13_p := arg1_np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-13 ].
+arg12-15-125_n_p := arg1_np & arg5_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg1-12-16-126_c_p := arg1_np & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16-126 ].
+arg1-16_p := arg1_np & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-16 ].
+arg13-15-16-135-136-156-1356_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13-15-16-135-136-156-1356 ].
+arg12_c := arg1_np & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+arg13-15-135_p_p := arg1_np & arg3_pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13-15-135 ].
+arg1-12-15-16-125-126-156-1256_c_p_p := arg1_np & arg5_pp & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-16-125-126-156-1256 ].
+arg12-13-16-123-126-136-1236_n_p_p := arg1_np & arg3_pp & arg6_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-16-123-126-136-1236 ].
+arg12-13-16-123-126-136-1236_c_p_p := arg1_np & arg3_pp & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-16-123-126-136-1236 ].
+arg12-15-16-125-126-156-1256_n_p_p := arg1_np & arg5_pp & arg6_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-16-125-126-156-1256 ].
+arg12-16-126_n_p := arg1_np & arg6_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg1-12-15-16-125-126-156-1256_p_p_p := arg1_np & arg5_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-16-125-126-156-1256 ].
+arg1-12-15-125_p_p := arg1_np & arg5_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg1-12-16-126_pc_p := arg1_np & arg6_pp & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16-126 ].
+arg12-15-125_p_p := arg1_np & arg5_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg12-16-126_np_p := arg1_np & arg6_pp & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg1-12-13-123_c_p := arg1_np & arg3_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-123 ].
+arg12-15-125_np_p := arg1_np & arg5_pp & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg1-12-15-125_c_p := arg1_np & arg5_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg1-12-16-126_p_p := arg1_np & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16-126 ].
+arg1-12-15-125_n_p := arg1_np & arg5_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg1-12-13-123_p_p := arg1_np & arg3_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-123 ].
+arg12-15-16-125-126-156-1256_c_p_p := arg1_np & arg5_pp & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-16-125-126-156-1256 ].
+arg12-13-123_nc_p := arg1_np & arg3_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356_p_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356 ].
+arg12-15-125_c_p := arg1_np & arg5_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg1-13-15-135_p_p := arg1_np & arg3_pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-13-15-135 ].
+arg12-15-125_pc_p := arg1_np & arg5_pp & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg12-13-123_c_p := arg1_np & arg3_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg12-13-123_p_p := arg1_np & arg3_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg1-12-15-125_np_p := arg1_np & arg5_pp & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg12-15-16-125-126-156-1256_p_p_p := arg1_np & arg5_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-16-125-126-156-1256 ].
+arg12-13-16-123-126-136-1236_p_p_p := arg1_np & arg3_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-16-123-126-136-1236 ].
+arg12-13-123_np_p := arg1_np & arg3_pp & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg12-13-123_pc_p := arg1_np & arg3_pp & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg1-12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356_p_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356 ].
+arg1-12-15-125_pc_p := arg1_np & arg5_pp & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg12-13-15-123-125-135-1235_p_p_p := arg1_np & arg3_pp & arg5_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-15-123-125-135-1235 ].
+arg1-12-16-126_n_p := arg1_np & arg6_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16-126 ].
+arg12-16-126_nc_p := arg1_np & arg6_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg12-15-16-125-126-156-1256_np_p_p := arg1_np & arg5_pp & arg6_pp & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-16-125-126-156-1256 ].
+arg13-16-136_p_p := arg1_np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13-16-136 ].
+arg12-16-126_c_p := arg1_np & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg1-12-13-16-123-126-136-1236_c_p_p := arg1_np & arg3_pp & arg6_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-16-123-126-136-1236 ].
+arg1-12-13-16-123-126-136-1236_p_p_p := arg1_np & arg3_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-16-123-126-136-1236 ].
+arg1-12-13-123_n_p := arg1_np & arg3_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-123 ].
+arg12-15-125_nc_p := arg1_np & arg5_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg12-13-15-123-125-135-1235_n_p_p := arg1_np & arg3_pp & arg5_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-15-123-125-135-1235 ].
+arg1-12-15-16-125-126-156-1256_n_p_p := arg1_np & arg5_pp & arg6_pp & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-16-125-126-156-1256 ].
+arg1-12-13-15-123-125-135-1235_p_p_p := arg1_np & arg3_pp & arg5_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-13-15-123-125-135-1235 ].
+arg1-12-15-125_nc_p := arg1_np & arg5_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+arg12-13-15-123-125-135-1235_c_p_p := arg1_np & arg3_pp & arg5_pp & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-15-123-125-135-1235 ].
+arg12-15-125_npc_p := arg1_np & arg5_pp & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-125 ].
+arg12-15-16-125-126-156-1256_nc_p_p := arg1_np & arg5_pp & arg6_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-15-16-125-126-156-1256 ].
+arg12-13-123_npc_p := arg1_np & arg3_pp & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+arg12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356_nc_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-15-16-123-125-126-135-136-156-1235-1236-1256-1356-12356 ].
+arg12-16-126_pc_p := arg1_np & arg6_pp & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-16-126 ].
+arg136_p_p := arg1_np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg136 ].
+arg135_p_p := arg1_np & arg3_pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg135 ].
+arg1235_p_p_p := arg1_np & arg3_pp & arg5_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1235 ].
+arg1356_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1356 ].
+arg12356_p_p_p_p := arg1_np & arg3_pp & arg5_pp & arg6_pp & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12356 ].

@@ -5,7 +5,6 @@
 | rrg |  | https://www.coli.uni-saarland.de/~tania/rrg/rrg-20110615.tgz |  |
 | norsyg |  | git clone https://github.com/petterha/norsyg.git |  |
 | wambaya |  | https://faculty.washington.edu/ebender/wmb/wmb.tgz |  |
-| hegram |  | https://cl.haifa.ac.il/projects/HeGram/semitic_grammar2-master.zip |  |
 | burger |  | http://bultreebank.org/wp-content/uploads/2017/11/bg.zip |  |
 | erg |  | git clone https://github.com/delph-in/erg.git |  |
 | jacy |  | git clone https://github.com/delph-in/jacy.git |  |

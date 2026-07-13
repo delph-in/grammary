@@ -1,0 +1,59 @@
+;;; $Id: types-extraction.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;--------------------------------------------------------------------------
+;                         ARABIC EXTRACTION RULES 
+;--------------------------------------------------------------------------
+; TAG 11/10/15: Added HEAD-DTR.SYNSEM lex-synsem as subject extraction is Arabic is lexical (like complement extraction).
+; TAG 12/2/15: The topicalized subject must be +DEF.
+extracted-subj-phrase :+ basic-extracted-arg-phrase & [ SYNSEM.NON-LOCAL.SLASH.LIST.FIRST.CAT.HEAD.DEF +,
+                           HEAD-DTR.SYNSEM lex-synsem  ].
+
+; TAG 28/1/15: commented out, the general phrase in types-phrasal does not include the OBJ-MARK specification
+;; TAG 11/01/15: moved because arabic does not have OBH-MARK
+;extracted-v-head-comp4-np-phrase := extracted-comp4-phrase & 
+;  [ HEAD-DTR.SyNSEM.LOCAL.CAT [ HEAD v_pron_head,
+;				VAL [ DEP4.DEP.LOCAL.CAT [ HEAD noun,
+;						       VAL.R-FRAME no-arg ] ] ] ].
+								   
+					
+;;;;;;;;;;;
+;;;COMP2;;;
+;;;;;;;;;;;
+
+; TAG 28/1/15: commented out, the general rule in types-extraction does not include OBJ-MARK specification.
+; TAG 12/01/15:  arabic does not have OBJ-MARK;
+;When an NP in DEP2 is extracted the LOCAL values of DEP2 need to be set and linking has to occur 
+;(instead of what happens in head-np-comp2-phrase)
+;LHS 2207: took out the restriction of the head's case to acc (to enable 'hxlwm hmvrh hith')
+;LHS 0210: put back the restriction of the head's case to acc because 'hxlwm hmvrh hith' isn't relevant to comp2 anymore.
+;extracted-v-head-comp2-np-phrase := extracted-comp2-phrase & no-hcons-ccont-rule &
+;  [ HEAD-DTR [ SYNSEM [ LOCAL [ CONT.HOOK.TOPREL.ARG2 #ind2, 
+;				CAT [ HEAD v_pron_head,
+;				      VAL [ S-FRAME arg2+,
+;					    DEP2.DEP.LOCAL [ 	CAT [ HEAD noun & [ CASE acc ],
+;                                                              
+;                                                       	      VAL.R-FRAME no-arg ],
+;                                                 	CONT.HOOK.INDEX  ref-ind & #ind2 ] ] ] ] ] ] ].
+
+; TAG 28/1/15: commented out, the general rule in types-extraction does not include OBJ-MARK specification.
+;LHS 1211: extraction for subject to object raising (the dep2 np)
+;extracted-raising-head-comp2-np-phrase := extracted-comp2-phrase & no-hcons-ccont-rule &
+;  [ HEAD-DTR [ SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head,
+;				      VAL [ S-FRAME arg2-,
+;					    DEP2.DEP.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+;                                                             
+;                                                       	       VAL.R-FRAME no-arg ] ] ] ] ] ] ] ].
+															   
+															   
+;;;;;;;;;;;
+;;;COMP3;;;
+;;;;;;;;;;;
+; TAG 28/1/15: commented out, the general phrase in types-phrasal does not include OBJ-MARK specification
+; TAG 120115:  arabic does not have OBJ-MARK
+;extracted-comp3-np-phrase := extracted-comp3-phrase &
+; [ HEAD-DTR [ SYNSEM [ LOCAL [ CONT.HOOK.TOPREL.ARG3 #ind3,
+;				CAT.VAL.DEP3.DEP.LOCAL [ CAT [ HEAD noun & 
+;							            [ CASE acc ],
+;                                          		   
+;                                          		   VAL.R-FRAME no-arg ],
+;                                                     CONT.HOOK.INDEX  ref-ind & #ind3 ] ] ] ] ].  

@@ -1,0 +1,29 @@
+1 dni npl ph 2 35
+2 dni akl lxm ph 1 63
+3 dni nebr ph 2 35
+4 hkwrsh rwpdh ph 2 41
+5 hkwrsh rwpdh ph ylidi dni 1 63
+6 hkwrsh rwpdh ylidi dni ph 1 70
+7 dni xeb e hkwrsh rwpdh 1 75
+8 dni xeb e hkwrsh rwpdh ylidi dni 1 114
+9 dni xeb e hxlwn nebr 1 66
+10 dni xeb e hkwrsh rwpdh ph 3 150
+11 dni xeb e hkwrsh rwpdh ylidi dni ph 2 174
+12 dni xeb e hkwrsh rwpdh ph ylidi dni 1 189
+13 dni xeb e hxlwn nebr ph 3 127
+14 ph dni npl 1 27
+15 ph dni akl lxm 1 51
+16 ph dni nebr 1 27
+17 ph hkwrsh rwpdh 1 30
+18 ph hkwrsh rwpdh ylidi dni 1 53
+19 ph dni xeb e hkwrsh rwpdh 2 87
+20 ph dni xeb e hkwrsh rwpdh ylidi dni 2 128
+21 ph dni xeb e hxlwn nebr 2 78
+22 *gdwl dni xeb e hkwrsh rwpdh 0 84
+23 *mh dni xeb e hkwrsh rwpdh 0 125
+
+;;; Total CPU time: 2120 msecs
+
+;;; Mean edges: 82.26
+
+;;; Mean parses: 1.39

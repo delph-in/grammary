@@ -1,0 +1,33 @@
+;;; $Id: types-dep-lxm.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+; Arabic types-deps:
+;====================
+
+;;;;;;;;;;;;;;;;;;
+;;;arg6-related;;;
+;;;;;;;;;;;;;;;;;;
+
+arg6_pp-np := top-deps-lxm &
+ [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG6 semarg,
+                   CAT.VAL.DEP6.DEP.LOCAL.CAT.HEAD +np ] ] .
+arg6_pp := arg6_pp-np & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP6.DEP [ LOCAL.CAT.HEAD adp ] ].
+  
+arg6_np := arg6_pp-np & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP6.DEP [ LOCAL.CAT.HEAD noun ] ].
+  
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Simple pre-LE types;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+arg15-16-156_p_np := arg1_np & arg5_pp & arg6_pp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg15-16-156 ].
+  
+  
+  
+  
+  
+  
+  
+  
+ 

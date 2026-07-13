@@ -1,0 +1,15 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;; HEBREW RULES ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; TAG 120115: moved to heb-rules, irrelevant to Arabic
+;$ for acc at marking
+acc-marking-phrase-rule := acc-marking-phrase.
+
+;LHS 310115: moved here from the general rules, because isn't relevant to Arabic.
+subj1-head := subj1-head-phrase.
+subj2-head := subj2-head-phrase.
+r-subj1-head := raising-subj1-head-phrase.
+

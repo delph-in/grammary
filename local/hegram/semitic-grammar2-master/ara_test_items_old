@@ -1,0 +1,91 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;; Arabic test items ;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Case and Agreement issues
+
+;;; v+np - accusative NP:
+;; Singular
+1kl mhmd lxma 
+*1kl mhmd lxm
+*1kl lxma mhmd
+
+;; Dual
+*wldan 1kl lxma
+1kl wldan lxma
+*1kla wldan lxma
+*1kl wldin lxma
+
+;; Broken plurals
+1kl al1wlad lxma
+*1klwa al1wlad lxma 
+*1wlad 1kl lxma 
+r1a 1wlad 1wlada 
+*r1a 1wlad 1wlad
+
+;; Sound plurals
+r1a almylmwn alwld 
+*r1a almylmin alwld 
+*mylmwn 1kl lxma
+r1a mhmd almylmin
+*r1a mhmd almylmwn
+
+;;; p+np - genetive NP:
+safr mhmd 1la wld
+*safr mhmd 1la wlda
+safr mhmd 1la mylmin 
+*safr mhmd 1la mylmwn
+*safr mhmd 1la mylman
+
+;;; Proper nouns can be non-acc or acc (mhmd vs. 1broim):
+r1a 1broim mhmd
+r1a 1broim mhmda
+r1a 1broim 1broim
+r1a mhmd 1broim
+safr mhmd 1la 1broim
+*safr 1broim 1la mhmda
+safr 1broim 1la mhmd
+
+;;; Adjective structure-sharing with the nouns they modify in CNCRD, DEF and CASE:
+*r1a mhmd mylmin kbar 
+r1a mhmd mylmin kbara
+r1a mhmd mylmin kbirin
+*r1a mhmd mylmin kbiran
+*r1a mhmd wld kbir
+r1a mhmd wlda kbira
+r1a mhmd alwld alkbir
+r1a mhmd mylmp kbirp
+
+*1kl wld kbira
+1kl wld kbir
+
+;; Gender agreement in VS
+*1klt mhmd
+1klt almylmp
+*1kl almylmp
+
+;; SV order
+mhmd 1kl lxma
+almylmwn 1klwa lxma
+*almylmwn 1kl lxma
+*mhmd 1klt lxma
+*wld 1kl lxma
+
+;; Dep6 can be NP:
+dxl mhmd 1la albit
+dxl mhmd albit
+*safr mhmd albit
+dxl mhmd mn alsahp 1la albit
+dxl mhmd  albit mn alsahp
+
+;; Passive:
+ner almqal 
+
+;; Known undergeneration
+lxma 1kl mhmd
+ma4a 1kl mhmd
+
+;; Known overgeneration
+*dxl mhmd mn alsahp albit
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

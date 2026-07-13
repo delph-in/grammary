@@ -1,0 +1,27 @@
+1 *e ild akl lxm 0 23
+2 *e hild nsy l ildh 0 24
+3 *e hild nish lakwl lxm 0 32
+4 *e ild npl 0 13
+5 *e hstbr e hildh nplh 0 18
+6 *e hild xeb e hildh nplh 0 33
+7 *e hild xeb e hild akl lxm 0 49
+8 *e hild xweb e hildh xwebt e hild akl lxm 0 82
+9 *e hild nish lipwl 0 20
+10 at hlxm hild akl 1 20
+11 l ildh hild nsy 1 18
+12 lakwl lxm hild nish 1 20
+13 e hildh nplh hild xeb 1 25
+14 *hlxm hild akl 0 15
+15 *l ildh hild akl 0 20
+16 *at hlxm hild nsy 0 17
+17 *e hild akl 0 16
+18 *e at hlxm hild akl 0 24
+19 *e lakwl lxm hild nish 0 24
+20 *e e hildh nplh hild xeb 0 29
+21 *e l ildh hild nsy 0 22
+
+;;; Total CPU time: 380 msecs
+
+;;; Mean edges: 25.90
+
+;;; Mean parses: 0.19

@@ -14,8 +14,8 @@ vcs = "git clone https://github.com/petterha/norsyg.git"
 [wambaya]
 vcs = "https://faculty.washington.edu/ebender/wmb/wmb.tgz"
 
-[hegram]
-vcs = "https://cl.haifa.ac.il/projects/HeGram/semitic_grammar2-master.zip"
+#[hegram]
+#vcs = "https://cl.haifa.ac.il/projects/HeGram/semitic_grammar2-master.zip"
 
 [burger]
 vcs = "http://bultreebank.org/wp-content/uploads/2017/11/bg.zip"

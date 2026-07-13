@@ -1,0 +1,184 @@
+;;  -*- Mode: TDL; Coding: utf-8; -*- 
+;;
+;;  Rels hierarchy automatically derived from 
+;;  an existing lexicon file (05/06/2016)
+
+
+;LHS 29/1/15: A (relatively flat) hierarchy of rels to populate LKEYS.KEYREL.PRED.
+;Prepositions' rels appear in types-prep-lex, including idiomatic ones.
+l-or-i-rel := predsort.
+;For idiomatic lexical items
+i-rel := l-or-i-rel.
+;For literal lexical items (most words)
+l-rel := l-or-i-rel.
+;===========================
+;========Literal============
+;===========================
+
+;=============================================================================
+;================================= NOUNS =====================================
+;=============================================================================
+_n_rel := l-rel.
+_alwph_n_rel := _n_rel.
+_spr_n_rel := _n_rel.
+_dn_n_rel := _n_rel.
+_kli_n_rel := _n_rel.
+_rae_n_rel := _n_rel.
+_mktb_n_rel := _n_rel.
+_argz_n_rel := _n_rel.
+_argwn_n_rel := _n_rel.
+_sipwr_n_rel := _n_rel.
+_xlwn_n_rel := _n_rel.
+_kwrsh_n_rel := _n_rel.
+_swd_n_rel := _n_rel.
+_mvrh_n_rel := _n_rel.
+_xlwm_n_rel := _n_rel.
+_tlmid_n_rel := _n_rel.
+_ild_n_rel := _n_rel.
+_ewlxn_n_rel := _n_rel.
+_klb_n_rel := _n_rel.
+_lxm_n_rel := _n_rel.
+_ywgh_n_rel := _n_rel.
+_irwelim_n_rel := _n_rel.
+_dni_n_rel := _n_rel.
+_dnh_n_rel := _n_rel.
+_mi_n_rel := _n_rel.
+_mh_n_rel := _n_rel.
+_xgwrh_n_rel := _n_rel.
+_yc_n_rel := _n_rel.
+_xwl_n_rel := _n_rel.
+_bit_n_rel := _n_rel.
+_ani_n_rel := _n_rel.
+_hwa_n_rel := _n_rel.
+_hia_n_rel := _n_rel.
+_hn_n_rel := _n_rel.
+_at_n_rel := _n_rel.
+_atn_n_rel := _n_rel.
+_hm_n_rel := _n_rel.
+_anwki_n_rel := _n_rel.
+_atm_n_rel := _n_rel.
+_anxnw_n_rel := _n_rel.
+_ath_n_rel := _n_rel.
+_anw_n_rel := _n_rel.
+
+
+;=============================================================================
+;================================= VERBS =====================================
+;=============================================================================
+_v_rel := l-rel.
+_rah_v_rel := _v_rel.
+_mca_v_rel := _v_rel.
+_ripd_v_rel := _v_rel.
+_rwpd_v_rel := _v_rel.
+_swdr_v_rel := _v_rel.
+_nebr_v_rel := _v_rel.
+_hakil_v_rel := _v_rel.
+_rch_v_rel := _v_rel.
+_nish_v_rel := _v_rel.
+_gilh_v_rel := _v_rel.
+_hbin_v_rel := _v_rel.
+_ahb_v_rel := _v_rel.
+_hclix_v_rel := _v_rel.
+_hxliv_v_rel := _v_rel.
+_prsm_v_rel := _v_rel.
+_akl_v_rel := _v_rel.
+_hetme_v_rel := _v_rel.
+_ebr_v_rel := _v_rel.
+_npl_v_rel := _v_rel.
+_hbvix_v_rel := _v_rel.
+_ntn_v_rel := _v_rel.
+_xipe_v_rel := _v_rel.
+_xeb_v_rel := _v_rel.
+_xee_v_rel := _v_rel.
+_nsy_v_rel := _v_rel.
+_hnix_v_rel := _v_rel.
+_qnh_v_rel := _v_rel.
+_amwr_v_rel := _v_rel.
+_yewi_v_rel := _v_rel.
+_nrah_v_rel := _v_rel.
+_ica_v_rel := _v_rel.
+_hwcia_v_rel := _v_rel.
+_hlk_v_rel := _v_rel.
+_xzr_v_rel := _v_rel.
+_hmeik_v_rel := _v_rel.
+_ymd_v_rel := _v_rel.
+_biqe_v_rel := _v_rel.
+_hwsip_v_rel := _v_rel.
+_bxr_v_rel := _v_rel.
+_idy_v_rel := _v_rel.
+_hreh_v_rel := _v_rel.
+_ekny_v_rel := _v_rel.
+_amr_v_rel := _v_rel.
+_yeh_v_rel := _v_rel.
+_hgiy_v_rel := _v_rel.
+_qibl_v_rel := _v_rel.
+_ylh_v_rel := _v_rel.
+_lqx_v_rel := _v_rel.
+_dibr_v_rel := _v_rel.
+_nkns_v_rel := _v_rel.
+_hidq_v_rel := _v_rel.
+_mh_v_rel := _v_rel.
+_ird_v_rel := _v_rel.
+_vmn_v_rel := _v_rel.
+
+
+;=============================================================================
+;================================= ADJECTIVES ================================
+;=============================================================================
+_adj_rel := l-rel.
+_gdwl_j_rel := _adj_rel.
+_wrwd_j_rel := _adj_rel.
+_vyim_j_rel := _adj_rel.
+_iph_j_rel := _adj_rel.
+_xwpei_j_rel := _adj_rel.
+_klkli_j_rel := _adj_rel.
+_mh_j_rel := _adj_rel.
+
+
+;=============================================================================
+;================================= ADVERBS ===================================
+;=============================================================================
+_adv_rel := l-rel.
+_ph_r_rel := _adv_rel.
+_em_r_rel := _adv_rel.
+_atmwl_r_rel := _adv_rel.
+_kkh_r_rel := _adv_rel.
+_aiph_r_rel := _adv_rel.
+_mti_r_rel := _adv_rel.
+
+
+;=============================================================================
+;================================= FUNCTIONAL ================================
+;=============================================================================
+;Note: prepositions have a separate (language specific) hierarchy, see types-prep-lex.tdl.
+;Some other functional elements don't have semantics yet (at, e).
+;LHS 29/1/15: aux_rel is temporarily used for ham.
+_funct_rel := l-rel.
+_mh_c_rel := _funct_rel.
+_la_rel := _funct_rel.
+_w_rel := _funct_rel.
+
+
+;===========================
+;========Idiomatic==========
+;===========================
+
+;=============================================================================
+;================================= NOUNS =====================================
+;=============================================================================
+_i_n_rel := i-rel.
+_i-belt-expenses_n_rel := _i_n_rel.
+_i-tree-idea_n_rel := _i_n_rel.
+_i-tools-temper_n_rel := _i_n_rel.
+_i-head-reality_n_rel := _i_n_rel.
+_i-sand-reality_n_rel := _i_n_rel.
+
+;=============================================================================
+;================================= VERBS =====================================
+;=============================================================================
+_i_v_rel := i-rel.
+_i-tighten-reduce_v_rel := _i_v_rel.
+_i-descend-backoff_v_rel := _i_v_rel.
+_i-hide-ignore_v_rel := _i_v_rel.
+_i-leave-lose_v_rel := _i_v_rel.
+_i-cause_leave-lose_v_rel := _i_v_rel.

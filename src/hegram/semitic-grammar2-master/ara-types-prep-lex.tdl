@@ -1,0 +1,28 @@
+;;  -*- Mode: TDL; Coding: utf-8; -*- 
+;;
+;;  Type file for particle predicates automatically derived from a list of particles
+;; (18/03/2015) with 'create_prep_hier.py'
+;;
+
+
+1la-b-fi-l-mn-yla-yn-my-yla-ynd-p := prep-p-l.
+1la-l-fi-p := 1la-l-fi-yla-ynd-p.
+1la-l-fi-yla-ynd-p := 1la-b-fi-l-mn-yla-yn-my-yla-ynd-p.
+1la-l-p := 1la-l-fi-p & 1la-l-yla-p.
+1la-l-yla-p := 1la-l-fi-yla-ynd-p.
+_1la_p_rel := 1la-l-p.
+_b_p_rel := b-fi-p & yn-yla-b-p.
+_fi_p_rel := 1la-l-fi-p & b-fi-p.
+_l_p_rel := l-yla-p & 1la-l-p.
+_mn_p_rel := 1la-b-fi-l-mn-yla-yn-my-yla-ynd-p.
+_my_p_rel := 1la-b-fi-l-mn-yla-yn-my-yla-ynd-p.
+_yla_p_rel := l-yla-p & yla-yn-p & yla-b-fi-p.
+_yn_p_rel := yla-yn-p.
+_ynd_p_rel := b-fi-yla-ynd-p & 1la-l-fi-yla-ynd-p.
+b-fi-p := yla-b-fi-p.
+b-fi-yla-ynd-p := 1la-b-fi-l-mn-yla-yn-my-yla-ynd-p.
+l-yla-p := 1la-l-yla-p.
+yla-b-fi-p := yn-yla-fi-b-p & b-fi-yla-ynd-p.
+yla-yn-p := yn-yla-b-p.
+yn-yla-b-p := yn-yla-fi-b-p.
+yn-yla-fi-b-p := 1la-b-fi-l-mn-yla-yn-my-yla-ynd-p.

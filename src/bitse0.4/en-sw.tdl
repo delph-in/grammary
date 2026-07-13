@@ -1,0 +1,1195 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;    
+;;;  en-sw.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  Basic definitions of types that are common for
+;;;    English and Swedish
+;;;
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Synsem accomodating for language
+
+;;adding language info on signs
+sign :+ [ LANG lang ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;addition of opttype on synsems
+;;for handloing of optional argumetns of different types
+synsem-min :+ [ OPTTYPE  opttype ]. 
+
+opttype := sort.
+
+unspec := opttype.
+spec := opttype.
+refl-opt := spec.
+;possibly more types
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Lexical categories
+
+basic-lex := lex-item &
+  [ SYNSEM lex-synsem].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Nouns
+
+noun-lex := basic-noun-lex & basic-one-arg & basic-lex &
+  [ SYNSEM [ OPTTYPE /l opttype,
+	     LOCAL [ CAT [ HEAD [ MOD < > ],
+			   VAL [ SPR < #spr & [ LOCAL.CAT.HEAD det ] >,
+			       COMPS < >,
+			       SUBJ < >,
+			       SPEC < > ] ] ] ],
+    ARG-ST < #spr > ].
+
+;;Common nouns
+
+common-noun-lex := noun-lex & 
+  [ SYNSEM.LOCAL [ CAT [ HEAD common & [ CASE nom+acc ],
+			  VAL.SPR 		  
+			    < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] > ],
+		   CONT.HOOK.INDEX.PNG [ PER third ] ],
+    INFLECTED - ].
+
+
+;;Proper nouns
+
+proper-noun-lex := noun-lex &
+  [ SYNSEM [ LOCAL [CAT [ HEAD proper & [ CASE nom+acc ],
+			  VAL.SPR 
+				    < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] > ],
+		    CONT.HOOK.INDEX [ PNG [PER third,
+					   NUM sg ] ] ],
+	     LKEYS.KEYREL named-relation ],
+    INFLECTED + ].
+
+proper-noun-lex-fem := proper-noun-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEND fem ].
+
+proper-noun-lex-masc := proper-noun-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEND masc ].
+
+proper-noun-lex-thing := proper-noun-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEND thing ].
+
+
+;;Pronouns
+
+pronoun-lex := noun-lex &
+  [ SYNSEM [ LOCAL [CAT [ HEAD pronoun,
+			  VAL.SPR 
+			 < [ LOCAL.CONT.RELS <! [ PRED pronoun_q_rel ] !> ] > ],
+		    CONT.HOOK.INDEX pron-ind ],
+	     LKEYS.KEYREL.PRED "pronoun_n_rel" ],
+    INFLECTED + ].
+
+
+
+nom-pronoun-lex := pronoun-lex &
+  [ SYNSEM.LOCAL [ CAT.HEAD.CASE nom,
+		   CONT.HOOK.INDEX.PRONTYPE std-pron ] ].
+
+;;accusative and reflexive pronouns can be objects,
+;;and thus have a common base type
+acc-refl-pronoun-lex := pronoun-lex &
+  [ SYNSEM.LOCAL [ CAT.HEAD.CASE acc,
+		   CONT.HOOK.INDEX.PRONTYPE pers-pron ] ].
+
+acc-pronoun-lex := acc-refl-pronoun-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PRONTYPE std-pron ].
+
+refl-pronoun-lex := acc-refl-pronoun-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PRONTYPE refl ].
+
+;;type for fake reflexives (as in "behave oneself")
+empty-refl-pronoun-lex := no-hcons-lex-item &
+			  basic-zero-arg & basic-lex & fully-inflected-lexeme &
+  [ SYNSEM.LOCAL [ CAT [ HEAD noun & [ MOD < >,
+				       CASE no-case ],
+			 VAL [ SPR <  >,
+			       SUBJ < >,
+			       COMPS < > ] ],
+		   CONT [ RELS <! !>,
+			  HOOK.INDEX.PRONTYPE refl ] ] ].
+
+
+
+;;;;;;;;;;;;;;;;
+;;Determiners
+
+det-lex := basic-determiner-lex & basic-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.MOD <  >,
+			 VAL [ SPR <  >,
+			       COMPS < >,
+			       SUBJ < >,
+                               SPEC < [ LOCAL.CAT.HEAD common ] > ] ] ] ].
+
+
+;;definitive determiners
+def-det-lex := det-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.SPEC < [ LOCAL.CAT.HEAD [ INFL-DEF bool ] ] > ].
+
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;;Verbs
+
+;;all verbs are non-inverted as default
+verb-lex := basic-verb-lex & basic-lex &
+   [ INFLECTED -,
+     ALTS.SHIFTS /l -,
+     SYNSEM.LOCAL [ CAT [ HEAD /l ord-verb & [ MOD < > ],
+			  VAL [ SPR < >,
+				SUBJ < #subj & [ LOCAL [ CAT np-cat,
+							 CONT.HOOK.INDEX #xarg ]] >,
+				SPEC < > ] ],
+		    CONT [ MSG no-msg,
+			   HOOK.XARG #xarg ] ],
+     ARG-S < #subj, ... > ].
+
+
+
+raising-verb-lex := verb-lex & trans-first-arg-raising-lex-item &
+  [ SYNSEM.LOCAL.CAT [ HEAD [ DO -,
+			      INV - ],
+		       VAL [ SPR <  >,
+			     COMPS < #dobj >,
+			     SUBJ < #subj >,
+			     SPEC < > ] ],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat &
+				 [ HEAD.CASE nom ] ],
+	     #dobj & [ LOCAL.CAT vp-cat & 
+				 [ HEAD.VFORM inf ] ] > ].
+
+modal-verb-lex := raising-verb-lex &
+  [ SYNSEM.LOCAL.CAT.HEAD.AUX + ].		
+
+
+intrans-verb-lex := verb-lex & intransitive-lex-item & 
+  [ SYNSEM.LOCAL [ CAT [ VAL [ SPR <  >,
+			       COMPS < >,
+			       SUBJ < #subj >,
+			       SPEC < > ] ] ],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & 
+				 [ HEAD.CASE nom ] ] > ].
+
+trans-verb-lex := verb-lex & transitive-lex-item & 
+  [ SYNSEM.LOCAL [ CAT [ VAL [ SPR <  >,
+			       COMPS < #dobj >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ],
+	     #dobj & [ LOCAL.CAT np-cat & [ HEAD.CASE acc ] ] > ].
+
+;;transitive verb with optional object
+opt-obj-trans-verb-lex := trans-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT +,
+				   OPTTYPE /l unspec ] > ].
+
+;;transitive verb with non-optional object
+non-opt-obj-trans-verb-lex := trans-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT - ] > ].
+
+
+;;extension of basic ditransitive type,
+;;added a feature SHIFTS to ALTS to control dative alternations
+ditransitive-lex-item-plus := ditransitive-lex-item &
+  [ ALTS dative-alts ].
+
+;;"issue someone something"
+ditrans-io-do-verb-lex := verb-lex & ditransitive-lex-item-plus & 
+  [ SYNSEM.LOCAL [ CAT [ VAL [ SPR <  >,
+			       COMPS < #iobj & [ OPT - ],
+				       #dobj & [ OPT - ] >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ],
+	     #dobj & [ LOCAL.CAT np-cat & [ HEAD.CASE acc ] ],
+	     #iobj & [ LOCAL.CAT np-cat & [ HEAD.CASE acc ] ] > ].
+
+
+;;"recommend something to someone"
+ditrans-do-lpio-verb-lex := verb-lex & ditransitive-lex-item-plus & 
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPR #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #iobj & [ OPT - ],
+				       #dobj & [ OPT - ] >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ],
+	     #iobj & [ LOCAL.CAT np-cat & [ HEAD.CASE acc ] ],
+	     #dobj & [ LOCAL.CAT pp-cat & [ HEAD [ CASE acc,
+						   LEX +,
+						   PFORM #pform ] ] ] > ].
+
+;;"give something to someone"/give something to someone"
+ditrans-do-lpio-shifts-verb-lex := ditrans-do-lpio-verb-lex &
+  [ ALTS.SHIFTS + ].
+
+
+;;"put it on something"
+ditrans-do-fpio-verb-lex := verb-lex & ditrans-np-fpp-lex-item & 
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPR #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #iobj  & [ OPT - ],
+				       #dobj  & [ OPT - ] >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ],
+	     #iobj & [ LOCAL [ CONT.HOOK.INDEX #p-arg1,
+			       CAT np-cat & [ HEAD.CASE acc ] ] ],
+	     #dobj & [ LOCAL [ CONT.HOOK.XARG #p-arg1,
+			       CAT pp-cat & [ HEAD [ CASE acc,
+						     LEX -,
+						     PFORM #pform ] ] ] ] > ].
+
+
+;;type constraining the prep to locational preps
+;;should be updated to be chosen semantically, not syntactically
+ditrans-do-loc-fpio-verb-lex := ditrans-do-fpio-verb-lex &
+  [ SYNSEM.LOCAL.CAT.HEAD.GOVPR loc-pf ].
+	     	     
+
+;;currently all Prep-objects are non-optional..
+intrans-lex-pp-comp-verb-lex := verb-lex & transitive-lex-item & 
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPR #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #dobj & [ OPT - ] >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ],
+	     #dobj & [ LOCAL.CAT pp-cat & [ HEAD [ CASE acc,
+						   LEX +,
+						   PFORM #pform ] ] ] > ]. 
+
+;;"uppföra sig"
+intrans-refl-comp-verb-lex := verb-lex & intrans-empty2ndarg-lex-item &
+  [ SYNSEM.LOCAL [ CAT.VAL [ SPR <  >,
+			     COMPS < #refl & [ OPT - ] >,
+			     SUBJ < #subj  >,
+			     SPEC < > ] ],
+    ARG-ST < #subj & [ LOCAL [CONT.HOOK.INDEX [ PNG #png ],
+			      CAT np-cat & [ HEAD.CASE nom ] ] ],
+	     #refl & [ LOCAL refl-0-local &
+			     [ CONT.HOOK.INDEX.PNG #png ] ] > ].
+
+;;"know that/whether something happens"
+clausal-comp-verb-lex := verb-lex & clausal-second-arg-trans-lex-item &
+  [ SYNSEM.LOCAL [ CAT.VAL [ SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >, 
+			     COMPS < #comps > ],
+		   CONT.HOOK.XARG #xarg ],
+    ARG-ST < #subj & [ LOCAL.CAT np-cat & [ HEAD.CASE nom ] ], 
+	     #comps & [ LOCAL [ CAT [ HEAD +vc &
+					   [ VFORM finite ],
+				      VAL [ SUBJ < anti-synsem >,
+					    COMPS <  > ],
+				      MC - ],
+				CONT.MSG message ] ] > ].
+
+
+;;"wonder whether something happens"
+clausal-que-comp-verb-lex := clausal-comp-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.MSG.PRED question_m_rel ] > ].
+
+;;"hope that something happens"
+clausal-prop-comp-verb-lex := clausal-comp-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ LOCAL.CONT.MSG.PRED proposition_m_rel ] > ].
+
+
+;;;;;;;;;;;;;;;;;;
+;;Complementizers
+
+complementizer-lex := basic-one-arg &
+  [ SYNSEM.LOCAL [ CAT [ HEAD comp &
+			      [ MOD < > ],
+			 VAL [ SPR < >,
+			       SUBJ < anti-synsem >,
+			       COMPS < #comps >,
+			       SPEC < > ]],
+		   CONT.HOOK.INDEX #ind ],
+    ARG-ST < #comps & [ LOCAL [ CAT [ HEAD verb &
+					   [ VFORM finite ],
+				      VAL [ SUBJ null,
+					    COMPS < > ] ],
+				CONT [ MSG.PRED proposition_m_rel,
+				       HOOK.INDEX #ind ] ] ] > ].
+
+
+that-comp-lex := complementizer-lex &
+  [ SYNSEM.LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT [ MSG #msg,
+						  HOOK.LTOP #ltop ]] >,
+		   CONT [ MSG #msg,
+			  HOOK.LTOP #ltop,
+			  RELS < ! ! >,
+			  HCONS < ! ! > ]]].
+
+whether-comp-lex := complementizer-lex &
+  [ SYNSEM.LOCAL [ CAT.VAL.COMPS < [ LOCAL.CONT.HOOK.LTOP #marg ] >,
+		   CONT [ MSG message & #msg &
+			      [ LBL #ltop,
+				PRED question_m_rel,
+				MARG #marg ],
+			  HOOK.LTOP #ltop,
+			  RELS < ! #msg ! >,
+			  HCONS < ! ! > ]]].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,
+;;adverbs
+
+;;currently only scopal adverbs allowed
+adverb-lex := basic-adverb-lex & scopal-mod-lex &
+  [ SYNSEM [ LOCAL [ CAT [ VAL [ SPR < >,
+				 SUBJ < >,
+				 COMPS < >,
+				 SPEC < > ],
+ 			   HEAD.MOD < [ LOCAL [ CAT [ HEAD verb ],
+                                                CONT.HOOK.INDEX.E.TENSE #ten ] ] > ],
+		     CONT.HOOK.INDEX.E.TENSE #ten ] ] ].
+
+verbal-adverb-lex := adverb-lex &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD.MOD < lex-synsem & [ LOCAL.CAT.HEAD verb ] > ] ] ] ].
+
+;;alternative version of scopal-mod to overcome head-inversion divergences
+scopal-mod-lex2 := lex-item &
+  [ SYNSEM [ LOCAL [ CAT.HEAD.MOD < [ LOCAL scopal-mod &
+					    [ CONT.HOOK.LTOP #larg ] ] >,
+		     CONT.HCONS <! !> ],
+	     LKEYS.KEYREL.ARG1 #larg ] ].
+
+adverb-lex2 := basic-adverb-lex & scopal-mod-lex2 &
+  [ SYNSEM [ LOCAL [ CAT [ VAL [ SPR < >,
+				 SUBJ < >,
+				 COMPS < >,
+				 SPEC < > ],
+ 			   HEAD.MOD < [ LOCAL [ CAT [ HEAD verb,
+                                                      VAL.COMPS < > ],
+                                                CONT.HOOK.INDEX.E.TENSE #ten ] ] > ],
+		     CONT.HOOK.INDEX.E.TENSE #ten ] ] ].
+
+
+verbal-adverb-lex2 := adverb-lex2 &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD.MOD < lex-synsem & [ LOCAL.CAT.HEAD verb ] > ] ] ] ].
+
+
+
+;;adjctives, currently only intersective adjectives allowed
+adjective-lex := basic-int-mod-adj-lex  &
+  [ SYNSEM.LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT [ HEAD noun & [ MODI +,
+                                                              INFL-DEF bool ],
+						VAL.SPR < synsem > ] ] >,
+		       VAL [ SPR < >,		
+			     SUBJ < >,
+			     COMPS < >,
+			     SPEC < > ],
+		       POSTHEAD - ] ].
+
+
+;;;;;;;;;;;;;;;
+;;prepositions
+
+;;type for contentive (semantically contributing) prepositions
+cont-prep-lex := basic-int-mod-adposition-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD [ MOD < [ LOCAL.CAT.HEAD +nv ] >,
+				LEX - ],
+			 VAL [ SPR < >,
+			       SUBJ < >,
+			       COMPS < #comps & [ OPT - ] >,
+			       SPEC < > ],
+			 POSTHEAD + ],
+		   CONT [ HOOK.XARG #arg1,
+			  RELS <! arg12-ev-relation & [ ARG1 #arg1,
+							ARG2 #arg2 ] !> ] ],
+    ARG-ST < #comps & [ LOCAL [ CAT np-cat & [ HEAD.CASE acc ],
+				CONT.HOOK.INDEX #arg2 ] ] > ].
+
+
+;;type for empty (with no semantic contribution) prepositions
+empty-prep-lex := no-hcons-lex-item &
+  [ SYNSEM.LOCAL [ CAT [ HEAD adp &
+			      [ LEX +,
+				MOD < > ],
+			 VAL [ SPR < >,
+			       SUBJ < >,
+			       COMPS < #comps & [ OPT - ] >,
+			       SPEC < > ] ],
+		   CONT [ HOOK.INDEX #index,
+			  RELS <! !> ] ],
+    ARG-ST < #comps & [ LOCAL [ CAT np-cat & [ HEAD.CASE acc ],
+				CONT.HOOK.INDEX #index ] ] > ].
+
+
+
+;;Particles
+;;particle is a separate head type.
+
+
+;;part of the comps list - are compulsary for their verbs
+part-lex := basic-zero-arg & basic-lex & fully-inflected-lexeme & 
+  [ SYNSEM.LOCAL.CAT [ HEAD part,
+		       VAL [ SPR <  >,
+			     SUBJ < >,
+			     COMPS < > ] ] ].
+
+;;type for empty (with no semantic contribution) particles
+empty-part-lex := part-lex  & no-hcons-lex-item &
+  [ SYNSEM [ LOCAL [ CAT [  HEAD lex-part & [ MOD < > ] ],
+		     CONT.RELS <! !> ] ] ].
+	 
+;;;aspectual  
+;;part of the mod-list, can modify their verbs
+;;only experimental support in bitse0.4
+asp-part-lex := part-lex & norm-hook-lex-item &
+  [ SYNSEM.LOCAL [ CAT [ HEAD asp-part &
+				[ MOD < lex-synsem & [ LOCAL particle-mod & 
+							     [ CAT.HEAD verb,
+							       CONT.HOOK.INDEX.E.ASPECT #asp ] ] > ] ],
+		   CONT.HOOK.INDEX.E.ASPECT #asp ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;relations
+
+;;quantifier relations
+quant_rel := predsort.
+pronoun_q_rel := quant_rel.
+reg_q_rel := quant_rel.
+dem_q_rel :=reg_q_rel.
+non_dem_q_rel :=reg_q_rel.
+undef_q_rel := non_dem_q_rel.
+def_q_rel := non_dem_q_rel.
+
+;;emphasis relation for do support
+;;only experimental
+emphasis_rel := predsort.
+
+
+
+;;relations for prepositions, to be extended, regard this as a prototype
+;;experimental only
+prep_rel := predsort.
+
+;;locational prepositions
+loc_prep_rel := prep_rel.
+on_p_rel := loc_prep_rel.
+under_p_rel := loc_prep_rel.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;phrase rules
+
+unary-opt-info-phrase := headed-phrase &
+  [ SYNSEM.OPTTYPE #opttype,
+    HEAD-DTR.SYNSEM.OPTTYPE #opttype ].
+
+binary-opt-info-phrase := binary-headed-phrase &
+  [ SYNSEM.OPTTYPE #opttype,
+    HEAD-DTR.SYNSEM.OPTTYPE #opttype ].
+
+unary-lang-agree-phrase := unary-opt-info-phrase &
+  [ LANG #lang,
+    HEAD-DTR.LANG #lang ].
+
+binary-lang-agree-phrase := binary-headed-phrase &
+  [ LANG #lang,
+    HEAD-DTR.LANG #lang,
+    NON-HEAD-DTR.LANG #lang ].
+
+
+lang-agree-lex-rule := lex-rule &
+  [ LANG #lang,
+    DTR.LANG #lang ].
+
+
+head-subj-phrase := basic-head-subj-phrase & head-final & binary-lang-agree-phrase &
+		    declarative-clause &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+    HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.COMPS < >,
+    C-CONT [ RELS <! *top* !>,
+	     HCONS <! *top* !> ] ].
+
+
+yes-no-q-phrase := interrogative-clause & head-only & unary-lang-agree-phrase &
+ [ SYNSEM.LOCAL [ CAT [ VAL [ SPR #spr & <>,
+			      COMPS #comps & <>,
+			      SUBJ #subj & < anti-synsem >,
+			      SPEC #spec ],
+			MC + ],
+		  CONT.HOOK.INDEX.E.TENSE #fin ],
+   C-CONT [ RELS < ! [ MARG #marg1 ],
+		    [ LBL #marg1,
+		      PRED proposition_m_rel,
+		      MARG #marg2 ] ! >,
+	    HCONS < ! qeq & [ HARG #marg2,
+			     LARG #hdtop ] ! > ],
+   HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ SPR #spr,
+				       COMPS #comps,
+				       SUBJ #subj,
+				       SPEC #spec ],
+				 HEAD.INV + ],
+			   CONT [ HOOK.INDEX.E.TENSE #fin & fin,
+				  MSG no-msg,
+				  HOOK.LTOP #hdtop ]]].
+
+verb-head-subj-phrase := head-subj-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD verb & [ INV na-or-- ] ] ].
+
+fin-verb-head-subj-phrase := verb-head-subj-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.VFORM finite ].
+
+infin-verb-head-subj-phrase := verb-head-subj-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD.VFORM inf ].
+ 
+noun-head-spec-phrase := basic-head-spec-phrase & head-final & binary-lang-agree-phrase & 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD common,
+    NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD det ].
+
+ 
+head-spec-phrase := basic-head-spec-phrase & head-final & binary-lang-agree-phrase.
+
+head-comp-phrase := basic-head-comp-phrase & head-initial & binary-lang-agree-phrase & 
+  [ SYNSEM phr-synsem & [ LOCAL.CONT.MSG #msg ],
+    HEAD-DTR.SYNSEM.LOCAL.CONT.MSG #msg ].
+				 
+
+head-opt-comp-phrase := basic-head-opt-comp-phrase & unary-lang-agree-phrase &
+  [ HEAD-DTR.SYNSEM [ MODIFIED notmod,
+		      LOCAL.CAT [ VAL.COMPS < [ OPTTYPE unspec ] > ] ] ].
+
+
+;;noun phrase without determiner
+covert-det-phrase := head-only & unary-lang-agree-phrase &
+  [ SYNSEM phr-synsem & [ LOCAL.CAT.VAL [ SPR < >,
+					  SUBJ < >,
+					  COMPS < >,
+					  SPEC < > ] ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL [ SPR < [ LOCAL.CAT.HEAD det ] >, 
+					SUBJ < >,
+					COMPS < > ],
+			      CONT.HOOK [ INDEX #index,
+					  LTOP #larg ] ] ],
+    C-CONT [ RELS <! quant-relation & [ LBL #ltop,
+					ARG0 #index,
+					RSTR #harg ] !>,
+	     HCONS <! qeq &
+		    [ HARG #harg,
+		      LARG #larg ] !>,
+	     HOOK [ INDEX #index,
+		    LTOP #ltop ] ] ].
+
+pronoun-covert-det-phrase := covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD pronoun,
+				VAL.SPR
+				     < [ LOCAL.CONT.RELS <! [ PRED pronoun_q_rel ] !> ] > ],
+    C-CONT.RELS <! [ PRED pronoun_q_rel ] !> ].
+
+
+
+common-covert-det-phrase := covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD common ].
+
+;;only plural undefs can be without quant,
+common-undef-covert-det-phrase := common-covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.SPR
+			      < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] >,
+			    CONT.HOOK.INDEX [ PNG [ NUM plur ],
+					      DEF - ] ],
+    C-CONT.RELS <! [ PRED undef_q_rel ] !> ]. 
+
+proper-covert-det-phrase := covert-det-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD proper,
+				  VAL.SPR
+				       < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] > ],
+			    CONT.HOOK.INDEX.DEF + ],
+    C-CONT.RELS <! [ PRED def_q_rel ] !> ]. 
+
+
+
+;;;;;;;;
+;;Modifier rules
+
+;;particles are always posthead
+particle-mod-phrase := head-adj-phrase & binary-lang-agree-phrase &
+  [ SYNSEM.LOCAL.CONT #cont,
+    HEAD-DTR.SYNSEM.LOCAL.CONT #cont,
+    NON-HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD.MOD < [ LOCAL particle-mod ] > ] ].
+
+
+;;;;;;
+;;Modifier rules, 
+;;crossclassified with binary-lang-agree-phrase
+
+;;marked for the modifier to be inflected, might not work for everything...
+;;needed for adjective infl to work OK
+;;could be updated, maybe for the other adjunct types too
+la-adj-head-int-phrase := adj-head-int-phrase & binary-lang-agree-phrase &
+  [ HEAD-DTR.INFLECTED + ].
+la-head-adj-int-phrase := head-adj-int-phrase & binary-lang-agree-phrase.
+la-head-adj-scop-phrase := head-adj-scop-phrase & binary-lang-agree-phrase.
+la-adj-head-scop-phrase := adj-head-scop-phrase & binary-lang-agree-phrase.
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Lexical rules
+
+
+;;;verbs
+
+verb-lex-rule := lang-agree-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT [ HEAD verb ] ].
+
+non-inv-verb-lex-rule := verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.INV - ].
+
+
+infin-verb-lex-rule := const-ltow-rule & non-inv-verb-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL [ CAT.HEAD.VFORM infinite ] ],
+    DTR.SYNSEM #synsem ].
+
+
+;;;;;nouns
+
+
+noun-lex-rule := lang-agree-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT [ HEAD noun,
+			   VAL.SPR
+			     < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] > ] ].
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Person, number, gender
+my-png := png &
+  [ PER person,
+    NUM number,
+    GEND gender ].
+
+3sg-png := my-png &
+  [ PER third,
+    NUM plur ].
+
+non3sg-png := my-png.
+
+pl-png := non3sg-png &
+  [ NUM plur ].
+
+1-2sg-png := non3sg-png & 
+  [ PER non-third,
+    NUM sg ].
+
+person := sort.
+non-third := person.
+first := non-third.
+second := non-third.
+third := person.
+
+number := sort.
+sg := number.
+plur := number.
+
+gender := sort.
+gram-gender := gender.
+utrum := gram-gender.
+neutrum := gram-gender.
+real-gender := gender.
+masc := real-gender.
+fem := real-gender.
+thing := real-gender. 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Tense
+
+;;only finite tense in CONT,
+;;infinites are stored in VFORM (only relevant for syntax)
+
+fin := tense.
+pres := fin.           ;;;present ("go")
+imp := fin.            ;;;imperfect ("went") - could be renamed "past" for clarity
+imperative := fin.     ;;;imperative ("sit")
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;vform
+
+;;vform is used for the form of an individual verb,
+;; except for finite forms where that is stored in tense
+
+vform := sort.
+finite := vform.
+infinite := vform.
+base:= infinite.
+inf := infinite. ;;infinitive (run/springa)
+pr-part := infinite. ;; present participle (running/springande)
+pa-part := infinite. ;; past participle    (?/sprungen)
+perf-part := infinite. ;;perfect participle (swum/simmat)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Case
+
+case := sort.
+nom+acc := case.
+nom := nom+acc.
+acc := nom+acc.
+no-case := case.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;languages
+
+lang := sort.
+sw := lang.
+en := lang.
+
+
+
+
+;;;;;;;;;;;;;;
+;;aspect
+
+;;only experimental, needs lots of work...
+
+aspect :+
+  [ TEL bool,
+    DYN bool,
+    DUR bool ].
+
+static := aspect &
+  [ DYN - ].
+
+dynamic := aspect &
+  [ DYN + ].
+
+state := static &
+  [ TEL -,
+    DUR + ].
+
+
+durational := dynamic &
+  [ DUR + ].
+
+momentous := dynamic &
+  [ DUR - ].
+
+telic := aspect &
+  [ TEL + ].
+
+atelic := aspect &
+  [ TEL - ].
+
+dyn-atel := dynamic & atelic.
+
+activity := durational & dyn-atel.
+
+accomplish := durational & telic.
+
+;;normally DUR - but depends on compl
+semelfactive := momentous & dyn-atel.
+
+
+achiev := momentous & telic.
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Expansions to head types
+
+noun :+
+  [ DECL decl,
+    MODI bool,
+    INFL-DEF bool ].
+
+
+
+;;noun + adp
++np :+
+  [ CASE case ].
+
+;;GOVPA governs particles, GOVPR preps
+verb :+
+  [ INV luk,
+    AUX luk,
+    DO bool,
+    CONJUG conjug,
+    GOVPA pform,
+    GOVPR pform ].
+
+;;verbs and complements
++vc :+
+  [ VFORM vform ].
+
+
+;;;;division of verbs
+
+ord-verb := verb &
+  [ AUX -,
+    DO -,
+    INV -].
+
+q-verb := verb.
+
+aux-verb := q-verb &
+  [ AUX +,
+    DO - ].
+
+do-verb := q-verb &
+  [ AUX -,
+    DO + ].
+
+;;;;;;;;;;;;;;;;;
+;;adpositions
+
+adp :+
+  [ LEX bool ].
+;;the feature LEX is used to distinguish lexical and functional uses of preps.
+
+;;add pform also for words that can be particles.
++rp :+
+  [ PFORM pform ].
+
+
+;;;;;;;;;;;;;;;;;;;;
+;;pform
+
+;;used for syntactic selection of prepositions and particles
+
+pform := *top*.
+pformm := pform.
+;;type for ditrans. verbs that have changed alternation and no longer takes a prep
+none := pform.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;More head types
+
+;;particles
+part := +rp.
++rp :+ 
+ "Adverbs, adpositions and particles.".
+
+lex-part := part.
+
+asp-part := part.
+
+
+;;;;;;;;;;;;;;;
+;;subtypes for nouns
+
+common := noun.
+proper := noun.
+pronoun := noun.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;abstract lex types
+
+
+;;used as subtypes in ordinary lex items
+
+intrans-empty2ndarg-lex-item := basic-two-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ],
+		synsem >,
+     SYNSEM.LKEYS.KEYREL [ ARG1 #ind ] ].
+
+intrans-empty2-3ndarg-lex-item := basic-three-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+		synsem,
+		synsem >,
+     SYNSEM.LKEYS.KEYREL [ ARG1 #ind1 ] ].
+
+
+;;;;;Used for adding a particle (or refl) with no sem info to a phrase
+trans-empty2ndarg-lex-item := basic-three-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+		synsem,
+		[ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ] >,
+     SYNSEM.LKEYS.KEYREL [ ARG1 #ind1,
+			   ARG2 #ind2 ] ].
+
+;;to be used for combinations of refl and part and PPs, probably more types needed
+trans-empty2-3ndarg-lex-item := basic-four-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+		synsem,
+		synsem,
+		[ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ] >,
+     SYNSEM.LKEYS.KEYREL [ ARG1 #ind1,
+			   ARG2 #ind2 ] ].
+
+trans-empty2-4ndarg-lex-item := basic-four-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+		synsem,
+		[ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ],
+		synsem  >,
+       SYNSEM.LKEYS.KEYREL [ ARG1 #ind1,
+			     ARG2 #ind2 ] ].
+
+ditrans-empty2-3ndarg-lex-item := basic-five-arg &
+     [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+		synsem,
+		synsem,
+		[ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ],
+		[ LOCAL.CONT.HOOK.INDEX ref-ind & #ind3 ] >,
+     SYNSEM.LKEYS.KEYREL [ ARG1 #ind1,
+			   ARG2 #ind2,
+			   ARG3 #ind3 ] ].
+
+ditrans-np-fpp-lex-item := basic-three-arg &
+  [ ARG-ST < [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind1 ],
+	     [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind2 ],
+	     [ LOCAL.CONT.HOOK.LTOP #h3 ] >,
+    SYNSEM.LKEYS.KEYREL [ ARG1 #ind1,
+			  ARG2 #ind2,
+			  ARG3 #h3 ] ].
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;modifier types
+
+
+;;type for phrase adding an (aspectual?) particle as a modifier,
+;;parallell to scopal-mod and intersective-mod
+particle-mod := local.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;new indextypes
+
+pron-ind := ref-ind &
+  [ PRONTYPE prontype ].
+
+;;the prontype hierarchy is originally taken from the erg:
+;;  LinGO English Resource Grammar
+;;  Copyright (c) 1994-2005
+;;    Dan Flickinger, Rob Malouf, Emily M. Bender
+;;
+;;and modified. I needed a common type for Swedish refl and acc pronouns,
+;;since they coincide in most pernums
+prontype := sort.
+real-pron := prontype.
+pers-pron := real-pron.
+std-pron := pers-pron.
+recip := real-pron. 
+refl := pers-pron.
+impers := real-pron.
+demon := real-pron.
+zero-pron := real-pron.
+not-pron := prontype.
+
+
+;;;;;;;;;;;;;;;;;;;;;;
+;;main types for declination and conjugations
+;;only used in Swedish, but needed here for correct handling in common types
+
+decl := sort.
+conjug := sort.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;cat- and local-types for different phrases et.c.
+
+np-cat := cat &
+  [ HEAD noun,
+    VAL.SPR < > ].
+
+refl-local := local &
+  [ CAT.HEAD noun,
+    CONT.HOOK.INDEX.PRONTYPE refl ].
+
+refl-0-local := refl-local &
+  [ CONT.RELS <! !> ].
+
+vp-cat := cat &
+  [ HEAD verb,
+    VAL [ COMPS < >,
+	  SUBJ < [] > ] ].
+
+pp-cat := cat &
+  [ HEAD adp,
+    VAL.COMPS < > ].
+
+part-cat := cat &
+  [ HEAD part ].
+
+;;specify more of these types if needed
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Complicated lexical rules
+
+;;rule for changing dative-valence
+
+ditrans-verb-io-do-lex-rule := const-ltol-rule & verb-lex-rule &
+  [ SYNSEM [ OPT #opt,
+	     DEF-OPT #def-opt,
+	     NON-LOCAL #non-loc,
+	     LOCAL [ CAT [ HEAD [ VFORM #fin & finite,
+				  AUX #aux,
+				  DO #do,
+				  MOD #mod,
+				  GOVPR none,
+                                  CONJUG #conjug ],
+			   VAL [ SPR #spr,
+				 COMPS < [ LOCAL [ CAT np-cat & [ HEAD [ MOD < >,
+									 KEYS #keys2,
+									 CASE #case2 ],
+								  VAL #val2 ],
+						   CONT #cont2 ],
+					   NON-LOCAL #non-loc2,
+					   OPT - ], #dobj >,
+				 SUBJ #subj,
+				 SPEC #spec ],
+			   MC #mc,
+			   HC-LIGHT #hc,
+			   POSTHEAD #ph ],
+		     CONT #cont,
+		     CTXT #ctxt,
+		     AGR #agr ],
+	     MODIFIED #xmod ],
+    DTR [ INFLECTED -,
+          SYNSEM [ OPT #opt,
+		   DEF-OPT #def-opt,
+		   LOCAL [ CAT [ HEAD verb & [ INV -,
+					       VFORM #fin & finite,
+					       AUX #aux,
+					       DO #do,
+					       MOD #mod,
+				               GOVPR pformm,
+                                               CONJUG #conjug ],
+				 VAL [ SPR #spr,
+				       COMPS < #dobj,
+					       [ LOCAL [ CAT pp-cat & [ HEAD [ KEYS #keys2,
+									       CASE #case2 ],
+									VAL #val2 ],
+							 CONT #cont2 ],
+						 NON-LOCAL #non-loc2 ] >,
+				       SUBJ #subj,
+				       SPEC #spec ],
+				 MC #mc,
+				 HC-LIGHT #hc,
+				 POSTHEAD #ph ],
+			   CONT #cont,
+			   CTXT #ctxt,
+			   AGR #agr ],
+		   NON-LOCAL #non-loc,
+		   MODIFIED #xmod ],
+	  ALTS.SHIFTS + ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;alts extension
+dative-alts := alts &
+  [ shifts bool ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;basic types for lexemes with 4 and 5 arguments
+;;parallell to mewtrix types up to 3 args
+
+basic-four-arg := lex-item &
+  [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle3,
+				   LAST #slast ],
+			   REL [ LIST #rmiddle3,
+				 LAST #rlast ],
+			   QUE [ LIST #qmiddle3,
+				 LAST #qlast ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #sfirst,
+				   LAST #smiddle1 ],
+			   REL [ LIST #rfirst,
+				 LAST #rmiddle1 ],
+			   QUE [ LIST #qfirst,
+				 LAST #qmiddle1 ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #smiddle1,
+				   LAST #smiddle2 ],
+			   REL [ LIST #rmiddle1,
+				 LAST #rmiddle2 ],
+			   QUE [ LIST #qmiddle1,
+				 LAST #qmiddle2 ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #smiddle2,
+				   LAST #smiddle3 ],
+			   REL [ LIST #rmiddle2,
+				 LAST #rmiddle3 ],
+			   QUE [ LIST #qmiddle2,
+				 LAST #qmiddle3 ] ] ] >,
+    SYNSEM.NON-LOCAL [ SLASH [ LIST #sfirst,
+			       LAST #slast ],
+		       REL [ LIST #rfirst,
+			     LAST #rlast ],
+		       QUE [ LIST #qfirst,
+			     LAST #qlast ] ] ].
+
+
+
+basic-five-arg := lex-item &
+  [ ARG-ST < [ NON-LOCAL [ SLASH [ LIST #smiddle4,
+				   LAST #slast ],
+			   REL [ LIST #rmiddle4,
+				 LAST #rlast ],
+			   QUE [ LIST #qmiddle4,
+				 LAST #qlast ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #sfirst,
+				   LAST #smiddle1 ],
+			   REL [ LIST #rfirst,
+				 LAST #rmiddle1 ],
+			   QUE [ LIST #qfirst,
+				 LAST #qmiddle1 ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #smiddle1,
+				   LAST #smiddle2 ],
+			   REL [ LIST #rmiddle1,
+				 LAST #rmiddle2 ],
+			   QUE [ LIST #qmiddle1,
+				 LAST #qmiddle2 ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #smiddle2,
+				   LAST #smiddle3 ],
+			   REL [ LIST #rmiddle2,
+				 LAST #rmiddle3 ],
+			   QUE [ LIST #qmiddle2,
+				 LAST #qmiddle3 ] ] ],
+	     [ NON-LOCAL [ SLASH [ LIST #smiddle3,
+				   LAST #smiddle4 ],
+			   REL [ LIST #rmiddle3,
+				 LAST #rmiddle4 ],
+			   QUE [ LIST #qmiddle3,
+				 LAST #qmiddle4 ] ] ] >,
+    SYNSEM.NON-LOCAL [ SLASH [ LIST #sfirst,
+			       LAST #slast ],
+		       REL [ LIST #rfirst,
+			     LAST #rlast ],
+		       QUE [ LIST #qfirst,
+			     LAST #qlast ] ] ].
+
+
+
+
+
+
+

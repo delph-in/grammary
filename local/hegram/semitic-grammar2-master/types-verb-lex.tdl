@@ -1,0 +1,604 @@
+;;; $Id: types-verb-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Verbs - general types;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+general-verb-lex := norm-sem-lex-item &
+  [ SYNSEM [ LOCAL [ CAT [ 	MC - ],
+		     CONT.HOOK [ INDEX #index,
+				 ICONS-KEY.CLAUSE #index,
+				 CLAUSE-KEY #index ] ],
+	     LKEYS.KEYREL event-relation ] ].
+
+;LHS 0210: took out the constraint on DEP2's OBJ-MARK (in the new valence system it is no longer necessary)
+;Nurit 26/10 added constraint for basic-verb-lex and for basic-copula-lex: R-FRAME = S-FRAME. This is not true for raising verbs.
+basic-verb-lex := general-verb-lex & 
+  [ SYNSEM [ LOCAL [ CAT [ 	HEAD verb,
+  				VAL [ 	R-FRAME #frame,
+  					S-FRAME #frame ] ] ] ] ].
+
+raising-verb-lex := general-verb-lex & 
+  [ SYNSEM [ LOCAL [ CAT [ 	HEAD verb ] ] ] ].
+
+
+;nurit 9/6 - define types of copulas and prons
+;LHS 0210: took out the constraint on DEP2's OBJ-MARK (in the new valence system it is no longer necessary)
+basic-copula-lex := general-verb-lex & 
+  [ SYNSEM [ LOCAL [ CAT [ 	HEAD v_pron_head,
+  				VAL [ 	R-FRAME #frame,
+  					S-FRAME #frame ] ] ],
+	     LKEYS.KEYREL.PRED "_cop_rel" ] ].
+
+basic-pron-cop-lex := basic-copula-lex &
+[ SYNSEM.LOCAL.CAT.HEAD pron ].
+
+basic-verb-cop-lex := basic-copula-lex &
+[ SYNSEM.LOCAL.CAT.HEAD verb ].
+
+;LHS & NM: the actual constraint (other than the head) is taken from intransitive-lex-item, which we're mirroring.
+;added the event-relation so that ARG0 will be an event
+;LHS 11/11: added SUBJ-ARG arg1 so that "dni mh l/ylidi dnh" won't get a parse where the PP is comp1 (this means that "mh" will
+;stand for an active and non-accusative verb)
+;vp-qpart-lex-item := np-vp-cp-qpart-lex-item & icons-lex-item & non-mod-lex-item &
+;  [ SYNSEM [ LOCAL [ CAT [ VAL [ DEP2.REAL arg2-,
+;                                 R-FRAME arg1 & #frame,
+;                                 S-FRAME #frame,
+;                                 SUBJ-ARG arg1 ],
+;                           HEAD verb ] ],
+; 	           LKEYS.KEYREL event-relation &  [ ARG1 ref-ind  ] ] ].
+;LHS 070915: expanding subj1-subj2 fix: adding characteristics defined in arg1_np to vp-qpart-lex-item. Since we can't know what the subject is of 
+;a vp inf/bn mh, we're assuming it's arg1 by default. Before this change, VP mh in sentences like "dni nish mh" weren't linked to the main verb.
+vp-qpart-lex-item := np-vp-cp-qpart-lex-item & icons-lex-item & non-mod-lex-item &
+  [ SYNSEM [ LOCAL [ CAT [ VAL [ DEP1 #subj & [ DEP.LOCAL [ CAT [ HEAD noun ],
+                                                            CONT.HOOK [ TOPREL.PRED l-rel,
+                                                                        INDEX #xarg ] ] ],
+                                 DEP2.REAL arg2-,
+                                 R-FRAME arg1 & #frame,
+                                 S-FRAME #frame,
+                                 SUBJ-ARG arg1,
+                                 SUBJ-DEP #subj ],
+                           HEAD verb ],
+                     CONT.HOOK [ TOPREL.ARG1 #xarg,
+                                 XARG #xarg ]  ],
+ 	           LKEYS.KEYREL event-relation &  [ ARG1 ref-ind  ] ] ]. 	           
+
+vp-inf-qpart-lex-item := vp-qpart-lex-item &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE infinitive ].
+
+;LHS 11/11: added for beinoni mh.
+vp-bn-qpart-lex-item := vp-qpart-lex-item &
+  [ SYNSEM.LOCAL [ CONT.HOOK.INDEX.E.TENSE present ] ].
+ 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Complex pre-LE types;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Simple pre-LE types appear in types-deps-lxm (i.e., ones that only specify R-FRAME in addition to inheriting from relevant super-types)
+
+;;;Complex pre-LE types appear here (i.e., ones that add additional information):
+;===========
+;==Raising==
+;===========
+;For subject-raising DEP2 "verbs" (e.g., yewi - prev implementation)
+;NM 3/9/15: subj1-subj2 fix: coindexation is just with XARG, which is coindexed with
+;arg1 or arg2 in the lower VP, depending on the verb type, not with ARG1
+;arg12_v_subj-raising := arg12_v &
+;  [ SYNSEM.LOCAL.CAT.VAL [	S-FRAME arg2,
+;  				SUBJ-ARG #arg1,
+;				DEP1 #subj,
+;				DEP2.DEP [ LOCAL [  CAT.VAL [ SUBJ-ARG #arg1 & arg1,
+;							                  DEP1 #subj],
+;						            CONT.HOOK [ XARG #ind,
+;		                    TOPREL.ARG1 #ind ] ] ] ] ].
+
+arg12_v_subj-raising := arg12_v_raising &
+  [ SYNSEM.LOCAL [ CAT.VAL [ S-FRAME arg2,
+ 				            DEP1 #subj,
+            				DEP2.DEP.LOCAL.CAT.VAL.SUBJ-DEP #subj & 
+                                            [ DEP.LOCAL.CONT.HOOK.XARG #ind ] ],
+                    CONT.HOOK.XARG #ind ] ].
+
+
+;For subject raising DEP4 verbs (e.g. nrah)
+arg14_j_subj-raising := arg14_j &
+  [ SYNSEM.LOCAL.CAT.VAL [	S-FRAME arg4 ] ].
+arg14_njr_subj-raising := arg14_njr &
+  [ SYNSEM.LOCAL.CAT.VAL [	S-FRAME arg4 ] ].                                      							 
+  
+;For DEP2 object to subject raising DEP4 verbs (e.g. rah, mca):
+arg124_n_v_obj-raising := arg124_n_v &
+  [ SYNSEM.LOCAL.CAT [ VAL [ S-FRAME arg14 ] ] ].  
+arg124_n_a_obj-raising := arg124_n_a &
+  [ SYNSEM.LOCAL.CAT.VAL [ S-FRAME arg14,
+                           SUBJ-ARG #arg1,
+                           DEP4.DEP [ LOCAL [  CAT.VAL [ SUBJ-ARG #arg1 & arg1 ] ] ] ] ].
+
+;For DEP3 subject-to-object raising DEP4 verbs (e.g., yeh)
+;yeh at dnh gdwlh, yeh at dnh tlmidh
+arg134_n_nj_obj_raising := arg134_n_nj & 
+  [ SYNSEM.LOCAL.CAT.VAL [ S-FRAME arg14,
+                           SUBJ-ARG #arg1,
+                           DEP4.DEP [ LOCAL [  CAT.VAL [ SUBJ-ARG #arg1 & arg1 ] ] ] ] ].                             
+
+;===========
+;==Control==
+;===========
+;Nurit 9/6 : linking patterns of control verbs are defined lexically
+;For DEP2 subject-control verbs (e.g., nish)
+;NM 3/9/15: subj1-subj2 fix: coindexation is just with XARG, which is coindexed with
+;arg1 or arg2 in the lower VP, depending on the verb type, not with ARG1
+;arg12_v_subj-cntrl := arg12_v &
+;  [ SYNSEM.LOCAL.CAT.VAL [	DEP1.DEP [ LOCAL.CONT.HOOK.INDEX #ind ],
+;				DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind,
+;                                     TOPREL.ARG1 #ind ] ] ] ].
+arg12_v_subj-cntrl := arg12_v &
+  [ SYNSEM.LOCAL.CAT.VAL [	DEP1.DEP [ LOCAL.CONT.HOOK.INDEX #ind ],
+				DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind ] ] ] ].
+
+
+;;For subject-control verbs with PP DEP3 objects (e.g., hbvix)
+;arg123_v_p_subj-cntrl := arg123_v_p &
+;  [ SYNSEM.LOCAL.CAT.VAL [	DEP1.DEP [ LOCAL.CONT.HOOK.INDEX #ind ],
+;				DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind,
+;                                     TOPREL.ARG1 #ind ] ] ] ].
+;;For object-control verbs with PP DEP3 objects (e.g., hreh)
+;arg123_v_p_obj-cntrl := arg123_v_p &
+;  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind,
+;                                                         TOPREL.ARG1 #ind ] ],
+;                            DEP3.DEP [ LOCAL.CONT.HOOK.TOPREL.ARG2 #ind ] ] ].
+;;For object-control verbs with NP DEP3 objects (e.g., ekny)
+;arg123_v_n_obj-cntrl := arg123_v_n &
+;  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind,
+;                                                         TOPREL.ARG1 #ind ] ],
+;                            DEP3.DEP [ LOCAL.CONT.HOOK.INDEX #ind ] ] ].
+;;For object-control verbs with PP DEP5 objects (e.g., biqe)
+;arg125_v_p_obj-cntrl := arg125_v_p &
+;  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind,
+;                                                         TOPREL.ARG1 #ind ] ],
+;                            DEP5.DEP [ LOCAL.CONT.HOOK.TOPREL.ARG2 #ind ] ] ].
+
+;;LHS 100915: expanding subj1-subj2 fix: now, other types of control verbs have coindexation just with XARG, which is coindexed with
+;;arg1 or arg2 in the lower VP, depending on the verb type, not with ARG1.
+;;For subject-control verbs with PP DEP3 objects (e.g., hbvix)
+arg123_v_p_subj-cntrl := arg123_v_p &
+  [ SYNSEM.LOCAL.CAT.VAL [	DEP1.DEP [ LOCAL.CONT.HOOK.INDEX #ind ],
+				DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind ] ] ] ].
+;For object-control verbs with PP DEP3 objects (e.g., hreh)
+arg123_v_p_obj-cntrl := arg123_v_p &
+  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind ] ],
+                            DEP3.DEP [ LOCAL.CONT.HOOK.TOPREL.ARG2 #ind ] ] ].                            						                                                              
+;For object-control verbs with NP DEP3 objects (e.g., ekny)
+arg123_v_n_obj-cntrl := arg123_v_n &
+  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind ] ],
+                            DEP3.DEP [ LOCAL.CONT.HOOK.INDEX #ind ] ] ].
+;For object-control verbs with PP DEP5 objects (e.g., biqe)
+arg125_v_p_obj-cntrl := arg125_v_p &
+  [ SYNSEM.LOCAL.CAT.VAL [	DEP2.DEP [ LOCAL.CONT.HOOK [ XARG #ind ] ],
+                            DEP5.DEP [ LOCAL.CONT.HOOK.TOPREL.ARG2 #ind ] ] ].
+
+;========================================
+;==IDIOMS with special linking patterns==
+;========================================
+;NM 19/2/15: linking is defined here, not in the lexicon
+
+;Idiomatic (linking DEP1 with XARG of DEP5 NP in "ica m kliw")
+arg15_pi_xarg15 := arg15_pi &
+  [ SYNSEM.LOCAL [ CONT.HOOK.XARG #xarg,
+                   CAT.VAL [ DEP5.DEP.LOCAL.CONT.HOOK.XARG #xarg ] ] ].                                                         				
+
+;Idiomatic (linking DEP2 with XARG of DEP5 NP in "hwcia at X m kliw")
+arg125_n_pi_xarg25 := arg125_n_pi &
+  [ SYNSEM.LOCAL [ CAT.VAL [ DEP2.DEP.LOCAL.CONT.HOOK.INDEX #xarg,
+                             DEP5.DEP.LOCAL.CONT.HOOK.XARG #xarg ] ] ].                                                         				
+
+;Idiomatic (linking DEP1 with XARG of DEP2 NP in "vmn at raew b xwl")
+arg125_ni_pi_xarg12 := arg125_ni_pi &
+  [ SYNSEM.LOCAL [ CONT.HOOK.XARG #xarg,
+                   CAT.VAL [ DEP2.DEP.LOCAL.CONT.HOOK.XARG #xarg ] ] ].     
+                   
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Tense specified pre-LE types;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; TAG 26/5/15 : Tense-classified types. LE types inherit from these types. In heb-types-verb and ara-types-verb additional
+; constraints are added to these types with ":+"
+
+infinitive-verb-lex := general-verb-lex &
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE infinitive ].
+
+past-verb-lex := general-verb-lex &
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE past ].
+
+present-verb-lex := general-verb-lex &
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE present ]. 
+
+future-verb-lex := general-verb-lex & 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE finite ].
+
+imperative-verb-lex := general-verb-lex &
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE imperative,
+  SYNSEM.LOCAL.CONT.HOOK.INDEX.SF comm ].  
+                                                   				
+
+;;;;;;;;;;;;;;;;;;;; 
+;;;LE types verbs;;;
+;;;;;;;;;;;;;;;;;;;; 
+; TAG 26/5/15: LE types inherit from the tense types
+
+;For akl
+arg1-12_np_past_le := arg1-12_np & basic-verb-lex & past-verb-lex.
+  
+arg1-12_np_present_le := arg1-12_np & basic-verb-lex & present-verb-lex.
+  
+arg1-12_np_future_le := arg1-12_np & basic-verb-lex & future-verb-lex.
+  
+arg1-12_np_infinitive_le := arg1-12_np & basic-verb-lex & infinitive-verb-lex.
+  
+;For hbin
+arg1-12_nc_past_le := arg1-12_nc & basic-verb-lex & past-verb-lex.
+  
+arg1-12_nc_present_le := arg1-12_nc & basic-verb-lex & present-verb-lex.
+  
+arg1-12_nc_future_le := arg1-12_nc & basic-verb-lex & future-verb-lex.
+  
+arg1-12_nc_infinitive_le := arg1-12_nc & basic-verb-lex & infinitive-verb-lex.
+      
+;For hclix
+arg12_p_past_le := arg12_p & basic-verb-lex & past-verb-lex.
+   
+arg12_p_present_le := arg12_p & basic-verb-lex & present-verb-lex.
+    
+arg12_p_future_le := arg12_p & basic-verb-lex & future-verb-lex.
+    
+arg12_p_infinitive_le := arg12_p & basic-verb-lex & infinitive-verb-lex.
+    
+;For hxliv
+arg12_pc_past_le := arg12_pc & basic-verb-lex & past-verb-lex.
+    
+arg12_pc_present_le := arg12_pc & basic-verb-lex & present-verb-lex.
+    
+arg12_pc_future_le := arg12_pc & basic-verb-lex & future-verb-lex.
+    
+arg12_pc_infinitive_le := arg12_pc & basic-verb-lex & infinitive-verb-lex.
+
+;For previous xeb (no arg6)
+arg1-12_c_past_le := arg1-12_c & basic-verb-lex & past-verb-lex.
+  
+arg1-12_c_present_le := arg1-12_c & basic-verb-lex & present-verb-lex.
+  
+arg1-12_c_future_le := arg1-12_c & basic-verb-lex & future-verb-lex.
+  
+arg1-12_c_infinitive_le := arg1-12_c & basic-verb-lex & infinitive-verb-lex.   
+        
+arg123_nc_p_past_le := arg123_nc_p & basic-verb-lex & past-verb-lex.
+  
+arg123_nc_p_present_le := arg123_nc_p & basic-verb-lex & present-verb-lex.
+  
+arg123_nc_p_future_le := arg123_nc_p & basic-verb-lex & future-verb-lex.
+  
+arg123_nc_p_infinitive_le := arg123_nc_p & basic-verb-lex & infinitive-verb-lex.
+ 
+arg12-14_cp-vp_advp-adjp-pp-np_past_le := arg12-14_vc_njrp & basic-verb-lex & past-verb-lex.
+  
+arg12-123-124_n_p_p_past_le := arg12-123-124_n_p_p & basic-verb-lex & past-verb-lex.
+  
+arg12-123-124_n_p_p_present_le := arg12-123-124_n_p_p & basic-verb-lex & present-verb-lex.
+ 
+arg12-123-124_n_p_p_infinitive_le := arg12-123-124_n_p_p & basic-verb-lex & infinitive-verb-lex.
+  
+arg12-123-124_n_p_p_future_le := arg12-123-124_n_p_p & basic-verb-lex & future-verb-lex.
+ 
+arg12_nc_past_le := arg12_nc & basic-verb-lex & past-verb-lex.
+ 
+arg12_npc_past_le := arg12_npc & basic-verb-lex & past-verb-lex.
+  
+arg12_npc_present_le := arg12_npc & basic-verb-lex & present-verb-lex.
+  
+arg12_npc_future_le := arg12_npc & basic-verb-lex & future-verb-lex.
+  
+arg12_npc_infinitive_le := arg12_npc & basic-verb-lex & infinitive-verb-lex.
+  
+arg12_nc_present_le := arg12_nc & basic-verb-lex & present-verb-lex.
+  
+arg12_nc_infinitive_le := arg12_nc & basic-verb-lex & infinitive-verb-lex.
+  
+arg12_nc_future_le := arg12_nc & basic-verb-lex & future-verb-lex.
+
+arg124_n_p_past_le := arg124_n_p & basic-verb-lex & past-verb-lex.
+ 
+arg124_n_p_present_le := arg124_n_p & basic-verb-lex & present-verb-lex.
+ 
+arg124_n_p_infinitive_le := arg124_n_p & basic-verb-lex & infinitive-verb-lex.
+  
+arg124_n_p_future_le := arg124_n_p & basic-verb-lex & future-verb-lex.
+  
+arg14_p_past_le := arg14_p & basic-verb-lex & past-verb-lex.
+  
+arg14_p_present_le := arg14_p & basic-verb-lex & present-verb-lex.
+  
+arg14_p_infinitive_le := arg14_p & basic-verb-lex & infinitive-verb-lex.
+ 
+arg14_p_future_le := arg14_p & basic-verb-lex & future-verb-lex.
+
+;SUBJ-ARG: for passives
+arg12-2_p_past_le := arg12-2_p & basic-verb-lex & past-verb-lex.
+  
+; TAG 10/3/15: for Arabic passives (no al-yedey):
+arg2_pass_past_le :=  arg2_pass & basic-verb-lex & past-verb-lex.
+
+;SUBJ-ARG: for unaccusatives
+arg2_unacc_past_le := arg2_unacc & basic-verb-lex & past-verb-lex.
+
+;NM 3/9/15: subj1-subj2 fix: arg2 subject infinitive
+arg2_unacc_infinitive_le := arg2_unacc & basic-verb-lex & infinitive-verb-lex.
+
+
+;;LHS 110915: expanding the subj1-subj2 fix: arg2 subject present, for VP beinoni (complement for subject to object raising verbs).
+arg2_unacc_present_le := arg2_unacc & basic-verb-lex & present-verb-lex.
+  
+arg12_n_past_le := arg12_n & basic-verb-lex & past-verb-lex.
+
+arg12_n_present_le := arg12_n & basic-verb-lex & present-verb-lex.
+  
+arg12_n_future_le := arg12_n & basic-verb-lex & future-verb-lex.
+    
+arg12_n_infinitive_le := arg12_n & basic-verb-lex & infinitive-verb-lex.
+ 
+;For non control nish
+arg1-12_n_past_le := arg1-12_n & basic-verb-lex & past-verb-lex.
+ 
+arg1-12_n_present_le := arg1-12_n & basic-verb-lex & present-verb-lex.
+ 
+arg1-12_n_infinitive_le := arg1-12_n & basic-verb-lex & infinitive-verb-lex.
+ 
+arg1-12_p_past_le := arg1-12_p & basic-verb-lex & past-verb-lex.
+  
+arg1-12_p_present_le := arg1-12_p & basic-verb-lex & present-verb-lex.
+  
+arg1-12_p_future_le := arg1-12_p & basic-verb-lex & future-verb-lex.
+
+arg1-12_p_infinitive_le := arg1-12_p & basic-verb-lex & infinitive-verb-lex.
+ 
+arg1-12_n_future_le := arg1-12_n & basic-verb-lex & future-verb-lex.
+  
+arg1-12_pc_past_le := arg1-12_pc & basic-verb-lex & past-verb-lex.
+  
+arg1-12_pc_present_le := arg1-12_pc & basic-verb-lex & present-verb-lex.
+
+arg1-12_pc_infinitive_le := arg1-12_pc & basic-verb-lex & infinitive-verb-lex.
+  
+arg1-12_pc_future_le := arg1-12_pc & basic-verb-lex & future-verb-lex.
+  
+arg1_basic_past_le := arg1_basic & basic-verb-lex & past-verb-lex.
+ 
+arg1_basic_present_le := arg1_basic & basic-verb-lex & present-verb-lex.
+ 
+arg1_basic_infinitive_le := arg1_basic & basic-verb-lex & infinitive-verb-lex.
+  
+arg1_basic_future_le := arg1_basic & basic-verb-lex & future-verb-lex.
+ 
+arg123_n_n_past_le := arg123_n_n & basic-verb-lex & past-verb-lex.
+  
+arg123_n_n_present_le := arg123_n_n & basic-verb-lex & present-verb-lex.
+ 
+arg123_n_n_infinitive_le := arg123_n_n & basic-verb-lex & infinitive-verb-lex.
+  
+arg123_n_n_future_le := arg123_n_n & basic-verb-lex & future-verb-lex.
+ 
+arg123_n_p_past_le := arg123_n_p & basic-verb-lex & past-verb-lex.
+ 
+arg123_n_p_present_le := arg123_n_p & basic-verb-lex & present-verb-lex.
+ 
+arg123_n_p_infinitive_le := arg123_n_p & basic-verb-lex & infinitive-verb-lex.
+ 
+arg123_n_p_future_le := arg123_n_p & basic-verb-lex & future-verb-lex.
+ 
+;For ntn:
+arg12-123_n_p_past_le := arg12-123_n_p & basic-verb-lex & past-verb-lex.
+  
+arg12-123_n_p_present_le := arg12-123_n_p & basic-verb-lex & present-verb-lex.
+  
+arg12-123_n_p_future_le := arg12-123_n_p & basic-verb-lex & future-verb-lex.
+ 
+arg12-123_n_p_infinitive_le := arg12-123_n_p & basic-verb-lex & infinitive-verb-lex.
+
+;LHS 20/11 complex predicates (XCOMP):
+argxc_le := arg_xcomp & basic-verb-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE finite ].
+
+;For ica, temporarilly
+arg1-14_a_past_le := arg1-14_a & basic-verb-lex & past-verb-lex.
+
+;Nurit 26/10
+;;;RAISING VERBS
+arg12_v_subj-raising_present_le := arg12_v_subj-raising & raising-verb-lex & present-verb-lex.
+ 
+arg14_j_subj-raising_past_le := arg14_j_subj-raising & raising-verb-lex & past-verb-lex.
+ 
+arg14_njr_subj-raising_past_le := arg14_njr_subj-raising & raising-verb-lex & past-verb-lex.
+  
+;For rah ("ECM" entry)
+arg124_n_v_obj-raising_past_le := arg124_n_v_obj-raising & raising-verb-lex & past-verb-lex.
+ 
+arg124_n_v_obj-raising_present_le := arg124_n_v_obj-raising & raising-verb-lex & present-verb-lex.
+  
+arg124_n_v_obj-raising_infinitive_le := arg124_n_v_obj-raising & raising-verb-lex &  infinitive-verb-lex.
+ 
+arg124_n_v_obj-raising_future_le := arg124_n_v_obj-raising & raising-verb-lex & future-verb-lex.
+  
+;For mca ("ECM" entry)
+arg124_n_a_obj-raising_past_le := arg124_n_a_obj-raising & raising-verb-lex & past-verb-lex.
+
+arg124_n_a_obj-raising_present_le := arg124_n_a_obj-raising & raising-verb-lex & present-verb-lex.
+
+arg124_n_a_obj-raising_future_le := arg124_n_a_obj-raising & raising-verb-lex & future-verb-lex.
+  
+arg124_n_a_obj-raising_infinitive_le := arg124_n_a_obj-raising & raising-verb-lex & infinitive-verb-lex.
+  
+;For yeh ("ECM" entry)
+arg134_n_nj_obj_raising_past_le := arg134_n_nj_obj_raising & raising-verb-lex & past-verb-lex.
+ 
+
+;Nurit 9/6
+;;;CONTROL VERBS
+;For subject-control verbs (e.g., nish, rch)
+arg12_v_subj-cntrl_past_le := arg12_v_subj-cntrl & basic-verb-lex & past-verb-lex.
+ 
+arg12_v_subj-cntrl_present_le := arg12_v_subj-cntrl & basic-verb-lex & present-verb-lex.
+
+arg12_v_subj-cntrl_infinitive_le := arg12_v_subj-cntrl & basic-verb-lex & infinitive-verb-lex.
+  
+arg12_v_subj-cntrl_future_le := arg12_v_subj-cntrl & basic-verb-lex & future-verb-lex.
+
+
+;For subject-control verbs with PP objects (e.g., hbtix)
+arg123_v_p_subj-cntrl_past_le := arg123_v_p_subj-cntrl & basic-verb-lex & past-verb-lex.
+
+arg123_v_p_subj-cntrl_present_le := arg123_v_p_subj-cntrl & basic-verb-lex & present-verb-lex.
+  
+arg123_v_p_subj-cntrl_infinitive_le := arg123_v_p_subj-cntrl & basic-verb-lex & infinitive-verb-lex.
+  
+arg123_v_p_subj-cntrl_future_le := arg123_v_p_subj-cntrl & basic-verb-lex & future-verb-lex.
+ 
+
+
+;For object-control verbs with PP objects (e.g., hreh)
+arg123_v_p_obj-cntrl_past_le := arg123_v_p_obj-cntrl & basic-verb-lex & past-verb-lex.
+
+arg123_v_p_obj-cntrl_present_le := arg123_v_p_obj-cntrl & basic-verb-lex & present-verb-lex.
+  
+arg123_v_p_obj-cntrl_infinitive_le := arg123_v_p_obj-cntrl & basic-verb-lex & infinitive-verb-lex.
+ 
+arg123_v_p_obj-cntrl_future_le := arg123_v_p_obj-cntrl & basic-verb-lex & future-verb-lex.
+  
+;For object-control verbs with PP objects (e.g., biqe)
+arg125_v_p_obj-cntrl_past_le := arg125_v_p_obj-cntrl & basic-verb-lex & past-verb-lex.
+  
+arg125_v_p_obj-cntrl_present_le := arg125_v_p_obj-cntrl & basic-verb-lex & present-verb-lex.
+
+arg125_v_p_obj-cntrl_infinitive_le := arg125_v_p_obj-cntrl & basic-verb-lex & infinitive-verb-lex.
+  
+arg125_v_p_obj-cntrl_future_le := arg125_v_p_obj-cntrl & basic-verb-lex & future-verb-lex.
+
+;For object-control verbs with NP objects (e.g., ekny)
+arg123_v_n_obj-cntrl_past_le := arg123_v_n_obj-cntrl & basic-verb-lex & past-verb-lex.
+  
+arg123_v_n_obj-cntrl_present_le := arg123_v_n_obj-cntrl & basic-verb-lex & present-verb-lex.
+ 
+arg123_v_n_obj-cntrl_infinitive_le := arg123_v_n_obj-cntrl & basic-verb-lex & infinitive-verb-lex.
+  
+arg123_v_n_obj-cntrl_future_le := arg123_v_n_obj-cntrl & basic-verb-lex & future-verb-lex.
+
+;;;COPULAS
+;Nurit 9/6 defined new types which inherit from subtypes of basic-copula-lex (in matrix.tdl), which defines the PRED for all of them
+arg12-14_pron-cop_present_le := arg12-14_vc_njrp & basic-pron-cop-lex & present-verb-lex.
+
+arg12-14_verb-cop_past_le := arg12-14_vc_njrp & basic-verb-cop-lex & past-verb-lex.
+
+arg12-14_verb-cop_future_le := arg12-14_vc_njrp & basic-verb-cop-lex & future-verb-lex.
+
+;;;New types to test expanded system:
+arg12-123-126-1236_nc_p_p_past_le := arg12-123-126-1236_nc_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg16_p_past_le := arg16_p & basic-verb-lex & past-verb-lex.
+    
+arg15_p_past_le := arg15_p & basic-verb-lex & past-verb-lex.
+    
+arg156_p_p_past_le := arg156_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg15-16-156_p_p_present_le := arg15-16-156_p_p & basic-verb-lex & present-verb-lex.
+  
+arg15-16-156_p_p_future_le := arg15-16-156_p_p & basic-verb-lex & future-verb-lex.
+    
+arg15-16-156_p_p_infinitive_le := arg15-16-156_p_p & basic-verb-lex & infinitive-verb-lex.
+  
+arg15-16-156_p_p_past_le := arg15-16-156_p_p & basic-verb-lex & past-verb-lex.
+  
+arg126_nc_p_past_le := arg126_nc_p & basic-verb-lex & past-verb-lex.
+  
+arg1236_nc_p_p_past_le := arg1236_nc_p_p & basic-verb-lex & past-verb-lex.
+  
+arg125_n_p_present_le := arg125_n_p & basic-verb-lex & present-verb-lex.
+  
+arg125_n_p_future_le := arg125_n_p & basic-verb-lex & future-verb-lex.
+  
+arg125_n_p_infinitive_le := arg125_n_p & basic-verb-lex & infinitive-verb-lex.
+  
+arg125_n_p_past_le := arg125_n_p & basic-verb-lex & past-verb-lex.
+  
+arg12-123-125_n_p_p_present_le := arg12-123-125_n_p_p & basic-verb-lex & present-verb-lex.
+  
+arg12-123-125_n_p_p_past_le := arg12-123-125_n_p_p & basic-verb-lex & past-verb-lex.
+
+arg12-123-125_n_p_p_future_le := arg12-123-125_n_p_p & basic-verb-lex & future-verb-lex.
+ 
+arg12-123-125_n_p_p_infinitive_le := arg12-123-125_n_p_p & basic-verb-lex & infinitive-verb-lex.
+
+arg1-12-16_c_p_past_le := arg1-12-16_c_p & basic-verb-lex & past-verb-lex.
+ 
+arg12-13_pc_p_past_le := arg12-13_pc_p & basic-verb-lex & past-verb-lex.
+  
+arg1-12-16_c_p_present_le := arg1-12-16_c_p & basic-verb-lex & present-verb-lex.
+ 
+arg1-12-16_c_p_future_le := arg1-12-16_c_p & basic-verb-lex & future-verb-lex.
+ 
+arg1-12-16_c_p_infinitive_le := arg1-12-16_c_p & basic-verb-lex & infinitive-verb-lex.
+ 
+arg13-123_n_n_past_le := arg13-123_n_n & basic-verb-lex & past-verb-lex.
+ 
+arg13-123_n_n_present_le := arg13-123_n_n & basic-verb-lex & present-verb-lex.
+  
+arg13-123_n_n_future_le := arg13-123_n_n & basic-verb-lex & future-verb-lex.
+ 
+arg13-123_n_n_infinitive_le := arg13-123_n_n & basic-verb-lex & infinitive-verb-lex.
+ 
+arg13_n_past_le := arg13_n & basic-verb-lex & past-verb-lex.
+ 
+arg14_njp_past_le := arg14_njp & basic-verb-lex & past-verb-lex.
+
+arg146_njp_p_past_le := arg146_njp_p & basic-verb-lex & past-verb-lex.
+ 
+arg145_njp_p_past_le := arg145_njp_p & basic-verb-lex & past-verb-lex.
+ 
+arg1456_njp_p_p_past_le := arg1456_njp_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg1-14-15-16-145-146-156-1456_njp_p_p_past_le := arg1-14-15-16-145-146-156-1456_njp_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg1-15-16-156_p_p_past_le := arg1-15-16-156_p_p & basic-verb-lex & past-verb-lex.
+  
+arg12-125_n_p_past_le := arg12-125_n_p & basic-verb-lex & past-verb-lex.
+
+arg12-125_nc_p_past_le := arg12-125_nc_p & basic-verb-lex & past-verb-lex.
+  
+arg1256_n_p_p_past_le := arg1256_n_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg126_n_p_past_le := arg126_n_p & basic-verb-lex & past-verb-lex.
+
+arg12-125-126-1256_n_p_p_past_le := arg12-125-126-1256_n_p_p & basic-verb-lex & past-verb-lex.
+  
+;;;;;;;;;;;;;;;
+;;;Idiomatic;;;
+;;;;;;;;;;;;;;;
+;NM 19/2/15: type name changes; E.g., ni instead of n_i, ni_pi instead of n_i_p_i
+;also - xarg15 for linking between dep1 and dep5
+arg12_ni_past_le := arg12_ni & basic-verb-lex & past-verb-lex.
+
+arg12_ni_present_le := arg12_ni & basic-verb-lex & present-verb-lex.
+  
+arg12_ni_future_le := arg12_ni & basic-verb-lex & future-verb-lex.
+ 
+arg12_ni_infinitive_le := arg12_ni & basic-verb-lex & infinitive-verb-lex.
+ 
+arg15_pi_past_le := arg15_pi & basic-verb-lex & past-verb-lex.
+   
+;-----------------------------------------
+;  IDIOMS with special linking patterns
+;-----------------------------------------
+;For "ica m kliw"
+arg15_pi_xarg15_past_le := arg15_pi_xarg15 & basic-verb-lex & past-verb-lex.
+  
+;For "hwcia at X m kliw"
+arg125_n_pi_xarg25_past_le := arg125_n_pi_xarg25 & basic-verb-lex & past-verb-lex.
+    
+;For "vmn at raew b hxwl"
+arg125_ni_pi_xarg12_past_le := arg125_ni_pi_xarg12 & basic-verb-lex & past-verb-lex.
+  
+

@@ -1,0 +1,590 @@
+;;; $Id: types-extraction.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;--------------------------------------------------------------------------
+;                           EXTRACTION RULES 
+;--------------------------------------------------------------------------
+; TAG 20/10/15: added percolation of SUBJ-ARG to bar Arabic head-subj from operating after the subject was extracted (for completeness, this should
+; also happen in Hebrew).
+;LHS 2912 percolate S-FRAME up to restrict when the raising rules apply
+;A general type for extraction phrases
+basic-extracted-arg-phrase := head-only &
+  [ SYNSEM [ LIGHT -,
+             LOCAL.CAT.VAL [ SUBJ-ARG #subjarg,
+							 S-FRAME #sframe,
+                             PPSORT #ppsort ] ],
+    HEAD-DTR.SYNSEM [ LOCAL.CAT.VAL [ SUBJ-ARG #subjarg,
+									  S-FRAME #sframe,
+                                      PPSORT #ppsort ] ] ].
+                                                   
+; TAG 11/10/15: the   [ HEAD-DTR.SYNSEM lex-synsem ] moved back here, as comp extraction in Arabic is lexical, like in Hebrew. This reverts the change from 11/08. 
+; TAG 11/08/15: Arabic allows comp extraction at the phrasal level (to allow extraction from VSO - lxma 1kl mhmd). The HEAD-DTR.SYNSEM lex-synsem constraint is relevant only to Hebrew.
+; (moved to heb-types-extraction)
+;LHS for complement extraction and adjunct extraction (acts on lexical items) 
+basic-extracted-arg-phrase-lex-head-dtr := basic-extracted-arg-phrase &
+                                            [ HEAD-DTR.SYNSEM lex-synsem ]. 
+
+;LHS for subject extraction and zero copula complement extraction (acts on phrases)	
+basic-extracted-arg-phrase-phr-head-dtr := basic-extracted-arg-phrase & 
+[ HEAD-DTR.SYNSEM phr-synsem ].	
+  
+;------------------------------------------
+;           SUBJ
+;------------------------------------------
+
+; For multi-extraction- the order of slashes is < SUBJ, OBJ >
+; TAG 11/10/15: In Arabic, subject extraction (like complement extraction in Arabic and Hebrew) is lexical.
+; Thus, removed the HEAD-DTR.SYNSEM phr-synsem constraint from the general extracted-subj-phrase and moved it to heb-types-extraction (with :+). 
+; Similarly, as subject-extraction is lexical in Arabic, add a HEAD-DTR .SYNSEM lex-synsem constraint (with :+) in ara-types-extraction. 
+; Also, this type used to inherit from basic-extracted-arg-phrase-phr-head-dtr which is specified as HEAD-DTR.SYNSEM phr-synsem, which does not fit Arabic.
+; Changed it to inherit from basic-extracted-arg-phrase in ara-types-extraction and from basic-extracted-arg-phrase-phr-head-dtr in heb-types-extraction.
+; (If the general phrase inherits from basic-extracted-arg-phrase we get a redundency error in HebGram.
+; In addition, the constraint that the Deps' REAL must be unifiable with the R-FRAME is moved to heb-types-extraction as in Arabic extraction is lexical, so the
+; comps do not have to be realized before the subject extraction.
+
+;LHS 22/10/15: set the SUBJ-DEP.REAL of the mother to be arg12, to mark that the subject has been realized (it is either arg1+ or arg2+).
+; TAG 1/2/15: changed the name of the phrase and the rule to extracted-subj-phrase without "que", because this is a general rule for heb. and ara. Arabic, unlike
+; Hebrew, does have subject topicalization (this is how SV order is derived). The ques requirement is added to the Hebrew version of the phrase 
+; in heb-types-extraction. Also, added a general extracted-subj-phrase as a supertype of extracted-subj1-phrase and extracted-subj2-phrase. 
+; Added agreement between SLASH and the HEAD-DTR, which will percolate and force agreement with the topicalized subject in Arabic.
+extracted-subj-phrase := head-compositional & que-rel-percolate-phrase & no-hcons-ccont-rule & no-rels-ccont-rule & no-icons-ccont-rule &
+  [ SYNSEM canonical-synsem &
+		[ NON-LOCAL [ SLASH [ LIST [ FIRST.CAT.HEAD.CNCRD #png,
+		                             REST 0-1-list & #hlist ],
+				      LAST #hlast ] ],
+		  LOCAL [ CAT.VAL [  SUBJ-DEP.REAL arg12,
+						R-FRAME #frame,
+						   DEP3 #dep3,
+						   DEP4 #dep4,
+						   DEP5 #dep5,
+						   DEP6 #dep6 ] ] ],
+    HEAD-DTR.SYNSEM [ NON-LOCAL.SLASH [ LIST #hlist,
+    							   LAST #hlast  ],
+    					 LOCAL [ CONT.HOOK [ 	INDEX.E.TENSE finite ],
+					 	 CAT [ HEAD v_pron_head & [ CNCRD #png ],
+						       VAL [ R-FRAME #frame,
+								   DEP3 #dep3,
+								   DEP4 #dep4,
+								   DEP5 #dep5,
+								   DEP6 #dep6 ] ] ] ] ].
+
+
+; TAG 11/10/15: The constraint that the deps' REAL is unifiable with the R-FRAME 
+; is moved to heb-types-extraction because subj-extraction in Arabic is lexical. 								   
+extracted-subj1-phrase := extracted-subj-phrase &
+  [ SYNSEM canonical-synsem &
+		[ NON-LOCAL [ SLASH [ LIST [ FIRST #gap ] ] ],
+		  LOCAL [ CAT.VAL [  R-FRAME #frame,
+						   DEP1 [ REAL #frame & arg1+ ],
+						   DEP2 #dep2 ] ] ],
+    HEAD-DTR [ 	   SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ-ARG arg1,
+							     R-FRAME #frame,
+								   DEP1 [ REAL arg1-,
+									  DEP.LOCAL #gap & [ CAT [ HEAD.CASE nom,
+											     VAL.R-FRAME no-arg ] ] ],
+								   DEP2 #dep2 ] ] ] ] ] ].
+
+;For regular subject extraction (no subject to subject raising)
+basic-extracted-subj1-phrase := extracted-subj1-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CONT.HOOK.TOPREL [ ARG1 #ind1 ],
+			    CAT.VAL  [ S-FRAME arg1+,
+				       DEP1.DEP.LOCAL [ CONT.HOOK.INDEX ref-ind & #ind1 ] ] ] ].
+;For subject to subject raising
+raising-extracted-subj1-phrase := extracted-subj1-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.S-FRAME arg1- ].
+
+;For verbs whose subject is arg2
+; TAG 11/10/15: The constraint that the deps' REAL is unifiable with the R-FRAME 
+; is moved to heb-types-extraction because subj-extraction in Arabic is lexical. 
+extracted-subj2-phrase :=  extracted-subj-phrase &
+  [ SYNSEM canonical-synsem &
+		[ NON-LOCAL [ SLASH [ LIST [ FIRST #gap ] ] ],
+		  LOCAL [ CAT.VAL [  R-FRAME #frame,
+						   DEP2 [ REAL #frame & arg2+ ],
+						   DEP1 #dep1 ] ] ],
+    HEAD-DTR [ 	   SYNSEM [ LOCAL [ CONT.HOOK.TOPREL [ARG2 #ind2],
+										CAT [ VAL [ SUBJ-ARG arg2,
+							     R-FRAME #frame,
+								   DEP2 [ REAL arg2-,
+									  DEP.LOCAL #gap & [ CONT.HOOK.INDEX ref-ind & #ind2,
+														CAT [ HEAD.CASE nom,
+											     VAL.R-FRAME no-arg ] ] ],
+								   DEP1 #dep1 ] ] ] ] ] ].
+
+
+;before multi-extraction
+;extracted-subj-que-phrase := basic-extracted-arg-phrase-phr-head-dtr & head-compositional & que-rel-percolate-phrase & no-hcons-ccont-rule & no-rels-ccont-rule & no-icons-ccont-rule &
+;  [ SYNSEM canonical-synsem &
+;		[ NON-LOCAL [ SLASH 1-dlist & [ LIST < #gap > ] ],
+;		  LOCAL [ CAT.VAL [  R-FRAME #frame,
+;						   SPR < >,
+;						   DEP1 [ REAL #frame & arg1+ ],
+;						   DEP2 #dep2,
+;						   DEP3 #dep3,
+;						   DEP4 #dep4 ],
+;			  CONT.HOOK.INDEX.SF ques ] ],
+;    HEAD-DTR [ 	   SYNSEM phr-synsem & [ NON-LOCAL.SLASH 0-dlist,
+;					 LOCAL [ CONT.HOOK [ 	TOPREL.ARG1 #ind1,
+;					 			INDEX.E.TENSE finite ],
+;					 	 CAT [ HEAD v_pron_head,
+;						       VAL [ R-FRAME #frame,
+;								   DEP1 [ REAL arg1-,
+;									  DEP.LOCAL #gap & [ CONT.HOOK.INDEX  ref-ind & #ind1] ],
+;								   DEP2 #dep2 & [ REAL #frame ],
+;								   DEP3 #dep3 & [ REAL #frame ],
+;								   DEP4 #dep4 & [ REAL #frame ] ],
+;							MC na ] ] ] ] ].
+
+
+
+
+;------------------------------------------
+;           COMP
+;------------------------------------------
+
+;LHS: not needed anymore (que-rel-percolate-phrase moved up).
+;extracted-comp-slash-phrase := extracted-comp-phrase & que-rel-percolate-phrase.
+
+; TAG 20/10/15: moved the percolation of SUBJ-ARG to basic-extracted-arg-phrase.
+;LHS 1505 a common ancestor for complement extraction rules (except zero pron) + restricting comp extraction to only happen on 
+;verbs (otherwise, it would also happen on mh)
+extracted-comp-phrase := basic-extracted-arg-phrase-lex-head-dtr & no-rels-ccont-rule & no-icons-ccont-rule & que-rel-percolate-phrase &
+  [ SYNSEM.LOCAL.CAT [ MC #mc,
+                       VAL.SUBJ-DEP #subj ],          
+    HEAD-DTR [ SYNSEM.LOCAL.CAT [ HEAD v_pron_head,
+                                  MC #mc,
+                                  VAL.SUBJ-DEP #subj             ] ] ].
+
+
+;;;;;;;;;;;
+;;;COMP1;;;
+;;;;;;;;;;;
+;LHS 2110: adding extraction of comp1-pp
+extracted-comp1-phrase := extracted-comp-phrase & no-hcons-ccont-rule &
+                               head-compositional &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+							            DEP2 #dep2,
+                         	DEP1 [ REAL #frame & arg1+ ],
+                         	DEP3 #dep3,
+                         	DEP4 #dep4,
+                         	DEP5 #dep5,
+                         	DEP6 #dep6 ] ],
+	    NON-LOCAL [ SLASH 1-dlist & [ LIST < #gap > ] ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CONT.HOOK.TOPREL [ ARG1 #ind1 ],
+                                CAT [ VAL [ R-FRAME #frame,
+                                            SUBJ-ARG #subj,
+                                            DEP2 #dep2,
+                                            DEP1 [ REAL #subj & arg1-,
+                                                   DEP.LOCAL #gap & [ CONT.HOOK.TOPREL.ARG2 ref-ind & #ind1,
+                                                                  CAT.HEAD adp ] ],
+                                     	      DEP3 #dep3,
+                                     	      DEP4 #dep4,
+                                     	      DEP5 #dep5,
+                                     	      DEP6 #dep6 ]] ] ] ] ].	                               
+
+;;;;;;;;;;;
+;;;COMP2;;;
+;;;;;;;;;;;
+;Nurit-0805 The slash is defined in the mother and is taken from the LOCAL of DEP2. The previous version had slash-gap do the job,
+;but it created a mess because of SLASH amalgamation
+;SUBJ-ARG: comp2 extraction should only be possible if subject isn't arg2
+;extracted-comp2-phrase := extracted-comp-phrase &
+;                               head-compositional &
+;  [ SYNSEM canonical-synsem &
+;	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+;							DEP1 #dep1,
+;                         	DEP2 [ REAL #frame & arg2+ ],
+;                         	DEP3 #dep3,
+;                         	DEP4 #dep4,
+;                         	DEP5 #dep5,
+;                         	DEP6 #dep6 ] ],
+;	    NON-LOCAL [ SLASH 1-dlist & [ LIST < #gap > ] ] ],
+ ;   HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+;					    SUBJ-ARG #subj,
+;			       	            DEP1 #dep1,
+;                                            DEP2 [ REAL #subj & arg2-,
+;                                                  DEP.LOCAL #gap ],
+;                                     	    DEP3 #dep3,
+;                                     	    DEP4 #dep4,
+;                                     	    DEP5 #dep5,
+;                                    	    DEP6 #dep6 ]] ] ] ] ].	
+											
+extracted-comp2-phrase := extracted-comp-phrase &
+                               head-compositional &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+							DEP1 #dep1,
+                         	DEP2 [ REAL #frame & arg2+ ],
+                         	DEP3 #dep3,
+                         	DEP4 #dep4,
+                         	DEP5 #dep5,
+                         	DEP6 #dep6 ] ],
+	    NON-LOCAL [ SLASH 1-dlist & [ LIST < #gap > ] ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+					    SUBJ-ARG #subj,
+			       	            DEP1 #dep1,
+                                            DEP2 [ REAL #subj & arg2-,
+                                                   DEP.LOCAL #gap ],
+                                     	    DEP3 #dep3,
+                                     	    DEP4 #dep4,
+                                     	    DEP5 #dep5,
+                                     	    DEP6 #dep6 ]] ] ] ] ].												
+
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal. 
+; TAG 12/01/15: moved to heb-types-extraction because arabic does not have OBJ-MARK
+; When an NP in DEP2 is extracted the LOCAL values of DEP2 need to be set and linking has to occur 
+;(instead of what happens in head-np-comp2-phrase)
+;LHS 2207: took out the restriction of the head's case to acc (to enable 'hxlwm hmvrh hith')
+;LHS 0210: put back the restriction of the head's case to acc because 'hxlwm hmvrh hith' isn't relevant to comp2 anymore.
+extracted-v-head-comp2-np-phrase := extracted-comp2-phrase & no-hcons-ccont-rule &
+ [ HEAD-DTR [ SYNSEM [ LOCAL [ CONT.HOOK.TOPREL.ARG2 #ind2, 
+				 CAT [ HEAD v_pron_head,
+				       VAL [ S-FRAME arg2+,
+					      DEP2.DEP.LOCAL [ 	CAT [ HEAD noun & [ CASE acc ],
+                                                  VAL.R-FRAME no-arg ],
+                                            CONT.HOOK.INDEX  ref-ind & #ind2 ] ] ] ] ] ] ].
+												  
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-phrasal. 
+;LHS 1211: extraction for subject to object raising (the dep2 np)
+extracted-raising-head-comp2-np-phrase := extracted-comp2-phrase & no-hcons-ccont-rule &
+   [ HEAD-DTR [ SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head,
+				       VAL [ S-FRAME arg2-,
+					     DEP2.DEP.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+                                                VAL.R-FRAME no-arg ] ] ] ] ] ] ] ].
+                                               
+
+;LHS 2110: added extraction for comp2 PPs, including PPSORT matching                                                 	
+extracted-comp2-pp-phrase := extracted-comp2-phrase & no-hcons-ccont-rule &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CONT.HOOK.TOPREL [ ARG2 #ind2 ],
+                            CAT.VAL [ PPSORT.DEP2-P #ppsort,
+                            	      DEP2.DEP.LOCAL [ CONT.HOOK.TOPREL [ PRED #ppsort,
+                                                                    ARG2 ref-ind & #ind2],
+                                                 CAT.HEAD adp ] ] ] ].
+
+;extracted-comp2-vp-phrase := extracted-comp2-phrase & hcons-ccont-rule &
+;  [ C-CONT.HCONS <! [ HARG #harg,
+;                      LARG #larg ] !>,
+;    HEAD-DTR.SYNSEM [ LOCAL [ 	CONT.HOOK.TOPREL [ ARG2 #harg ],
+;                                CAT.VAL.DEP2 [ 	DEP.LOCAL [ CAT.HEAD verb,
+;                                                   	    CONT.HOOK [	LTOP  #larg,
+;									TOPREL.ARG1 semarg,
+;                                 	                             	INDEX event & [ E.TENSE infinitive ] ] ] ] ] ] ]. 
+
+
+;LHS 080915: expanding subj1-subj2 fix: Don't force the VP complement to have arg1 (control)
+extracted-comp2-vp-phrase := extracted-comp2-phrase & hcons-ccont-rule &
+  [ C-CONT.HCONS <! [ HARG #harg,
+                      LARG #larg ] !>,
+    HEAD-DTR.SYNSEM [ LOCAL [ 	CONT.HOOK.TOPREL [ ARG2 #harg ],
+                                CAT.VAL.DEP2 [ 	DEP.LOCAL [ CAT.HEAD verb,
+                                                   	    CONT.HOOK [	LTOP  #larg,
+																	INDEX event & [ E.TENSE infinitive ] ] ] ] ] ] ].
+																	
+extracted-comp2-cp-phrase := extracted-comp2-phrase & hcons-ccont-rule &                                                
+  [ C-CONT.HCONS <! [ HARG #harg,
+                      LARG #larg ] !> ,
+    HEAD-DTR.SYNSEM [ LOCAL [ 	CONT.HOOK.TOPREL [ ARG2 #harg ],
+		      		CAT [ VAL.DEP2.DEP.LOCAL [ CAT [ HEAD comp,
+							     VAL fullval ],
+                                                 CONT.HOOK [ LTOP  #larg ] ] ] ] ] ].
+
+;;;;;;;;;;;
+;;;COMP3;;;
+;;;;;;;;;;;
+extracted-comp3-phrase := extracted-comp-phrase & no-hcons-ccont-rule &
+                               head-compositional &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+			       	DEP1 #dep1,
+                         	DEP3 [ REAL #frame & arg3+ ],
+                         	DEP4 #dep4,
+                         	DEP2 #dep2,
+                         	DEP5 #dep5,
+                         	DEP6 #dep6 ]],
+	    NON-LOCAL.SLASH 1-dlist & [ LIST < #gap > ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+					    SUBJ-ARG #subj,
+			       	            DEP1 #dep1,
+                                            DEP3 [ REAL #subj & arg3-,
+					           DEP.LOCAL #gap ],
+                                     	    DEP4 #dep4,
+                                     	    DEP2 #dep2,
+                                     	    DEP5 #dep5,
+                                     	    DEP6 #dep6 ] ] ] ] ] ].
+
+; TAG 28/1/15: uncommented, the OBJ-MARK specification is removed and added in heb-types-extraction
+; TAG 120115: moved to heb-types-extraction because arabic does not have OBJ-MARK
+extracted-comp3-np-phrase := extracted-comp3-phrase &
+  [ HEAD-DTR [ SYNSEM [ LOCAL [ CONT.HOOK.TOPREL.ARG3 #ind3,
+				 CAT.VAL.DEP3.DEP.LOCAL [ CAT [ HEAD noun & [ CASE acc ],
+                                           		VAL.R-FRAME no-arg ],
+                                                      CONT.HOOK.INDEX  ref-ind & #ind3 ] ] ] ] ].    
+                                              
+extracted-comp3-pp-phrase := extracted-comp3-phrase & 
+  [ SYNSEM.LOCAL.CONT.HOOK.TOPREL.ARG3 #ind3,
+    HEAD-DTR [ SYNSEM [ LOCAL [ CONT.HOOK.TOPREL.ARG3 #ind3,
+          CAT.VAL.DEP3 [  DEP.LOCAL [ CAT.HEAD adp,
+                                  CONT.HOOK.TOPREL [ ARG2 ref-ind & #ind3 ] ] ] ] ] ] ].
+;;;;;;;;;;;
+;;;COMP4;;;
+;;;;;;;;;;;
+extracted-comp4-phrase := extracted-comp-phrase &
+                               head-compositional & no-hcons-ccont-rule &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+			       	DEP1 #dep1,
+                         	DEP4 [ REAL #frame & arg4+ ],
+                         	DEP3 #dep3,
+                         	DEP2 #dep2,
+                         	DEP5 #dep5,
+                         	DEP6 #dep6 ]],
+	    NON-LOCAL.SLASH 1-dlist & [ LIST < #gap > ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+			       	            DEP1 #dep1,
+					    SUBJ-ARG #subj,
+                                            DEP4 [ REAL #subj & arg4-,
+					           DEP.LOCAL #gap & [ CONT.HOOK.LTOP handle & #hand4 ] ],
+                                     	    DEP3 #dep3,
+                                     	    DEP2 #dep2,
+                                     	    DEP5 #dep5,
+                                     	    DEP6 #dep6 ] ],
+                          CONT.HOOK.TOPREL [ ARG4 #hand4 ] ] ] ] ].
+
+
+; TAG 28/1/15: uncommented, the OBJ-MARK and CASE non-acc specification is removed and added in heb-types-extraction
+; TAG 11/01/15: moved to heb-types-extraction because arabic does not have OBJ-MARK					  
+extracted-v-head-comp4-np-phrase := extracted-comp4-phrase & 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD v_pron_head,
+				 VAL [ DEP4.DEP.LOCAL.CAT [ HEAD noun, 
+						                    VAL.R-FRAME no-arg ] ] ] ].
+								
+;extracted-comp4-vp-phrase := extracted-comp4-phrase &
+;  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.DEP4.DEP.LOCAL [ CAT.HEAD verb,
+;						  CONT [ HOOK [ TOPREL.ARG1 semarg,
+;							        INDEX event & [ E.TENSE present ] ] ] ] ] ].
+
+;LHS 120915: expanding subj1-subj2 fix: Don't force the VP complement to have arg1 (raising)
+extracted-comp4-vp-phrase := extracted-comp4-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.DEP4.DEP.LOCAL [ CAT.HEAD verb,
+						  CONT [ HOOK [ INDEX event & [ E.TENSE present ] ] ] ] ] ].						        
+	                                                 
+extracted-comp4-pp-phrase := extracted-comp4-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ PPSORT.DEP4-P #ppsort,
+				    DEP4.DEP.LOCAL [ CAT.HEAD adp,
+						 CONT.HOOK.TOPREL.PRED #ppsort ] ] ].
+extracted-comp4-advp-phrase := extracted-comp4-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.DEP4.DEP.LOCAL [ CAT.HEAD adv ] ] ].
+extracted-comp4-adjp-phrase := extracted-comp4-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.DEP4.DEP.LOCAL [ CAT.HEAD adj ] ] ].
+
+;;;;;;;;;;;
+;;;COMP5;;;
+;;;;;;;;;;;
+extracted-comp5-phrase := extracted-comp-phrase & head-compositional & no-hcons-ccont-rule &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+			       	DEP1 #dep1,
+                         	DEP5 [ REAL #frame & arg5+ ],
+                         	DEP3 #dep3,
+                         	DEP2 #dep2,
+                         	DEP4 #dep4,
+                         	DEP6 #dep6 ]],
+	    NON-LOCAL.SLASH 1-dlist & [ LIST < #gap > ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+			       	            DEP1 #dep1,
+					    SUBJ-ARG #subj,
+                                            DEP5 [ REAL #subj & arg5-,
+					           DEP.LOCAL #gap & [ CONT.HOOK.LTOP handle & #hand5,
+								      CAT.HEAD +rp ] ],
+                                     	    DEP3 #dep3,
+                                     	    DEP2 #dep2,
+                                     	    DEP4 #dep4,
+                                     	    DEP6 #dep6 ]],
+                          CONT.HOOK.TOPREL [ ARG5 #hand5 ] ] ] ] ].
+
+extracted-comp5-advp-phrase := extracted-comp5-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL [ CAT.VAL.DEP5.DEP.LOCAL [ CAT.HEAD adv ] ] ].
+
+extracted-comp5-pp-phrase := extracted-comp5-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ PPSORT.DEP5-P #ppsort,
+				    DEP5.DEP.LOCAL [ CAT.HEAD adp,
+						     CONT.HOOK.TOPREL.PRED #ppsort ] ] ].
+
+;;;;;;;;;;;
+;;;COMP6;;;
+;;;;;;;;;;;
+extracted-comp6-phrase := extracted-comp-phrase & head-compositional & no-hcons-ccont-rule &
+  [ SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ 	R-FRAME #frame,
+			       	DEP1 #dep1,
+                         	DEP6 [ REAL #frame & arg6+ ],
+                         	DEP3 #dep3,
+                         	DEP2 #dep2,
+                         	DEP4 #dep4,
+                         	DEP5 #dep5 ] ],
+	    NON-LOCAL.SLASH 1-dlist & [ LIST < #gap > ] ],
+    HEAD-DTR [ SYNSEM [	LOCAL [ CAT [ VAL [ R-FRAME #frame,
+			       	            DEP1 #dep1,
+					    SUBJ-ARG #subj,
+                                            DEP6 [ REAL #subj & arg6-,
+					           DEP.LOCAL #gap & [ CONT.HOOK.LTOP handle & #hand6 ] ],
+                                     	    DEP3 #dep3,
+                                     	    DEP2 #dep2,
+                                     	    DEP4 #dep4,
+                                     	    DEP5 #dep5 ] ],
+                          CONT.HOOK.TOPREL [ ARG6 #hand6 ] ] ] ] ].
+
+extracted-comp6-pp-phrase := extracted-comp6-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ PPSORT.DEP6-P #ppsort,
+				    DEP6.DEP.LOCAL [ CAT.HEAD adp,
+						     CONT.HOOK.TOPREL.PRED #ppsort ] ] ].
+
+;--------------------------------------------------------------------------
+;                           FILLER RULES
+;--------------------------------------------------------------------------
+; ERB 2004-08-26 The analysis of relative clauses in the ERG
+; requires that the relative clause construction (a kind of
+; "head" filler phrase) not actually be a subtype of 
+; headed-phrase.  This is because the HEAD.MOD value of
+; the mother and the would-be head daughter differ.
+; Thus basic-filler-phrase does not inherit form headed-phrase.
+; We provide a subtype, basic-head-filler-phrase, below, which does.
+
+;basic-head-slash-filler-phrase := basic-slash-filler-phrase & head-compositional.
+
+; ASF 2011-10-05 changed supertype 'headed-phrase' to more specific 'head-compostional'
+; in order to make sure matrix.tdl provides the right semantics.
+
+; LHS January 2015: added que percolation to avoid spurious parses when it appears alongside V2
+basic-head-filler-phrase := binary-phrase & phrasal & 
+  [ SYNSEM [ LOCAL [ CAT [ MC +,
+			   HEAD v_pron_head,
+  			   VAL #val & fullval,
+			   POSTHEAD + ] ] ,
+	     NON-LOCAL [ SLASH 0-dlist,
+                     QUE #que ]		 ],
+    ARGS < phrase & [ SYNSEM [ LOCAL #slash & [ CTXT.ACTIVATED + ],
+			       NON-LOCAL [ SLASH 0-dlist ] ] ],
+	   [ SYNSEM [ LOCAL.CAT [ VAL #val ],
+		      NON-LOCAL [ SLASH 1-dlist & <! #slash !>, 
+			              QUE #que ] ] ] > ].
+
+que-head-filler-phrase := basic-head-filler-phrase & head-final &  no-hcons-ccont-rule & head-compositional &
+  [ HEAD-DTR [ SYNSEM [ LOCAL.CAT [ HEAD v_pron_head ] ] ],
+    NON-HEAD-DTR [ SYNSEM phr-synsem & 
+			[ NON-LOCAL [ QUE 1-dlist ] ] ],
+    C-CONT.RELS <! !> ].
+
+slash-head-filler-phrase := basic-head-filler-phrase & head-final &  no-hcons-ccont-rule & head-compositional &
+  [ HEAD-DTR [ SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head ],
+  				CONT.HOOK.INDEX.SF prop ] ] ],
+    NON-HEAD-DTR [ SYNSEM phr-synsem & 
+			[ NON-LOCAL [ QUE 0-dlist ] ] ],
+    C-CONT.RELS <! !> ].
+
+
+;general type for head-filler when the SLASH list has two elements
+multi-head-filler-phrase := binary-phrase & phrasal & 
+  [ SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head,
+  			   VAL #val & [ R-FRAME #link,
+					  	DEP1.REAL #link,
+					  	DEP2.REAL #link,
+					  	DEP3.REAL #link,
+					  	DEP4.REAL #link,
+					  	DEP5.REAL #link,
+					  	DEP6.REAL #link ],
+			   POSTHEAD + ] ] ],
+    ARGS < phrase & [ SYNSEM [ LOCAL [ CTXT.ACTIVATED + ],
+			       NON-LOCAL [ SLASH 0-dlist ] ] ],
+	   [ SYNSEM [ LOCAL.CAT [ VAL #val ] ] ] > ].
+
+
+;given multi-extraction, this rule takes the first element in SLASH and binds it with a QUE element
+;The element that remains is bound by a regular slash-head-filler-phrase
+;13/7 - this doesn't work yet, because slash-head-filler-phrase only operates on prop (otherwise all SVOs are also topicalizations).
+;need to figure out a way to fix this
+que-multi-head-filler-phrase := multi-head-filler-phrase & head-final &  no-hcons-ccont-rule & head-compositional &
+  [ SYNSEM [ NON-LOCAL.SLASH  [ LIST < #hrest >,
+	     			LAST #hlast ] ],
+    HEAD-DTR [ SYNSEM [ NON-LOCAL [ SLASH [ LIST [ FIRST #bind,
+				      		   REST [ FIRST #hrest,
+				      			  REST #hlast ] ],
+				      	    LAST #hlast ] ] ] ],
+  NON-HEAD-DTR [ SYNSEM phr-synsem & 
+		[ LOCAL #bind,
+		  NON-LOCAL [ QUE 1-dlist ] ] ],
+  C-CONT.RELS <! !> ].
+    
+;given multi-extraction, this rule takes the second element in SLASH and binds it with a non-QUE element (topic)
+;The element that remains is bound by a regular que-head-filler-phrase
+slash-multi-head-filler-phrase := multi-head-filler-phrase & head-final &  no-hcons-ccont-rule & head-compositional &
+  [ SYNSEM [ NON-LOCAL.SLASH  [ LIST < #slash >,
+	     			LAST #hlast ] ],
+    HEAD-DTR [ SYNSEM [ NON-LOCAL [ SLASH [ LIST [ FIRST #slash,
+				      		   REST [ FIRST #bind,
+				      			  REST #hlast ] ],
+				      	    LAST #hlast ] ] ] ],
+    NON-HEAD-DTR [ SYNSEM phr-synsem & 
+			[ LOCAL #bind,
+			  NON-LOCAL [ QUE 0-dlist ] ] ],
+  C-CONT.RELS <! !> ].
+
+
+;--------------------------------------------------------------------------
+;                           EXTRACTION RULES - ADV
+;--------------------------------------------------------------------------
+;LHS 25/12: revived: changed to adjunct-phrase and post revolution era (deps). Restricted the modified head 
+;to be v_pron_head.
+basic-extracted-adjunct-phrase := head-mod-phrase & phrasal & basic-extracted-arg-phrase-lex-head-dtr.
+
+;LHS: adverb extraction ("ph hild akl lxm"); 
+;+ HOOK.LTOP #hand is reentrant of the modifier in slash position and the head-daughter (for a correct mrs);
+;+ Added COMPS < > on the head-dtr, to avoid spurious parses on non intransitive verbs ("aiph hild akl lxm")
+;+ Added C-CONT.RELS <! !>, in order to get an mrs with all the relations in "ph dnh nplh atmwl".
+extracted-adjunct-phrase := basic-extracted-adjunct-phrase &
+  [ SYNSEM [ LOCAL.CAT [ VAL [ DEP1 #dep1,
+			       DEP2 #dep2,
+			       DEP3 #dep3,
+			       DEP4 #dep4,
+			       DEP5 #dep5,
+			       DEP6 #dep6 ],
+		         POSTHEAD #ph,
+                         MC #mc ],
+	     NON-LOCAL.SLASH 1-dlist &
+		   <! [ CAT [ POSTHEAD +,
+                              HEAD [ MOD < [ LOCAL intersective-mod &
+                                                   [ CAT [ HEAD v_pron_head,
+                                                           VAL #val,
+                                                           POSTHEAD #ph,
+                                                           MC #mc ],
+                                                     CONT.HOOK #hook,
+                                                     CTXT #ctxt ] ] > ] ],
+			CONT.HOOK.LTOP #hand ] !> ],
+    HEAD-DTR [ SYNSEM 
+	   [ LOCAL local &
+		   [ CAT [ HEAD v_pron_head,
+                           VAL #val & [ DEP1 #dep1,
+					DEP2 #dep2,
+					DEP3 #dep3,
+					DEP4 #dep4,
+				        DEP5 #dep5,
+					DEP6 #dep6 ],
+			   POSTHEAD #ph,
+                           MC #mc ],
+                     CONT.HOOK #hook & [ LTOP #hand ],
+                     CTXT #ctxt ],
+             NON-LOCAL.SLASH 0-dlist,
+	     MODIFIED notmod ] ],
+    C-CONT [ HOOK #hook,
+			 HCONS <! !>,
+			 ICONS <! !>,
+			 RELS <! !> ] ].
+
+;LHS 30/12: Commented out because their other functions are no longer needed once adjunct extraction is done at the lexical level (barring
+;adverb extraction at the sentential level was done here); However, if we ever have trouble caused by the lack of the following restriction,
+;we can bring these sub-types back. It's probably irrelevant at the moment because we only have NP and PP subjects, both of which 
+;can't have extraction.
+extracted-adjunct-phrase-subj1 := extracted-adjunct-phrase &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ DEP1 [ DEP [ NON-LOCAL.SLASH 0-dlist ] ] ] ].
+extracted-adjunct-phrase-subj2 := extracted-adjunct-phrase  &
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ DEP2 [ DEP [ NON-LOCAL.SLASH 0-dlist ] ] ] ].

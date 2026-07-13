@@ -1,0 +1,95 @@
+;;; $Id: types-noun-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;;; Nouns
+;;; TAG: no need for OBJ-MARK and CASE because there is no accusative marker like 'at'
+
+
+ 
+;;; Agreement: Additional dual types for Arabic
+;;; TAG 190115: added 3non-sm-noun-lex for duals and plurals which look the same in non-nom CASE.
+;NM 25/1/15 - I moved agreement classifications to types-nominal-lex so that they will be shared by nouns and adjectives
+
+;3df-noun-lex := noun-lex & 
+;  [ SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png,
+;                   CONT.HOOK.INDEX.PNG #png & png-3df ] ].
+;				   
+;3non-sm-noun-lex := noun-lex & 
+;  [ SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png,
+;                   CONT.HOOK.INDEX.PNG #png & png-3non-sm ] ].
+;				   
+;3dm-noun-lex := noun-lex & 
+;  [ SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png,
+;                   CONT.HOOK.INDEX.PNG #png & png-3dm ] ].
+
+
+
+;NM 25/1/15 - I moved case classifications to types-nominal-lex so that they will be shared by nouns and adjectives
+;DIMENSION 1: Agreement (12+ types)
+
+;;; Special types for case-marked lexemes:
+
+;non-nominative-lex := noun-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ CASE non-nom ] ] ].
+;non-accusative-lex := noun-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ CASE non-acc ] ] ].
+;nominative-lex := non-accusative-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ CASE nom ] ] ].
+;accusative-lex := non-nominative-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ CASE acc ] ] ].
+;genetive-lex := non-nominative-lex & non-accusative-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ CASE gen ] ] ].
+
+;NM 25/1/15: I don't think that there's a need for an intermediate type
+;indef-cmn-acc-lex := indef-cmn-noun-lex & accusative-lex.
+;indef-cmn-non-acc-lex := indef-cmn-noun-lex & non-accusative-lex.  ;; wld can be nominative or genetive, but not accusative, because indefinite accusatives come with 'a'
+
+;==========================================
+; ==== CROSS-CLASSIFICATIONS (LEAVES) =====
+;==========================================
+;NM 25/1/15: changed 3sm-noun-lex to 3sm-nominal-lex (3sm and all the rest of the pngs)
+; Basically, the types are subtypes of noun types from types-noun-lex + case information
+
+;;; For indefinite singular and plural (non-dual) accusative common nouns:
+indef-cmn-acc-3sm-lex := indef-cmn-3sm-noun-lex  & accusative-lex.
+indef-cmn-acc-3pm-lex := indef-cmn-3pm-noun-lex  & accusative-lex.
+indef-cmn-acc-3sf-lex := indef-cmn-3sf-noun-lex  & accusative-lex.
+indef-cmn-acc-3pf-lex := indef-cmn-3pf-noun-lex  & accusative-lex.
+
+;;; For indefinite singular and plural (non-dual) non-accusative common nouns:
+indef-cmn-nonacc-3sm-lex := indef-cmn-3sm-noun-lex  & non-accusative-lex.
+indef-cmn-nonacc-3pm-lex := indef-cmn-3pm-noun-lex  & non-accusative-lex.
+indef-cmn-nonacc-3sf-lex := indef-cmn-3sf-noun-lex  & non-accusative-lex.
+indef-cmn-nonacc-3pf-lex := indef-cmn-3pf-noun-lex  & non-accusative-lex.
+
+;;; For sound (regular) plural male nouns: (only the case information is arabic-specific)
+def-cmn-nonnom-3pm-lex := def-cmn-3pm-noun-lex & non-nominative-lex. 
+def-cmn-nom-3pm-lex := def-cmn-3pm-noun-lex & nominative-lex.
+indef-cmn-nonnom-3pm-lex := indef-cmn-3pm-noun-lex & non-nominative-lex. 
+indef-cmn-nom-3pm-lex := indef-cmn-3pm-noun-lex & nominative-lex.
+
+;;; TAG 190115: added def-cmn-nonnom-3non-sm-lex and indef-cmn-nonnom-3non-sm-lex, 
+;; for 3m duals and plurals which look the same in non-nom CASE
+; NM 25/1/15: changed non-s to pd
+def-cmn-nonnom-3pdm-lex := def-cmn-noun-lex & 3pdm-nominal-lex & non-nominative-lex.
+indef-cmn-nonnom-3pdm-lex := indef-cmn-noun-lex & 3pdm-nominal-lex & non-nominative-lex.
+
+;;; TAG 190115: Adding acc and non-acc for proper nouns
+;;; For accusative proper nouns:
+3sm-proper-noun-acc-lex := 3sm-proper-noun-lex & accusative-lex.
+3sf-proper-noun-acc-lex := 3sf-proper-noun-lex & accusative-lex. 
+
+;;; For non-accusative proper nouns:
+3sm-proper-noun-nonacc-lex := 3sm-proper-noun-lex & non-accusative-lex. 
+3sf-proper-noun-nonacc-lex := 3sf-proper-noun-lex & non-accusative-lex. 
+
+;;; For dual nouns:
+def-cmn-3dm-noun-lex := def-cmn-noun-lex & 3dm-nominal-lex.
+indef-cmn-3dm-noun-lex := indef-cmn-noun-lex & 3dm-nominal-lex.
+def-cmn-3df-noun-lex := def-cmn-noun-lex & 3df-nominal-lex.
+indef-cmn-3df-noun-lex := indef-cmn-noun-lex & 3df-nominal-lex.
+
+def-cmn-nonnom-3dm-lex := def-cmn-3dm-noun-lex & non-nominative-lex. 
+def-cmn-nonnom-3df-lex := def-cmn-3df-noun-lex & non-nominative-lex.
+def-cmn-nom-3dm-lex := def-cmn-3dm-noun-lex & nominative-lex.
+def-cmn-nom-3df-lex := def-cmn-3df-noun-lex & nominative-lex.
+indef-cmn-nonnom-3dm-lex := indef-cmn-3dm-noun-lex & non-nominative-lex. 
+indef-cmn-nonnom-3df-lex := indef-cmn-3df-noun-lex & non-nominative-lex.
+indef-cmn-nom-3dm-lex := indef-cmn-3dm-noun-lex & nominative-lex.
+indef-cmn-nom-3df-lex := indef-cmn-3df-noun-lex & nominative-lex.
+
+

@@ -1,0 +1,44 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  rules.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  grammar rules
+;;;
+
+
+
+fin-verb-head-subj := fin-verb-head-subj-phrase.
+head-comp := head-comp-phrase.
+head-spec := head-spec-phrase.
+
+yes-no-q := yes-no-q-phrase.
+
+head-opt-comp := head-opt-comp-phrase.
+refl-opt-comp := refl-opt-comp-phrase.
+
+pronoun-covert-det := pronoun-covert-det-phrase.
+def-covert-det := common-def-covert-det-phrase.
+undef-covert-det := common-undef-covert-det-phrase.
+proper-covert-det := proper-covert-det-phrase.
+
+adj-head-int := la-adj-head-int-phrase.
+head-adj-int :=  la-head-adj-int-phrase.
+adj-head-scop := la-adj-head-scop-phrase.
+head-adj-scop := la-head-adj-scop-phrase.
+
+particle-mod := particle-mod-phrase.

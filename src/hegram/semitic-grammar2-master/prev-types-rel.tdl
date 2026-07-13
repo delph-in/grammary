@@ -1,0 +1,213 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+
+;LHS 29/1/15: A (relatively flat) hierarchy of rels to populate LKEYS.KEYREL.PRED.
+;Prepositions' rels appear in types-prep-lex.
+
+l-or-i-rel := predsort.
+
+;For idiomatic lexical items
+i-rel := l-or-i-rel.
+
+;For literal lexical items (most words)
+l-rel := l-or-i-rel.
+
+;===========================
+;========Literal============
+;===========================
+
+;=============================================================================
+;================================= NOUNS =====================================
+;=============================================================================
+_n_rel := l-rel.
+_belt_n_rel := _n_rel.
+_heart_n_rel := _n_rel.
+_dish_n_rel := _n_rel.
+_story_n_rel := _n_rel.
+_window_n_rel := _n_rel.
+_couch_n_rel := _n_rel.
+_secret_n_rel := _n_rel.
+_goal_n_rel := _n_rel.
+_dream_n_rel := _n_rel.
+_student_m_n_rel := _n_rel.
+_student_f_n_rel := _n_rel.
+_boy_n_rel := _n_rel.
+_girl_n_rel := _n_rel.
+_table_n_rel := _n_rel.
+_dog_f_n_rel := _n_rel.
+_dog_m_n_rel := _n_rel.
+_bread_n_rel := _n_rel.
+_cake_n_rel := _n_rel.
+_tree_n_rel := _n_rel.
+_I_pronoun_n_rel := _n_rel.
+_he_pronoun_n_rel := _n_rel.
+_jerusalem_n_rel := _n_rel.
+_danny_n_rel := _n_rel.
+_dana_n_rel := _n_rel.
+_head_n_rel := _n_rel.
+_sand_n_rel := _n_rel.
+_letter_n_rel := _n_rel.
+_box_n_rel := _n_rel.
+_organization_n_rel := _n_rel.
+_who_n_rel := _n_rel.
+_what_n_rel := _n_rel.
+
+; TAG 12/02/15: adding Arabic nouns:
+_mhmd_n_rel := _n_rel.
+_1broim_n_rel := _n_rel.
+_teacher_m_n_rel := _n_rel.
+_teacher_f_n_rel := _n_rel.
+_meat_n_rel := _n_rel.
+_house_n_rel := _n_rel.
+_yard_n_rel := _n_rel.
+_paper_n_rel := _n_rel.
+_book_n_rel := _n_rel.
+_exam_n_rel := _n_rel.
+_word_n_rel := _n_rel.
+_school_n_rel := _n_rel.
+_man_n_rel := _n_rel.
+_war_n_rel := _n_rel.
+
+;=============================================================================
+;================================= VERBS =====================================
+;=============================================================================
+_v_rel := l-rel.
+_see_v_rel := _v_rel.
+_find_v_rel := _v_rel.
+_upholster_v_rel := _v_rel.
+_upholster_passive_v_rel := _v_rel.
+_tidy_up_passive_v_rel := _v_rel.
+_break_unaccusative_v_rel := _v_rel.
+_feed_v_rel := _v_rel.
+_try_v_rel := _v_rel.
+_want_v_rel := _v_rel.
+_understand_v_rel := _v_rel.
+_reveal_v_rel := _v_rel.
+_love_v_rel := _v_rel.
+_succeed_v_rel := _v_rel.
+_decide_v_rel := _v_rel.
+_advertise_v_rel := _v_rel.
+_eat_v_rel := _v_rel.
+_use_v_rel := _v_rel.
+_break_v_rel := _v_rel.
+_fall_v_rel := _v_rel.
+_promise_v_rel := _v_rel.
+_give_v_rel := _v_rel.
+_seek_v_rel := _v_rel.
+_think_v_rel := _v_rel.
+_travel_v_rel := _v_rel.
+_put_v_rel := _v_rel.
+_buy_v_rel := _v_rel.
+_might_v_rel := _v_rel.
+_seem_v_rel := _v_rel.
+_leave_v_rel := _v_rel.
+_go_v_rel := _v_rel.
+_return_v_rel := _v_rel.
+_continue_v_rel := _v_rel.
+_request_v_rel := _v_rel.
+_choose_v_rel := _v_rel.
+_know_v_rel := _v_rel.
+_let_v_rel := _v_rel.
+_allow_v_rel := _v_rel.
+_persuade_v_rel := _v_rel.
+_say_v_rel := _v_rel.
+_make_v_rel := _v_rel.
+_walk_v_rel := _v_rel.
+_arrive_v_rel := _v_rel.
+_receive_v_rel := _v_rel.
+_repeat_v_rel := _v_rel.
+_rise_v_rel := _v_rel.
+_take_v_rel := _v_rel.
+_talk_v_rel := _v_rel.
+_enter_v_rel := _v_rel.
+_stand_v_rel := _v_rel.
+_discover_v_rel := _v_rel.
+_intend_v_rel := _v_rel.
+_tighten_v_rel := _v_rel.
+_descend_v_rel := _v_rel.
+_hide_v_rel := _v_rel.
+_cause_leave_v_rel := _v_rel.
+_what_v_rel := _v_rel.
+
+; TAG 10/3/15:
+_die_v_rel := _v_rel.
+_stop_v_rel := _v_rel.
+_appear_v_rel := _v_rel.
+_determine_v_rel := _v_rel.
+_do_v_rel := _v_rel.
+_advertise_passive_v_rel := _v_rel.
+_turn_upside-down_v_rel := _v_rel.
+_write_v_rel := _v_rel.
+_turn-into_v_rel := _v_rel.
+_hear_v_rel := _v_rel.
+_learn_v_rel := _v_rel.
+_work-on_rel := _v_rel.
+_do-for_v_rel := _v_rel.
+_send_v_rel := _v_rel.
+_elect_v_rel := _v_rel.
+_ask_v_rel := _v_rel.
+_cause_v_rel := _v_rel.
+_present_v_rel := _v_rel.
+_invite_v_rel := _v_rel.
+_to_v_rel := _v_rel.
+
+;=============================================================================
+;================================= ADJECTIVES ================================
+;=============================================================================
+_adj_rel := l-rel.
+_big_rel := _adj_rel.
+_pretty_rel := _adj_rel.
+_tasty_rel := _adj_rel.
+_pink_rel := _adj_rel.
+_financial_rel := _adj_rel.
+_free_rel := _adj_rel.
+_what_a_rel := _adj_rel.
+
+;=============================================================================
+;================================= ADVERBS ===================================
+;=============================================================================
+_adv_rel := l-rel.
+_here_rel := _adv_rel.
+_there_rel := _adv_rel.
+_yesterday_rel := _adv_rel.
+_thus_rel := _adv_rel.
+_where_rel := _adv_rel.
+_when_rel := _adv_rel.
+
+;=============================================================================
+;================================= FUNCTIONAL ================================
+;=============================================================================
+;Note: prepositions have a separate (language specific) hierarchy, see types-prep-lex.tdl.
+;Some other functional elements don't have semantics yet (at, e).
+_funct_rel := l-rel.
+_and_coord_rel := _funct_rel.
+_neg_rel := _funct_rel.
+_what_c_rel := _funct_rel.
+;LHS 29/1/15: temporarily used for ham:
+_aux_rel := _funct_rel.
+
+;===========================
+;========Idiomatic==========
+;===========================
+
+;=============================================================================
+;================================= NOUNS =====================================
+;=============================================================================
+_i_n_rel := i-rel.
+_i-belt-expenses_n_rel := _i_n_rel.
+_i-tree-idea_n_rel := _i_n_rel.
+;POSS Nurit 12/2/15
+_i-dishes-senses_n_rel := _i_n_rel.
+;LHS 15/02/15: MWE order constraints (V+NPpossessive+PP)
+_i-head-reality_n_rel := _i_n_rel.
+_i-sand-reality_n_rel := _i_n_rel.
+;=============================================================================
+;================================= VERBS =====================================
+;=============================================================================
+_i_v_rel := i-rel.
+_i-tighten-reduce_v_rel := _i_v_rel.
+_i-descend-backoff_v_rel := _i_v_rel.
+;POSS Nurit 12/2/15
+_i-leave-lose_v_rel := _i_v_rel.
+;LHS 15/02/15: MWE order constraints (V+NPpossessive+PP)
+_i-hide-ignore_v_rel := _i_v_rel.
+_i-cause_leave-lose_v_rel := _i_v_rel.

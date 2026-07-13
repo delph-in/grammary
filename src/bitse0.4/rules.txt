@@ -1,0 +1,56 @@
+
+head-opt-comp := head-opt-comp-phrase.
+refl-opt-comp := refl-opt-comp-phrase.
+fin-verb-head-subj := fin-verb-head-subj-phrase.
+;infin-verb-head-subj := infin-verb-head-subj-phrase.
+head-comp := head-comp-phrase.
+;head-comp-e-sem := head-empty-sem-comp-phrase.
+;head-verb-np-comp := head-verb-np-comp-phrase.
+;head-verb-vp-comp := head-verb-vp-comp-phrase.
+;head-verb-pp-comp := head-verb-pp-comp-phrase .
+;head-that-comp := head-that-comp-phrase.
+;head-embed-comp := head-embed-comp-phrase.
+;head-verb-part-comp := head-verb-part-comp-phrase.
+;head-prep-np-comp := head-prep-np-comp-phrase.
+;head-do-ques-comp := head-do-ques-comp-phrase.
+;head-do-sup-comp := head-do-sup-comp-phrase.
+;head-do-verb-comp := head-do-verb-comp-phrase.
+;noun-head-spec := noun-head-spec-phrase.
+head-spec := head-spec-phrase.
+
+yes-no-q := yes-no-q-phrase.
+
+
+;infin-intrans-vp := infin-intrans-verb-phrase.
+
+pronoun-covert-det := pronoun-covert-det-phrase.
+def-covert-det := common-def-covert-det-phrase.
+undef-covert-det := common-undef-covert-det-phrase.
+proper-covert-det := proper-covert-det-phrase.
+
+
+;;marked for the modifier to be inflected, might not work for everything...
+;;needed for adjective infl to work OK
+;;fix in a nicer way, and maybe for the other adjunct types too
+adj-head-int := adj-head-int-phrase &
+  [ LANG #lang,
+    HEAD-DTR [ INFLECTED +,
+	       LANG #lang ],
+    NON-HEAD-DTR.LANG #lang ].
+
+head-adj-int := head-adj-int-phrase &
+  [ LANG #lang,
+    HEAD-DTR.LANG #lang,
+    NON-HEAD-DTR.LANG #lang ].
+
+adj-head-scop := adj-head-scop-phrase &
+  [ LANG #lang,
+    HEAD-DTR.LANG #lang,
+    NON-HEAD-DTR.LANG #lang ].
+
+head-adj-scop := head-adj-scop-phrase &
+  [ LANG #lang,
+    HEAD-DTR.LANG #lang,
+    NON-HEAD-DTR.LANG #lang ].
+
+particle-mod := particle-mod-phrase.

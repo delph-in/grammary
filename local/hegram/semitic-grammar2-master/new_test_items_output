@@ -1,0 +1,395 @@
+1 dni akl 1 23
+2 dni akl lxm 1 40
+3 dni akl m hlxm 1 46
+4 dni hmeik at hsipwr 1 51
+5 dni hmeik b sipwr 1 55
+6 *dni akl hlxm 0 34
+7 *dni akl at lxm 0 34
+8 *dnh akl at hlxm 0 35
+9 htlmid hetme b ewlxn 1 37
+10 dni xzr yl hsipwr 1 55
+11 dni hmeik al irwelim 1 55
+12 dnh hxlivh yl hxlwm 1 45
+13 dnh hxlivh e dni iakl 1 84
+14 dnh hxlivh lprsm at hswd 1 84
+15 hild ebr at hkwrsh 1 33
+16 dni hnix at hlxm yl hewlxn 1 55
+17 dni hnix yl hewlxn at hlxm 1 53
+18 *dni hnix yl hewlxn at lxm 0 46
+19 dnh xebh e hild akl lxm 1 119
+20 dnh xebh e hild iakl lxm 1 119
+21 dnh xebh yl hklb 1 45
+22 *dni xeb yl hklb e dnh nplh 0 80
+23 dni amr at hswd 1 44
+24 dni amr at hswd l dnh 1 71
+25 dni amr at hswd yl hklb 1 71
+26 dni amr at hswd yl hklb l dnh 1 95
+27 hild lqx at hklb m dnh al hxlwn 1 93
+28 dni nsy l dnh 1 43
+29 dni hgiy m irwelim 1 49
+30 dni xzr m irwelim l dnh 1 83
+31 *dni nsy l at hildh 0 33
+32 *dni nsy l at ildh 0 32
+33 *dni nsy l at dnh 0 33
+34 dni hakil at dnh lxm 2 65
+35 dni hakil lxm at dnh 2 69
+36 dni ntn klb 1 43
+37 dni ntn l dnh klb 1 64
+38 dni ntn klb l dnh 1 71
+39 *dni ntn klb ildh 0 56
+40 *dni ntn l dnh 0 46
+41 dni rch lxm 1 46
+42 dni rch b lxm 1 48
+43 hild rch e dni iakl lxm 1 122
+44 dni rch lakwl lxm 1 84
+45 *dni rch hlxm 0 40
+46 *dni rch yl hlxm 0 42
+47 hild nish lakwl 1 57
+48 dni nish at hkwrsh 1 43
+49 *hild nish akl 0 36
+50 dni qnh klb m dnh 1 68
+51 dni qnh m dnh klb 1 57
+52 dni qnh l dnh klb 1 56
+53 dni hbvix l dnh lakwl lxm 1 114
+54 dni hbvix l dnh lnswt lakwl lxm 1 196
+55 *dni hbvix lipwl l dnh 0 49
+56 dni hbvix klb l dnh 1 68
+57 dni hbvix l dnh e hildh gdwlh 1 96
+58 *dni hbvix klb dnh 0 50
+59 hildh mreh l dni lakwl lxm 1 101
+60 dni mreh l dnh lnswt lakwl 1 138
+61 dni mnsh lhrewt l dnh lakwl lxm 1 186
+62 *hildh mreh lipwl l dni 0 44
+63 dni biqe e hild iakl 1 92
+64 dni biqe lprsm sipwr 1 92
+65 hild ekny at hildh lxpe at hklb 1 95
+66 *hild ekny liswy l dni at hildh 0 68
+67 *hild ekny liswy l dni hildh 0 69
+68 dnh rath klb 1 41
+69 ildh rath e dni gilh at hswd 1 96
+70 hild mca e dnh nisth lprsm at hswd 1 208
+71 dnh ahbh at dni 1 43
+72 at hlxm dni akl 1 39
+73 lxm dni akl 1 35
+74 at hlxm dni ntn l ildh 1 63
+75 at hlxm dni xeb e hild akl 1 101
+76 lxm dni hnix yl hewlxn 1 47
+77 at dnh dni hakil lxm 2 59
+78 at hildh hild ekny liswy l dni 1 72
+79 lxm hild hbvix l ildh lakwl 1 98
+80 lxm dnh hbvixh l dni e hild irch 1 126
+81 lxm dni mglh e dnh aklh 1 93
+82 *gdwl dni akl 0 32
+83 *hlxm dni akl 0 34
+84 *hlxm dni xeb e hild akl 0 96
+85 *gdwl dni xeb e hild akl 0 93
+86 *at hildh hild ekny 0 29
+87 *lxm hild hbvix lakwl l ildh 0 66
+88 e dnh nplh dni xeb 1 56
+89 e dni iakl lxm hild hbin 1 98
+90 e hild irch lxm dni hbvix l dnh 1 126
+91 *gdwl dni xeb 0 32
+92 lakwl dni nish 1 44
+93 lakwl dni xeb e hild rch 1 101
+94 lxewb e dni gdwl hild hreh l dnh 1 102
+95 *gdwl dni nish 0 34
+96 b lxm dni rch 1 48
+97 yl hewlxn dni hnix at hlxm 1 52
+98 l dnh dni ntn lxm 1 64
+99 yl dnh dni xeb 1 44
+100 m dnh hild qnh klb 1 63
+101 l dnh hild hbvix lipwl 1 54
+102 l ildh dni hreh lxewb e dni gdwl 1 105
+103 yl hklb dni amr at hswd l dnh 1 93
+104 *gdwl dni nsy 0 27
+105 *dnh dni nsy l 0 32
+106 *ildh dni nsy l 0 32
+107 hild hgdwl npl 1 27
+108 hild akl lxm gdwl 1 65
+109 hild ntn l ildh lxm gdwl 1 90
+110 hild ntn l ildh gdwlh lxm 1 95
+111 *hild gdwl npl 0 25
+112 *hildh hgdwl nplh 0 19
+113 *ild gdwlh npl 0 23
+114 hild akl mh 1 68
+115 dni lqx mh 1 68
+116 dni rch at mi 1 44
+117 dni nish mh 2 79
+118 dni xeb mh 1 68
+119 dni dibr yl mh 2 93
+120 dni nsy l mi 1 43
+121 dni ntn mh l mi 1 95
+122 dni hakil mh at dnh 2 93
+123 dni hnix yl hklb mh 1 93
+124 dni qnh mh 1 68
+125 dni qnh klb m mi 1 68
+126 dni gilh mh 2 69
+127 hxlwm hih mh 5 102
+128 hlxm hwa yl mh 2 94
+129 dni hih aiph 1 64
+130 hklb hwa aiph 1 64
+131 *dni rch mi 0 34
+132 *hild akl mh gdwl 0 78
+133 *dni mh lxm 0 76
+134 *dni mh l ildh 0 78
+135 *dni mh ylidi ildh 0 78
+136 *dni hreh lipwl l mi 0 44
+137 *dni hreh mh l dnh 0 74
+138 *dni ekny mh at dnh 0 73
+139 *dni ekny lipwl at mi 0 40
+140 mh dni hnix yl hewlxn 1 83
+141 at mh hild ntn l dnh 1 102
+142 mh dni xeb e hildh aklh 1 135
+143 at mi dni hakil lxm 2 58
+144 mh hild akl 1 71
+145 at mh hild akl 1 76
+146 mh hild rch 3 76
+147 at mi dni ekny lakwl 1 49
+148 at mh dni hbvix l dnh 1 103
+149 mh dni gilh 2 67
+150 *mh dni hakil dnh 0 72
+151 *lxm mh dni akl 0 92
+152 *mh lxm dni akl 0 82
+153 *mi dni akl 0 33
+154 *mi dni gilh 0 28
+155 mh dni nish 2 74
+156 mh dni hbvix l dnh 3 98
+157 mh dni hreh l dnh 1 83
+158 mh dni ekny at dnh 1 79
+159 mh hild xeb e dnh nisth 2 138
+160 mh dni biqe m dnh lnswt 2 158
+161 *mh mh dni nish 0 125
+162 mh dni hbin 2 72
+163 *mh mh dni prsm 0 123
+164 *mh dni hxliv e 0 75
+165 *e mh dni hclix 0 127
+166 l mi dni ntn lxm 1 63
+167 m mi dni qnh lxm 1 62
+168 yl mh dni hnix lxm 2 94
+169 b mh dni hclix 2 85
+170 l mh dni nkns 2 87
+171 l mi dni hbvix lipwl 1 53
+172 l mi dni hreh lipwl 1 48
+173 ylidi mi hkwrsh rwpdh 1 40
+174 *mi dni nsy l 0 31
+175 hild yewi lakwl lxm 1 60
+176 hild yewi lakwl lxm ph 1 97
+177 dni yewi mh 1 58
+178 mh dni yewi 0 59
+179 lprsm at hswd dni yewi 0 53
+180 mi yewi lakwl 1 35
+181 *hildh yewi lipwl 1 30
+182 dni mca at dnh mh 4 143
+183 dni mca at dnh yl mh 2 129
+184 dni mca at dnh mi 1 77
+185 dni rah at dnh mh 1 109
+186 dni rah at mi nwpl 1 65
+187 dni mca at mh gdwl 1 108
+188 dni ica mh 4 121
+189 dni nrah mh 3 78
+190 dni nrah aiph 1 46
+191 mh dni mca at dnh 4 114
+192 gdwlh dni mca at dnh 1 70
+193 awklt lxm dni mca at dnh 1 90
+194 yl mh dni mca at dnh 2 131
+195 yl hewlxn dni mca at dnh 1 83
+196 mi dni mca at dnh 1 72
+197 tlmidh dni mca at dnh 1 74
+198 mh dni rah at dnh 1 95
+199 nwplt dni rah at dnh 1 53
+200 at mi dni rah nwpl 1 48
+201 ild dni rah nwpl 1 45
+202 at mh dni mca gdwl 1 93
+203 at hsipwr dni yeh gdwl 1 42
+204 mh dni ica 4 88
+205 gdwl dni ica 1 47
+206 tlmid dni ica 1 49
+207 mh dni nrah 3 71
+208 gdwl dni nrah 1 31
+209 tlmid dni nrah 1 33
+210 aiph dni nrah 1 31
+211 ph dni nrah 1 31
+212 *mi dni rah nwpl 0 42
+213 mi akl lxm 1 36
+214 mi npl 1 16
+215 mi xeb e dni npl 1 60
+216 mi nish ltt l ild klb 1 141
+217 mi gilh at hswd 1 33
+218 mi ica gdwl 1 47
+219 mi nrah gdwl 1 31
+220 mi mca at dnh tlmidh 1 69
+221 hmvrh hith ltt l dni klb 1 163
+222 hmvrh hith lipwl 1 50
+223 hxlwm hih e dni isy l irwelim 1 117
+224 hild hih tlmid 2 52
+225 hild hih htlmid 2 52
+226 hlxm hih yl hewlxn 1 52
+227 hild hih gdwl 1 44
+228 hild hih ph 1 64
+229 *hild hih gdwlh 0 42
+230 *hmvrh hih ltt l dni klb 0 140
+231 *hild hih at htlmid 0 42
+232 hmvrh hia ltt l ildh klb 1 163
+233 hxlwm hwa e dni isy l irwelim 1 117
+234 hildh hia tlmidh 2 52
+235 hildh hia htlmidh 2 52
+236 dni hwa yl hewlxn 1 52
+237 dnh hia gdwlh 1 44
+238 dnh hith ph 1 64
+239 *dnh hia gdwl 0 42
+240 *hmvrh hwa ltt l ildh klb 0 140
+241 *hild hwa at tlmid 0 41
+242 lipwl hmvrh hith 1 43
+243 ltt l ildh klb hmvrh hia 1 118
+244 e dni isy l irwelim hxlwm hih 1 104
+245 tlmidh hildh hia 1 42
+246 htlmidh hildh hith 1 42
+247 yl hewlxn dni hwa 1 52
+248 ph dni hwa 1 40
+249 gdwl hxlwm hih 1 40
+250 ph hildh hia 1 40
+251 *gdwlh hxlwm hwa 0 38
+252 *at htlmidh hildh hith 0 46
+253 yl mh hlxm hwa 2 99
+254 mh hmvrh hith 5 82
+255 aiph dnh hia 1 40
+256 dni gdwl 1 18
+257 dni ph 1 25
+258 hmvrh ltt l ildh klb 1 107
+259 hxlwm e dni isy l irwelim 1 81
+260 hildh tlmidh 1 19
+261 dni yl hewlxn 1 26
+262 dni xeb e hild gdwl 1 67
+263 dni xeb e hmvrh lakwl lxm 1 141
+264 *dni e dnh 0 23
+265 *dni xeb e gdwl 0 40
+266 *dni xeb e mh 0 115
+267 *gdwl 0 8
+268 dni mh 6 60
+269 dni aiph 1 25
+270 aiph dni 0 17
+271 dni xeb e mi htlmid 1 67
+272 mh dni 2 55
+273 mi hild 1 18
+274 mh dni xweb e hild 2 90
+275 yl hewlxn dni 0 28
+276 tlmidh hildh 1 19
+277 e dni isy l irwelim hxlwm 0 79
+278 lakwl lxm hmvrh 0 46
+279 gdwl dni 0 17
+280 ph dni 0 17
+281 *hild ntn lxm b dnh 0 61
+282 *b dnh hild qibl 0 36
+283 *hildh xebh m dni 0 40
+284 *m dni hildh ylh 0 44
+285 *hild ntn lxm m mi 0 62
+286 *m mi hild ntn lxm 0 63
+287 *dni hetme yl klb 0 31
+288 *dni nsy yl dnh 0 34
+289 dni npl ph 2 35
+290 dni akl lxm atmwl 1 63
+291 dni akl ph lxm atmwl 1 86
+292 dni ntn l dnh klb atmwl 1 89
+293 dni ntn atmwl l dnh klb 1 83
+294 dni ntn l dnh atmwl klb 1 93
+295 dni xeb e hildh nsyh l irwelim atmwl 2 185
+296 hxlwn nebr ph 2 35
+297 hkwrsh rwpdh ph 2 41
+298 hkwrsh rwpdh ph ylidi dni 1 63
+299 hkwrsh rwpdh ylidi dni ph 1 70
+300 dni hbin e hkwrsh rwpdh ph 3 150
+301 dni gilh e hkwrsh rwpdh ylidi dni ph 2 169
+302 dni prsm e hkwrsh rwpdh ph ylidi dni 1 189
+303 dni xeb e hxlwn nebr ph 3 127
+304 hkwrsh rwpdh ylidi dni 1 42
+305 hkwrsh rwpdh 1 20
+306 klb gdwl rwpd ylidi dnh 1 58
+307 mh rwpd 2 50
+308 mh rwpd ylidi dni 2 72
+309 *at hkwrsh rwpdh ylidi dni 0 46
+310 *hkwrsh rwpdh ylidi at dni 0 35
+311 *hkwrsh rwpd 0 17
+312 xlwn gdwl nebr 1 33
+313 hxlwn nebr 1 17
+314 dni hbin e hkwrsh rwpdh 1 75
+315 dni prsm e hkwrsh rwpdh ylidi dni 1 114
+316 dni gilh e hxlwn nebr 1 61
+317 mh nebr 2 48
+318 *hxlwn nebrh 0 15
+319 *at mh nebr 0 52
+320 dnh nrath gdwlh 1 35
+321 hxlwm nrah mvrh 1 35
+322 *dnh nrath gdwl 0 33
+323 dni rah at dnh awklt m hlxm 1 113
+324 dnh mcah at dni metme b xlwn 1 108
+325 hild mca at hxlwm mvrh 1 78
+326 hild mca at hxlwm gdwl 1 77
+327 hild mca at hklb ph 2 107
+328 hild mca at dnh yl hewlxn 1 85
+329 dni yeh at dnh tlmidh 1 52
+330 dni yeh at dnh gdwlh 1 51
+331 *hild mca at hxlwm gdwlh  0 69
+332 *dnh mcah at dni hetme b xlwn 0 90
+333 *dni yeh at hild lhetme b xlwn 0 73
+334 dni ica gdwl 1 57
+335 hxlwm ica mvrh 1 57
+336 hxlwm ica hmvrh 1 57
+337 dni ica ph 2 75
+338 htlmid ica yl hewlxn 1 65
+339 *dnh ica ph 0 58
+340 *hxlwm ica at hmvrh 0 49
+341 dni hlk m ph l irwelim 1 76
+342 ph dni npl 1 27
+343 ph dni akl lxm 1 51
+344 ph dni nebr 1 27
+345 ph hkwrsh rwpdh 1 30
+346 ph hkwrsh rwpdh ylidi dni 1 53
+347 ph dni hbin e hkwrsh rwpdh 2 87
+348 ph dni gilh e hkwrsh rwpdh ylidi hild 2 122
+349 ph dni prsm e hxlwn nebr 2 78
+350 ph dni xeb e hildh nplh 2 78
+351 mti dni hbin e hild xzr m irwelim 2 169
+352 aiph dni akl m hlxm 1 57
+353 mti dnh nplh ph 1 46
+354 dni qibl klb aiph 1 62
+355 ph hild gdwl 1 28
+356 aiph hild gdwl 1 28
+357 aiph hild hbvix l dnh klb 1 76
+358 mti hild amr l dnh at hswd yl dni 1 101
+359 mti hild hgiy m irwelim 1 60
+360 atmwl hild hih ph 2 76
+361 aiph dni mca at dnh awklt m hlxm 2 144
+362 lxm akl dni 1 35
+363 l dnh nsy dni m irwelim 1 58
+364 m dnh qibl dni klb 1 49
+365 ltt l ild klb biqe dni m dnh 1 150
+366 awklt rah dni at dnh 1 53
+367 atmwl lqx dni at dnh l irwelim 1 65
+368 mti hih dni gdwl 1 56
+369 aiph mca dni at dnh awklt m hlxm 1 107
+370 atmwl hbin dni e hild xzr 1 100
+371 dni hbin e mti xzr hild 1 86
+372 mti hbin dni e atmwl xzr hild 1 90
+373 *mti dni hbin e xzr hild 0 76
+374 *atmwl hbin dni e xzr hild 0 72
+375 *mti lxm akl dni 0 45
+376 *akl dni lxm 0 34
+377 *dni nsy l hildh 1 43
+378 *hild rch e dni akl lxm 1 122
+379 *dni nsy l mh 2 88
+380 *at mh dni hakil lxm 2 98
+381 *l mh dni nsy 2 82
+382 *mh akl 2 52
+383 *mi xeb e mh dnh aklh 1 195
+384 *hildh hia tlmid 1 44
+385 *hild hih tlmidh 1 44
+386 *dni hih ylidi dni 1 52
+387 mi at hlxm akl 0 35
+388 at hlxm mi akl 0 34
+389 mi xeb e at hlxm dnh aklh 1 72
+
+;;; Total CPU time: 77440 msecs
+
+;;; Mean edges: 68.00
+
+;;; Mean parses: 0.97

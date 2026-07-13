@@ -1,0 +1,48 @@
+BiTSE 0.4
+
+BiTSE 0.4 is the first BiTSe version that is released publicly.
+
+This bundle contains the Bilingual grammar for Translation between
+Swedish and English, BiTSE. The grammar is intended to be used with
+systems that can run TDL-style grammars, such as the LKB (Copestake
+2001), and can be used for parsing and generation.
+
+For documentation see: 
+
+ http://www.ida.liu.se/~sarst/bitse
+
+The grammar is released under the LGPLLR, a version of the LGPL adapted to
+linguistic resources. See LICENSE for details.
+
+BiTSE is based on the LinGO Grammar Matrix (Matrix0.8). A copyright
+notice for the Matrix can be found in matrix-licence.txt.
+
+
+
+Architecture
+
+BiTSE follows the standard LKB/Matrix (Matrix0.8) grammar set up as
+concerns major file types; however, note that
+
+- Type and lexicon files are to a large extent split between specific
+for either Swedish or English, and shared between the languages.
+
+- The rule files are not split between languages in the current (0.4)
+version.
+
+
+Test sentences
+
+Test sentences and their parses can be found in the test/ catalogue.
+Test files have the extension "txt"
+The parsed versions have the extension "out"
+
+
+Running BiTSE with LKB
+The lkb catalogue contains configuration files et.c. for LKB.
+
+To run BiTSE in LKB: start LKB and load the grammar via the
+script file in the lkb catalogue.
+
+BiTSE always runs with both Swedish and English loaded.
+

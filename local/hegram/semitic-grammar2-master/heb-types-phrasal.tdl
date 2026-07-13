@@ -1,0 +1,235 @@
+;;; $Id: types-phrasal.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;; HEBREW ;;;
+
+;===============================================
+; =============== PHRASAL TYPES=================
+;===============================================
+
+; TAG 29/1/15: moved the canon-basic-head-subj-phrase and its daughters to heb-types-phrasal from types-phrasal										  
+; TAG 29/1/15: moved the phr-synsem specification of the HEAD-DTR from the basic-head-subj-phrase to allow V NP rather than VP NP (for VS order) in Arabic.	
+;              The phrase now inherits from cncrd-agr-phrase, because full agreement is found only in Hebrew canon order. 
+canon-basic-head-subj-phrase := basic-head-subj-phrase & cncrd-agr-phrase &
+  [ SYNSEM phr-synsem & 
+        [ LOCAL.CAT [ MC +,
+		      VAL [ R-FRAME #link ] ] ],
+	HEAD-DTR [ SYNSEM phr-synsem & [ LOCAL [ CAT.VAL [ R-FRAME #link,
+                                               		   DEP3.REAL #link,
+                                               		   DEP4.REAL #link,
+                                               		   DEP5.REAL #link,
+                                               		   DEP6.REAL #link ] ] ] ] ].
+
+;SUBJ-ARG: supertype for head-subj phrases whose syntactic subject is arg1 (added SUBJ-ARG arg1).
+;No longer includes CNCRD between subject (arg1) and the verb (it's in types-deps-lxm)
+;Nurit 26/10
+;;; RAISING VERBS ;;;; distinguish between regular subjects and raised subjects, which shouldn't be linked to an ARG1
+;;; the difference is in the S-FRAME of the head daughter. If it's unifiable with arg1+ then basic-head-subj1-phrase applies, 
+;;; if arg1- then raising-head-subj1-phrase applies
+canon-basic-head-subj1-phrase := canon-basic-head-subj-phrase &
+[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+                         DEP1 [ REAL #link & arg1+ ],
+                         DEP2 #dep2 ],
+	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+					    S-FRAME arg1+,
+                                    SUBJ-ARG arg1,
+                                    DEP1 [ DEP #synsem,
+					   REAL arg1- ] ,
+                                    DEP2 #dep2 & [ REAL #link ] ] ],
+                          CONT.HOOK [ TOPREL.ARG1 #ind1 ] ],
+	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind1 ] ] ] ].
+
+;NM 3/9/15: subj1-subj2 fix: the subject of a raising verb is always arg1
+; (but it's not a semantic argument of the raising verb. 
+; The value of DEP1 of the raising verb is structure-shared with the  SUBJ-DEP 
+; of the embedded verb, so it has the index of the VP's subject (arg1 or arg2), 
+; which is co-indexed with the index of the non-head-daughter
+;canon-raising-head-subj1-phrase := canon-basic-head-subj-phrase &
+;[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+;			 DEP1 [ REAL #link & arg1+ ],
+;                         DEP2 #dep2 ],
+;	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+;		                            S-FRAME arg1-,	
+;		                            SUBJ-ARG arg1,
+;		                            DEP1 [ DEP #synsem,
+;						   REAL arg1- ] ,
+;		                            DEP2 #dep2 & [ REAL #link ] ] ] ],
+;	NON-HEAD-DTR.SYNSEM #synsem ].
+
+canon-raising-head-subj1-phrase := canon-basic-head-subj-phrase &
+[ SYNSEM.LOCAL.CAT.VAL [	R-FRAME #link,
+			             	DEP1 [ REAL #link & arg1+ ],
+                         			DEP2 #dep2 ],
+	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [   R-FRAME #link,
+		                                  S-FRAME arg1-,	
+		                                  SUBJ-ARG arg1,
+		                                  DEP1 [  DEP #synsem & [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ],
+						                          REAL arg1- ] ,
+		                                  DEP2 #dep2 & [ REAL #link ] ] ] ],
+	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL.CONT.HOOK.INDEX ref-ind & #ind ] ].
+
+
+;SUBJ-ARG: added new supertype for head-subj phrases whose syntactic subject is arg2, and changed elements accordingly.
+;No longer includes CNCRD between subject (arg2) and the verb (it's in types-deps-lxm)
+;Note: There's structure sharing of the non-head daughter's local.cont.hook.index with that of the head daughter's local.cont.hook.toprel.arg2 (as opposed to arg1 in basic-head-subj1-phrase).
+canon-basic-head-subj2-phrase := canon-basic-head-subj-phrase &
+[ SYNSEM.LOCAL.CAT.VAL [ R-FRAME #link,
+                         DEP2 [ REAL #link & arg2+ ],
+                         DEP1 #dep1 ],
+	HEAD-DTR.SYNSEM.LOCAL [ CAT [ VAL [ R-FRAME #link,
+                                    SUBJ-ARG arg2,
+                                    DEP2 [ DEP #synsem,
+					   REAL arg2- ] ,
+                                    DEP1 #dep1 & [ REAL #link ] ] ],
+                          CONT.HOOK [ TOPREL.ARG2 #ind2 ] ],
+	NON-HEAD-DTR.SYNSEM #synsem & [ LOCAL [ CONT.HOOK [ INDEX ref-ind & #ind2 ] ] ] ].
+										
+; TAG 29/1/15: moved to heb-types-phrasal with all the rules that inherit from canon-basic-head-subj-phrase
+;Nurit 26/10
+;;; RAISING VERBS ;;;;
+raising-subj1-head-phrase := canon-raising-head-subj1-phrase & head-final.										
+
+; TAG 29/1/15: moved to heb-types-phrasal with all the rules that inherit from canon-basic-head-subj-phrase
+subj1-head-phrase := canon-basic-head-subj1-phrase & head-final.
+subj2-head-phrase := canon-basic-head-subj2-phrase & head-final.
+
+; TAG 29/1/15: moved the MC structure-sharing to the Hebrew version of the rule. 
+; the non-canon rule inherits from cncrd-agr-phrase for full subj-verb agreement in V2 in Hebrew. 
+; TAG 27/1/15: moved the constraint that the verb must be extracted to heb-types-phrasal
+VS-basic-head-subj-phrase :+  cncrd-agr-phrase & [  SYNSEM.LOCAL.CAT.MC #mc, 
+                                        HEAD-DTR basic-extracted-arg-phrase-lex-head-dtr & [ SYNSEM.LOCAL.CAT.MC #mc ] ].
+
+
+; TAG 28/1/15: The hebrew version only adds the OBJ-MARK specification 
+;TAG 11/01/15: moved to heb-types-phrasal because Arabic does not have OBJ-MARK 
+v-head-np-comp4-phrase :+ [ NON-HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD.CASE non-acc , 
+                                                              OBJ-MARK - ] ] ]. 
+			  
+															  
+					  
+
+;=============== DEP2 RULES ====================
+;--------------- NP in DEP2 --------------------
+ ;Specific for v+np
+; TAG 28/1/15: the general rule is in types-phrasal, the Hebrew version only adds the OBJ-MARK + specification. 
+; TAG: 12/01/15: Moved to heb-types-phrasal since arabic does not have OBJ-MARK
+v-head-np-comp2-phrase :+ [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK + ]. 
+
+;Raising
+; TAG 28/1/15: the general rule is in types-phrasal, the Hebrew version only adds the OBJ-MARK + specification. 
+; TAG: 12/01/15: Moved to heb-types-phrasal since arabic does not have OBJ-MARK
+raising-head-np-comp2-phrase :+ [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK + ]. 
+
+; TAG 211015: In Hebrew the head of the comp2 VP must be infinitive:
+head-vp-comp2-phrase :+
+   [ NON-HEAD-DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE infinitive ]. 
+
+;=============== DEP3 RULES ====================
+; TAG 28/1/15: the OBJ-MARK specification is added to the rule here
+; TAG 12/11/15: moved because arabic does not have OBJ-MARK
+; Nurit 9/6: OBJ-MARK + is enough to get only ACC
+; LHS 0210: returning ACC to the equation
+; LHS 1812: added the S-FRAME constraint to distinguish from raising 
+head-np-comp3-phrase :+
+    [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK + ]. 
+                             
+;Raising
+raising-head-np-comp3-phrase :+ 
+    [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK + ].
+
+					  
+;~~~~~~~~~~~~~~~~~~~ DEP4 RULES ~~~~~~~~~~~~~~~~~~~~~~~~~~~` 
+; TAG 29/9/16: moved the non-acc specification back to the core grammar, as it is needed for Arabic
+; TAG 28/1/15: the general rule in types-phrasal does not include the OBJ-MARK specification, which is added to the Hebrew version here.
+;TAG 11/01/15: moved to heb-types-phrasal because Arabic does not have OBJ-MARK 
+np-zero-copula-phrase :+ [  ARGS.FIRST.SYNSEM.LOCAL [ CAT [ OBJ-MARK - ] ] ]. 
+
+;~~~~~~~~~~~~~~~~~~~ DEP6 RULES ~~~~~~~~~~~~~~~~~~~~~~~~~~~` 
+; TAG 290916: the general head-comp6-phrase includes np-pp disjunction, the Hebrew version adds the pp rectriction
+head-comp6-phrase :+ 
+   [ NON-HEAD-DTR.SYNSEM.LOCAL.CAT.HEAD adp ].
+															
+
+; TAG 28/1/15: the OBJ-MARK specification is added to the rule. 					 
+; TAG 12/01/15: moved because arabic does not have OBJ-MARK
+;LHS - changed the PRED to reflect indefiniteness (OBJ-MARK added to mimic indefinite common nouns)
+indef-np-phrase :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK bool ].
+
+; TAG 28/1/15: the general rule in types-phrasal does not include the OBJ-MARK specification, which is added to the Hebrew version here.  
+;LHS - added this type with a PRED that will reflect definiteness (OBJ-MARK and CASE added to mimic definite common nouns)
+def-np-phrase :+ 
+   [ HEAD-DTR.SYNSEM.LOCAL [ CAT [ HEAD [ CASE non-acc ],  
+                                   OBJ-MARK - ] ] ].         							
+	
+; TAG 28/1/15: the general rule does not include OBJ-MARK, and the Hebrew version here adds it.	
+;TAG 12/01/15: moved because arabic does not have OBJ-MARK	
+; SSH 2012-03-03 ICONS
+; SSH 2013-02-19 deleting ICONS ?
+; Nurit 9/6 - copy OBJ-MARK from daughter to mother (used to be a HEAD feature)
+; 0710 LTOP of the phrase is structure shared with the LTOP of the daughter (instead of the LTOP of the quant relation)
+; 11/11 Replaced SPR requirements with the requirement that the head-daughter's R-FRAME is arg0, but the mother's is no-arg.
+; Accordingly, all phrasal rules that used to refer to empty SPRs now refer to R-FRAME no-arg.
+basic-bare-np-phrase :+ 
+   [ SYNSEM.LOCAL.CAT.OBJ-MARK #mark, 
+     HEAD-DTR.SYNSEM.LOCAL.CAT.OBJ-MARK #mark ].
+;POSS LHS 10/02/15: possessive nouns should percolate OBJ-MARK as well.
+poss-bare-np-phrase :+
+   [ SYNSEM.LOCAL.CAT.OBJ-MARK #mark, 
+     HEAD-DTR.SYNSEM.LOCAL.CAT [ HEAD.CASE non-acc,
+				 OBJ-MARK #mark & - ] ].
+	
+; TAG 11/01/15: moved from types.phrasal because it is irrelevant for arabic:
+;NM: The phrase rule for attaching AT to a noun - it copies everything from the noun daughter to the mother except CASE (changes to ACC) 
+; and OBJ-MARK (changes to +, so that the rule won't be applied recursively)
+;Nurit 9/6 - moved OBJ-MARK to CAT
+acc-marking-phrase := phrase &
+ [ KEY-ARG #ka,
+   SYNSEM phr-synsem & [ LKEYS #lkeys,
+	    OPT #opt,
+	    OPT-CS #ocs,
+	    LOCAL [CAT [ HEAD [ DEF #def,
+				KEYS #keys,
+				CNCRD #cncrd,
+				CASE acc,
+				CLT #clt ],
+			 OBJ-MARK +,
+			 VAL #val,
+			 MC #mc,
+			 MKG #mkg,
+			 HC-LIGHT #hl,
+			 POSTHEAD #ph
+			],
+		   CONT #cont,
+		   AGR #agr,
+		   COORD #coord,
+		   COORD-REL #cr,
+		   COORD-STRAT #cs ],
+	    NON-LOCAL #nloc,
+	    MODIFIED #mod ],
+   INFLECTED #inf,
+   C-CONT #cc,
+   ARGS < acc-marking-lex & [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP #noun ], sign & [ KEY-ARG #ka,
+									      SYNSEM #noun &
+										[ LKEYS #lkeys,
+										  OPT #opt,
+										    OPT-CS #ocs,
+										    LOCAL [CAT [ HEAD [ DEF #def,
+													KEYS #keys,
+													CNCRD #cncrd,
+													CLT #clt ],
+												 VAL #val & [ R-FRAME no-arg ],
+												 MC #mc,
+												 MKG #mkg,
+												 HC-LIGHT #hl,
+												 POSTHEAD #ph
+												],
+											   CONT #cont,
+											   AGR #agr,
+											   COORD #coord,
+											   COORD-REL #cr,
+											   COORD-STRAT #cs ],
+										    NON-LOCAL #nloc,
+										    MODIFIED #mod ],
+									      INFLECTED #inf,
+									      C-CONT #cc  ] > 
+ ].

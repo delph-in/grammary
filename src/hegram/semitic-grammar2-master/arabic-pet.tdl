@@ -1,0 +1,81 @@
+;;; -*- Mode: TDL; Package: DISCO -*-
+;;;
+;;; $Id: pet.tdl,v 1.2 2008-05-23 01:44:21 sfd Exp $
+;;;
+
+:begin :type.
+
+;;
+;; type hierarchy
+;;
+
+:include "types-head".
+:include "matrix".
+:include "arabic".
+:include "general".
+:include "lexical-rules".
+:include "types-lexical".
+:include "types-link".
+:include "types-deps-lxm".
+:include "types-png".
+:include "ara-types-png".
+:include "types-nominal-lex".
+:include "types-noun-lex".
+:include "ara-types-noun-lex".
+:include "types-rel".
+:include "types-adj-lex".
+:include "ara-types-adj-lex".
+:include "types-adv-lex".
+:include "types-verb-lex".
+:include "types-prep-lex".
+:include "types-phrasal".
+:include "ara-types-phrasal".
+:include "types-extraction".
+:include "ara-types-extraction".
+:include "types-coordination".
+:include "mtr".
+
+;; DPF 11-may-2025 - Added to get Arabic grammar to compile
+:include "ara-types-rel".
+:include "ara-types-verb-lex".
+:include "ara-types-prep-lex".
+:include "ara-types-deps-lxm.tdl".
+:end :type.
+
+;;
+;; lexicon entries (instances of status lex-entry or generic-lex-entry)
+;;
+
+:begin :instance :status lex-entry.
+:include "ara-lexicon".
+:end :instance.
+
+;;
+;; grammar rules and lexical rules (instances of status rule)
+;;
+
+:begin :instance :status rule.
+:include "rules".
+:include "ara-rules".
+:end :instance.
+
+:begin :instance :status lex-rule.
+:include "lrules".
+:include "irules".
+:end :instance.
+
+;;
+;; parse-tree labels (instances)
+;;
+
+:begin :instance.
+:include "labels".
+:end :instance.
+
+;;
+;; start symbols of the grammar (instances)
+;;
+
+:begin :instance.
+:include "roots".
+:end :instance.

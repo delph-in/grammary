@@ -1,0 +1,429 @@
+;;; $Id: types-dep-lxm.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;NURIT - QEQ all verbs will be no-hcons and the qeq will be introduced in the phrase definitions
+;LHS + NM: making this hierarchy category neutral
+top-deps-lxm := norm-sem-lex-item & non-mod-lex-item & no-hcons-lex-item &
+	[ SYNSEM.LOCAL.CAT.VAL [ DEP1.REAL arg1-,
+				 DEP2.REAL arg2-,
+				 DEP3.REAL arg3-,
+				 DEP4.REAL arg4- ] ].
+
+
+;;;no-arg
+no-arg-top := top-deps-lxm &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME no-arg ].
+   
+;;;arg1-related
+arg1_top := top-deps-lxm &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP1.REAL arg1- ].
+
+;SUBJ-ARG - includes CNCRD between the subject and its verb
+;Includes the specification of the subject as arg1
+;LHS 0710: now includes the structure sharing of the mother's XARG with the HOOK.INDEX of DEP1 (because otherwise, the arg1 of 'lakwl' in 'dni hbvix l dnh lnswt lakwl' was unidentified)
+
+arg1_np := arg1_top &
+  [ SYNSEM.LOCAL [ CONT.HOOK.XARG #xarg,
+		   CAT [ HEAD.CNCRD #png,
+			 VAL [ DEP1.LOCAL [ CAT [ HEAD noun & [ CNCRD #png ] ],
+					  CONT.HOOK.INDEX #xarg ],
+                               SUBJ-ARG arg1 ] ] ] ].
+
+
+;SUBJ-ARG: For passive 
+arg1_pp := arg1_top &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP1.LOCAL [ CONT.HOOK.TOPREL.PRED _yl_idi_p_rel,
+                                      CAT.HEAD adp ] ].
+
+;; Nurit 26/10
+;;; define ARGs in the semantic relation even when they are not realized (e.g., ARG2 for `eat' even when intransitive)
+;;; introduce feature in the maximal disjunctive type
+
+;;;arg2-related
+;arg2_cp-vp-np-pp := top-deps-lxm &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ REAL arg2-, LOCAL.CAT.HEAD +nvpc ] ].
+
+;The disjunctive super-type for all arg2 verbs, except object to subject raising ones:
+arg2_cp-vp-np-pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG2 semarg, 
+  		   CAT.VAL.DEP2 [ REAL arg2-, LOCAL.CAT.HEAD +nvpc ] ] ].
+
+;LHS 2910: a supertype for subject to object raising verbs (doesn't introduce TOPREL.ARG2):
+arg2_raised_np := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP2 [ REAL arg2-, LOCAL.CAT.HEAD noun ] ] ].
+
+arg2_vp-np-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nvp ] ].
+arg2_cp-vp-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +vpc ] ].
+arg2_cp-np-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +npc ] ].
+arg2_cp-vp-np := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nvc ] ].
+arg2_vp-np := arg2_vp-np-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nv ] ].
+arg2_np-pp := arg2_vp-np-pp & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +np ] ].
+arg2_cp-np := arg2_cp-np-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nc ] ].
+arg2_vp-pp := arg2_vp-np-pp & arg2_cp-vp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +vp ] ].
+arg2_cp-vp := arg2_cp-vp-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +vc ] ].
+arg2_cp-pp := arg2_cp-np-pp & arg2_cp-vp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +pc ] ].
+arg2_np := arg2_vp-np & arg2_np-pp & arg2_cp-np.
+arg2_cp := arg2_cp-np & arg2_cp-vp & arg2_cp-pp.
+;This should only be for infinitival VPs (defined in types-phrasal)
+arg2_vp := arg2_vp-np & arg2_vp-pp & arg2_cp-vp.
+arg2_pp := arg2_np-pp & arg2_vp-pp & arg2_cp-pp.
+
+;prev version (only CP-VPinf-NP):
+;arg2_cp-vp-np := top-deps-lxm &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ REAL arg2-, LOCAL.CAT.HEAD +nvc ] ].
+;arg2_cp-np := arg2_cp-vp-np &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nc ] ].
+;arg2_cp-vp := arg2_cp-vp-np &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +vc ] ].
+;arg2_vp-np := arg2_cp-vp-np &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP2 [ LOCAL.CAT.HEAD +nv ] ].
+;arg2_np := arg2_cp-np & arg2_vp-np.
+;arg2_cp := arg2_cp-np & arg2_cp-vp.
+;arg2_vp := arg2_cp-vp & arg2_vp-np.
+
+;;;arg3-related
+;Nurit 26/10 - add ARG3 to TOPREL
+;arg3_np-pp := top-deps-lxm &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP3 [ REAL arg3-, 
+;				LOCAL.CAT.HEAD +np ] ].
+
+;The disjunctive super-type for all arg3 verbs, except object to subject raising ones:
+arg3_np-pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG3 semarg, 
+                   CAT.VAL.DEP3 [ REAL arg3-, 
+				LOCAL.CAT.HEAD +np ] ] ].
+				
+;LHS 2910: two supertypes for subject to object raising verbs (doesn't introduce TOPREL.ARG3):
+arg3_raised_np := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP3 [ REAL arg3-, LOCAL.CAT.HEAD noun ] ] ].
+arg3_raised_pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP3 [ REAL arg3-, LOCAL.CAT.HEAD adp,
+                                  LOCAL.CONT.HOOK.TOPREL.PRED _l_p_rel ] ] ].  			
+				
+;LHS: the pos head is required here, otherwise these following two types are indistinguishable
+arg3_np := arg3_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP3 [ LOCAL.CAT.HEAD noun ] ].
+;LHS 0510: added the restricion of TOPREL.PRED (used to be in types-phrasal)
+arg3_pp := arg3_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP3.LOCAL [ CONT.HOOK.TOPREL.PRED _l_p_rel,
+				      CAT.HEAD adp ] ].
+
+;;;;;;;;;;
+;;;arg4-related
+;LHS 1910: introducing vp (beinoni) to arg4
+;Nurit 26/10 - add ARG4 to TOPREL
+;arg4_advp-adjp-pp-np-vp := top-deps-lxm &
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +nvjrp ] ].
+
+arg4_advp-adjp-pp-np-vp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG4 semarg, 
+                   CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +nvjrp ] ] ].
+
+arg4_advp-adjp-pp-np := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +njrp ] ].
+
+arg4_adjp-pp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +nvjp ] ].
+
+arg4_advp-pp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +nvrp ] ].
+
+arg4_advp-adjp-pp-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +vjrp ] ].
+
+arg4_advp-adjp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ REAL arg4-, LOCAL.CAT.HEAD +nvjr ] ].
+
+arg4_advp-adjp-np := arg4_advp-adjp-pp-np & arg4_advp-adjp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +njr ] ].
+
+arg4_advp-pp-np := arg4_advp-adjp-pp-np & arg4_advp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nrp ] ].
+
+arg4_advp-adjp-pp := arg4_advp-adjp-pp-np & arg4_advp-adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +jrp ] ].
+
+arg4_adjp-pp-np := arg4_advp-adjp-pp-np & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +njp ] ].
+
+arg4_adjp-np-vp := arg4_advp-adjp-np-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nvj ] ].
+
+arg4_advp-adjp-vp := arg4_advp-adjp-np-vp & arg4_advp-adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vjr ] ].
+
+arg4_advp-np-vp := arg4_advp-adjp-np-vp & arg4_advp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nvr ] ].
+
+arg4_advp-pp-vp := arg4_advp-adjp-pp-vp & arg4_advp-pp-np-vp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vrp ] ].
+
+arg4_adjp-pp-vp := arg4_advp-adjp-pp-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vjp ] ].
+
+arg4_pp-np-vp := arg4_advp-pp-np-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nvp ] ].
+
+arg4_advp-adjp := arg4_advp-adjp-pp & arg4_advp-adjp-np & arg4_advp-adjp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +jr ] ].
+
+arg4_adjp-pp := arg4_advp-adjp-pp & arg4_adjp-pp-np & arg4_adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +jp ] ].
+
+arg4_advp-pp := arg4_advp-adjp-pp & arg4_advp-pp-np & arg4_advp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +rp ] ].
+
+arg4_advp-np := arg4_advp-pp-np & arg4_advp-adjp-np & arg4_advp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nr ] ].
+
+arg4_adjp-np := arg4_adjp-pp-np & arg4_advp-adjp-np & arg4_adjp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nj ] ].
+
+arg4_pp-np := arg4_adjp-pp-np & arg4_advp-pp-np & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +np ] ].
+
+arg4_np-vp := arg4_adjp-np-vp & arg4_advp-np-vp & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +nv ] ].
+
+arg4_adjp-vp := arg4_adjp-np-vp & arg4_advp-adjp-vp & arg4_adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vj ] ].
+
+arg4_advp-vp := arg4_advp-adjp-vp & arg4_advp-np-vp & arg4_advp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vr ] ].
+
+arg4_pp-vp := arg4_advp-pp-vp & arg4_adjp-pp-vp & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4 [ LOCAL.CAT.HEAD +vp ] ].
+
+arg4_adjp := arg4_adjp-pp & arg4_advp-adjp & arg4_adjp-np arg4_adjp-vp.
+
+arg4_advp := arg4_advp-pp & arg4_advp-adjp & arg4_advp-np & arg4_advp-vp.
+
+arg4_pp := arg4_adjp-pp & arg4_advp-pp & arg4_pp-np & arg4_pp-vp.
+
+arg4_np := arg4_pp-np & arg4_advp-np & arg4_adjp-np & arg4_np-vp.
+
+;This should be only for beinoni (defined in types-phrasal)
+arg4_vp := arg4_advp-vp & arg4_adjp-vp & arg4_pp-vp & arg4_np-vp.
+
+;;;;;;;;;;;;;;;;;;
+;;;Pre-LE types;;;
+;;;;;;;;;;;;;;;;;;
+;Interargument linking for verbs that take dep4:
+dep4-dep1-link := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP1 [ LOCAL.CONT.HOOK.INDEX #ind ],
+	                   DEP4 [ LOCAL [  CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+dep4-dep2-raising := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP2 [ LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ],
+	                   DEP4 [ LOCAL [  CAT.VAL.DEP1.LOCAL #subj,
+					   CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+dep4-dep3-raising := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP3 [ LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ],
+	                   DEP4 [ LOCAL [  CAT.VAL.DEP1.LOCAL #subj,
+					   CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+
+;LHS 0210: adding np to arg4
+;LHS 1910: took out the structure sharing with the subject to a separate type (dep4-dep1-link)
+;For copula:
+arg12-14_vc_njrp := arg1_np & arg2_cp-vp & arg4_advp-adjp-pp-np & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-14 ].
+
+;For prepositions
+arg02_n := arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].
+
+;For non control nish
+arg1-12_n := arg1_np & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For xeb
+arg1-12_c := arg1_np & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For akl
+arg1-12_np := arg1_np & arg2_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For hbin
+arg1-12_nc := arg1_np & arg2_cp-np & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].  
+;For ebr
+arg12_n := arg1_np & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+;For hclix
+arg12_p := arg1_np & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+;For hxliv
+arg12_pc := arg1_np & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;SUBJ-ARG: For passive (can have a by phrase but don't have to). arg2 is specified as a subject here.
+arg2-21_p := arg1_pp & arg2_subject & 
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG1 semarg,
+		   CAT.VAL.R-FRAME arg12-2 ] ].
+;For unaccusatives:
+arg2_unacc := arg2_subject &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].
+  		   
+;prev versions:
+;0710: added the XARG constraint, to enable the correct linking of the bottom verb in 'dni hbvix l dnh lnswt lakwl'                          
+;2510: brought back CNCRD
+;arg2-21_p := arg1_pp & arg2_np & 
+;  [ SYNSEM.LOCAL [ CAT [ HEAD.CNCRD #png,
+;			 VAL [ R-FRAME arg12-2,
+;                             SUBJ-ARG arg2,
+;			     DEP2.LOCAL [ CAT.HEAD.CNCRD #png,
+;					  CONT.HOOK.INDEX #xarg ] ] ],
+;		   CONT.HOOK.XARG #xarg ] ].		   
+;0710: added the XARG constraint, to enable the correct linking of the bottom verb in 'dni hbvix l dnh lnswt lakwl'                          
+;2510: brought back CNCRD
+;arg2_basic := arg2_np &
+;  [ SYNSEM.LOCAL [ CAT [ HEAD.CNCRD #png,
+;			 VAL [ R-FRAME arg2,
+;                             SUBJ-ARG arg2,
+;			     DEP2.LOCAL [ CAT.HEAD.CNCRD #png,
+;					  CONT.HOOK.INDEX #xarg ] ] ],
+;		   CONT.HOOK.XARG #xarg ] ].
+
+
+;temp entry for ica
+arg1-14_a := arg1_np & arg4_advp-adjp-pp-np-vp & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-14 ].
+
+;For gilh
+arg12_nc := arg1_np & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;LHS 0510: For current rch (with PP, and VP is elsewhere) 
+arg12_npc := arg1_np & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;For xeb - tmp
+arg1-12_pc := arg1_np & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For npl
+arg1_basic := arg1_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1 ].
+;For nsy - tmp
+arg14_p := arg1_np & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].
+;For hnix - tmp
+arg124_n_p := arg1_np & arg2_np & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg124 ].
+;For hakil
+arg123_n_n := arg1_np & arg2_np & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+arg123_n_p := arg1_np & arg2_np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+;For ntn
+arg12-123_n_p := arg1_np & arg2_np & arg3_pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123 ].
+;For qnh - tmp
+arg12-123-124_n_p_p := arg1_np & arg2_np & arg3_pp & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123-124 ].
+
+;Nurit 26/10
+;;; RAISING VERBS ;;;;
+
+;For subject-raising DEP2 "verbs" (e.g., yewi - prev implementation)
+arg12_v_subj-raising := arg1_np & arg2_vp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg12,
+  				S-FRAME arg2,
+  				SUBJ-ARG #arg1,
+				DEP1 #subj,
+				DEP2 [ LOCAL [  CAT.VAL [ SUBJ-ARG #arg1 & arg1,
+							  DEP1 #subj],
+						CONT.HOOK [ XARG #ind,
+							 TOPREL.ARG1 #ind ] ] ] ] ].
+
+		 
+;For subject raising DEP4 verbs (e.g. nrah)
+arg14_j_subj-raising := arg1_np & arg4_adjp & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg14,
+                S-FRAME arg4 ] ].
+arg14_njr_subj-raising := arg1_np & arg4_advp-adjp-np & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg14,
+  				S-FRAME arg4 ] ].
+
+
+;For object raising DEP4 verbs (e.g. rah, mca):
+;LHS 1910: for rah (ECM entry)
+arg124_n_v_obj-raising := arg1_np & arg2_raised_np & arg4_vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT [ VAL [ R-FRAME arg124,
+                             S-FRAME arg14 ] ] ].
+;For subject-to-object raising verb (e.g., mca)
+arg124_n_a_obj-raising := arg1_np & arg2_raised_np & arg4_advp-adjp-pp-np-vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg124,
+                           S-FRAME arg14,
+                           SUBJ-ARG #arg1,
+                           DEP4 [ LOCAL [  CAT.VAL [ SUBJ-ARG #arg1 & arg1 ] ] ] ] ].                             
+
+
+;A type for arg2 subjects
+arg2_subject := arg2_np &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.CNCRD #png,
+			 VAL [ SUBJ-ARG arg2,
+			     DEP2.LOCAL [ CAT.HEAD.CNCRD #png,
+					  CONT.HOOK.INDEX #xarg ] ] ],
+		   CONT.HOOK.XARG #xarg ] ].
+
+;LHS 20/11 complex predicates (XCOMP)
+;Basically, this type has an xc R-FRAME, and all of its deps are unifiable with its XCOMP's deps (which must be a verb), which are not yet realized.
+arg_xcomp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL [ R-FRAME xc,
+                             DEP1 #dep1,
+                             DEP2 #dep2,
+                             DEP3 #dep3,
+                             DEP4 #dep4,
+                             XCOMP [ LOCAL [ CAT [ HEAD verb,
+                                                   VAL [ DEP1 #dep1 & [ REAL arg1- ],
+                                                         DEP2 #dep2 & [ REAL arg2- ],
+                                                         DEP3 #dep3 & [ REAL arg3- ],
+                                                         DEP4 #dep4 & [ REAL arg4- ] ] ] ] ] ] ] ].
+
+
+
+;Nurit 9/6 : linking patterns of control verbs are defined lexically
+
+;For subject-control verbs (e.g., nish)
+arg12_v_subj-cntrl := arg1_np & arg2_vp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg12,
+				DEP1 [ LOCAL.CONT.HOOK.INDEX #ind ],
+				DEP2 [ LOCAL.CONT.HOOK [ XARG #ind,
+							 TOPREL.ARG1 #ind ] ] ] ].
+
+;For subject-control verbs (e.g., hbvix)
+arg123_v_p_subj-cntrl := arg1_np & arg2_vp & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg123,
+				DEP1 [ LOCAL.CONT.HOOK.INDEX #ind ],
+				DEP2 [ LOCAL.CONT.HOOK [ XARG #ind,
+							 TOPREL.ARG1 #ind ] ] ] ].
+
+;For other (non control) complements of subject control verbs (hbvix)
+arg123_nc_p := arg1_np & arg2_cp-np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+
+;For pp object-control verbs (e.g., hreh)
+arg123_v_p_obj-cntrl := arg1_np & arg2_vp & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg123,
+				DEP2 [ LOCAL.CONT.HOOK [ XARG #ind,
+							 TOPREL.ARG1 #ind ] ],
+				DEP3 [ LOCAL.CONT.HOOK.TOPREL.ARG2 #ind ] ] ].
+
+;For np object-control verbs (e.g., ekny)
+arg123_v_n_obj-cntrl := arg1_np & arg2_vp & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg123,
+				DEP2 [ LOCAL.CONT.HOOK [ XARG #ind,
+							 TOPREL.ARG1 #ind ] ],
+				DEP3 [ LOCAL.CONT.HOOK.INDEX #ind ] ] ].
+
+;For other frames of np object control (ekny) ###obsolete###
+;LHS TODO: create the relevant R-FRAME types in link.tdl and make sure this type name is ok
+;arg13-123-134_cp_np_pp := arg1_np & arg3_np & arg2_cp & arg4_pp &
+;  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13-123-134 ].  
+

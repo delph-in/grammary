@@ -1,0 +1,327 @@
+;;; -*- Mode: TDL; Package: LKB -*-
+;;;
+;;; $Id: labels.tdl,v 1.8 2008-05-23 01:44:21 sfd Exp $
+
+;;; These label definitions are used by the LKB to put
+;;; labels on the nodes of the trees it displays.  They
+;;; are solely for the convenience of the grammar developer
+;;; and do not carry theoretical significance.  Accordingly,
+;;; though they are provided as part of the Matrix distribution,
+;;; users should customize them without hesitation.
+
+;;; NB: This is one tdl file in which order matters.
+;;; The LKB will choose the first label it encounters (in the
+;;; order below) which is consistent with the node it is
+;;; labeling.  If two labels are consistent with each other,
+;;; the more specific one must appear first in this list, or
+;;; it will never get used.
+
+
+;LHS 11/11: all labels that used to refer to empty SPRs now refer to VAL.R-FRAME no-arg, whereas those that used to refer to 
+; non-empty SPRs now refer to VAL.R-FRAME arg0.
+
+pron-label := label & 
+           [ SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD pron,
+                                  VAL [ DEP1.REAL arg1-,
+					DEP2.REAL arg2-,
+					DEP3.REAL arg3-,
+					DEP4.REAL arg4-,
+					DEP5.REAL arg5-,
+					DEP6.REAL arg6- ] ],
+                            COORD-STRAT "" ] ],
+             LABEL-NAME "Pron" ].
+
+
+n-mid-label := label &
+            [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                   VAL.R-FRAME arg0 ],
+                             COORD +,
+			     COORD-REL implicit-coord-rel ],
+	      LABEL-NAME "NP-M" ].
+
+n-bottom-label := label &
+            [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                   VAL.R-FRAME arg0 ],
+                             COORD + ],
+              LABEL-NAME "NP-B" ].
+
+n-label := label & 
+	   [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                  VAL.R-FRAME arg0 ],
+                            COORD-STRAT "" ],
+             LABEL-NAME "N" ].
+
+n-top-label := label &
+            [ SYNSEM.LOCAL.CAT [ HEAD noun,
+                                 VAL.R-FRAME arg0 ],
+              LABEL-NAME "NP-T" ].
+
+np-mid-label := label &
+            [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                   VAL.R-FRAME no-arg ],
+                             COORD +,
+			     COORD-REL implicit-coord-rel ],
+	      LABEL-NAME "NP-M" ].
+
+np-bottom-label := label &
+            [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                   VAL.R-FRAME no-arg ],
+                             COORD + ],
+              LABEL-NAME "NP-B" ].
+
+np-label := label & 
+            [ SYNSEM.LOCAL [ CAT [ HEAD noun,
+                                   VAL.R-FRAME no-arg ],
+                             COORD-STRAT "" ],
+              LABEL-NAME "NP" ].
+
+np-top-label := label & 
+	    [ SYNSEM.LOCAL.CAT [ HEAD noun,
+				 VAL.R-FRAME no-arg ],
+	      LABEL-NAME "NP-T" ].
+
+v-mid-label := label &
+	   [ SYNSEM.LOCAL [ CAT [ HEAD verb,
+                                  VAL [ DEP2.REAL link,
+					DEP3.REAL link,
+					DEP4.REAL link,
+					DEP5.REAL link,
+					DEP6.REAL link ] ],
+                            COORD +,
+                            COORD-REL implicit-coord-rel ],
+             LABEL-NAME "V-M" ].
+
+v-bottom-label := label &
+	   [ SYNSEM.LOCAL [ CAT [ HEAD verb,
+                                  VAL [ DEP2.REAL link,
+					DEP3.REAL link,
+					DEP4.REAL link,
+					DEP5.REAL link,
+					DEP6.REAL link ] ],
+                            COORD + ],
+             LABEL-NAME "V-B" ].
+
+v-label := label & 
+           [ SYNSEM lex-synsem & [ LOCAL [ CAT [ HEAD verb,
+                                  VAL [ DEP1.REAL arg1-,
+					DEP2.REAL arg2-,
+					DEP3.REAL arg3-,
+					DEP4.REAL arg4-,
+					DEP5.REAL arg5-,
+					DEP6.REAL arg6- ] ],
+                            COORD-STRAT "" ] ],
+             LABEL-NAME "V" ].
+
+s-label := label &
+           [ SYNSEM [ LOCAL [ CAT [ HEAD v_pron_head,
+                                  VAL [ R-FRAME #link,
+			  		DEP1.REAL #link,
+			  		DEP2.REAL #link,
+			  		DEP3.REAL #link,
+			  		DEP4.REAL #link,
+			  		DEP5.REAL #link,
+			  		DEP6.REAL #link ] ],
+                            COORD-STRAT "" ],
+                      NON-LOCAL.SLASH <! !> ],
+             LABEL-NAME "S"].
+s-bar-label := label &
+           [ SYNSEM.LOCAL [ CAT [ HEAD v_pron_head,
+                                  VAL [ R-FRAME #link,
+			  		DEP1.REAL #link,
+			  		DEP2.REAL #link,
+			  		DEP3.REAL #link,
+			  		DEP4.REAL #link,
+			  		DEP5.REAL #link,
+			  		DEP6.REAL #link ] ],
+                            COORD-STRAT "" ],
+             LABEL-NAME "S/XP"].
+
+vp-label := label & 
+            [ SYNSEM.LOCAL [ CAT [ HEAD verb,
+                                   VAL [ R-FRAME #link,
+           SUBJ-ARG arg1,
+					 DEP1.REAL arg1-,
+					 DEP2.REAL #link,
+					 DEP3.REAL #link,
+					 DEP4.REAL #link,
+					 DEP5.REAL #link,
+					 DEP6.REAL #link ]],
+                             COORD-STRAT "" ],
+              LABEL-NAME "VP" ].
+
+vp-label := label & 
+            [ SYNSEM.LOCAL [ CAT [ HEAD verb,
+                                   VAL [ R-FRAME #link,
+           SUBJ-ARG arg2,
+					 DEP2.REAL arg2-,
+					 DEP1.REAL #link,
+					 DEP3.REAL #link,
+					 DEP4.REAL #link,
+					 DEP5.REAL #link,
+					 DEP6.REAL #link ]],
+                             COORD-STRAT "" ],
+              LABEL-NAME "VP" ].
+              
+
+
+V-bar-label := label &
+	   [ SYNSEM.LOCAL.CAT [ HEAD verb,
+				VAL [ DEP2.REAL link,
+				      DEP3.REAL link,
+				      DEP4.REAL link,
+				      DEP1.REAL link,
+				      DEP5.REAL link,
+				      DEP6.REAL link ] ],
+	     LABEL-NAME "V'"].
+
+
+pronp-label := label & 
+            [ SYNSEM.LOCAL [ CAT [ HEAD pron,
+                                   VAL [ R-FRAME #link,
+					 SUBJ-ARG arg1,
+					 DEP1.REAL arg1-,
+					 DEP2.REAL #link,
+					 DEP3.REAL #link,
+					 DEP4.REAL #link,
+					 DEP5.REAL #link,
+					 DEP6.REAL #link ]],
+                             COORD-STRAT "" ],
+              LABEL-NAME "PronP" ].
+
+pronp-label := label & 
+            [ SYNSEM.LOCAL [ CAT [ HEAD pron,
+                                   VAL [ R-FRAME #link,
+					 SUBJ-ARG arg2,
+					 DEP2.REAL arg2-,
+					 DEP1.REAL #link,
+					 DEP3.REAL #link,
+					 DEP4.REAL #link,
+					 DEP5.REAL #link,
+					 DEP6.REAL #link ]],
+                             COORD-STRAT "" ],
+              LABEL-NAME "PronP" ].              
+
+
+	     
+pron-bar-label := label &
+	   [ SYNSEM.LOCAL.CAT [ HEAD pron,
+				VAL [ DEP2.REAL link,
+				      DEP3.REAL link,
+				      DEP4.REAL link,
+				      DEP1.REAL link,
+				      DEP5.REAL link,
+				      DEP6.REAL link ] ],
+	     LABEL-NAME "pron'"].	     
+
+p-label := label & 
+	   [ SYNSEM.LOCAL.CAT [ HEAD adp,
+				VAL [ DEP2.REAL arg2-,
+				      DEP3.REAL link,
+				      DEP4.REAL link,
+				      DEP5.REAL link,
+				      DEP6.REAL link ] ],
+	     LABEL-NAME "P" ].
+
+pp-label := label & 
+	    [ SYNSEM.LOCAL.CAT [ HEAD adp,
+				 VAL [ DEP2.REAL arg2+,
+				       DEP3.REAL link,
+				       DEP4.REAL link,
+				       DEP5.REAL link,
+				       DEP6.REAL link ] ],
+	      LABEL-NAME "PP" ].
+
+c-label := label &
+	   [ SYNSEM.LOCAL.CAT [ HEAD comp,
+				VAL [ DEP2.REAL arg2-,
+				      DEP3.REAL link,
+				      DEP4.REAL link,
+				      DEP5.REAL link,
+				      DEP6.REAL link ] ],
+	     LABEL-NAME "C" ].
+
+cp-label := label &
+	    [ SYNSEM.LOCAL.CAT [ HEAD comp,
+				 VAL [ DEP2.REAL arg2+,
+				       DEP3.REAL link,
+				       DEP4.REAL link,
+				       DEP5.REAL link,
+				       DEP6.REAL link ] ],
+	      LABEL-NAME "CP"].
+
+det-label := label &
+	     [ SYNSEM.LOCAL.CAT.HEAD det,
+	       LABEL-NAME "D"].
+
+adv-mid-label := label & 
+	   [ SYNSEM.LOCAL [ CAT.HEAD adv,
+                            COORD +,
+                            COORD-REL implicit-coord-rel ],
+	     LABEL-NAME "ADV-M" ].
+
+adv-bottom-label := label & 
+	   [ SYNSEM.LOCAL [ CAT.HEAD adv,
+                            COORD + ],
+	     LABEL-NAME "ADV-B" ].
+
+adv-label := label & 
+	     [ SYNSEM lex-synsem & [ LOCAL [ CAT.HEAD adv,
+                              COORD-STRAT "" ] ],
+               LABEL-NAME "ADV" ].
+
+adv-top-label := label & 
+	     [ SYNSEM.LOCAL.CAT.HEAD adv,
+	       LABEL-NAME "AdvP" ].
+
+adj-mid-label := label & 
+	   [ SYNSEM.LOCAL [ CAT.HEAD adj,
+                            COORD +,
+                            COORD-REL implicit-coord-rel ],
+	     LABEL-NAME "ADJ-M" ].
+
+adj-bottom-label := label & 
+	   [ SYNSEM.LOCAL [ CAT.HEAD adj,
+                            COORD + ],
+	     LABEL-NAME "ADJ-B" ].
+
+adj-label := label & 
+	   [ SYNSEM lex-synsem & [ LOCAL [ CAT.HEAD adj,
+                           COORD-STRAT "" ] ],
+	     LABEL-NAME "ADJ" ].
+
+adj-top-label := label & 
+	   [ SYNSEM.LOCAL.CAT.HEAD adj,
+	     LABEL-NAME "AdjP" ].
+
+conj-label := label & 
+	      [ SYNSEM.LOCAL.CAT.HEAD conj,
+		LABEL-NAME "CONJ" ].
+
+num-label := label & 
+	     [ SYNSEM.LOCAL.CAT [ HEAD num,
+				  VAL [ DEP2.REAL link,
+					DEP3.REAL link,
+					DEP4.REAL link,
+					DEP5.REAL link,
+					DEP6.REAL link ] ],
+	       LABEL-NAME "NUM" ].
+
+numbar-label := label &
+	     [ SYNSEM.LOCAL.CAT [ HEAD num,
+				  VAL [ DEP2.REAL link,
+					DEP3.REAL link,
+					DEP4.REAL link,
+					DEP5.REAL link,
+					DEP6.REAL link,
+					R-FRAME no-arg ]],
+	       LABEL-NAME "NUM-BAR" ].
+
+nump-label := label &
+	     [ SYNSEM.LOCAL.CAT [ HEAD num,
+				  VAL [ DEP2.REAL link,
+					DEP3.REAL link,
+					DEP4.REAL link,
+					DEP5.REAL link,
+					DEP6.REAL link,
+					R-FRAME no-arg ]],
+	       LABEL-NAME "NUMP" ].

@@ -1,0 +1,144 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;
+;;  Lexical types
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Lexical entries will be cross-classified along many dimensions,
+; including:
+;
+; -- Whether or not they introduce non-empty non-local feature values
+; -- Amalgamation of non-local features
+; -- Whether or not they are fully inflected as listed
+;     in the lexicon.
+; -- Part of speech (and associated semantic generalizations)
+; -- Subcategorization
+; -- Values for the HOOK features
+;
+; On the first three dimensions, the vast majority of words will
+; actually follow the general pattern.  In order to facilitate the
+; definition of types (in particular grammars) for those cases that
+; don't, the constraints are stated on separate types.  Additional
+; types can be created as required by inheriting from all of the types
+; that are still relevant.  This is clearly an area to investigate
+; the use of defaults, as we learn more about best practice concerning
+; their use.
+;
+; Note that we don't treat these dimensions as entirely independent
+; of each other, but rather hope to strike a balance between flexibility
+; and redundancy. 
+;
+; We are currently avoiding any development within the Matrix of the
+; subhierarchy under head (see notes at the definition of type head
+; above), believing that the exact geometry of that hierarchy to be
+; somewhat language dependent.  Thus, even the types for the part of
+; speech dimension will not specify head values, and will need to be
+; specialized in particular grammars to do so.  Furthermore, the
+; subcategorization types will specify only the number of syntactic
+; arguments and their linking to the semantic relations.
+
+; Update: 2004-08-26 We have devised a means of adding in a subhierarchy
+; under head without prejudging the disjunctive types needed.  Therefore,
+; the part of speech types will now specify HEAD values.  Nonetheless,
+; the HEAD values of arguments are left underspecified, as that does
+; vary across languages.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Type assigning empty mod list. Added to basic types for nouns, verbs and determiners.
+non-mod-lex-item := lex-item &
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD < > ].
+  
+; HOOK feature values
+
+; LKEYS.KEYREL is a short-cut to the relation that is going to
+; contribute the LTOP and INDEX for the word, such that linking
+; types and lexical entries don't have to refer to a specific position
+; on the RELS list.
+
+norm-ltop-lex-item := lex-item &
+  [ SYNSEM [ LOCAL.CONT [ HOOK [ LTOP #ltop ],
+                          RELS.LIST.FIRST #keyrel ],
+             LKEYS.KEYREL #keyrel & [ LBL #ltop ] ] ].
+
+norm-hook-lex-item := norm-ltop-lex-item &
+  [ SYNSEM [ LOCAL.CONT.HOOK.INDEX #index,
+             LKEYS.KEYREL.ARG0 #index ] ].
+
+; ERB 2007-02-26 For modifiers. Elements that have a double life
+; as attributive and predicative become tricky.  Attributive adjectives
+; and PPs should be raise-index-mod-lex-item, while predicative
+; ones should be norm-hook-lex-item. But how to relate the two?
+; Also, reconsider whether I want to do this for intersective as
+; well as scopal modifiers, or just the scopal guys.
+
+raise-index-mod-lex-item := norm-ltop-lex-item &
+  [ SYNSEM.LOCAL [ CAT.HEAD.MOD < [ LOCAL.CONT.HOOK.INDEX #index ] >,
+				   CONT.HOOK.INDEX #index ] ].
+
+
+; Furthermore, most lexical items contribute only one relation, and
+; have empty g values.
+
+;NURIT 30/5 add a constraint re TOPREL
+single-rel-lex-item := lex-item &
+  [ SYNSEM.LOCAL.CONT [ HOOK.TOPREL #rel,
+                        RELS <! #rel & relation !> ] ].
+
+single-rel-not-qpart-lex-item := basic-not-qpart-lex-item & single-rel-lex-item.
+
+no-hcons-lex-item := lex-item & 
+  [ SYNSEM.LOCAL.CONT.HCONS <! !> ].
+
+; SSH 2012-03-03
+; SSH 2012-05-07
+
+;LHS: QUE changing the infrastructure to make most lexical types not qpart (not wh-words)
+;no-icons-lex-item := lex-item &
+no-icons-lex-item := basic-not-qpart-lex-item &  
+  [ SYNSEM.LOCAL.CONT.ICONS <! !> ].
+
+no-info-str-lex-item := no-icons-lex-item & 
+  [ SYNSEM.LOCAL.CONT.HOOK [ ICONS-KEY.CLAUSE #clause,
+		             CLAUSE-KEY #clause ] ].
+
+; SSH 2013-03-27
+no-rels-hcons-icons-lex-item := no-hcons-lex-item & no-icons-lex-item & 
+  [ SYNSEM.LOCAL.CONT.RELS <! !> ].
+
+; ERB 2005-05-11 Normal lex items don't introduce messages. 
+; Since I'm trying out an analysis where the no-msg-phrases
+; copy of MSG values, need to bottom out in MSG no-msg
+; on most lex items.
+
+; ERB 2007-01-22 Removing no-hcons-lex-item here, since now
+; there are many words which introduce hcons (in the absence of
+; messages). HCONS should now (in most cases) be constrained
+; by the linking types.
+
+; SSH 2012-02-16 ICONS is added to this type.
+; SSH 2012-05-07 info-str & ... is not needed any more under ICONS. 
+icons-lex-item := lex-item &
+  [ SYNSEM.LOCAL.CONT [ HOOK [ INDEX #index,
+							   ICONS-KEY #icons ],
+						ICONS <! #icons & info-str & [ TARGET #index ] !> ] ].
+
+; SSH 2012-02-16 icons-lex-item is newly used.
+norm-sem-lex-item := norm-hook-lex-item & single-rel-not-qpart-lex-item & icons-lex-item.
+
+;LHS: QUE changing the infrastructure to make most lexical types not-qpart (not wh words)
+;hcons-lex-item := norm-hook-lex-item & single-rel-lex-item.
+hcons-lex-item := norm-hook-lex-item & single-rel-not-qpart-lex-item.
+
+; ERB 2005-08-07 For lexical items like case-marking adpositions
+; and auxiliaries which only contribute tense/aspect information.
+; These all take HOOK from their first complements.
+
+; SSH 2012-03-03 
+raise-sem-lex-item := no-hcons-lex-item & no-info-str-lex-item &
+  [ SYNSEM.LOCAL [ CONT [ RELS <! !>,
+						  HOOK #hook ],
+				   CAT.VAL [ DEP2.DEP [ LOCAL.CONT.HOOK #hook ],
+					     DEP3.REAL arg3-,
+					     DEP4.REAL arg4-,
+					     DEP5.REAL arg5-,
+					     DEP6.REAL arg6- ] ] ].

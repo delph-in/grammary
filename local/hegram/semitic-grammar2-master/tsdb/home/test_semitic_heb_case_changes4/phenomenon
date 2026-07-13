@@ -1,0 +1,51 @@
+1@arg1-12_np@@@@@@@ubuntu@14-1-2015
+2@arg12_p@@@@@@@ubuntu@14-1-2015
+3@arg16_p@@@@@@@ubuntu@14-1-2015
+4@arg12_pc + v_subj-cntrl@@@@@@@ubuntu@14-1-2015
+5@arg12_n@@@@@@@ubuntu@14-1-2015
+6@arg1-12-16_c_p@@@@@@@ubuntu@14-1-2015
+7@arg12-123-126-1236_nc_p_p@@@@@@@ubuntu@14-1-2015
+8@arg12-125-126-1256_n_p_p@@@@@@@ubuntu@14-1-2015
+9@arg15-16-156_p_p@@@@@@@ubuntu@14-1-2015
+10@arg123_n_n@@@@@@@ubuntu@14-1-2015
+11@arg12-123_n_p@@@@@@@ubuntu@14-1-2015
+12@arg12_npc + v_subj-cntrl@@@@@@@ubuntu@14-1-2015
+13@arg1-12_n + v_subj-cntrl@@@@@@@ubuntu@14-1-2015
+14@12-123-125_n_p_p@@@@@@@ubuntu@14-1-2015
+15@123_v_p_subj-cntrl@@@@@@@ubuntu@14-1-2015
+16@123_nc_p@@@@@@@ubuntu@14-1-2015
+17@123_v_p_obj-cntrl@@@@@@@ubuntu@14-1-2015
+18@125_v_p_obj-cntrl + v_subj-cntrl@@@@@@@ubuntu@14-1-2015
+19@123_v_n_obj-cntrl@@@@@@@ubuntu@14-1-2015
+20@12_nc@@@@@@@ubuntu@14-1-2015
+21@NP topicalization@@@@@@@ubuntu@14-1-2015
+22@CP topicalization@@@@@@@ubuntu@14-1-2015
+23@VP topicalization@@@@@@@ubuntu@14-1-2015
+24@PP topicalization@@@@@@@ubuntu@14-1-2015
+25@adjective agreement@@@@@@@ubuntu@14-1-2015
+26@in situ object questions@@@@@@@ubuntu@14-1-2015
+27@NP object questions (except DEP4)@@@@@@@ubuntu@14-1-2015
+28@VPinf object questions@@@@@@@ubuntu@14-1-2015
+29@CP object questions@@@@@@@ubuntu@14-1-2015
+30@PP questions@@@@@@@ubuntu@14-1-2015
+31@XCOMP (misc.)@@@@@@@ubuntu@14-1-2015
+32@DEP4 in-situ questions (non-copula)@@@@@@@ubuntu@14-1-2015
+33@DEP4 extraction (non-copula)@@@@@@@ubuntu@14-1-2015
+34@wh subj questions@@@@@@@ubuntu@14-1-2015
+35@COP - all complement types@@@@@@@ubuntu@14-1-2015
+36@PRON - all complement types@@@@@@@ubuntu@14-1-2015
+37@COP and PRON topicalization@@@@@@@ubuntu@14-1-2015
+38@COP and PRON object questions@@@@@@@ubuntu@14-1-2015
+39@ZERO PRON@@@@@@@ubuntu@14-1-2015
+40@preposition agreement@@@@@@@ubuntu@14-1-2015
+41@adverbial adjuncts@@@@@@@ubuntu@14-1-2015
+42@Passive (including agreement with the DEP2 subject and extraction)@@@@@@@ubuntu@14-1-2015
+43@Unaccusatives (including agreement with the DEP2 subject)@@@@@@@ubuntu@14-1-2015
+44@Subject to subject raising@@@@@@@ubuntu@14-1-2015
+45@Subject to object raising (including beinoni)@@@@@@@ubuntu@14-1-2015
+46@Secondary predicate@@@@@@@ubuntu@14-1-2015
+47@PPs with adverbs@@@@@@@ubuntu@14-1-2015
+48@adverb extraction and in situ questions@@@@@@@ubuntu@14-1-2015
+49@V2@@@@@@@ubuntu@14-1-2015
+50@Known overgeneration@@@@@@@ubuntu@14-1-2015
+51@subj questions with object topicalization (currently not done)@@@@@@@ubuntu@14-1-2015

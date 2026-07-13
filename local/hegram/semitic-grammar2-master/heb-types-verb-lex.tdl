@@ -1,0 +1,8 @@
+;;; $Id: types-verb-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Verbs - general types for Hebrew;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; TAG 26/5/15: future verbs in Hebrew are in future tense
+future-verb-lex :+ 
+   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE future ].

@@ -1,0 +1,100 @@
+;;; $Id: types-adj-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;;; Adjectives
+
+basic-adjective-lex := single-rel-not-qpart-lex-item &
+  [ SYNSEM [ LOCAL.CAT.HEAD adj,
+	     LKEYS.KEYREL event-relation ]].
+
+;NM: add png & def agreement between modifier and modified
+;LHS: added an empty SLASH, to mimic the effect NPs have on their predicate (thereby barring unwarranted fillers) 	
+; 11/11: adjectives should only modify nouns that haven't undergone a bare-np-rule (i.e., their R-FRAME is arg0)
+adjective-lex := basic-adjective-lex & intersective-mod-lex &
+	      raise-index-mod-lex-item &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD [ CNCRD #cncrd,
+				  DEF #def,
+				  MOD < lex-synsem & [ LOCAL.CAT [ VAL.R-FRAME arg0,
+								   HEAD noun & [ CNCRD #cncrd,
+					                            DEF #def ] ] ]> ],
+			          VAL fullval & [ R-FRAME no-arg ],
+			                POSTHEAD + ] ],
+	          NON-LOCAL.SLASH 0-dlist & [ LIST < > ]]].
+
+; ERB 2007-02-26 New type raise-index-mod-lex-item (in lexical-types.tdl) to get the
+; INDEX value right on modifiers.  Attributive adjectives should
+; inherit from this one, predicatives from norm-hook-lex-item.
+; Need to worry about the relationship between the two.
+
+; ASF 2011-10-20 basic-mod-adj-lex should not inherit from
+; raise-index-mod-lex-item: this leads to conflicting index values
+; (event for adj, index for nouns) preventing coordination from working
+; changed to norm-sem-lex-item.
+basic-mod-adj-lex := basic-adjective-lex & norm-sem-lex-item.
+basic-scopal-mod-adj-lex := basic-mod-adj-lex & scopal-mod-lex.
+basic-int-mod-adj-lex := basic-mod-adj-lex & intersective-mod-lex.
+basic-nomod-adj-lex := basic-adjective-lex & no-mod-lex & norm-hook-lex-item.
+
+;LHS: adjectival qprt-lex-item for copulas with an adjectival predicate.
+adjp-qpart-lex-item := basic-adjective-for-qpart-lex & qpart-lex-item & intersective-mod-lex &
+		raise-index-mod-lex-item &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD [ CNCRD #cncrd,
+				  DEF #def,
+				  MOD < lex-synsem & [ LOCAL.CAT [ VAL [ R-FRAME arg0,
+									 DEP1.REAL arg1-,
+									 DEP2.REAL arg2- ],
+								   HEAD noun & [ CNCRD #cncrd,
+					                            DEF #def ] ] ]> ],
+			          VAL fullval & [ R-FRAME no-arg ],
+			                POSTHEAD + ] ],
+	          NON-LOCAL.SLASH 0-dlist & [ LIST < > ]]].
+
+;LHS: adjectival qprt-lex-item for copulas with an adjectival predicate.
+basic-adjective-for-qpart-lex := single-rel-lex-item &
+  [ SYNSEM [ LOCAL.CAT.HEAD adj,
+	     LKEYS.KEYREL event-relation ]].
+
+;===============================================
+;==== 2 DIMENSIONS: Agreement & Definiteness ===
+;===============================================
+;NM 25/1/15 - I moved agreement classifications to types-nominal-lex so that they will be shared by nouns and adjectives 
+
+;DIMENSION 1: Agreement (12+ types)
+
+;3sm-adj-lex := adjective-lex & 3sm-nominal-lex.
+;  [ SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png,
+;                   CONT.HOOK.INDEX.PNG #png & png-3sm ] ].
+
+;3sf-adj-lex := adjective-lex & 3sf-nominal-lex.
+;  [ SYNSEM.LOCAL [ CAT.HEAD.CNCRD #png,
+;                   CONT.HOOK.INDEX.PNG #png & png-3sf ] ].
+
+;DIMENSION 2: Definiteness (2 subtypes)
+; TAG: the definiteness specification is inherited for def-lex and indef-lex (defined in types-nominal)
+def-adj-lex := adjective-lex & def-lex.
+indef-adj-lex := adjective-lex & indef-lex.
+
+;==========================================
+; ==== CROSS-CLASSIFICATIONS (LEAVES) =====
+;==========================================
+; TAG 11/2/15: changed adjective lexemes to inherit from the underspecified for person nominal types (for predicative use).
+; Adjectives are now underspecified for person.
+; TAG 11/2/15: Also added a singular type which is underspecified for gender, for adjectives like "iph". 
+;NM 25/1/15: changed 3sm-adj-lex to 3sm-nominal-lex (3sm and all the rest of the pngs)
+
+def-s-adj-lex := def-adj-lex & s-nominal-lex.
+def-sm-adj-lex := def-adj-lex & sm-nominal-lex.
+def-sf-adj-lex := def-adj-lex & sf-nominal-lex.
+indef-s-adj-lex := indef-adj-lex & s-nominal-lex.
+indef-sm-adj-lex := indef-adj-lex & sm-nominal-lex.
+indef-sf-adj-lex := indef-adj-lex & sf-nominal-lex.
+
+;LHS 19/5/15: added plural, unspecified for gender (origin: dinflections)
+def-p-adj-lex := def-adj-lex & p-nominal-lex.
+indef-p-adj-lex := indef-adj-lex & p-nominal-lex.
+
+; TAG 26/1/15: added plural adjectives: 
+def-pm-adj-lex := def-adj-lex & pm-nominal-lex.
+def-pf-adj-lex := def-adj-lex & pf-nominal-lex.
+indef-pm-adj-lex := indef-adj-lex & pm-nominal-lex.
+indef-pf-adj-lex := indef-adj-lex & pf-nominal-lex.
+

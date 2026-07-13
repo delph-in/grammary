@@ -1,0 +1,149 @@
+;;  -*- Mode: TDL; Coding: utf-8; -*- 
+;;
+;;  Type file for predicates automatically derived from 
+;;  the PMI Dictionary (21/07/2013) with 'tab2tdl.py' (second section below)
+;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Adpositions as lexical items;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;NURIT-CHANGED
+basic-adposition-lex := single-rel-lex-item &
+  [ SYNSEM [ LOCAL.CAT [ HEAD adp,
+    	     	         VAL [ DEP2.DEP.LOCAL.CONT.HOOK.INDEX #ind ] ],
+             LKEYS.KEYREL arg12-ev-relation &
+	     		  [ ARG2 #ind ]]].	     		  
+
+basic-nomod-adposition-lex := basic-adposition-lex & no-mod-lex & norm-hook-lex-item.
+basic-mod-adp-lex := basic-adposition-lex & norm-sem-lex-item.
+basic-scopal-mod-adposition-lex := basic-mod-adp-lex & scopal-mod-lex.
+basic-int-mod-adposition-lex := basic-mod-adp-lex & intersective-mod-lex.
+
+;LHS: preposition type (+ preventing combination with a bare N); 
+;LHS: Barring preposition stranding in topicalization & wh-complement questions (canonical-synsem for the complement)
+;LHS: OPT - bars a preposition from acting as a que-filler (with an unexpressed complement)
+nomod-adposition-lex-np := basic-nomod-adposition-lex &
+  [ SYNSEM [ LOCAL.CAT [ VAL [  DEP2.DEP canonical-synsem & [ OPT -,
+                                                              NON-LOCAL [ SLASH 0-dlist ],
+                                                              LOCAL.CAT [ VAL [ DEP2.DEP.LOCAL.CAT.HEAD noun ] ] ] ] ] ] ].
+
+basic-nomod-adposition-lex-np := nomod-adposition-lex-np & arg02_n.
+
+;LHS MWEs 11/02/15: for idiomatic prepositions (in order to avoid redundancy, I moved all that is shared by the idiomatic and non idiomatic types up one level)
+;NM 19/2/15: type name changes; arg02_ni instead of arg02_n_i
+basic-nomod-adposition-lex-np-i := nomod-adposition-lex-np & arg02_ni. 
+
+;POSS Nurit 12/2/15: special types for idiomatic prepositions that raise the possessor of their NP complement
+poss-raise-adposition-lex-np-i := basic-nomod-adposition-lex-np-i &                                                              
+    [ SYNSEM.LOCAL [ CONT.HOOK.XARG #xarg,
+                     CAT.VAL.DEP2.DEP.LOCAL.CONT.HOOK.XARG #xarg ] ].                                                             
+
+;LHS 22/12: testing adverbial PPs
+;norm-hook-lex-item & single-rel-lex-item (redundant because of arg04_r)
+basic-nomod-adposition-lex-advp := no-mod-lex & arg04_r &
+  [ SYNSEM [ LOCAL.CAT [ HEAD adp,
+    	     	         VAL [ DEP4.DEP canonical-synsem & [ OPT -,
+                                                         LOCAL [ CAT.VAL.DEP4.DEP.LOCAL.CAT.HEAD adv ],
+                                                         NON-LOCAL.SLASH 0-dlist ] ] ],
+             LKEYS.KEYREL arg14-ev-relation ]].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;prep-p hierarchy ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;===========================
+;========Literal============
+;===========================
+;LHS PPSORT: An adapted version of the prep-p hierarchy from PH's predicates_big file
+				
+prep-p := predsort.
+prep-p-l := prep-p & l-rel.
+;supertype:
+al-b-l-m-yl-ym-p := prep-p-l.
+;leaves:
+_al_p_rel := al-b-p & al-yl-p & al-l-p & al-ym-p & al-m-p.
+; TAG 11/3/15: commented-out and moved to heb-types-prep because Arabic has the same prepositions:
+;; DPF 11-may-2025 - Uncommented _l_p_rel because needed for compiling Arabic
+;_b_p_rel := b-yl-p & b-m-p & al-b-p & b-l-p & b-ym-p.
+_l_p_rel := l-yl-p & l-m-p & b-l-p & al-l-p & l-ym-p.
+_m_p_rel := l-m-p & b-m-p & m-ym-p & m-yl-p & al-m-p.
+_yl_p_rel := b-yl-p & yl-ym-p & l-yl-p & al-yl-p & m-yl-p.
+_ym_p_rel := yl-ym-p & b-ym-p & m-ym-p & l-ym-p & al-ym-p.
+
+;from PH's heb (currently, not used; When we decide to use them, we should probably move them
+;in the hierarchy to somewhere where it would be easy to distinguish between them and 
+;the above mentioned prepositions):
+_txt_p_rel := prep-p-l.
+_elid_p_rel := prep-p-l.
+_bin_p_rel := prep-p-l.
+_lpni_p_rel := prep-p-l.
+_axri_p_rel := prep-p-l.
+_im_p_rel := prep-p-l.
+;SUBJ-ARG: added _yl_idi_p_rel outside of the elaborate hierarchy, for a quick and dirty solution for by phrases (2709).:
+_yl_idi_p_rel := prep-p-l.
+
+;The actual hierarchy under al-b-l-m-yl-ym-p:
+al-b-l-m-p := al-b-l-m-ym-p & al-b-l-m-yl-p.
+al-b-l-m-yl-p := al-b-l-m-yl-ym-p.
+al-b-l-m-ym-p := al-b-l-m-yl-ym-p.
+al-b-l-p := al-b-l-ym-p & al-b-l-m-p & al-b-l-yl-p.
+al-b-l-yl-p := al-b-l-m-yl-p.
+al-b-l-ym-p := al-b-l-m-ym-p.
+al-b-m-p := al-b-m-yl-p & al-b-l-m-p & al-b-m-ym-p.
+al-b-m-yl-p := al-b-l-m-yl-p.
+al-b-m-ym-p := al-b-l-m-ym-p.
+al-b-p := al-b-l-p & al-b-yl-p & al-b-ym-p & al-b-m-p.
+al-b-yl-p := al-b-m-yl-p & al-b-l-yl-p & al-b-yl-ym-p.
+al-b-yl-ym-p := al-b-l-m-yl-ym-p.
+al-b-ym-p := al-b-l-ym-p & al-b-m-ym-p & al-b-yl-ym-p.
+al-l-m-p := al-l-m-yl-p & al-b-l-m-p & al-l-m-ym-p.
+al-l-m-yl-p := al-b-l-m-yl-p.
+al-l-m-ym-p := al-b-l-m-ym-p.
+al-l-p := al-b-l-p & al-l-m-p & al-l-ym-p & al-l-yl-p.
+al-l-yl-p := al-l-m-yl-p & al-l-yl-ym-p & al-b-l-yl-p.
+al-l-yl-ym-p := al-b-l-m-yl-ym-p.
+al-l-ym-p := al-l-yl-ym-p & al-b-l-ym-p & al-l-m-ym-p.
+al-m-p := al-l-m-p & al-b-m-p & al-m-ym-p & al-m-yl-p.
+al-m-yl-p := al-b-m-yl-p & al-m-yl-ym-p & al-l-m-yl-p.
+al-m-yl-ym-p := al-b-l-m-yl-ym-p.
+al-m-ym-p := al-m-yl-ym-p & al-l-m-ym-p & al-b-m-ym-p.
+al-yl-p := al-b-yl-p & al-yl-ym-p & al-l-yl-p & al-m-yl-p.
+al-yl-ym-p := al-m-yl-ym-p & al-l-yl-ym-p & al-b-yl-ym-p.
+al-ym-p := al-yl-ym-p & al-b-ym-p & al-l-ym-p & al-m-ym-p.
+b-l-m-p := b-l-m-ym-p & al-b-l-m-p & b-l-m-yl-p.
+b-l-m-yl-p := al-b-l-m-yl-p.
+b-l-m-ym-p := al-b-l-m-ym-p.
+b-l-p := al-b-l-p & b-l-m-p & b-l-ym-p & b-l-yl-p.
+b-l-yl-p := b-l-yl-ym-p & al-b-l-yl-p & b-l-m-yl-p.
+b-l-yl-ym-p := al-b-l-m-yl-ym-p.
+b-l-ym-p := b-l-m-ym-p & b-l-yl-ym-p & al-b-l-ym-p.
+b-m-p := b-m-ym-p & b-m-yl-p & b-l-m-p & al-b-m-p.
+b-m-yl-p := al-b-m-yl-p & b-m-yl-ym-p & b-l-m-yl-p.
+b-m-yl-ym-p := al-b-l-m-yl-ym-p.
+b-m-ym-p := b-l-m-ym-p & b-m-yl-ym-p & al-b-m-ym-p.
+b-yl-p := al-b-yl-p & b-m-yl-p & b-yl-ym-p & b-l-yl-p.
+b-yl-ym-p := b-l-yl-ym-p & b-m-yl-ym-p & al-b-yl-ym-p.
+b-ym-p := b-m-ym-p & al-b-ym-p & b-yl-ym-p & b-l-ym-p.
+l-m-p := al-l-m-p & l-m-yl-p & b-l-m-p & l-m-ym-p.
+l-m-yl-p := al-l-m-yl-p & l-m-yl-ym-p & b-l-m-yl-p.
+l-m-yl-ym-p := al-b-l-m-yl-ym-p.
+l-m-ym-p := b-l-m-ym-p & al-l-m-ym-p & l-m-yl-ym-p.
+l-yl-p := l-m-yl-p & al-l-yl-p & b-l-yl-p & l-yl-ym-p.
+l-yl-ym-p := b-l-yl-ym-p & al-l-yl-ym-p & l-m-yl-ym-p.
+l-ym-p := al-l-ym-p & b-l-ym-p & l-yl-ym-p & l-m-ym-p.
+m-yl-p := l-m-yl-p & b-m-yl-p & m-yl-ym-p & al-m-yl-p.
+m-yl-ym-p := al-m-yl-ym-p & b-m-yl-ym-p & l-m-yl-ym-p.
+m-ym-p := b-m-ym-p & m-yl-ym-p & al-m-ym-p & l-m-ym-p.
+yl-ym-p := al-yl-ym-p & b-yl-ym-p & m-yl-ym-p & l-yl-ym-p.
+
+;=============================
+;========Idiomatic============
+;=============================
+;LHS MWEs 11/02/15: a flat hierarchy for idiomatic prepositions (no disjunctions necessary)
+prep-p-i := prep-p & i-rel.
+_m_from_tree_ip_rel := prep-p-i. ;For "ird mhyc"
+;POSS Nurit 12/2/15 - ica m hklim/kliw
+_m_from_tools_ip_rel := prep-p-i. ;For "ica m kliw"
+;LHS 15/02/15: V+NPpossessive+PP
+_b_in_sand_ip_rel := prep-p-i. ;For "vmn at raew/hrae b xwl"

@@ -1,0 +1,49 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+;;;LHS: trying to implement a lexical rule (doesn't work yet)
+;;trans-to-ditrans-pp-lrule := arg123_np_pp & basic-verb-lex &
+;;[ SYNSEM [ NON-LOCAL #non-local,
+;;	   LOCAL [ CAT.HEAD #head,
+;;		 CONT #cont ] ],
+;; ARGS < arg12_np & [ SYNSEM [ NON-LOCAL #non-local,
+;;			       LOCAL [ CAT.HEAD #head,
+;;				     CONT #cont ] ] ] > ].
+
+;;trans-to-ditrans-pp-lrule := val-change-only-lex-rule &
+;;  [ ARGS < arg12_np > ].				
+
+;;The best version so far, but still problematic: (with nurit)
+;;trans-to-ditrans-pp-lrule := arg123_np_pp & basic-verb-lex & 
+;;[ SYNSEM [ NON-LOCAL #non-local,
+;;	   LOCAL [ CAT.HEAD #head,
+;;		 CONT #cont ] ],
+;;  ARGS < [ SYNSEM lex-synsem & [ LOCAL [ CONT #cont,
+;;					 CAT [ VAL.C-FRAME arg0-1-12-2,
+;;					     HEAD #head ] ],
+;;		    		 NON-LOCAL #non-local ] ] > ].
+
+;;testing				     
+;trans-to-ditrans-pp-lrule := arg123_np_pp & basic-verb-lex & 
+;[ SYNSEM [ NON-LOCAL #non-local,
+;	   LOCAL [ CAT [ HEAD #head,
+;			 HC-LIGHT #hclight,
+;			 POSTHEAD #ph,
+;			 MC #mc ],
+;		   CONT #cont,
+;		   CTXT #ctxt,
+;		   AGR #agr ],
+;	   MODIFIED #mod,
+;	   LIGHT #light ],
+; ARGS < [ SYNSEM lex-synsem & [ LOCAL [ CONT #cont,
+;					 CAT [ VAL.C-FRAME arg0-1-12-2,
+;					       HEAD #head,
+;					       HC-LIGHT #hclight,
+;					       POSTHEAD #ph,
+;					       MC #mc ],
+;					 CTXT #ctxt,
+;					 AGR #agr ],
+;		    		 NON-LOCAL #non-local,
+;				 MODIFIED #mod,
+;				 LIGHT #light ] ] > ].
+;     
+
+

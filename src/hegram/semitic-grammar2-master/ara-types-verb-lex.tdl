@@ -1,0 +1,85 @@
+;;; $Id: types-verb-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Verbs - general types for Arabic;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;; MOOD ;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; TAG 26/5/15: Adding Mood specification to tense-types (Arabic past, present, and present+future are always indicative)
+
+past-verb-lex :+ 
+ [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.MOOD indicative ].
+ 
+present-verb-lex :+ 
+[ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.MOOD indicative ].
+
+future-verb-lex :+ 
+   [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E [ MOOD indicative,
+                                      TENSE present+future ] ].  
+   
+;; DPF 11-may-2025 - Added missing ampersand to manswb-verb-lex definition.
+
+; For manswb:
+manswb-verb-lex := general-verb-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.MOOD sbj-f, 
+    SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE finite ].
+
+; For majzwm:
+majzum-verb-lex := general-verb-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.MOOD juss-f,
+    SYNSEM.LOCAL.CONT.HOOK.INDEX.E.TENSE finite ].
+
+; For an:
+subjunctive-verb-lex := general-verb-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.E.MOOD subjunctive ].
+
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;; Specific subcategorizations for Arabic ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+arg15-16-156_p_np_past_le := arg15-16-156_p_np & basic-verb-lex & past-verb-lex.
+
+arg12-123_np_np_past_le := arg12-123_np_np & basic-verb-lex & past-verb-lex.
+
+arg12-125_p_p_past_le := arg12-125_p_p & basic-verb-lex & past-verb-lex.
+  
+arg12_np_past_le := arg12_np & basic-verb-lex & past-verb-lex.
+
+arg12-13-16-123-126-1236_nc_p_p_past_le := arg12-13-16-123-126-1236_nc_p_p & basic-verb-lex & past-verb-lex.
+
+arg1-12-125_npc_p_past_le := arg1-12-125_npc_p & basic-verb-lex & past-verb-lex.
+
+arg1-12-123_p_p_past_le := arg1-12-123_p_p & basic-verb-lex & past-verb-lex.
+
+arg1-16-156_p_p_past_le := arg1-16-156_p_p & basic-verb-lex & past-verb-lex.
+ 
+arg1-12-15-125_nc_p_past_le := arg1-12-15-125_nc_p & basic-verb-lex & past-verb-lex.
+  
+arg1-12-16-125-126-156-1256_npc_p_p_past_le := arg1-12-16-125-126-156-1256_npc_p_p & basic-verb-lex & past-verb-lex.
+  
+arg12-126-1256_n_p_p_past_le := arg12-126-1256_n_p_p & basic-verb-lex & past-verb-lex.
+  
+arg123_np_np_past_le := arg123_np_np & basic-verb-lex & past-verb-lex.
+  
+arg1-12-123_n_p_past_le := arg1-12-123_n_p & basic-verb-lex & past-verb-lex.
+ 
+arg1-12-123_npc_n_past_le := arg1-12-123_npc_n & basic-verb-lex & past-verb-lex.
+
+arg12-13-123_p_n_past_le := arg12-13-123_p_n & basic-verb-lex & past-verb-lex.
+
+arg1-12_npc_past_le := arg1-12_npc & basic-verb-lex & past-verb-lex.
+ 
+arg12-123_nc_p_past_le := arg12-123_nc_p & basic-verb-lex & past-verb-lex.
+ 
+arg12-126_n_p_past_le := arg12-126_n_p & basic-verb-lex & past-verb-lex.
+
+; For an:
+arg12_v_subj-raising_sbj_le := arg12_v_subj-raising & raising-verb-lex & subjunctive-verb-lex.
+
+; For manswb:
+arg1-12_np_sbj_le := arg1-12_np & basic-verb-lex & manswb-verb-lex.
+
+  

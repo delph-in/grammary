@@ -1,0 +1,240 @@
+;;; -*- Mode: TDL; Coding: utf-8 -*-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; created at:
+;;;     Thu Dec 05 08:44:55 UTC 2013
+;;; based on Matrix customization system version of:
+;;;     Thu Oct 10 18:49:17 UTC 2013
+;;;
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Matrix Type Addenda
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;POSS LHS 10/02/15: adding the CLT feature, that marks whether something inclues a clitic (currently only used for possessive clitics)
+noun :+ [ CASE case,
+	  CLT clt-min ].
+
+clt-min := avm.
+clt := clt-min.
+no-clt := clt-min.
+;For "klbi".
+poss-clt := clt.
+;For "alinw".
+comp-clt := clt.
+;For "ahbtih".
+obj-clt := clt.
+
+; This grammar includes head-modifier rules.  To keep
+; out extraneous parses, constrain the value of MOD on
+; various subtypes of head.  This may need to be loosened later.
+; This constraint says that only adverbs, adjectives,
+; and adpositions can be modifiers.
+
++nvcdmo :+ [ MOD < > ].
+
+;$Definiteness$
++nj :+ [DEF bool].
+
+png :+ [ PER person,
+    NUM number,
+    GEND gender ].
+
+;========================
+;COPULA - add a Pron head type
+;$Agreement$ the type hierarchy below png is defined in types-png.tdl
+;The CNCRD feature needs to be introduced once, so I created an intermediate head subtype for that
+png_head := head & [CNCRD png].
++nvjdm :+ png_head.
+
+;LHS: COPULA - because we need a disjunctive type for verbs and pron:
+v_pron_head := head.
+;LHS: COPULA - because we need a disjunctive type for verbs, complementizers and pron:
+v_c_pron_head := head.
+pron := png_head & v_pron_head & v_c_pron_head.
+
+;;;;;;;;;;;;;;
+;;; Features
+;;;;;;;;;;;;;;
+
+;;; Case 
+;; TAG 11/01/15: Case moved to hebrew.tdl because Arabic has different type-hierarchy
+; case := *top*.
+; acc := case.
+; non-acc := case.
+; nom := non-acc.
+; other := non-acc.
+
+; TAG 14/1/15: new case types for hebrew & arabic
+ case := *top*.
+ non-nom := case.
+ non-acc := case.
+ acc := non-nom.
+ nom := non-acc.
+ gen := non-nom & non-acc. 
+
+;;; Person
+
+person := *top*.
+3rd := person.
+non-3rd := person.
+2nd := non-3rd.
+1st := non-3rd.
+
+;;; Number
+;; TAG 190115: adding a non-sg type for Arabic dual+plural which look the same in the non-nom CASE
+number := *top*.
+sg := number.
+non-sg := number.
+pl := non-sg.
+du := non-sg.
+
+
+;;; Gender
+
+gender := *top*.
+fem := gender.
+masc := gender.
+
+;;; Tense
+
+;TAG 15/3/15: changing the Tense hierarchy to fit Arabic (adding a future-present super type and a non-finite super type)
+;LHS: clustering all finite tenses together to enable barring of subject in infinitival clauses
+finite := tense.
+non-finite := tense.
+present+future := finite.
+present := present+future.
+infinitive := non-finite.
+past+future := finite.
+past := past+future.
+future := past+future & present+future.
+imperative := finite.
+
+;; TAG 26/5/15: add type for pro-drop
+
+;;; Mood
+; TAG 26/5/15: Adding a mood hierarchy for Arabic
+
+indicative := mood.
+subjunctive := mood.
+jussive := mood.
+sbj-f := mood.
+juss-f := mood.
+
+
+;;;;;;;;;;;;;;;;;;;
+;;; Lexical Types
+;;;;;;;;;;;;;;;;;;;
+
+; General type definitions are found here. POS-specific definitions in respective files.
+;NURIT-QUE add QUE constraint
+;LHS 2005 can't be a head feature, so moved it up
+basic-not-qpart-lex-item := lex-item & 
+  [ SYNSEM.NON-LOCAL.QUE <! !> ].
+
+; NURIT-QUE:  Just so we know - when this was the definition non-local-concat-phrase didn't work
+; [ SYNSEM.NON-LOCAL.QUE 0-dlist ].
+
+;=============================================
+; Noun types are defined in noun-lex-types
+;=============================================
+; Verb types are defined in verb-lex-types
+;=============================================
+;==============================================
+; Adjective types are defined in verb-lex-types
+;==============================================
+;=============================================
+; Adverb types are defined in adverb-lex-types
+;=============================================
+;================================================
+; Preposition types are defined in prep-lex-types
+;================================================
+
+;;; Others
+
+; We treat question particles as complementizers.
+; Here is the lexical type for complementizers.
+
+;LHS: this supertype's MC value is underspecified (luk), which will result in an underspecified MC value for the CP it is part of.
+;If the CP shouldn't be an independent clause, use the subypte nmc-complementizer-lex-item.
+;LHS: only takes finite complements (to prevent 'dni xeb e mh' for a verbal 'mh')
+;LHS: Barring complementizer stranding in topicalization & wh-complement questions (canonical-synsem for the complement)
+;LHS 10/12: no tense constraint because head-subj will take care of that
+complementizer-lex-item := raise-sem-lex-item &
+  [ SYNSEM.LOCAL.CAT [ HEAD comp &
+                            [ MOD < > ],
+                       VAL [ R-FRAME arg2,
+                             DEP1.REAL arg1-,
+                             DEP2 [ REAL arg2-,
+                                    DEP canonical-synsem & [ LOCAL [ CAT [ MC +,
+                                                                     HEAD v_pron_head,
+                                                                     VAL [ R-FRAME #link,
+                                                                           DEP1.REAL #link,
+                                                                           DEP2.REAL #link,
+                                                                           DEP3.REAL #link,
+                                                                           DEP4.REAL #link,
+                                                                           DEP4.REAL #link,
+                                                                           DEP6.REAL #link ] ] ] ] ],
+                             DEP3.REAL arg3-,
+                             DEP4.REAL arg4-,
+                             DEP5.REAL arg5-,
+                             DEP6.REAL arg6- ] ] ].
+
+; Subtype for question particles. Constrains SF to ques. LHS: changes to "yes-no" in order to free qpart-lex-item for actual que particles.
+qpart-yes-no-lex-item := complementizer-lex-item &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.SF ques ].
+
+
+;LHS: Subtype for complementizers that create non-independent CPs.
+nmc-complementizer-lex-item := complementizer-lex-item &
+  [ SYNSEM.LOCAL.CAT.MC - ].
+
+;NURIT-QUE - commented out QUE
+;LHS: QUE supertype for non yes-no questions - the leaves are in specific pos type files.
+;LHS 1505 REVIVED new version
+qpart-lex-item := no-hcons-lex-item &
+  [ SYNSEM [ LOCAL #loc & [ CAT [VAL [ 	DEP3.REAL arg3-,
+			      		DEP4.REAL arg4-,
+			      		DEP5.REAL arg5-,
+			      		DEP6.REAL arg6- ] ] ],
+	     NON-LOCAL [ SLASH 0-dlist ,
+	     		 QUE <! #loc !> ] ] ].
+	     		 
+	     		 
+; NURIT-QUE: Just so we know - when this was the definition non-local-concat-phrase didn't work
+;	     		 QUE 1-dlist & [ LIST < #loc > ] ] ] ].
+
+;RELS <! #rel & relation !>
+
+
+;LHS 1505 REVIVED new version
+np-vp-cp-qpart-lex-item := qpart-lex-item & single-rel-lex-item & norm-hook-lex-item.
+
+;LHS & NM: the mrs for this can't directly mirror the mrs of its counterpart (no-icons-lex-item path clashes), but this results in a correct
+;mrs. + added the event-relation so that ARG0 will be an event
+cp-qpart-lex-item := np-vp-cp-qpart-lex-item &
+  [ SYNSEM [ LOCAL [ CONT.HOOK.INDEX event & [ E.TENSE finite ], 
+		     CAT [ HEAD comp,
+		         VAL [ R-FRAME arg2,
+			       DEP1.REAL arg1-,
+		         DEP2.REAL arg2+ ] ] ],
+	     LKEYS.KEYREL event-relation ] ].
+	     
+
+;;;;;;;;;;;;;;;;;;;
+;;; Lexical Rules
+;;;;;;;;;;;;;;;;;;;
+
+;;; Lexical rule types
+;; no lexical rules so far (but the ones that originated in matrix.tdl are in lexical-rules.tdl)
+
+;;;;;;;;;;;;;;;;;;;
+;;; Phrasal Types
+;;;;;;;;;;;;;;;;;;;
+; in phrasal-types.tdl
+
+;;;;;;;;;;;;;;;;;;
+;;; Coordination
+;;;;;;;;;;;;;;;;;;
+; In coordination-types.tdl

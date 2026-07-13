@@ -1,0 +1,53 @@
+;;; $Id: types-adv-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;;; Adverbs
+
+basic-adverb-lex := raise-index-mod-lex-item & single-rel-not-qpart-lex-item &
+  [ SYNSEM [ LOCAL.CAT.HEAD adv,
+	     LKEYS.KEYREL event-relation ]].
+
+basic-scopal-adverb-lex := basic-adverb-lex & scopal-mod-lex.
+basic-int-adverb-lex := basic-adverb-lex & intersective-mod-lex.
+
+; Type for negative adverbs.
+; 
+; This adverb should go through a specialized phrase structure rule
+;        included with this grammar.
+
+;NURIT-TEMPORARILY COMMENTED OUT
+;LHS 08/02/15: REVIVED: changed VAL to fullval+no-arg, the modified element to v_pron_head (instead of verb),
+;and has MC - (instead of referring to SUBJ). This is preliminary, we'll have to reconsider the details when
+;we deal with negation.
+neg-adv-lex := basic-scopal-adverb-lex &
+  [ SYNSEM.LOCAL.CAT [ VAL fullval & [ R-FRAME no-arg ],
+                       POSTHEAD -,
+                       HEAD.MOD < [ LOCAL.CAT [ HEAD v_pron_head,
+						MC - ] ] > ] ].
+
+;LHS: adverbs
+;LHS: COPULA - changed to enable adverbs to also modify pron
+adverb-lex := basic-int-adverb-lex &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD [MOD < [ LOCAL.CAT [ HEAD v_pron_head ] ] > ],
+			   VAL fullval & [ R-FRAME no-arg ],
+			   POSTHEAD + ] ],
+	     NON-LOCAL.SLASH 0-dlist ] ].
+
+
+;LHS: adverbial qprt-lex-item for copulas with an adverbial predicate.
+advp-qpart-lex-item := qpart-lex-item & intersective-mod-lex & basic-adverb-for-qpart-lex &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD [ MOD < [ LOCAL.CAT [ HEAD v_pron_head ] ] > ],
+			   VAL fullval & [ R-FRAME no-arg,
+				 DEP1.REAL arg1-,
+			         DEP2.REAL arg2- ],
+			   POSTHEAD + ] ],
+	     NON-LOCAL.SLASH 0-dlist ] ].
+
+
+
+	     		 
+
+
+;LHS adverbial qpart-lex-item
+basic-adverb-for-qpart-lex := raise-index-mod-lex-item & single-rel-lex-item &
+  [ SYNSEM [ LOCAL.CAT.HEAD adv,
+	     LKEYS.KEYREL event-relation ]].    

@@ -1,0 +1,67 @@
+;;; $Id: types-adj-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;;;  Arabic Adjectives
+
+;; TAG 25/1/15: Arabic has three dimensions of structure-sharing between nouns and their adjectival modifiers:
+; agreement (CNCRD), definiteness (DEF), and case (CASE). The CASE structure-sharing is added in adjective-lex here:
+
+adjective-lex :+  [ SYNSEM [ LOCAL [ CAT [ HEAD [ CASE #case,
+												  MOD < [ LOCAL.CAT.HEAD.CASE #case ] > ] ] ] ] ].
+
+;==========================================
+;===== Adjective lexeme specification =====
+;==========================================
+
+;DIMENSION 1: Agreement 
+; TAG 11/2/15: changed adjective lexemes to inherit from the underspecified for person nominal types (for predicative use).
+; Adjectives are now underspecified for person.
+; TAG 26/1/15: adding dual agreement:
+
+def-pdm-adj-lex := def-adj-lex & pdm-nominal-lex.
+def-dm-adj-lex := def-adj-lex & dm-nominal-lex.
+def-df-adj-lex := def-adj-lex & df-nominal-lex.
+
+indef-pdm-adj-lex := indef-adj-lex & pdm-nominal-lex.
+indef-dm-adj-lex := indef-adj-lex & dm-nominal-lex.
+indef-df-adj-lex := indef-adj-lex & df-nominal-lex.
+
+; DIMENSION 2: CASE 
+; TAG 26/1/15:  The case specification of Arabic adjectives is added to the types-adj-lex types which are already 
+; specified for DEF and CNCRD:
+
+; ==== Singular =====
+acc-indef-sm-adj-lex := indef-sm-adj-lex & accusative-lex. 
+nonacc-indef-sm-adj-lex := indef-sm-adj-lex & non-accusative-lex. 
+
+acc-indef-sf-adj-lex := indef-sf-adj-lex & accusative-lex.
+nonacc-indef-sf-adj-lex := indef-sf-adj-lex & non-accusative-lex.
+
+; ==== Broken Plurals =====
+acc-indef-pm-adj-lex := indef-pm-adj-lex & accusative-lex. 
+nonacc-indef-pm-adj-lex := indef-pm-adj-lex & non-accusative-lex. 
+
+acc-indef-pf-adj-lex := indef-pf-adj-lex & accusative-lex.
+nonacc-indef-pf-adj-lex := indef-pf-adj-lex & non-accusative-lex.
+
+; ==== Sound Plurals ======
+nom-def-pm-adj-lex := def-pm-adj-lex & nominative-lex.
+nonnom-def-pm-adj-lex := def-pm-adj-lex & non-nominative-lex.
+
+nom-indef-pm-adj-lex := indef-pm-adj-lex & nominative-lex.
+nonnom-indef-pm-adj-lex := indef-pm-adj-lex & non-nominative-lex.
+
+; ==== Duals ======
+nom-def-dm-adj-lex := def-dm-adj-lex & nominative-lex.
+nonnom-def-dm-adj-lex := def-dm-adj-lex & non-nominative-lex.
+nom-indef-dm-adj-lex := indef-dm-adj-lex & nominative-lex.
+nonnom-indef-dm-adj-lex := indef-dm-adj-lex & non-nominative-lex.
+
+nom-def-df-adj-lex := def-df-adj-lex & nominative-lex.
+nonnom-def-df-adj-lex := def-df-adj-lex & non-nominative-lex.
+nom-indef-df-adj-lex := indef-df-adj-lex & nominative-lex.
+nonnom-indef-df-adj-lex := indef-df-adj-lex & non-nominative-lex.
+
+nonnom-def-pdm-adj-lex := def-pdm-adj-lex & non-nominative-lex.
+nonnom-indef-pdm-adj-lex := indef-pdm-adj-lex & non-nominative-lex.
+
+								

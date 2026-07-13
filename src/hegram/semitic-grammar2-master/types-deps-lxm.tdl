@@ -1,0 +1,614 @@
+;;; $Id: types-dep-lxm.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;ARGUMENT-FRAMES: added the link type
+link := predsort.
+
+;NURIT - QEQ all verbs will be no-hcons and the qeq will be introduced in the phrase definitions
+;LHS + NM: making this hierarchy category neutral
+top-deps-lxm := norm-sem-lex-item & non-mod-lex-item & no-hcons-lex-item &
+	[ SYNSEM.LOCAL.CAT.VAL [ DEP1.REAL arg1-,
+				 DEP2.REAL arg2-,
+				 DEP3.REAL arg3-,
+				 DEP4.REAL arg4-,
+				 DEP5.REAL arg5-,
+				 DEP6.REAL arg6- ] ].
+
+;;;;;;;;;;;;;
+;;;no-arg;;;;
+;;;;;;;;;;;;;
+;note that the link type no-arg currently doesn't differ from arg0
+no-arg-top := top-deps-lxm &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME no-arg ].
+
+;;;;;;;;;;;;;;;;;;   
+;;;arg1-related;;;
+;;;;;;;;;;;;;;;;;;
+arg1_top := top-deps-lxm.
+
+;SUBJ-ARG - no longer includes CNCRD between the subject and its verb
+;Includes the specification of the subject as arg1
+;LHS 0710: now includes the structure sharing of the mother's XARG with the HOOK.INDEX of DEP1 (because otherwise, the arg1 of 'lakwl' in 'dni hbvix l dnh lnswt lakwl' was unidentified)
+;LHS MWEs 11/02/15: restricting verbs to only accept non-idiomatic arg1 nps (currently, our idiomatic verbs will inherit from it as well)
+;NM 3/9/15: subj1-subj2 fix:  add SUBJ-DEP. Also - the coindexation of arg1 in toprel with xarg is not good for raising 
+;because a raising verb doesn't have an arg1.
+;so I split arg1_np to two subtypes and added a layer above
+arg1_np_top := arg1_top &
+  [ SYNSEM.LOCAL [ CONT.HOOK [  XARG #xarg ],
+		   CAT [ VAL [  DEP1 #subj & [ DEP.LOCAL [  CAT [ HEAD noun ],
+                                                CONT.HOOK [ TOPREL.PRED l-rel,
+                                                                INDEX #xarg ] ] ],
+                        SUBJ-DEP #subj,
+                        SUBJ-ARG arg1 ] ] ] ].                     
+                        
+arg1_np := arg1_np_top &
+[ SYNSEM.LOCAL [ CONT.HOOK [  TOPREL.ARG1 #xarg,
+                                XARG #xarg ] ] ].
+                                
+ 
+
+arg1_np_raising := arg1_np_top.
+
+;SUBJ-ARG: For passive 
+;LHS MWEs 11/02/15: no need to restrict any further, since this PRED inherits from l-rel
+arg1_pp := arg1_top &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP1.DEP.LOCAL [ CONT.HOOK.TOPREL.PRED _yl_idi_p_rel,
+                                      CAT.HEAD adp ] ].
+
+;; Nurit 26/10
+;;; define ARGs in the semantic relation even when they are not realized (e.g., ARG2 for `eat' even when intransitive)
+;;; introduce feature in the maximal disjunctive type
+
+;;;;;;;;;;;;;;;;;;
+;;;arg2-related;;;
+;;;;;;;;;;;;;;;;;;
+;The disjunctive super-type for all arg2 verbs, except object to subject raising ones:
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg2_cp-vp-np-pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG2 semarg, 
+  		   CAT.VAL.DEP2.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                    CAT.HEAD +nvpc ] ] ] ] .
+
+;LHS 2910: a supertype for subject to object raising verbs (doesn't introduce TOPREL.ARG2):
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg2_raised_np := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP2.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                              CAT.HEAD noun ] ] ] ].
+
+arg2_vp-np-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +nvp ] ].
+arg2_cp-vp-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +vpc ] ].
+arg2_cp-np-pp := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +npc ] ].
+arg2_cp-vp-np := arg2_cp-vp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +nvc ] ].
+arg2_vp-np := arg2_vp-np-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +nv ] ].
+arg2_np-pp := arg2_vp-np-pp & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +np ] ].
+arg2_cp-np := arg2_cp-np-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +nc ] ].
+arg2_vp-pp := arg2_vp-np-pp & arg2_cp-vp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +vp ] ].
+arg2_cp-vp := arg2_cp-vp-pp & arg2_cp-vp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +vc ] ].
+arg2_cp-pp := arg2_cp-np-pp & arg2_cp-vp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP2.DEP [ LOCAL.CAT.HEAD +pc ] ].
+arg2_np := arg2_vp-np & arg2_np-pp & arg2_cp-np.
+arg2_pp := arg2_np-pp & arg2_vp-pp & arg2_cp-pp.
+arg2_cp := arg2_cp-np & arg2_cp-vp & arg2_cp-pp.
+;This should only be for infinitival VPs (defined in types-phrasal)
+arg2_vp := arg2_vp-np & arg2_vp-pp & arg2_cp-vp.
+
+;LHS MWEs 11/02/15: idiomatic leaves
+arg2_np_i := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG2 semarg,
+                   CAT.VAL.DEP2.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED i-rel,
+                                              CAT.HEAD noun ] ] ] ].
+    
+
+;;;;;;;;;;;;;;;;;;
+;;;arg3-related;;;
+;;;;;;;;;;;;;;;;;;
+;The disjunctive super-type for all arg3 verbs, except object to subject raising ones:
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg3_np-pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG3 semarg, 
+                   CAT.VAL.DEP3.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                              CAT.HEAD +np ] ] ] ].
+                   
+;LHS 2910: two supertypes for subject to object raising verbs (doesn't introduce TOPREL.ARG3):
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements (unneccesary for the PP, because _l_p_rel inherits form l-rel)
+arg3_raised_np := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP3.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                              CAT.HEAD noun ] ] ] ].
+arg3_raised_pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL.DEP3.DEP [ LOCAL.CAT.HEAD adp,
+                                  LOCAL.CONT.HOOK.TOPREL.PRED _l_p_rel ] ] ].  			
+				
+;LHS: the pos head is required here, otherwise these following two types are indistinguishable
+arg3_np := arg3_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP3.DEP [ LOCAL.CAT.HEAD noun ] ].
+;LHS 0510: added the restricion of TOPREL.PRED (used to be in types-phrasal)
+;arg3_pp := arg3_np-pp & 
+;  [ SYNSEM.LOCAL.CAT.VAL.DEP3.DEP.LOCAL [ CONT.HOOK.TOPREL.PRED _l_p_rel,
+;				      CAT.HEAD adp ] ].
+; TAG 11/3/15: the general arg3_pp type in types-deps does not include the constraint the preposition has to be "l", because this is not true for Arabic.
+arg3_pp := arg3_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP3.DEP.LOCAL.CAT.HEAD adp ].
+
+;;;;;;;;;;;;;;;;;;
+;;;arg4-related;;;
+;;;;;;;;;;;;;;;;;;
+;LHS 1910: introducing vp (beinoni) to arg4
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg4_advp-adjp-pp-np-vp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG4 semarg, 
+                   CAT.VAL.DEP4.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                              CAT.HEAD +nvjrp ] ] ] ].
+
+arg4_advp-adjp-pp-np := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +njrp ] ].
+
+arg4_adjp-pp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvjp ] ].
+
+arg4_advp-pp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvrp ] ].
+
+arg4_advp-adjp-pp-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vjrp ] ].
+
+arg4_advp-adjp-np-vp := arg4_advp-adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvjr ] ].
+
+arg4_advp-adjp-np := arg4_advp-adjp-pp-np & arg4_advp-adjp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +njr ] ].
+
+arg4_advp-pp-np := arg4_advp-adjp-pp-np & arg4_advp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nrp ] ].
+
+arg4_advp-adjp-pp := arg4_advp-adjp-pp-np & arg4_advp-adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +jrp ] ].
+
+arg4_adjp-pp-np := arg4_advp-adjp-pp-np & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +njp ] ].
+
+arg4_adjp-np-vp := arg4_advp-adjp-np-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvj ] ].
+
+arg4_advp-adjp-vp := arg4_advp-adjp-np-vp & arg4_advp-adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vjr ] ].
+
+arg4_advp-np-vp := arg4_advp-adjp-np-vp & arg4_advp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvr ] ].
+
+arg4_advp-pp-vp := arg4_advp-adjp-pp-vp & arg4_advp-pp-np-vp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vrp ] ].
+
+arg4_adjp-pp-vp := arg4_advp-adjp-pp-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vjp ] ].
+
+arg4_pp-np-vp := arg4_advp-pp-np-vp & arg4_adjp-pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nvp ] ].
+
+arg4_advp-adjp := arg4_advp-adjp-pp & arg4_advp-adjp-np & arg4_advp-adjp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +jr ] ].
+
+arg4_adjp-pp := arg4_advp-adjp-pp & arg4_adjp-pp-np & arg4_adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +jp ] ].
+
+arg4_advp-pp := arg4_advp-adjp-pp & arg4_advp-pp-np & arg4_advp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +rp ] ].
+
+arg4_advp-np := arg4_advp-pp-np & arg4_advp-adjp-np & arg4_advp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nr ] ].
+
+arg4_adjp-np := arg4_adjp-pp-np & arg4_advp-adjp-np & arg4_adjp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nj ] ].
+
+arg4_pp-np := arg4_adjp-pp-np & arg4_advp-pp-np & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +np ] ].
+
+arg4_np-vp := arg4_adjp-np-vp & arg4_advp-np-vp & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +nv ] ].
+
+arg4_adjp-vp := arg4_adjp-np-vp & arg4_advp-adjp-vp & arg4_adjp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vj ] ].
+
+arg4_advp-vp := arg4_advp-adjp-vp & arg4_advp-np-vp & arg4_advp-pp-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vr ] ].
+
+arg4_pp-vp := arg4_advp-pp-vp & arg4_adjp-pp-vp & arg4_pp-np-vp &
+  [ SYNSEM.LOCAL.CAT.VAL.DEP4.DEP [ LOCAL.CAT.HEAD +vp ] ].
+
+arg4_adjp := arg4_adjp-pp & arg4_advp-adjp & arg4_adjp-np & arg4_adjp-vp.
+
+arg4_advp := arg4_advp-pp & arg4_advp-adjp & arg4_advp-np & arg4_advp-vp.
+
+arg4_pp := arg4_adjp-pp & arg4_advp-pp & arg4_pp-np & arg4_pp-vp.
+
+arg4_np := arg4_pp-np & arg4_advp-np & arg4_adjp-np & arg4_np-vp.
+
+;This should be only for beinoni (defined in types-phrasal)
+arg4_vp := arg4_advp-vp & arg4_adjp-vp & arg4_pp-vp & arg4_np-vp.
+
+
+;;;;;;;;;;;;;;;;;;
+;;;arg5-related;;;
+;;;;;;;;;;;;;;;;;;
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg5_advp-pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG5 semarg, 
+                   CAT.VAL.DEP5.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                              CAT.HEAD +rp ] ] ] ].
+				
+arg5_advp := arg5_advp-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP5.DEP [ LOCAL.CAT.HEAD adv ] ].
+
+;LHS: currently doesn't restrict prepositions, because it includes location, which is rather general
+;The actual verb should select its preposition
+arg5_pp := arg5_advp-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.DEP5.DEP.LOCAL [ CAT.HEAD adp ] ].
+
+;LHS MWEs 11/02/15: idiomatic leaves
+arg5_pp_i := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG5 semarg,
+                   CAT.VAL.DEP5.DEP [ LOCAL [ CONT.HOOK.TOPREL.PRED i-rel,
+                                              CAT.HEAD adp ] ] ] ].
+
+;; DPF 11-may-2025 - Uncommented, since there are still subtypes of this type
+;; defined in this file and apparently needed for compiling the Arabic grammar.
+
+;;;;;;;;;;;;;;;;;;
+;;;arg6-related;;;
+;;;;;;;;;;;;;;;;;;
+; TAG 10/3/15: Commented-out and moved to heb-types-deps-lex because in Arabic arg6 can be NP and AdvP (and because the preps are different)
+;LHS: currently restricts for 'yl' (topic) and 'l'/'al' (goal) 
+;The actual verb can select more specifically
+;LHS MWEs 11/02/15: because it currently selects a specific preposition type that inherits from l-rel, there's no need to add anything
+arg6_pp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG6 semarg,
+                   CAT.VAL.DEP6.DEP.LOCAL[ CONT.HOOK.TOPREL.PRED al-l-yl-p,
+                                          CAT.HEAD adp ] ] ].
+                                           
+;;;;;;;;;;;
+;;;Misc.;;;
+;;;;;;;;;;;
+;A type for arg2 subjects
+;No longer includes CNCRD
+;NM 3/9/15: subj1-subj2 fix: coindex arg2 in toprel with xarg
+;arg2_subject := arg2_np &
+;  [ SYNSEM.LOCAL [ CAT [ VAL [ SUBJ-ARG arg2,
+;			                   DEP2.DEP.LOCAL [ CONT.HOOK.INDEX #xarg ] ] ],
+;		           CONT.HOOK.TOPREL.XARG #xarg ] ].
+
+arg2_subject := arg2_np &
+  [ SYNSEM.LOCAL [ CAT [ VAL [ SUBJ-ARG arg2,
+                               SUBJ-DEP #subj, 
+			                   DEP2 #subj & [ DEP.LOCAL [ CONT.HOOK.INDEX #xarg ] ] ] ],
+		           CONT.HOOK [  TOPREL.ARG2 #xarg,
+                                XARG #xarg ] ] ].
+
+
+;LHS 20/11/14 complex predicates (XCOMP)
+;Basically, this type has an argxc R-FRAME, and all of its deps are unifiable with its XCOMP's deps (which must be a verb), which are not yet realized.
+;LHS MWEs 11/02/15: restricting non-idiomatic verbs to only accept non-idiomatic complements
+arg_xcomp := top-deps-lxm &
+  [ SYNSEM.LOCAL [ CAT.VAL [ R-FRAME argxc,
+                             DEP1 #dep1,
+                             DEP2 #dep2,
+                             DEP3 #dep3,
+                             DEP4 #dep4,
+                             DEP5 #dep5,
+                             DEP6 #dep6,
+                             XCOMP [ DEP.LOCAL [ CONT.HOOK.TOPREL.PRED l-rel,
+                                                 CAT [ HEAD verb,
+                                                   VAL [ DEP1 #dep1 & [ REAL arg1- ],
+                                                         DEP2 #dep2 & [ REAL arg2- ],
+                                                         DEP3 #dep3 & [ REAL arg3- ],
+                                                         DEP4 #dep4 & [ REAL arg4- ],
+                                                         DEP5 #dep5 & [ REAL arg5- ],
+                                                         DEP6 #dep6 & [ REAL arg6- ] ] ] ] ] ] ] ].                                           
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;inter-argument linking;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Interargument linking for verbs that take dep4:
+dep4-dep1-link := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP1.DEP [ LOCAL.CONT.HOOK.INDEX #ind ],
+	                   DEP4.DEP [ LOCAL [  CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+;dep4-dep2-raising := lex-item &
+;  [ SYNSEM.LOCAL.CAT.VAL [ DEP2.DEP [ LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ],
+;	                   DEP4.DEP [ LOCAL [  CAT.VAL.DEP1.DEP.LOCAL #subj,
+;					   CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+;LHS 120915: expanding subj1-subj2 fix:	Don't force the VP complement to have arg1 (raising)
+;Note: this enables correct subject to object raising for rah with a beinoni complement (regardless of the subject type of the main verb), 
+;but the issue of other complement types in general (e.g. adjp, advp, pp, np) is still unresolved (mca, inherits from dep4-dep2-raising, and
+;yeh, inherits from dep4-dep3-raising). Also, note that there is no mandatory agreement between both complements ('dni rah at dnh awkl' gets a parse).
+;This addition seems to enable a parse for the ungrammatical "hild mca at hxlwn gdwlh", and other changes (see commit comment from september 16, or email 
+;entitled Expanding Nurit's fix of the subj1-subj2 problem).
+dep4-dep2-raising := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP2.DEP [ LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ],
+                           DEP4.DEP [ LOCAL [  CAT.VAL.DEP1.DEP.LOCAL #subj,
+                                               CONT.HOOK [ XARG #ind ] ] ] ] ].
+					   
+dep4-dep3-raising := lex-item &
+  [ SYNSEM.LOCAL.CAT.VAL [ DEP3.DEP [ LOCAL #subj & [ CONT.HOOK.INDEX #ind ] ],
+	                   DEP4.DEP [ LOCAL [  CAT.VAL.DEP1.DEP.LOCAL #subj,
+					   CONT.HOOK [ TOPREL.ARG1 #ind ] ] ] ] ].
+  
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Simple pre-LE types;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Simple pre-LE types appear here (i.e., ones that only specify R-FRAME in addition to inheriting from relevant super-types)
+;;;Complex pre-LE types appear in types-verb-lex (i.e., ones that add additional information)
+
+
+;LHS 0210: adding np to arg4
+;LHS 1910: took out the structure sharing with the subject to a separate type (dep4-dep1-link)
+;For copula:
+arg12-14_vc_njrp := arg1_np & arg2_cp-vp & arg4_advp-adjp-pp-np & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-14 ].
+
+;For prepositions (doesn't require a new type of link, so it's ok that it doesn't have a descendent in types-verb-lex)
+arg02_n := arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].
+;LHS 22/12: testing adverbial PPs  
+arg04_r := arg4_advp &  
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg4 ].
+;For non control complements of subject control verbs (hbvix)
+arg123_nc_p := arg1_np & arg2_cp-np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].  
+;For non control nish
+arg1-12_n := arg1_np & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For xeb
+arg1-12_c := arg1_np & arg2_cp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For akl
+arg1-12_np := arg1_np & arg2_np-pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For hbin
+arg1-12_nc := arg1_np & arg2_cp-np & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].  
+;For ebr
+arg12_n := arg1_np & arg2_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+;For hclix
+arg12_p := arg1_np & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+;For hxliv
+arg12_pc := arg1_np & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;SUBJ-ARG: For passive (can have a by phrase but don't have to). arg2 is specified as a subject here.
+arg12-2_p := arg1_pp & arg2_subject & 
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG1 semarg,
+		   CAT.VAL.R-FRAME arg12-2 ] ].
+		   
+; TAG 10/3/15: for Arabic passives (no al-yedey):
+arg2_pass := arg2_subject & 
+  [ SYNSEM.LOCAL [ CONT.HOOK.TOPREL.ARG1 semarg,
+		   CAT.VAL.R-FRAME arg2 ] ].
+		   
+;For unaccusatives:
+arg2_unacc := arg2_subject &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].
+  		   
+;ica
+arg1-14_a := arg1_np & arg4_advp-adjp-pp-np-vp & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-14 ].
+arg1-14-15-16-145-146-156-1456_njp_p_p := arg1_np & arg4_adjp-pp-np & arg5_pp & arg6_pp & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-14-15-16-145-146-156-1456 ].
+arg145_njp_p := arg1_np & arg4_adjp-pp-np & arg5_pp & dep4-dep1-link & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg145 ].
+arg146_njp_p := arg1_np & arg4_adjp-pp-np & arg6_pp & dep4-dep1-link & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg146 ].
+arg1456_njp_p_p := arg1_np & arg4_adjp-pp-np & arg5_pp & arg6_pp & dep4-dep1-link & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1456 ].
+arg14_njp := arg1_np & arg4_adjp-pp-np & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].
+;For gilh
+arg12_nc := arg1_np & arg2_cp-np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;LHS 0510: For current rch (with PP, and VP is elsewhere) 
+arg12_npc := arg1_np & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+  
+;TAG 16/3/15: For Arabic non-control qlb:
+arg12_np := arg1_np & arg2_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+;For previous xeb (no arg6)
+arg1-12_pc := arg1_np & arg2_cp-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+; For arabic qr2r (decide)
+arg1-12_npc := arg1_np & arg2_cp-np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+;For npl
+arg1_basic := arg1_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1 ].
+;For previous nsy
+arg14_p := arg1_np & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].
+;For previous hnix
+arg124_n_p := arg1_np & arg2_np & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg124 ].
+;For previous hakil
+arg123_n_n := arg1_np & arg2_np & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+arg123_n_p := arg1_np & arg2_np & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+;For ntn
+arg12-123_n_p := arg1_np & arg2_np & arg3_pp & 
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123 ].
+;For Arabic 1y5a (ntn)
+arg12-123_np_np := arg1_np & arg2_np-pp & arg3_np-pp &
+	[ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123 ].
+; For Arabic syd (yzr)
+arg12-13-123_p_n := arg1_np & arg2_pp & arg3_np &
+	[ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-123 ].
+;For Arabic yr8 (present)
+arg12-123_nc_p := arg1_np & arg2_cp-np & arg3_pp &
+	[ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123 ].
+;For previous qnh
+arg12-123-124_n_p_p := arg1_np & arg2_np & arg3_pp & arg4_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123-124 ].
+  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;New types in expanded system;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+arg1-12_p := arg1_np & arg2_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12 ].
+; TAG: added new type for Arabic non-control smh:
+arg1-12-123_p_p := arg1_np & arg2_pp & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-123 ].
+; TAG: added new type for Arabic non-control 1ntxb:
+arg1-12-123_n_p := arg1_np & arg2_np & arg3_pp &
+ [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-123 ].
+; TAG: added new type for Arabic s1l:
+arg1-12-123_npc_n := arg1_np & arg2_cp-np-pp & arg3_np &
+ [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-123 ].
+arg12-123-126-1236_nc_p_p := arg1_np & arg2_cp-np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123-126-1236 ].
+arg16_p := arg1_np & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg16 ].
+arg15_p := arg1_np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg15 ].
+arg156_p_p := arg1_np & arg5_pp & arg6_pp &  
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg156 ].
+arg15-16-156_p_p := arg1_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg15-16-156 ].
+; TAG 16/3/15: for Arabic thw2l
+arg1-16-156_p_p := arg1_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-16-156 ].
+arg126_nc_p := arg1_np & arg2_cp-np & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg126 ].
+arg126_n_p := arg1_np & arg2_np & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg126 ].
+; TAG 18/3/15: for Arabic 1rsl (elx):
+arg12-126-1256_n_p_p := arg1_np & arg2_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-126-1256 ].
+; For Arabic dya (invite)
+arg12-126_n_p := arg1_np & arg2_np & arg6_pp &
+ [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-126 ].
+arg1236_nc_p_p := arg1_np & arg2_cp-np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1236 ].
+arg125_n_p := arg1_np & arg2_np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg125 ].
+arg12-123-125_n_p_p := arg1_np & arg2_np & arg3_pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-123-125 ].
+arg1-12-16_c_p := arg1_np & arg2_cp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16 ].
+arg12-13_pc_p := arg1_np & arg2_cp-pp & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13 ].
+arg13-123_n_n := arg1_np & arg2_np & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13-123 ].
+; TAG 16/3/15: adding a type for Arabic ktb:
+arg12-13-16-123-126-1236_nc_p_p := arg1_np & arg2_cp-np & arg3_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-13-16-123-126-1236 ].
+; TAG 18/3/15: adding a type for Arabic 1rsl (elx)
+arg123_np_np := arg1_np & arg2_np-pp & arg3_np-pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg123 ].
+arg13_n := arg1_np & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg13 ].
+arg1-15-16-156_p_p := arg1_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-15-16-156 ].
+arg12-125_n_p := arg1_np & arg2_np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-125 ].
+; TAG 16/3/15: Adding a type for Arabic fom (understand):  
+arg1-12-125_npc_p := arg1_np & arg2_cp-np-pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-125 ].
+; TAG 16/3/15: Adding a type for Arabic smy (hear):  
+arg1-12-16-125-126-156-1256_npc_p_p := arg1_np & arg2_cp-np-pp & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-16-125-126-156-1256 ].
+; TAG 16/3/15: Adding a type for Arabic tyl2m (learn):    
+arg1-12-15-125_nc_p := arg1_np & arg2_cp-np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1-12-15-125 ].
+; TAG 16/3/15: Adding a type for Arabic hcl yla:
+arg12-125_p_p := arg1_np & arg2_pp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-125 ].
+arg12-125_nc_p := arg1_np & arg2_cp-np & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-125 ].
+arg1256_n_p_p := arg1_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg1256 ].
+arg12-125-126-1256_n_p_p := arg1_np & arg2_np & arg5_pp & arg6_pp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12-125-126-1256 ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Special supertypes;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;LHS: These are types that have pre-LE types in types-verb-lex
+
+;Both DEP2 subject control and DEP2 subject raising verbs will inherit from this general type (see types-verb-lex)
+;NM 3/9/15: subj1-subj2 fix:  only subject control will inherit from this. 
+;Subject raising will inherit from arg1_np_raising which doesn't refer to arg1
+arg12_v := arg1_np & arg2_vp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+arg12_v_raising := arg1_np_raising & arg2_vp &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+
+  
+;For DEP4 subject raising
+arg14_j := arg1_np & arg4_adjp & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].  
+
+;;LHS 070915: expanding subj1-subj2 fix: now inherits from arg1_np_raising, instead of arg1_np, since we don't want semantic arg1 linking.
+;;Otherwise, "nrah" had an arg1 in its mrs, while it should be subject to subject raising.
+;arg14_njr := arg1_np & arg4_advp-adjp-np & dep4-dep1-link &
+;  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].
+arg14_njr := arg1_np_raising & arg4_advp-adjp-np & dep4-dep1-link &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg14 ].
+
+;For DEP2 subject-to-object raising DEP4 verbs
+arg124_n_v := arg1_np & arg2_raised_np & arg4_vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT [ VAL [ R-FRAME arg124 ] ] ].
+arg124_n_a := arg1_np & arg2_raised_np & arg4_advp-adjp-pp-np-vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg124 ] ].		
+; TAG 10/3/15: for Arabic obj-raising r1a:
+arg124_n_nvp := arg1_np & arg2_raised_np & arg4_pp-np-vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg124 ] ].	  
+; TAG 10/3/15: for Arabic obj-raising wjd:
+arg124_n_nvjp := arg1_np & arg2_raised_np & arg4_adjp-pp-np-vp & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg124 ] ]. 
+; TAG 10/3/15: for Arabic obj-raising 1rad:
+arg124_n_np := arg1_np & arg2_raised_np & arg4_pp-np & dep4-dep2-raising &
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg124 ] ].   
+
+
+;For DEP3 subject-to-object raising DEP4 verbs
+arg134_n_nj := arg1_np & arg3_raised_np & arg4_adjp-np & dep4-dep3-raising & 
+  [ SYNSEM.LOCAL.CAT.VAL [ R-FRAME arg134 ] ].
+  
+;Both subject-control verbs with PP DEP3 objects and object control verbs with PP DEP3 objects will inherit from this general type (see types-verb-lex)
+arg123_v_p := arg1_np & arg2_vp & arg3_pp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg123 ] ].
+;Both subject-control verbs with NP DEP3 objects (we don't have any yet) and object control verbs with NP DEP3 objects can inherit 
+;from this general type (see types-verb-lex)
+arg123_v_n := arg1_np & arg2_vp & arg3_np &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg123 ] ].
+;Same as above, but for PP DEP5 control verbs
+arg125_v_p := arg1_np & arg2_vp & arg5_pp &
+  [ SYNSEM.LOCAL.CAT.VAL [	R-FRAME arg125 ] ].
+
+;;;;;;;;;;;;;;;;;;;;
+;;;;Idiomatic;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+;LHS MWEs 11/02/15: idiomatic types
+;NM 19/2/15: type name changes; E.g., ni instead of n_i, ni_pi instead of n_i_p_i
+arg12_ni := arg1_np & arg2_np_i &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg12 ].
+;For idiomatic prepositions
+arg02_ni := arg2_np_i &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg2 ].
+arg15_pi := arg1_np & arg5_pp_i &   
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg15 ].
+;For "vmn raew b xwl" (linking XARG is done in types-verb-lex):
+arg125_ni_pi := arg1_np & arg2_np_i & arg5_pp_i &
+  [ SYNSEM.LOCAL [ CAT.VAL [ R-FRAME arg125 ] ] ].
+;For "hwcia at X m hklim"
+arg125_n_pi := arg1_np & arg2_np & arg5_pp_i &
+  [ SYNSEM.LOCAL.CAT.VAL.R-FRAME arg125 ].

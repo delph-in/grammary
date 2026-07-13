@@ -1,0 +1,62 @@
+1 jag sover 1 10
+2 jag står på mig 1 37
+3 hunden gick av 1 17
+4 Jag kom mig upp 1 23
+5 jag jagade Bob 1 22
+6 Bob jagar 1 19
+7 jag står ut med hunden 1 40
+8 jag åt 1 13
+9 jag klär på mig 1 30
+10 jag klär på mig 1 30
+11 jag rakar honom 1 21
+12 jag litar på honom 1 30
+13 jag hälsar på honom 2 41
+14 jag tog bort hundarna 1 20
+15 jag hälsade på en hund 2 39
+16 jag uppförde mig 1 16
+17 jag kom ihåg honom 1 22
+18 jag gav honom en hund 1 28
+19 jag gav en hund åt honom 1 42
+20 jag hämnades på honom 1 24
+21 Jag berättade en historia för honom 1 31
+22 Ann berättade en historia för hunden 1 36
+23 jag placerade en hund på en katt 1 47
+24 jag betraktade katten 1 21
+25 jag undrar om han sover 1 33
+26 jag hoppas att han äter lejon 1 49
+27 jag vet att han sover 1 29
+28 jag vet att han äter lejon 1 44
+29 jag åt honom 1 20
+30 *jag sova 0 9
+31 *jag står mig på 0 28
+32 *hund går av 0 17
+33 *jag kom upp mig det 0 27
+34 *jag jagar hund 0 23
+35 *Bob jaga 0 14
+36 *jag står ut hunden 0 29
+37 *jag klär på sig 1 30
+38 *jag klär på han 0 23
+39 *jag rakar han 0 20
+40 *jag litar honom 0 19
+41 *jag hälsar Bob 0 27
+42 *jag tog bort 0 13
+43 *jag besökte 0 9
+44 *jag uppförde sig 0 15
+45 *jag kom ihåg han 0 20
+46 *jag gav en hund på honom 0 50
+47 *Jag hämnas honom 0 15
+48 *jag berättade honom en historia 0 24
+49 *jag berättade en historia på honom 0 41
+50 *jag placerade 0 11
+51 *jag betraktade på katten 0 27
+52 *jag undrar att han sover 0 33
+53 *jag hoppas om han äter lejon 0 41
+54 *jag vet att han sova 0 25
+55 *jag vet att han äta jag 0 30
+56 *jag står hunden ut 0 31
+
+;;; Total CPU time: 2860 msecs
+
+;;; Mean edges: 26.52
+
+;;; Mean parses: 0.57

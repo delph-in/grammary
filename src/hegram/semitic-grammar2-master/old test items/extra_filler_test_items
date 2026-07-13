@@ -1,0 +1,63 @@
+; test fillers:
+;*klb 
+;*gdwl 
+;*l klb 
+;*l 
+;*at 
+
+;;;1-12np
+*klb hild akl lxm
+*gdwl hild akl lxm
+*l klb hild akl lxm
+*l hild akl lxm
+*at hild akl lxm
+
+;;;1-12np
+*gdwl hild akl 
+*l klb hild akl 
+*l hild akl 
+*at hild akl 
+
+
+;;124np-pp
+*klb dni hnix at hlxm yl hewlxn
+*gdwl dni hnix at hlxm yl hewlxn
+*l klb dni hnix at hlxm yl hewlxn
+*l dni hnix at hlxm yl hewlxn
+*at dni hnix at hlxm yl hewlxn
+
+*klb dni hnix yl hewlxn at hlxm
+*gdwl dni hnix yl hewlxn at hlxm
+*l klb dni hnix yl hewlxn at hlxm
+*l dni hnix yl hewlxn at hlxm
+*at dni hnix yl hewlxn at hlxm
+
+
+;;;14pp
+*klb dni nsy l dnh
+*gdwl dni nsy l dnh
+*l klb dni nsy l dnh
+*l dni nsy l dnh
+*at dni nsy l dnh
+
+;;;123np-pp
+*klb dni ntn l dnh klb
+*gdwl dni ntn l dnh klb
+*l klb dni ntn l dnh klb
+*l dni ntn l dnh klb
+*at dni ntn l dnh klb
+
+*klb dni ntn klb l dnh
+*gdwl dni ntn klb l dnh
+*l klb dni ntn klb l dnh
+*l dni ntn klb l dnh
+*at dni ntn klb l dnh
+
+;;;12-14cp-pp
+
+*klb dni xeb e dnh nplh
+*gdwl dni xeb e dnh nplh
+*l dni xeb e dnh nplh 
+*l dni xeb e dnh nplh
+*at dni xeb e dnh nplh
+

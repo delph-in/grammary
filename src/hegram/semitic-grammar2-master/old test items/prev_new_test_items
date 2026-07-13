@@ -1,0 +1,371 @@
+;;;1-12np
+dni akl
+dni akl lxm
+dni akl at hlxm
+*dni akl hlxm
+*dni akl at lxm
+*dnh akl at hlxm
+
+;;124np-pp
+dni hnix at hlxm yl hewlxn
+dni hnix yl hewlxn at hlxm
+*dni hnix yl hewlxn at lxm
+
+;;;12-14cp-pp
+dnh xebh e hild akl lxm
+dnh xebh e hild iakl lxm
+dnh xebh yl hklb
+
+;;;14pp
+dni nsy l dnh
+dni nsy m irwelim
+dni nsy l ildh
+*dni nsy l at hildh
+*dni nsy l at ildh
+*dni nsy l at dnh
+
+;;;123np-np
+dni hakil at dnh lxm
+dni hakil lxm at dnh
+
+;;;123np-pp
+dni ntn l dnh klb
+dni ntn klb l dnh
+*dni ntn klb ildh
+
+;;;12_cp-vp-np
+dni rch lxm
+dni rch lakwl lxm
+hild rch e dni iakl lxm
+*dni rch hlxm
+
+;;;12_vp_subj-cntrl
+hild nish lakwl
+*hild nish akl
+
+;;;12-123-124_np_pp
+dni qnh klb m dnh
+dni qnh m dnh klb
+dni qnh l dnh klb
+
+;;;123_vp_pp_subj-cntrl
+dni hbvix l dnh lakwl lxm
+dni hbvix lipwl l dnh
+dni hbvix l dnh lnswt lakwl lxm
+
+;;;123_cp-np_pp
+dni hbvix klb l dnh
+dni hbvix l dnh e hildh gdwlh
+*dni hbvix klb dnh
+
+;;;123_vp_pp_obj-cntrl
+hildh mreh l dni lakwl lxm
+hildh mreh lipwl l dni
+dni mreh l dnh lnswt lakwl
+dni mnsh lhrewt l dnh lakwl lxm
+
+;;;123_vp_np_obj-cntrl
+hild ekny at hildh liswy l dni
+hild ekny liswy l dni at hildh
+*hild ekny liswy l dni hildh
+
+;;;12_cp-np
+dni gilh at hswd
+dni gilh e dnh nsyh l irwelim
+
+;;;NP topicalization
+at hlxm dni akl
+lxm dni akl
+at hlxm dni ntn l ildh
+at hlxm dni rch
+at hlxm dni xeb e hild akl
+lxm dni ntn l dnh
+at hlxm dni hnix yl hewlxn
+at dnh dni hakil lxm
+lxm dni hakil at dnh
+klb dni qnh l dnh
+at hildh hild ekny liswy l dni
+lxm hild hbvix l ildh lakwl
+lxm hild hbvix lakwl l ildh
+lxm dnh hbvixh l dni e hild irch
+lxm dnh hbvixh  e hild irch l dni
+lxm hild hreh l ildh lakwl
+lxm hild hreh lakwl l ildh
+swd dni gilh
+lxm dni mglh e dnh aklh
+*gdwl dni akl
+*hlxm dni akl
+*hlxm dni xeb e hild akl
+*gdwl dni xeb e hild akl
+*at hildh hild ekny
+ 
+;;;CP topicalization 
+e dnh nplh dni xeb
+e dnh aklh lxm dni xeb
+e dni iakl lxm hild rch
+e hild irch lxm dni hbvix l dnh
+e dnh nplh dni gilh
+*gdwl dni xeb
+
+;;;VP topicalization 
+lakwl dni nish
+lakwl dni rch
+lakwl dni xeb e hild nish
+lakwl lxm dni nish
+lipwl dni hbvix l dnh
+liswy l ild dni ekny at dnh
+lxewb e dni gdwl hild hreh l dnh
+*gdwl dni nish
+
+;;;PP topicalization
+yl hewlxn dni hnix at hlxm
+l dnh dni ntn lxm
+yl dnh dni xeb
+l dnh dni nsy
+m dnh hild qnh klb
+l dnh hild hbvix lipwl
+l ildh dni hreh lxewb e dni gdwl
+l dni hild ekny at hildh liswy
+l dni hild ekny liswy at hildh
+*gdwl dni nsy
+*dnh dni nsy l
+*ildh dni nsy l
+ 
+;;adjective modification
+hild hgdwl npl
+hild akl lxm gdwl
+hild ntn l ildh lxm gdwl
+hild ntn l ildh gdwlh lxm
+
+;;;adjective agreement
+hildh hgdwlh nplh
+ild gdwl npl
+dni akl at hlxm hgdwl
+*hild gdwl npl
+*hildh hgdwl nplh
+*ild gdwlh npl
+
+;;;in situ object questions
+hild akl mh
+dni rch mh
+dni rch at mi
+dni nish mh
+dni xeb mh
+dni xeb yl mh
+dni xeb mh
+dni nsy l mi
+dni ntn mh l mi
+dni hakil mh at dnh
+dni hnix yl hklb mh
+dni qnh mh
+dni qnh klb m mi
+dni hbvix mh l dnh
+dni hbvix lipwl l mi
+dni hbvix l dnh mh
+dni hreh lipwl l mi
+dni hreh mh l dnh
+dni ekny mh at dnh
+dni ekny lipwl at mi
+dni gilh mh
+hxlwm hih mh
+hxlwm hwa mh
+hlxm hwa yl mh
+hlxm hih yl mh
+dni hih aiph
+hklb hwa aiph
+*dni rch mi
+*hild akl mh gdwl
+
+;;;NP object questions
+mh dni hnix yl hewlxn
+at mh hild ntn l dnh
+mh dni xeb e hildh aklh
+at mi dni hakil lxm
+mh dni hakil at dnh
+mh hild akl
+at mh hild akl
+at mi hild akl
+mh hild rch
+at mi dni ekny lakwl
+at mh dni hbvix l dnh
+mh dni gilh
+*mh dni hakil dnh
+*lxm mh dni akl
+*mh lxm dni akl
+*mi dni akl
+*mi dni gilh
+
+
+;;;VP object questions
+mh dni nish
+mh dni hbvix l dnh
+mh dni hreh l dnh
+mh dni ekny at dnh
+*mh mh dni nish
+mh hild xeb e dnh nisth
+
+;;;CP object questions
+mh dni xeb
+*mh mh dni xeb
+*mh dni xeb e
+*e mh dni xeb
+
+;;;PP object questions
+l mi dni ntn lxm
+m mi dni qnh lxm
+yl mh dni hnix lxm
+yl mh dni xeb
+l mi dni nsy
+l mi dni hbvix lipwl
+l mi dni hreh lipwl
+*mi dni nsy l
+
+;;;wh subj questions
+mi akl lxm
+mi npl
+mi xeb e dni npl
+mi xeb e hild rch lxm
+mi nish ltt l ild klb
+mi nsy l ildh
+mi hnix at hklb yl hewlxn
+mi hakil lxm at hildh
+mi qnh klb l dnh
+mi hbvix l dnh lipwl
+mi hreh l dnh lipwl
+mi ekny at dnh lipwl
+mi gilh at hswd
+
+;;;subj questions with object topicalization
+mi at hlxm akl
+at hlxm mi akl
+mi xeb e at hlxm dnh aklh
+
+;;;COP - all complement types
+hmvrh hith ltt l dni klb
+hmvrh hith lipwl
+hxlwm hih e dni isy l irwelim
+hild hih tlmid
+hild hih htlmid
+hlxm hih yl hewlxn
+hild hih gdwl
+hild hih ph
+*hild hih gdwlh
+*hmvrh hih ltt l dni klb
+*hild hih at htlmid
+
+;;;PRON - all complement types
+hmvrh hia ltt l ildh klb
+hxlwm hwa e dni isy l irwelim
+hildh hia tlmidh
+hildh hia htlmidh
+dni hwa yl hewlxn
+dnh hia gdwlh
+dnh hith ph
+*dnh hia gdwl
+*hmvrh hwa ltt l ildh klb
+*hild hwa at tlmid
+
+;;;COP and PRON topicalization
+lipwl hmvrh hith
+ltt l ildh klb hmvrh hia
+ltt l ildh klb hmvrh hith
+e dni isy l irwelim hxlwm hwa
+e dni isy l irwelim hxlwm hih
+tlmidh hildh hia
+tlmidh hildh hith
+htlmidh hildh hith
+yl hewlxn dni hwa
+yl hewlxn dni hih
+ph dni hih
+ph dni hwa
+gdwl hxlwm hwa
+gdwl hxlwm hih
+ph dni hih
+ph hildh hia
+*gdwlh hxlwm hwa
+*at htlmidh hildh hith
+
+;;;COP and PRON object questions
+yl mh hlxm hih
+yl mh hlxm hwa
+mh hmvrh hith
+mh hmvrh hia
+aiph dni hih
+aiph dnh hia
+
+;;;ZERO PRON
+dni gdwl
+dni ph
+hmvrh ltt l ildh klb
+hxlwm e dni isy l irwelim
+hildh tlmidh
+dni yl hewlxn
+dni xeb e hild gdwl
+dni xeb e hmvrh lakwl lxm
+*dni e dnh
+*dni xeb e gdwl
+*dni xeb e mh
+*gdwl
+
+;;ZERO PRON extraction and in-situ questions
+dni mh
+dni aiph
+aiph dni
+dni xeb e mi htlmid
+mh dni
+mi hild
+mh dni xweb e hild
+yl hewlxn dni
+tlmidh hildh
+e dni isy l irwelim hxlwm
+lakwl lxm hmvrh
+gdwl dni
+ph dni
+
+;;;preposition agreement
+*hild ntn lxm b dnh
+*b dnh hild ntn lxm
+*hildh xebh m dni
+*m dni hildh xebh
+*hild hnix at hlxm m hewlxn
+*m hewlxn hild hnix at hlxm
+*hild ntn lxm m mi
+*m mi hild ntn lxm
+*hildh xebh l mh
+*l mh hildh xebh
+*dni qnh klb al dnh
+*dni nsy yl dnh
+
+;;;Adverbial adjuncts
+dni npl ph
+dni akl lxm atmwl
+dni akl ph lxm atmwl
+dni ntn l dnh klb atmwl
+dni ntn atmwl l dnh klb
+dni ntn l dnh atmwl klb
+dni xeb e hildh nsyh l irwelim atmwl
+
+;;;Passive (including agreement with the DEP2 subject)
+hkwrsh rwpdh ylidi dni
+hkwrsh rwpdh
+klb gdwl rwpd ylidi dnh
+*at hkwrsh rwpdh ylidi dni
+*hkwrsh rwpdh ylidi at dni
+*hkwrsh rwpd
+
+;;;Unaccusatives (including agreement with the DEP2 subject)
+xlwn gdwl nebr
+hxlwn nebr
+*hxlwn nebrh
+
+;;;Known overgeneration
+*dni nsy l hildh
+*hild rch e dni akl lxm
+*dni nsy l mh
+*at mh dni hakil lxm
+*l mh dni nsy
+*mh akl
+*mi xeb e mh dnh aklh
+*hildh hia tlmid
+*hild hih tlmidh
+*dni hih ylidi dni

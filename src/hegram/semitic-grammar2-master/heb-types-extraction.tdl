@@ -1,0 +1,74 @@
+;;; $Id: types-extraction.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;--------------------------------------------------------------------------
+;                         HEBREW EXTRACTION RULES 
+;--------------------------------------------------------------------------
+; TAG 11/10/15: commented out, the [ HEAD-DTR.SYNSEM lex-synsem ] constraint moved back to the general types-extraction.
+; TAG 11/08/15: Arabic allows comp extraction at the phrasal level (to allow extraction from VSO - lxma 1kl mhmd). This constraint is relevant only to Hebrew.
+; (removed from types-extraction)
+; basic-extracted-arg-phrase-lex-head-dtr :+ [ HEAD-DTR.SYNSEM lex-synsem ].
+
+
+
+
+;------------------------------------------
+;           SUBJ
+;------------------------------------------
+; TAG 11/10/15: added HEAD-DTR.SYNSEM phr-synsem constraint as subj-extraction in Hebrew is phrasal.The constraint that the deps' REAL is unifiable with the R-FRAME 
+; is moved here. 
+; TAG 1/2/15: changed the name of the phrase and the rule to extracted-subj-phrase without "que", because this is a general rule for heb. and ara. Arabic, unlike
+; Hebrew, does have subject topicalization (this is how SV order is derived). The ques requirement is added to the Hebrew version of the phrase 
+; here. 
+extracted-subj-phrase :+ basic-extracted-arg-phrase-phr-head-dtr & [ SYNSEM.LOCAL.CONT.HOOK.INDEX.SF ques,
+                                                                     HEAD-DTR.SYNSEM phr-synsem & [ LOCAL.CAT.VAL [ R-FRAME #frame,
+                                                                                                                    DEP3.REAL #frame,
+                                                                                                                    DEP4.REAL #frame,
+                                                                                                                    DEP5.REAL #frame,
+                                                                                                                    DEP6.REAL #frame ] ] ].
+; TAG 11/10/15: The constraint that the deps' REAL is unifiable with the R-FRAME 
+; is moved here because subj-extraction in Arabic is lexical.                                                                                                                
+extracted-subj1-phrase :+ [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ R-FRAME #frame, 
+                                                            DEP2.REAL #frame ] ].
+extracted-subj2-phrase :+ [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL [ R-FRAME #frame, 
+                                                            DEP1.REAL #frame ] ].
+                                                                                                       
+
+ 
+;;;;;;;;;;;
+;;;COMP4;;;
+;;;;;;;;;;;
+
+; TAG 28/1/15: OBJ-MARK specification is added to the Hebrew version of the phrase here
+; TAG 11/01/15: moved because arabic does not have OBJ-MARK
+extracted-v-head-comp4-np-phrase :+ 
+    [ HEAD-DTR.SYNSEM.LOCAL.CAT [ VAL.DEP4.DEP.LOCAL.CAT [ HEAD [ CASE non-acc ], 
+	                                                       OBJ-MARK -  ] ] ].
+																
+
+;;;;;;;;;;;
+;;;COMP2;;;
+;;;;;;;;;;;
+
+; TAG 28/1/15: OBJ-MARK specification is added here to the Hebrew version of the rule
+; TAG 12/01/15: moved because arabic does not have OBJ-MARK
+; When an NP in DEP2 is extracted the LOCAL values of DEP2 need to be set and linking has to occur 
+;(instead of what happens in head-np-comp2-phrase)
+;LHS 2207: took out the restriction of the head's case to acc (to enable 'hxlwm hmvrh hith')
+;LHS 0210: put back the restriction of the head's case to acc because 'hxlwm hmvrh hith' isn't relevant to comp2 anymore.
+extracted-v-head-comp2-np-phrase :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.DEP2.DEP.LOCAL.CAT.OBJ-MARK +  ]. 
+
+; TAG 28/1/15: OBJ-MARK specification is added here to the Hebrew version of the rule  
+;LHS 1211: extraction for subject to object raising (the dep2 np)
+extracted-raising-head-comp2-np-phrase :+ 
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.DEP2.DEP.LOCAL.CAT.OBJ-MARK + ]. 
+                                                       	
+															   
+;;;;;;;;;;;
+;;;COMP3;;;
+;;;;;;;;;;;
+; TAG 28/1/15: the OBJ-MARK specification is added to the hebrew rule here
+; TAG 120115: moved because arabic does not have OBJ-MARK
+extracted-comp3-np-phrase :+
+  [ HEAD-DTR.SYNSEM.LOCAL.CAT.VAL.DEP3.DEP.LOCAL.CAT.OBJ-MARK + ].  
+                                               

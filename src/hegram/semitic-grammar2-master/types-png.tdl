@@ -1,0 +1,88 @@
+;;; $Id: types-png.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+;;; TAG 190115: added non-s (non-singular) types for Arabic dual+plural which look the same in non-nom CASE.
+;;; TAG 26/1/15: changed the hierarchy such that p and d combinations with gender and person inherit from the pd relevant type
+;;; and from png-d or png-p.
+;;; TAG 11/2/15: added png-pm as a parent of png-3pm and png-dm as a parent of png-3dm to allow 3pdm nouns in Arabic to combine with pm and dm adjectives:
+;;; The noun specifies the adj. for person, while the adj. specifies the noun for number. 
+
+
+;; ==== PERSON ======
+png-1 := png & [ PER 1st ].
+png-2 := png & [ PER 2nd ].
+png-3 := png & [ PER 3rd ].
+
+;; ==== NUMBER ======
+png-s := png & [ NUM sg ].
+;NM 25/1/15 - I changed what used to be non-sg (non-singular) to pd (plural-dual) 
+;because the dash in "non-sg" was confusing in type names
+png-pd := png & [ NUM non-sg].
+png-p := png-pd & [ NUM pl ].
+png-d := png-pd & [ NUM du ].
+
+;; ==== GENDER ======
+png-f := png & [ GEND fem ].
+png-m := png & [ GEND masc ].
+
+;; ==== PERSON-NUMBER ======
+png-1s := png-1 & png-s.
+png-1pd := png-1 & png-pd.
+png-1p := png-1pd & png-p.
+
+png-2s := png-2 & png-s.
+png-2pd := png-2 & png-pd.
+png-2p := png-2pd & png-p.
+png-2d := png-2pd & png-d. 
+
+png-3s := png-3 & png-s.
+png-3pd := png-3 & png-pd.
+png-3p := png-3pd & png-p.
+png-3d := png-3pd & png-d.
+
+
+;; ==== PERSON-GENDER ======
+png-1f := png-1 & png-f.
+png-1m := png-1 & png-m.
+
+png-2f := png-2 & png-f.
+png-2m := png-2 & png-m.
+
+png-3f := png-3 & png-f.
+png-3m := png-3 & png-m.
+
+;; ==== NUMBER-GENDER ======
+png-sf := png-s & png-f.
+png-pdf := png-pd & png-f.
+png-pf := png-pdf & png-p.
+png-df := png-pdf & png-d.
+
+png-sm := png-s & png-m.
+png-pdm := png-pd & png-m.
+png-pm := png-pdm & png-p.
+png-dm := png-pdm & png-d.
+
+
+;; ==== PERSON-NUMBER-GENDER ======
+png-1sf := png-1s & png-1f & png-sf.
+png-2sf := png-2s & png-2f & png-sf.
+png-3sf := png-3s & png-3f & png-sf.
+
+png-1pf := png-1p & png-1f & png-pf.
+png-2pf := png-2p & png-2f & png-pf.
+png-3pf := png-3p & png-3f & png-pf.
+
+png-1sm := png-1s & png-1m & png-sm.
+png-2sm := png-2s & png-2m & png-sm.
+png-3sm := png-3s & png-3m & png-sm.
+
+png-3pdm := png-3pd & png-3m & png-pdm.
+
+png-1pm := png-1p & png-1m & png-pm.
+png-2pm := png-2p & png-2m & png-pm.
+png-3pm := png-3pdm & png-3p & png-pm.
+
+png-2df := png-2d & png-2f & png-df.
+png-3df := png-3d & png-3f & png-df.
+
+png-2dm := png-2d & png-2m & png-dm.
+png-3dm := png-3pdm & png-3d & png-dm.
+

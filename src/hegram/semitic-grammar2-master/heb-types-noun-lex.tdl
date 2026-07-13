@@ -1,0 +1,28 @@
+;;; $Id: types-noun-lex.tdl,v 1.2 2013-12-05 01:44:21 sfd Exp $
+
+;;; Nouns
+; TAG 11/01/15: moved from types-noun-lex.tdl 
+;LHS & NM: proper-noun-lex now has all the features of def-cmn-noun-lex, in order to be barred from object position without 'at'
+;Nurit 9/6 OBJ-MARK is moved to CAT
+;verbs require OBJ-MARK to be +
+;copulas require OBJ-MARK to be -
+; TAG 11/01/15: moved from types-noun-lex.tdl 
+; NM 25/1/15: case types are now defined in types-nominal-lex, so everywhere that case was specified was changed to inherit from the appropriate types
+
+;proper-noun-lex := noun-lex & [ SYNSEM.LOCAL.CAT [ HEAD [ DEF +,
+;                                                         CASE non-acc ],
+;                                                   OBJ-MARK - ] ].
+
+;NM 25/1/15: the only Hebrew-specific addition to the general types defined in types-noun-lex
+proper-noun-lex :+  [ SYNSEM.LOCAL.CAT [ OBJ-MARK - ] ].
+;POSS LHS 10/02/15: possessive nouns should act like definite common nouns as far as OBJ-MARK goes.
+poss-cmn-noun-lex :+  [ SYNSEM.LOCAL.CAT [ OBJ-MARK - ] ].
+
+def-cmn-noun-lex :+ [ SYNSEM.LOCAL.CAT [ OBJ-MARK - ] ].
+
+indef-cmn-noun-lex :+ [ SYNSEM.LOCAL.CAT [ 	OBJ-MARK bool ] ].
+
+pronoun-noun-lex :+ [ SYNSEM.LOCAL.CAT [ OBJ-MARK - ] ].
+
+ 
+

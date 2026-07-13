@@ -1,0 +1,61 @@
+1 I sleep 1 11
+2 I insist 1 11
+3 The dog broke 1 13
+4 I succeeded 1 9
+5 I hunted Bob 1 16
+6 Bob hunts 1 12
+7 I endure the dog 1 22
+8 I ate 1 10
+9 I dress myself 1 23
+10 I dress 1 14
+11 I shave 1 14
+12 I trust him 1 18
+13 I greet Bob 1 18
+14 I deleted the dogs 1 21
+15 I visited a dog 1 18
+16 i behaved myself 1 15
+17 I remembered him 1 16
+18 I gave him a dog 0 21
+19 I gave a dog to him 1 35
+20 I revenged myself on him 1 31
+21 I told him a story 0 21
+22 Ann told a story to the dog 1 41
+23 I put a dog on the cat 2 60
+24 I looked at the cat 1 26
+25 I wonder whether he sleeps 1 33
+26 I hope that he eats lions 1 48
+27 I know whether he sleeps 1 33
+28 I know that he eats lions 1 48
+29 i ate it 0 15
+30 *I sleeps 0 10
+31 *I insist it 0 16
+32 *The dog break 0 14
+33 *I succeeded in it 0 21
+34 *I hunted dog 0 14
+35 *Bob hunt 0 13
+36 *I endure on the dog 0 27
+37 *I dress himself 1 23
+38 *I dress he 0 18
+39 *I shave he 0 18
+40 *I trusts him 0 15
+41 *I greet on Bob 0 23
+42 *I deleted 0 8
+43 *I visited 0 8
+44 *i behaved himself 0 14
+45 *I remembered himself 1 17
+46 *I gave a dog on him 0 33
+47 *I revenged myself at him 0 26
+48 *I told him on a story 0 33
+49 *Ann told a story on the dog 0 39
+50 *I put a dog the cat 0 33
+51 *I looked the cat 0 16
+52 *I wonder that he sleeps 0 29
+53 *I hope whether he eats lions 0 40
+54 *I know whether he sleep 0 27
+55 *I know that he eat lions 0 40
+
+;;; Total CPU time: 1080 msecs
+
+;;; Mean edges: 22.69
+
+;;; Mean parses: 0.53

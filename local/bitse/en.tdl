@@ -1,0 +1,342 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  en.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  Definitions of types used only for English
+;;;
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;used to constrain rules to work only for English
+english-only-rule := headed-phrase &
+  [ LANG #en,
+    HEAD-DTR.LANG #en & en ].
+
+english-only-lex-rule := lex-rule &
+  [ LANG #en,
+    DTR.LANG #en & en ].
+
+english-only-lex := basic-lex &
+  [ LANG en ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Lexical types
+
+;;;;;;;;;
+;;verbs
+
+en-ditrans-do-lpio-verb-lex := ditrans-do-lpio-verb-lex &
+  [ SYNSEM.LOCAL.CAT.HEAD.GOVPR to-pf ].
+
+en-ditrans-do-lpio-shifts-verb-lex := en-ditrans-do-lpio-verb-lex & ditrans-do-lpio-shifts-verb-lex.
+
+
+;;"I dress" which implicitly has a reflexive object.
+opt-refl-obj-trans-verb-lex := trans-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < [ OPT +,
+				   OPTTYPE refl-opt ] > ].
+
+
+
+;;might overgenerate
+do-support-lex := no-hcons-lex-item & 
+		  english-only-lex & basic-two-arg &
+[ INFLECTED -,
+  SYNSEM [ LOCAL [ CAT [ HEAD do-verb & 
+			       [ MOD < >,
+				 AUX -,
+				 INV - ],
+			 VAL [ SUBJ < #subj & [ LOCAL [ CAT [ HEAD noun &
+								   [ CASE nom ],
+							      VAL.SPR < >],
+							CONT.HOOK.INDEX #ind ] ]>,
+			       SPR < >,
+			       COMPS < #comps & 
+				       [ LOCAL [ CAT [ HEAD verb & 
+							    [ AUX -,
+							      VFORM infinite ],
+						       VAL [ COMPS < >] ],
+						 CONT.HOOK [ INDEX [INSTLOC #iloc,
+								    SORT #sort ],
+							     XARG #ind ] ],
+					 OPT - ] >,
+				SPEC < > ] ],
+		   CONT [ HOOK [ INDEX [INSTLOC #iloc,
+					SORT #sort ],
+				 XARG #ind ],
+			   RELS <! !>,
+			   MSG no-msg ] ] ],
+  ARG-ST < #subj, #comps > ].
+
+;;experimental
+do-emf-verb-lex := gen-verb-lex & 
+  [ ALTS.SHIFTS -,
+    SYNSEM.LOCAL.CAT [ HEAD [ DO +,
+			      AUX -,
+			      INV na ],
+		       VAL [ SPR <  >,
+			     COMPS < #dobj & phr-synsem >,
+			     SUBJ < #subj & phr-synsem >,
+			     SPEC < > ] ],
+    ARG-ST < #subj & [ LOCAL.CAT.HEAD noun &
+				      [ CASE nom ] ],
+	     #dobj & [ LOCAL [ CAT.HEAD verb ] ] > ].
+
+
+;;"revenge oneself on someone"
+trans-refl-pobj-verb-lex := verb-lex & trans-empty2ndarg-lex-item &
+			       english-only-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD [ GOVPR #prform ],
+			 VAL [ SPR <  >,
+			       COMPS < #refl & [ OPT - ], #pobj & [ OPT - ] >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ALTS.SHIFTS -,
+    ARG-ST < #subj & [ LOCAL [CONT.HOOK.INDEX [ PNG #png ],
+			      CAT np-cat & [ HEAD.CASE nom ] ] ],
+	     #refl & [ LOCAL refl-0-local & [ CONT.HOOK.INDEX.PNG #png ] ],
+	     #pobj & [ LOCAL.CAT pp-cat & [ HEAD [ PFORM #prform,
+						   CASE acc,
+						   LEX + ] ] ] > ].
+
+;;adverbs
+;;english scopal adverbs are currently always prehead
+en-adverb-lex := adverb-lex & english-only-lex &
+  [ SYNSEM.LOCAL.CAT [ HEAD.MOD < [ LOCAL.CAT.VAL.COMPS < > ] >,
+                       POSTHEAD - ] ].
+
+;;special type to handle head-switch divergences
+en-adverb-lex2 := adverb-lex2 & english-only-lex &
+  [ SYNSEM.LOCAL.CAT.POSTHEAD - ].
+
+;;;adjectives are marked as inflected in Englsh
+en-adjective-lex := adjective-lex & english-only-lex &
+  [ INFLECTED + ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;lexical rules
+
+;;basic types
+
+en-noun-lex-rule := noun-lex-rule & english-only-lex-rule &
+  [ SYNSEM.LOCAL.CAT.HEAD.INFL-DEF - ].
+
+en-verb-lex-rule := verb-lex-rule & english-only-lex-rule.
+
+
+;;verbs
+
+en-verb-pr-part-rule := infl-ltow-rule & en-verb-lex-rule &
+  [ SYNSEM.LOCAL [ CAT.HEAD.VFORM pr-part ] ].
+
+
+
+en-question-verb-lex-rule := const-ltol-rule & en-verb-lex-rule &
+  [ INFLECTED +,
+    SYNSEM [ OPT #opt,
+	     DEF-OPT #def-opt,
+	     NON-LOCAL #non-loc,
+	     LOCAL [ CAT [ HEAD [ INV +,
+				  VFORM #fin & finite,
+				  AUX #aux,
+				  DO #do,
+				  MOD #mod ],
+			   VAL [ SPR #spr,
+				 COMPS < #subj & [ OPT - ] . #comps >,
+				 SUBJ < anti-synsem >,
+				 SPEC #spec ],
+			   MC #mc,
+			   HC-LIGHT #hc,
+			   POSTHEAD #ph ],
+		     CONT #cont,
+		     CTXT #ctxt,
+		     AGR #agr ] ],
+    DTR.SYNSEM [ OPT #opt,
+		 DEF-OPT #def-opt,
+		 LOCAL [ CAT [ HEAD q-verb & [ INV -,
+					       VFORM #fin & finite,
+					       AUX #aux,
+					       DO #do,
+					       MOD #mod ],
+			       VAL [ SPR #spr,
+				     COMPS #comps,
+				     SUBJ < #subj & synsem >,
+				     SPEC #spec ],
+			       MC #mc,
+			       HC-LIGHT #hc,
+			       POSTHEAD #ph ],
+			 CONT #cont,
+			 CTXT #ctxt,
+			 AGR #agr ],
+		 NON-LOCAL #non-loc ] ].
+
+
+en-pres-verb-non3sg-lex-rule := const-ltow-rule & en-verb-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL [CAT [ HEAD.VFORM finite,
+				     VAL.SUBJ
+	 < [ LOCAL.CONT.HOOK.INDEX [ PNG 1-2sg-png ] ] > ] ,
+			       CONT.HOOK.INDEX [ E.TENSE pres ] ] ],
+    DTR.SYNSEM #synsem ].
+
+en-pres-verb-pl-lex-rule := const-ltow-rule & en-verb-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL [CAT [ HEAD.VFORM finite,
+				     VAL.SUBJ
+	 < [ LOCAL.CONT.HOOK.INDEX [ PNG.NUM plur ] ] > ] ,
+			      CONT.HOOK.INDEX [ E.TENSE pres ] ] ],
+    DTR.SYNSEM #synsem ].
+
+
+en-pres-verb-3sg-lex-rule := infl-ltow-rule & en-verb-lex-rule &
+  [ SYNSEM.LOCAL [CAT [ HEAD.VFORM finite,
+			VAL.SUBJ
+	 < [ LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg,
+					   PER third ] ] ] > ],
+		  CONT.HOOK.INDEX [ E.TENSE pres ] ] ].
+
+
+en-past-verb-lex-rule := infl-ltow-rule & en-verb-lex-rule &
+  [ SYNSEM.LOCAL [CAT [ HEAD.VFORM finite ],
+		  CONT.HOOK.INDEX [ E.TENSE imp ] ] ].
+
+
+;;;;;;;;
+;;nouns
+
+en-plur-noun-lex-rule := infl-ltow-rule & en-noun-lex-rule &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.NUM plur ].
+
+en-sg-noun-lex-rule := const-ltow-rule & en-noun-lex-rule &
+  [ SYNSEM #synsem & [LOCAL.CONT.HOOK.INDEX.PNG.NUM sg ],
+    DTR.SYNSEM #synsem ].
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;phrase-rules
+
+
+;;"do I" + sleep 
+head-do-ques-comp-phrase := head-comp-phrase & english-only-rule &
+  [ SYNSEM.LOCAL.CONT.HOOK [ LTOP #ltop,
+			     INDEX #index & [ INSTLOC #iloc,
+				     SORT #sort,
+				     E #event ],
+			     XARG #xarg ],
+    HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD do-verb & [ VFORM finite,
+						 INV + ],
+			    CONT.HOOK.INDEX [ E #event ] ],
+    NON-HEAD-DTR.SYNSEM phr-synsem & [ LOCAL [ CAT.HEAD verb & [ VFORM infinite ],
+					       CONT.HOOK [ LTOP #ltop,
+							   INDEX #index & [ INSTLOC #iloc,
+								   SORT #sort ],
+							   XARG #xarg ] ] ] ].
+
+
+;;do + sleep
+head-do-sup-comp-phrase := basic-head-comp-phrase-with-c-cont & english-only-rule &
+  [ SYNSEM.LOCAL.CONT.HOOK [ INDEX.E.TENSE #fin,
+			     LTOP #harg ],
+    HEAD-DTR.SYNSEM.LOCAL [ CAT.HEAD do-verb & [ VFORM finite,
+						 INV na-or-- ],
+			    CONT.HOOK [ INDEX.E.TENSE #fin ] ],
+    NON-HEAD-DTR.SYNSEM phr-synsem & [ LOCAL [ CAT.HEAD verb & [ VFORM infinite ],
+					       CONT.HOOK [ LTOP #larg ] ] ],
+    C-CONT [ HCONS <! qeq & [ HARG #harg,
+			      LARG #larg ] !> ] ].
+
+
+
+;;head-comp-phrase that allows modification of C-CONT
+basic-head-comp-phrase-with-c-cont := head-valence-phrase & head-compositional & 
+				      head-initial & binary-lang-agree-phrase &
+  [ SYNSEM phr-synsem &
+	   [ LOCAL [ CAT [ MC #mc,
+			   VAL [ SUBJ #subj,
+				 COMPS #comps,
+				 SPR #spr ],
+			   POSTHEAD #ph ],
+		     CONT.MSG #msg ],
+             LIGHT #light ],
+    HEAD-DTR.SYNSEM [ LOCAL [ CAT [ MC #mc,
+				    VAL [ SUBJ #subj,
+					  COMPS < #synsem . #comps >,
+					  SPR #spr ],
+				    HC-LIGHT #light,
+				    POSTHEAD #ph ],
+			      CONT.MSG #msg ] ], 
+    NON-HEAD-DTR.SYNSEM #synsem & canonical-synsem ].
+
+
+;;basic rule for optional arguments that gets an understood meaning when removed,
+;;and thus adds a relation for that understood meaning
+basic-head-sem-opt-comp-phrase := head-valence-phrase & head-only &
+				  head-compositional & unary-lang-agree-phrase &
+  [ INFLECTED #infl,
+    SYNSEM canonical-synsem &
+	   [ LOCAL.CAT [ VAL [ SUBJ #subj,
+			       COMPS #comps,
+                               SPR #spr,
+                               SPEC #spec ],
+                         MC #mc,
+                         POSTHEAD #ph ],
+             MODIFIED #mod ],
+    HEAD-DTR [ INFLECTED #infl & +,
+	       SYNSEM [ LOCAL [ CAT [ VAL [ SUBJ #subj,
+					  COMPS < unexpressed &
+						  [ OPT +,
+						    DEF-OPT #def,
+						    OPTTYPE spec,
+						    LOCAL.CONT.HOOK.INDEX.DEF #def ] . #comps >,
+					  SPR #spr,
+                                        SPEC #spec ],
+				    MC #mc,
+				    POSTHEAD #ph ],
+			      CONT.HOOK.INDEX event ],
+                      MODIFIED #mod ] ] ].
+
+refl-opt-comp-phrase := basic-head-sem-opt-comp-phrase & 
+  [ HEAD-DTR.SYNSEM [ MODIFIED notmod,
+		      LOCAL [ CAT [ VAL [ COMPS < [ OPTTYPE refl-opt,
+						    LOCAL refl-local & 
+							    [ CONT.HOOK.INDEX #index ] ] >,
+					  SUBJ < [ LOCAL.CONT.HOOK.INDEX.PNG #png ] > ] ] ] ],
+    C-CONT [ RELS <! noun-relation & [ LBL #larg,
+				       PRED "pronoun_n_rel",
+				       ARG0 pron-ind & #index & [ PNG #png,
+								 PRONTYPE refl ] ],
+		    quant-relation & [ PRED pronoun_q_rel,
+					ARG0 #index,
+					RSTR #harg ] !>,
+	     HCONS <! qeq & [ HARG #harg,
+			      LARG #larg ] !> ] ]. 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;English pforms
+
+to-pf := pformm.
+loc-pf := pformm. ;;locational preps
+on-pf := loc-pf.
+under-pf := loc-pf.
+at-pf := pformm.
+with-pf := pformm.

@@ -1,0 +1,386 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  sw.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  Definitions of types used only for Swedish
+;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;used to constrain rules to work only for Swedish
+swedish-only-rule := headed-phrase &
+  [ LANG #sw,
+    HEAD-DTR.LANG #sw & sw ].
+
+swedish-only-lex-rule := lex-rule & 
+  [ LANG #sw,
+    DTR.LANG #sw & sw ].
+
+swedish-only-lex := basic-lex &
+  [ LANG sw ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;lexical categories
+
+;;nouns with gender
+common-utr-noun-lex := common-noun-lex & swedish-only-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ GEND utrum ] ].		       
+
+common-neu-noun-lex := common-noun-lex & swedish-only-lex &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG [ GEND neutrum ] ].
+
+;;;adjectives (marked as non-inflected in Swedish
+sw-adjective-lex := adjective-lex & swedish-only-lex &
+  [ INFLECTED - ].
+
+
+;;phrasal verbs
+;;currently only for Swedish.
+;;There is a possibility that some phrasal verb types could be shared
+
+;;Example of verbs are given for most types.
+
+;;"gå av"
+intrans-part-verb-lex := verb-lex & intrans-empty2ndarg-lex-item &
+			       swedish-only-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPA #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #part & [ OPT - ] >,
+			       SUBJ < #subj & phr-synsem & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT.HEAD noun &
+				      [ CASE nom ] ],
+	     #part & [ LOCAL.CAT.HEAD part &
+				      [ PFORM #pform ] ] > ].
+
+
+;;"komma sig upp"
+intrans-refl-part-comp-verb-lex := verb-lex & intrans-empty2-3ndarg-lex-item &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPA #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #refl & [ OPT - ], 
+				       #part & [ OPT - ] >,
+			       SUBJ < #subj  >,
+			       SPEC < > ] ] ],
+    ARG-ST < #subj & [ LOCAL [CONT.HOOK.INDEX [ PNG #png ],
+			      CAT np-cat & [ HEAD.CASE nom ] ] ],
+	     #refl & [ LOCAL [ CAT.HEAD noun,
+			       CONT [ RELS <! !>,
+				      HOOK.INDEX [ PRONTYPE refl,
+						   PNG #png ] ] ] ],
+	     #part & [ LOCAL.CAT.HEAD part &
+				      [ PFORM #pform ] ] > ].
+
+;;"Stå på sig"
+intrans-part-refl-comp-verb-lex := verb-lex & intrans-empty2-3ndarg-lex-item &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPA #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #part & [ OPT - ], 
+				       #refl & [ OPT - ] >,
+			       SUBJ < #subj  >,
+			       SPEC < > ] ] ],
+    ARG-ST < #subj & [ LOCAL [CONT.HOOK.INDEX [ PNG #png ],
+			      CAT np-cat & [ HEAD.CASE nom ] ] ],
+	     #part & [ LOCAL.CAT.HEAD part &
+				      [ PFORM #pform ] ],
+	     #refl & [ LOCAL [ CAT.HEAD noun,
+			       CONT [ RELS <! !>,
+				      HOOK.INDEX [ PRONTYPE refl,
+						   PNG #png ] ] ] ] > ].
+
+
+;;base type for the two types below
+trans-part-obj-verb-lex := verb-lex & trans-empty2ndarg-lex-item &
+			       swedish-only-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD.GOVPA #pform,
+			 VAL [ SPR <  >,
+			       COMPS < #part & [ OPT - ], #dobj & phr-synsem >,
+			       SUBJ < #subj & phr-synsem & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT.HEAD noun &
+				      [ CASE nom ] ],
+	     #part & [ LOCAL.CAT.HEAD part &
+				      [ PFORM #pform ] ],
+	     #dobj & [ LOCAL.CAT.HEAD noun &
+				      [ CASE acc ] ] > ].
+
+;;"komma ihåg"
+trans-part-opt-obj-verb-lex := trans-part-obj-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < synsem, [ OPT +  ] > ]. 
+
+;;klä på någon"
+trans-part-non-opt-obj-verb-lex := trans-part-obj-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < synsem, [ OPT -  ] > ]. 
+
+;;base for the two types below
+trans-part-pobj-verb-lex := verb-lex & trans-empty2ndarg-lex-item &
+			       swedish-only-lex &
+  [ SYNSEM.LOCAL [ CAT [ HEAD [ GOVPA #paform,
+				GOVPR #prform ],
+			 VAL [ SPR <  >,
+			       COMPS < #part & [ OPT - ], #dobj >,
+			       SUBJ < #subj & [ LOCAL.CONT.HOOK.INDEX #xarg] >,
+			       SPEC < > ] ],
+		   CONT.HOOK.XARG #xarg],
+    ARG-ST < #subj & [ LOCAL.CAT.HEAD noun &
+				      [ CASE nom ] ],
+	     #part & [ LOCAL.CAT.HEAD part & [ PFORM #paform ] ],
+	     #dobj & [ LOCAL.CAT pp-cat & [ HEAD [ PFORM #prform,
+						   CASE acc ] ] ] > ].
+
+
+;;stå ut med någon"
+trans-part-non-opt-pobj-verb-lex := trans-part-pobj-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
+				 [ OPT - ] > ].
+
+
+trans-part-opt-pobj-verb-lex := trans-part-pobj-verb-lex &
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS < synsem,
+				 [ OPT + ] > ].
+
+;;;;
+;;ditrans-verb with prep always with "åt" or "till" in Swedish??
+sw-ditrans-do-lpio-verb-lex := ditrans-do-lpio-verb-lex &
+  [ SYNSEM.LOCAL.CAT.HEAD.GOVPR dat-pf ].
+
+sw-ditrans-do-lpio-verb-lex-for := ditrans-do-lpio-verb-lex &
+  [ SYNSEM.LOCAL.CAT.HEAD.GOVPR foer-pf ]. 
+
+
+;;"ge någon något"/"ge något åt någon"
+sw-ditrans-do-lpio-shifts-verb-lex := ditrans-do-lpio-shifts-verb-lex &
+                               sw-ditrans-do-lpio-verb-lex.
+
+;;"rekommendera någon något"/"rekommendera något för någon"
+sw-ditrans-do-lpio-shifts-verb-lex-for := ditrans-do-lpio-shifts-verb-lex &
+                                   sw-ditrans-do-lpio-verb-lex-for.
+
+;;adverbs
+ ;;swedish scopal adverbs are currently always posthead
+sw-adverb-lex := adverb-lex & swedish-only-lex &
+  [ SYNSEM.LOCAL.CAT.POSTHEAD + ].
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;phrase rules
+
+
+
+common-def-covert-det-phrase := common-covert-det-phrase & swedish-only-rule &
+  [ HEAD-DTR.SYNSEM [ LOCAL [ CAT.VAL.SPR
+			      < [ LOCAL.CONT.RELS <! [ PRED reg_q_rel ] !> ] >,
+			    CONT.HOOK.INDEX.DEF + ],
+		      MODIFIED notmod ],
+    C-CONT.RELS <! [ PRED def_q_rel ] !> ]. 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;lexical rules
+
+;;base types
+sw-noun-lex-rule := noun-lex-rule & swedish-only-lex-rule.
+sw-verb-lex-rule := non-inv-verb-lex-rule & swedish-only-lex-rule.
+
+
+;;verb rules
+
+;;change a verbs valence into question valence
+question-verb-lex-rule := const-ltol-rule & sw-verb-lex-rule &
+  [ SYNSEM [ OPT #opt,
+	     DEF-OPT #def-opt,
+	     OPTTYPE #opttype,
+	     LOCAL [ CAT [ HEAD [ MOD < >,
+				  INV +,
+				  VFORM #vform ],
+			   VAL [ SPR #spr,
+				 COMPS < #subj & [ OPT - ] . #comps >,
+				 SUBJ < anti-synsem >,
+				 SPEC #spec ],
+			   MC #mc,
+			   HC-LIGHT #hc,
+			   POSTHEAD #ph ],
+		     CONT #cont ],
+	     NON-LOCAL #non-local,
+	     LIGHT #light,
+	     MODIFIED #mod,
+	     LKEYS #lkeys ],
+    DTR.SYNSEM [ OPT #opt,
+		 DEF-OPT #def-opt,
+		 OPTTYPE #opttype,
+		 LOCAL [ CAT [ HEAD verb & [ INV -,
+					     VFORM #vform & finite ],
+			       VAL [ SPR #spr,
+				     COMPS #comps,
+				     SUBJ < #subj & synsem >,
+				     SPEC #spec ],
+			       MC #mc,
+			       HC-LIGHT #hc,
+			       POSTHEAD #ph ],
+			 CONT #cont ],
+		 NON-LOCAL #non-local,
+		 LIGHT #light,
+		 MODIFIED #mod,
+		 LKEYS #lkeys ] ].
+
+
+
+pres-verb-lex-rule := infl-ltow-rule & sw-verb-lex-rule &
+  [ SYNSEM.LOCAL [ CAT.HEAD.VFORM finite,
+		   CONT.HOOK.INDEX.E.TENSE pres ] ].
+
+pres-verb-lex-rule-0 := const-ltow-rule & sw-verb-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL [ CAT.HEAD.VFORM finite,
+		   CONT.HOOK.INDEX.E.TENSE pres ] ],
+    DTR.SYNSEM #synsem & [ LOCAL.CAT.HEAD.CONJUG pres-0 ] ].
+
+past-verb-lex-rule := infl-ltow-rule & sw-verb-lex-rule &
+  [ SYNSEM.LOCAL [ CAT.HEAD.VFORM finite,
+		   CONT.HOOK.INDEX.E.TENSE imp ] ]. 
+
+
+;;noun rules
+
+sing-undef-noun-lex-rule := const-ltow-rule & sw-noun-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg ],
+					       DEF - ] ],
+    DTR.SYNSEM #synsem ].
+
+sing-def-noun-lex-rule := infl-ltow-rule & sw-noun-lex-rule &
+  [ SYNSEM.LOCAL [ CAT.HEAD.INFL-DEF +,
+                   CONT.HOOK.INDEX [ PNG [ NUM sg ],
+				     DEF + ] ] ]. 
+
+
+plur-def-noun-lex-rule := infl-ltow-rule & sw-noun-lex-rule &
+  [ SYNSEM.LOCAL [ CAT.HEAD.INFL-DEF +,
+                   CONT.HOOK.INDEX [ PNG [ NUM plur ],
+				     DEF + ] ] ]. 
+
+plur-0-undef-noun-lex-rule := const-ltow-rule & sw-noun-lex-rule &
+  [ SYNSEM #synsem & [ LOCAL.CONT.HOOK.INDEX [ PNG [ NUM plur ],
+					       DEF - ] ],
+    DTR.SYNSEM #synsem & [ LOCAL.CAT.HEAD.DECL decl-0 ] ].
+
+plur-undef-noun-lex-rule := infl-ltow-rule & sw-noun-lex-rule &
+  [ SYNSEM.LOCAL.CONT.HOOK.INDEX [ PNG [ NUM plur ],
+				   DEF - ] ]. 
+
+;;;;;;;;;;
+;;adjective rules
+sw-adj-lex-rule := swedish-only-lex-rule &
+  [ DTR.SYNSEM [ LOCAL.CAT [ HEAD adj ] ] ].
+
+sing-utrum-undef-adj-lex-rule := const-ltow-rule & sw-adj-lex-rule &
+  [ SYNSEM #synsem & 
+	   [ LOCAL.CAT.HEAD.MOD 
+                 < [ LOCAL.CONT.HOOK.INDEX [ PNG [ GEND utrum,
+					      NUM sg ],
+					DEF - ] ] > ],
+    DTR.SYNSEM #synsem ].
+
+
+sing-neutrum-undef-adj-lex-rule := infl-ltow-rule & sw-adj-lex-rule &
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD 
+	      < [ LOCAL.CONT.HOOK.INDEX [ PNG [ GEND neutrum,
+						NUM sg ],
+					  DEF - ] ] > ]. 
+
+sing-def-adj-lex-rule := infl-ltow-rule & sw-adj-lex-rule &
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD 
+	      < [ LOCAL.CONT.HOOK.INDEX [ PNG [ NUM sg ],
+					  DEF + ] ] > ]. 
+
+plur-adj-lex-rule := infl-ltow-rule & sw-adj-lex-rule &
+  [ SYNSEM.LOCAL.CAT.HEAD.MOD 
+	      < [ LOCAL.CONT.HOOK.INDEX [ PNG [ NUM plur ] ] ] > ]. 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Declinations for nouns
+
+;;decl := sort. (declared in en-sw.tdl)
+
+decl-or := decl.
+decl-ar := decl.
+decl-er := decl.
+decl-n := decl.
+decl-0 := decl.
+decl-irreg := decl.
+decl-irreg-n := decl-n & decl-irreg.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Conjugations for verbs
+
+;;conjug := sort. (declared in en-sw.tdl)
+
+pres-conj := conjug.
+
+pres-er := conjug.
+pres-r := conjug.
+pres-0 := conjug.
+pres-irreg := conjug.
+
+past-irreg := conjug.
+past-+de := conjug.
+past-dte := conjug.
+
+;;cross-classifications of pres and past conjug, all are probably not needed...
+er-ir := pres-er & past-irreg.
+er-+de := pres-er & past-+de.
+er-dte := pres-er & past-dte.
+
+r-ir := pres-r & past-irreg.
+r-+de := pres-r & past-+de.
+r--dte := pres-r & past-dte.
+
+0-ir := pres-0 & past-irreg.
+0-+de := pres-0 & past-+de.
+0-dte := pres-0 & past-dte.
+
+irreg := pres-irreg & past-irreg.
+ir-+de := pres-irreg & past-+de.
+ir-dte := pres-irreg & past-dte.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;Swedish pforms
+
+;;;
+;;pform is currently used for prepositions and particles.
+
+dat-pf := pformm. ;;used in dat-pp for ditrans-verbs
+paa-pf := pformm.
+av-pf := pformm.
+åt-pf := dat-pf.
+till-pf := dat-pf.
+fraan-pf := pformm.
+ihaag-pf := pformm.
+bort-pf := pformm.
+foer-pf := pformm.
+ut-pf := pformm.
+med-pf := pformm.
+upp-pf := pformm.

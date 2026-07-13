@@ -1,0 +1,36 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  roots.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  the grammar start symbol (sentence)
+;;;
+
+
+
+;;accept sentences (VP with message) of finite tense
+root := phrase &
+  [ SYNSEM.LOCAL [CAT [ HEAD verb ],
+		  CONT [ HOOK.INDEX.E.TENSE fin,
+			 MSG message ] ] ].
+
+
+;;removed part
+;		      VAL [ SUBJ < anti-synsem >,
+;			    COMPS null ] ]
+
+

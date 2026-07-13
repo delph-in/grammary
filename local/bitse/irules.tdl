@@ -1,0 +1,187 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  irules.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  inflectional lexical rules
+;;;
+; File for spelling changing lexical rules, i.e., instances
+; of (subtypes of) infl-ltol-rule and infl-ltow-rule.
+
+
+
+%(letter-set (!b abcdefghijklmnopqrstuvwxyz))
+%(letter-set (!s abcdefghijklmnopqrtuvwxyz))
+%(letter-set (!v aouåeiyäö))
+;%(wild-card (?v aouåeiyäö))
+%(letter-set (!d bdfglmnprstv))
+%(letter-set (!a ouåeiyäö))
+%(letter-set (!l cfhkpqstx))
+%(letter-set (!t bdgjlmnrvwz))
+
+;;!b: English alfabet
+;;!s: English alfabet minus s
+;;!v, ?v: all vowels
+;;!d: consonants that doubles in the end of English words
+;;!a: all swedish vowels except a
+;;!l: unvoiced consonants
+;;!t: voiced consonants
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Swedish
+
+;;verbs
+
+#|
+pres-verb-er := 
+%suffix (* er) (?v er)
+pres-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG pres-er ]. 
+|#
+pres-verb-er := 
+%suffix (* er) (a er)
+pres-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG pres-er ]. 
+
+pres-verb-r := 
+%suffix (* r) (!v !vr)
+pres-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG pres-r ]. 
+
+past-verb-dte := 
+%suffix (!la !lte) (!ta !tde)
+past-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG past-dte ]. 
+
+past-verb-+de := 
+%suffix (* de) (!a !adde) (s des)
+past-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG past-+de ]. 
+
+;;dummy rule for irregular swedish present tense
+pres-verb-irreg := 
+%suffix (* r)
+pres-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG pres-irreg ].
+
+;;dummy rules for irregular swedish past tense
+past-verb-irreg := 
+%suffix (* de) 
+past-verb-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.CONJUG past-irreg ].
+
+
+;;nouns
+
+sing-def-noun-utr :=
+%suffix (* en) (!v !vn)
+sing-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEND utrum ].
+
+sing-def-noun-neu :=
+%suffix (* et) (!v !vt) (er ret) 
+sing-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CONT.HOOK.INDEX.PNG.GEND neutrum ].
+
+plur-undef-noun-or :=
+%suffix (* or) (!v or)
+plur-undef-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-or ].
+
+plur-undef-noun-ar :=
+%suffix (* ar) (!v ar)
+plur-undef-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-ar ].
+
+;;might have to be extended to cover every case
+plur-undef-noun-er :=
+%suffix (* er) (!v !vr) (i ier) (um er)
+plur-undef-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-er ].
+
+plur-undef-noun-n :=
+%suffix (* n)
+plur-undef-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-n ].
+
+plur-def-noun-or :=
+%suffix (* orna) (!v orna)
+plur-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-or ].
+
+plur-def-noun-ar :=
+%suffix (* arna) (!v arna)
+plur-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-ar ].
+
+;;might have to be extended to cover every case
+plur-def-noun-er :=
+%suffix (* erna) (!v !vrna) (i ierna) (um erna)
+plur-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-er ].
+
+plur-def-noun-n :=
+%suffix (* na)
+plur-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-n ].
+
+plur-def-noun-0 :=
+%suffix (* en) (!v !vn)
+plur-def-noun-lex-rule &
+  [ DTR.SYNSEM.LOCAL.CAT.HEAD.DECL decl-0 ].
+
+
+;;adjectives
+
+sing-neutrum-undef-adj :=
+%suffix (* t)
+sing-neutrum-undef-adj-lex-rule.
+
+sing-def-adj-lex :=
+%suffix (* a)
+sing-def-adj-lex-rule.
+
+plur-adj-lex :=
+%suffix (* a)
+plur-adj-lex-rule.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;English
+
+
+;;verbs
+
+en-pres-3sg-verb := 
+%suffix (!s !ss) (s sses) (ss sses) (o oes) (can can)
+en-pres-verb-3sg-lex-rule.
+
+en-past-verb :=
+%suffix (* ed) (!v ed) (e ed)
+en-past-verb-lex-rule.
+
+en-pr-part-verb :=
+%suffix (* ing) (!v!d !v!d!ding) (e ing)
+en-verb-pr-part-rule.
+
+
+;;nouns
+
+en-plur-noun :=
+%suffix (!s !ss) (!ss !ssses) (ss sses) 
+en-plur-noun-lex-rule.

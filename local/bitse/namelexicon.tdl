@@ -1,0 +1,55 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;    
+;;;  namelexicon.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  Lexicon for proper nouns that are shared between Swedish and English
+;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Proper nouns
+
+
+;;names of persons
+
+sara := proper-noun-lex-fem &
+   [ STEM < "Sara" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "Sara" ] ].
+
+ann := proper-noun-lex-fem &
+   [ STEM < "Ann" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "Ann" ] ].
+
+tom := proper-noun-lex-masc &
+   [ STEM < "Tom" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "Tom" ] ].
+
+bob := proper-noun-lex-masc &
+   [ STEM < "Bob" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "Bob" ] ].
+
+
+;;geographical names
+
+london := proper-noun-lex-thing &
+   [ STEM < "London" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "London" ] ].
+
+stockholm := proper-noun-lex-thing &
+   [ STEM < "Stockholm" >,
+     SYNSEM [ LKEYS.KEYREL.CARG "Stockholm" ] ].

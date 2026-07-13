@@ -1,0 +1,584 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;    
+;;;  swlexicon.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  Swedish lexicon for BiTSE
+;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Nouns
+
+hund := common-utr-noun-lex &
+  [ STEM < "hund" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "dog_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-ar ] ].
+
+katt := common-utr-noun-lex &
+  [ STEM < "katt" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "cat_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-er ] ].
+
+lejon := common-neu-noun-lex &
+  [ STEM < "lejon" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "lion_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-0 ] ].
+
+
+mormor := common-utr-noun-lex &
+  [ STEM < "mormor" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED mormor_rel,
+	     LOCAL.CAT.HEAD.DECL decl-irreg ] ].
+
+farmor := common-utr-noun-lex &
+  [ STEM < "farmor" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED farmor_rel,
+	     LOCAL.CAT.HEAD.DECL decl-irreg ] ].
+
+
+flicka := common-utr-noun-lex &
+  [ STEM < "flicka" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "girl_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-or ] ].
+
+historia := common-utr-noun-lex &
+  [ STEM < "historia" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "story_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-er ] ].
+
+äpple := common-neu-noun-lex &
+  [ STEM < "äpple" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "apple_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-n ] ]. 
+
+gevär := common-neu-noun-lex &
+  [ STEM < "gevär" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "gun_n_rel",
+	     LOCAL.CAT.HEAD.DECL decl-0 ] ]. 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Proper nouns
+
+helsingfors := proper-noun-lex-thing &
+   [ STEM < "Helsingfors" >,
+     LANG sw,
+     SYNSEM [ LKEYS.KEYREL.CARG "Helsinki" ] ].
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Pronouns
+
+
+jag := nom-pronoun-lex &
+  [ STEM < "jag" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ] ].
+han := nom-pronoun-lex &
+  [ STEM < "han" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ] ].
+vi := nom-pronoun-lex &
+  [ STEM < "vi" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM plur ] ] ].
+
+mig := acc-refl-pronoun-lex &
+  [ STEM < "mig" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ] ].
+
+mig-0 := empty-refl-pronoun-lex &
+  [ STEM < "mig" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM sg ] ] ].
+
+honom := acc-pronoun-lex &
+  [ STEM < "honom" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND masc ] ] ].
+oss := acc-refl-pronoun-lex &
+  [ STEM < "oss" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER first,
+					 NUM plur ] ] ].
+
+sig := refl-pronoun-lex &
+  [ STEM < "sig" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND real-gender ] ] ].
+
+sig-0 := empty-refl-pronoun-lex &
+  [ STEM < "sig" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CONT.HOOK.INDEX.PNG [ PER third,
+					 NUM sg,
+					 GEND real-gender ] ] ].
+
+en := det-lex &
+  [ STEM < "en" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED undef_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF -,
+				     PNG [ GEND utrum,
+					   NUM sg ] ] ] ].
+
+ett := det-lex &
+  [ STEM < "ett" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED undef_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF -,
+				     PNG [ GEND neutrum,
+					   NUM sg ] ] ] ].
+
+den := def-det-lex &
+  [ STEM < "den" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED def_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF +,
+				     PNG [ GEND utrum,
+					   NUM sg ] ] ] ].
+
+det := def-det-lex &
+  [ STEM < "det" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED def_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF +,
+				     PNG [ GEND neutrum,
+					   NUM sg] ] ] ]. 
+
+denna := def-det-lex &
+  [ STEM < "denna" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED dem_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF +,
+				     PNG [ GEND utrum,
+					   NUM sg ] ] ] ].
+
+detta := def-det-lex &
+  [ STEM < "detta" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED dem_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF +,
+				     PNG [ GEND neutrum,
+					   NUM sg] ] ] ]. 
+
+dessa := def-det-lex &
+  [ STEM < "dessa" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED dem_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ PNG [ NUM plur ] ] ] ]. 
+
+de := def-det-lex &
+  [ STEM < "de" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED dem_q_rel,
+	     LOCAL.CONT.HOOK.INDEX [ DEF +,
+				     PNG [ NUM plur ] ] ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Verbs
+
+sova := intrans-verb-lex &
+  [ STEM < "sova" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "sleep_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG er-ir,
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ].
+
+springa := intrans-verb-lex &
+  [ STEM < "springa" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "run_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG er-ir,
+		     CONT.HOOK.INDEX.E.ASPECT durational ] ] ].
+
+
+jaga := opt-obj-trans-verb-lex &
+  [ STEM < "jaga" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "hunt_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT durational ] ] ].
+
+raka := non-opt-obj-trans-verb-lex &
+  [ STEM < "raka" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "shave_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].
+
+besöka := non-opt-obj-trans-verb-lex &
+  [ STEM < "besöka" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "visit_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG er-dte,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].
+
+betrakta := non-opt-obj-trans-verb-lex &
+  [ STEM < "betrakta" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "look#at_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].
+
+äta := opt-obj-trans-verb-lex &
+  [ STEM < "äta" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "eat_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG er-ir,
+		     CONT.HOOK.INDEX.E.ASPECT durational ] ] ].
+
+kan := modal-verb-lex &
+  [ STEM < "kunna" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "can_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG irreg,
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ].       
+
+bruka := raising-verb-lex &
+  [ STEM < "bruka" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "usually_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].
+
+
+ge := sw-ditrans-do-lpio-shifts-verb-lex &
+  [ STEM < "ge" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "give_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG irreg,
+		     CONT.HOOK.INDEX.E.ASPECT achiev ] ] ].  
+
+beraetta := sw-ditrans-do-lpio-verb-lex-for &
+  [ STEM < "berätta" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "tell_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+rekommendera := sw-ditrans-do-lpio-shifts-verb-lex-for &
+  [ STEM < "rekommendera" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "recomend_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+utfärda := sw-ditrans-do-lpio-verb-lex &
+  [ STEM < "utfärda" >,
+    LANG sw, 
+    SYNSEM [ LKEYS.KEYREL.PRED "issue_v_rel",
+             LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].  
+
+;;fixa partikeln ut!!!
+hyra := sw-ditrans-do-lpio-verb-lex &
+  [ STEM < "hyra" >,
+    LANG sw, 
+    SYNSEM [ LKEYS.KEYREL.PRED "rent_v_rel",
+             LOCAL [ CAT.HEAD [ CONJUG ir-dte,
+				GOVPR paa-pf ],
+		     CONT.HOOK.INDEX.E.ASPECT aspect  ] ] ]. 
+
+lova := ditrans-io-do-verb-lex &
+  [ STEM < "lova" >,
+    LANG sw, 
+    SYNSEM [ LKEYS.KEYREL.PRED "promise_v_rel",
+             LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect  ] ] ].
+
+leverera := sw-ditrans-do-lpio-verb-lex &
+  [ STEM < "leverera" >,
+    LANG sw, 
+    SYNSEM [
+	     LKEYS.KEYREL.PRED "deliver_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].  
+
+placera := ditrans-do-loc-fpio-verb-lex &
+  [ STEM < "placera" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "put_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ].  
+
+lita-paa := intrans-lex-pp-comp-verb-lex &
+  [ STEM < "lita" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "trust_v_rel",
+	     LOCAL [ CAT.HEAD [ CONJUG r-+de,
+				GOVPR paa-pf ],
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ].  
+
+haemnas-paa := intrans-lex-pp-comp-verb-lex &
+  [ STEM < "hämnas" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "revenge_v_rel",
+	     LOCAL [ CAT.HEAD [ CONJUG 0-+de,
+				GOVPR paa-pf ],
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+haelsa := intrans-lex-pp-comp-verb-lex &
+  [ STEM < "hälsa" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "greet_v_rel",
+	     LOCAL [ CAT.HEAD [ CONJUG r-+de,
+				GOVPR paa-pf ],
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ].  
+
+harkla := intrans-refl-comp-verb-lex &
+  [ STEM < "harkla" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "hawk_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+uppföra := intrans-refl-comp-verb-lex &
+  [ STEM < "uppföra" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "behave_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG ir-dte,
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+komma-sig-upp := intrans-refl-part-comp-verb-lex &
+  [ STEM < "komma" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "succeed_v_rel",
+	     LOCAL [ CAT.HEAD [ CONJUG er-ir,
+				GOVPA upp-pf ],
+		     CONT.HOOK.INDEX.E.ASPECT aspect ] ] ]. 
+
+
+hoppas := clausal-prop-comp-verb-lex &
+ [ STEM < "hoppas" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "hope_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG 0-+de,
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ].  
+
+undra := clausal-que-comp-verb-lex &
+ [ STEM < "undra" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "wonder_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG r-+de,
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ]. 
+
+veta := clausal-comp-verb-lex &
+ [ STEM < "veta" >,
+   LANG sw, SYNSEM [
+ 	     LKEYS.KEYREL.PRED "know_v_rel",
+	     LOCAL [ CAT.HEAD.CONJUG irreg,
+		     CONT.HOOK.INDEX.E.ASPECT state ] ] ]. 
+
+gaa-av := intrans-part-verb-lex &
+  [ STEM < "gå" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "break_v_rel",
+	     LOCAL.CAT.HEAD [CONJUG r-ir,
+			     GOVPA av-pf ] ] ]. 
+
+stå-på :=intrans-part-refl-comp-verb-lex &
+  [ STEM < "stå" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "insist_v_rel",
+	     LOCAL.CAT.HEAD [CONJUG r-ir,
+			     GOVPA paa-pf ] ] ].
+
+;;works with a NP complement, not with a VP
+;;("komma ihåg något" OK, "komma ihåg att göra något", not OK yet)
+komma-ihaag := trans-part-opt-obj-verb-lex &
+  [ STEM < "komma" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "remember_v_rel",
+	     LOCAL.CAT.HEAD [CONJUG er-ir,
+			     GOVPA ihaag-pf ] ] ].
+
+
+klae-paa := trans-part-non-opt-obj-verb-lex &
+  [ STEM < "klä" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "dress_v_rel",
+	     LOCAL.CAT.HEAD [ CONJUG r-+de,
+			      GOVPA paa-pf ] ] ]. 
+
+ta-bort := trans-part-non-opt-obj-verb-lex &
+  [ STEM < "ta" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "delete_v_rel",
+	     LOCAL.CAT.HEAD [ CONJUG r-ir,
+			      GOVPA bort-pf ] ] ].
+
+haelsa-paa := trans-part-opt-obj-verb-lex &
+  [ STEM < "hälsa" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "visit_v_rel",
+	     LOCAL.CAT.HEAD [ CONJUG r-+de,
+			      GOVPA paa-pf ] ] ].
+
+
+staa-ut := trans-part-non-opt-pobj-verb-lex &
+  [ STEM < "stå" >,
+   LANG sw, SYNSEM [
+	     LKEYS.KEYREL.PRED "endure_v_rel",
+	     LOCAL.CAT.HEAD [ CONJUG r-ir,
+			      GOVPA ut-pf,
+			      GOVPR med-pf ] ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Complementizers
+
+att := that-comp-lex &
+  [ STEM < "att" >,
+    LANG sw ].
+
+om := whether-comp-lex &
+  [ STEM < "om" >,
+    LANG sw ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Particles and prepositions
+
+ihaag := lex-part-lex &
+  [ STEM < "ihåg" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CAT.HEAD.PFORM ihaag-pf ] ].
+
+
+ut := lex-part-lex &
+  [ STEM < "ut" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CAT.HEAD.PFORM ut-pf ] ].
+
+bort := lex-part-lex &
+  [ STEM < "bort" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CAT.HEAD.PFORM bort-pf ] ].
+
+
+av-prep-l  := lex-part-lex &
+  [ STEM < "av" >,
+   LANG sw, 
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM av-pf ] ].
+
+upp-prep-l  := lex-part-lex &
+  [ STEM < "upp" >,
+   LANG sw, 
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM upp-pf ] ].
+
+paa-lp := lex-part-lex &
+  [ STEM < "på" >,
+   LANG sw, SYNSEM [
+	     LOCAL.CAT.HEAD.PFORM paa-pf ] ].
+
+
+
+;på-part := asp-part-lex &
+;  [ STEM < "pa" >,
+;   LANG sw, SYNSEM [
+;	     LOCAL.CONT.HOOK.INDEX.E.ASPECT activity ] ].
+
+under-prep-f := func-prep-lex &
+  [ STEM < "under" >,
+   LANG sw, SYNSEM [   
+	     LKEYS.KEYREL.PRED under_p_rel ] ].
+
+på-prep-f := func-prep-lex &
+  [ STEM < "på" >,
+   LANG sw, SYNSEM [   
+	     LKEYS.KEYREL.PRED on_p_rel ] ].
+
+
+;;på-prep-f contributes semantically and has an on-rel
+;;på-prep-l has an empty rel in order to construct phrases where the prep isn't important
+
+
+paa-prep-l  := lex-prep-lex &
+  [ STEM < "på" >,
+       LANG sw, 
+  SYNSEM [ LOCAL.CAT.HEAD.PFORM paa-pf  ] ].
+
+
+till-prep-l  := lex-prep-lex &
+  [ STEM < "till" >,
+   LANG sw,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM till-pf ] ].
+
+foer-prep-l  := lex-prep-lex &
+  [ STEM < "för" >,
+   LANG sw,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM foer-pf] ].
+
+med-prep-l  := lex-prep-lex &
+  [ STEM < "med" >,
+   LANG sw,
+    SYNSEM [ LOCAL.CAT.HEAD.PFORM med-pf ] ].
+
+
+med-prep-f := func-prep-lex &
+  [ STEM < "med" >,
+   LANG sw, 
+SYNSEM [ LKEYS.KEYREL.PRED "with_p_rel" ] ].
+
+; åt-prep-po1  := prep-obj-lex &
+;   [ STEM < "åt" >,
+;        LANG sw, SYNSEM [ LOCAL.CAT.HEAD.PFORM åt-pf,
+; 	     LKEYS.KEYREL.PRED "to_p_rel" ] ].
+
+åt-prep-po2  := lex-prep-lex &
+   [ STEM < "åt" >,
+     LANG sw,
+      SYNSEM [ LOCAL.CAT.HEAD.PFORM åt-pf ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Adverbs
+
+verkligen := sw-adverb-lex &
+  [ STEM < "verkligen" >,
+    SYNSEM [ LOCAL.CONT.RELS <! [ PRED emphasis_rel ] !> ] ].
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;Adjectives
+
+stor := sw-adjective-lex &
+  [ STEM < "stor" >,
+   LANG sw, SYNSEM [   
+	     LKEYS.KEYREL.PRED "big_j_rel" ] ].

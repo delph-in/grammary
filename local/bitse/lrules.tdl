@@ -1,0 +1,63 @@
+;;; -*- Mode: tdl; Coding: utf-8; -*-
+;;;
+;;;              - BiTSe -
+;;; 
+;;;    Copyright (c)  BiTSe version 0.4
+;;;                       2005-2006 
+;;;      Sara Stymne   <sarst@ida.liu.se>
+;;;
+;;;   	 NLPLab
+;;;      Institutionen för datavetenskap
+;;;      Linköpings universitet
+;;;
+;;;  based on HPSG Grammar Matrix 0.8 (see file: matrix.tdl)
+;;;
+;;;
+;;;  lrules.tdl
+;;;
+;;;  20 Sep 2006
+;;;
+;;;  non-inflectional lexical rules
+;;;
+
+; File for spelling preserving lexical rules, i.e., instances
+; of (subtypes of) const-ltol-rule or const-ltow-rule.
+
+; %suffix should not appear in this file (see irules.tdl).
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Shared rules
+
+;;verbs
+infin-verb := infin-verb-lex-rule.
+question-verb := question-verb-lex-rule.
+ditrans-verb-io-do := ditrans-verb-io-do-lex-rule.
+
+;;nouns
+sing-undef-noun := sing-undef-noun-lex-rule.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Swedish
+
+;;verbs
+pres-0-verb := pres-verb-lex-rule-0.
+
+;;nouns
+plur-0-undef-noun-lex := plur-0-undef-noun-lex-rule.
+
+;;adjectives
+sing-utrum-undef-adj-lex := sing-utrum-undef-adj-lex-rule.
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;English
+
+;;verbs
+en-question-verb := en-question-verb-lex-rule.
+en-pres-verb-non3sg := en-pres-verb-non3sg-lex-rule.
+en-pres-verb-pl := en-pres-verb-pl-lex-rule.
+
+;;nouns
+en-sg-noun-lex := en-sg-noun-lex-rule.
+

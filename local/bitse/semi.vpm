@@ -1,0 +1,63 @@
+;;;
+;;; the correspondence between grammar-internal types and the one-letter codes
+;;; encoding value types on MRS variables: the type mapping, conceptually, is
+;;; applied parallel to the property mapping, i.e. context conditions in rules
+;;; below should be cast in the appropriate name space.
+;;;
+event              <> e
+ref-ind            <> x
+handle             <> h
+
+;;; ERB 2007-08-24 Adding semi.vpm now to help in keeping
+;;; generation manageable.  The hope is that I can have the "sg"
+;;; forms be underspecified for number, but use the vpm to take
+;;; inputs underspecified for number and constain them to be 
+;;; [ NUM sg ], which should rule out dual and plural forms.
+
+;;; ERB 2007-08-24 Preserve gender information for now, since
+;;; I'm using this for monolingual generation purpoess.
+
+PNG.GEND : GEND
+m <> m
+ii <> ii
+iii <> iii
+iv <> iv
+anim <> anim
+nm <> nm
+
+PNG.PER : PER
+first <> 1
+second <> 2
+third <> 3
+
+PNG.NUM : NUM
+sg <> sg
+plur <> pl
+
+;;; ERB 2007-08-24 And make sure we don't lose TMA information.
+
+E.TENSE : TENSE
+past <> past
+pres <> pres
+im-future <> im-fut
+future <> fut
+non-past <> non-past
+non-fut <> non-fut
+
+
+E.ASPECT : ASPECT
+state <> state
+hab <> hab
+default <> default
+
+E.MOOD : MOOD
+ind <> ind
+non-fut-ind >> gen-ind
+hyp <> hyp
+nact <> nact
+
+SF : SF
+prop <> prop
+ques <> ques
+prop-or-ques <> prop-or-ques
+comm <> comm

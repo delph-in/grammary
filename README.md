@@ -70,6 +70,28 @@ $ bash scripts/build-ltdb.sh build
 ACE is downloaded automatically on first run. Both `.db` and `.dat` files are
 written to `build/DBS/` and copied to `etc/ltdb/web/db/`.
 
+### Build the static LTDB mirror
+
+The GitHub Pages fallback is generated under `docs/ltdb/` from the compiled
+databases in `build/DBS/`. The static pages contain grammar/type metadata; type
+examples are loaded lazily in the browser from compact per-grammar SQLite files.
+
+```bash
+cd etc/ltdb
+uv run python ../../scripts/freeze_ltdb.py --destination ../../docs
+cd ../..
+python scripts/build_ltdb_example_dbs.py --db-dir build/DBS
+```
+
+To test the mirror locally:
+
+```bash
+python -m http.server -d docs 8000
+```
+
+The mirror does not support live parse/generate, full corpus search, or the full
+example inventory. Unsupported operations link back to the live LTDB.
+
 ### grammary.toml
 
 Grammars are listed in the file `grammary.toml`
@@ -95,5 +117,3 @@ Very rough distinctions so that people can have a general idea about how big the
 
 First install `grew`: https://grew.fr/usage/install/
 and `grewpy`: https://grew.fr/usage/python/
-
-

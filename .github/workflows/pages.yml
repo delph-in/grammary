@@ -1,0 +1,50 @@
+name: Deploy static mirror to GitHub Pages
+
+# Triggered manually from the Actions tab.
+# Requires the compiled grammar .db files to be attached to a GitHub Release
+# (the release.yml workflow does this on tag push).
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag to download grammar DBs from (e.g. v2025-04). Leave blank for latest."
+        required: false
+        default: ""
+
+permissions:
+  contents: write   # needed to push to gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: uv pip install -r requirements.txt
+
+      - name: Download compiled grammar DBs from GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p build/DBS
+          TAG="${{ github.event.inputs.release_tag }}"
+          if [[ -z "$TAG" ]]; then
+            TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
+          fi
+          echo "Downloading DBs from release: $TAG"
+          gh release download "$TAG" --dir build/DBS --pattern "*.db" --clobber
+          ls -lh build/DBS/
+
+      - name: Build static mirror
+        run: bash scripts/build_static_mirror.sh --output test-output --db-dir build/DBS
+
+      - name: Deploy to gh-pages
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          bash scripts/deploy_ghpages.sh --from test-output --remote origin

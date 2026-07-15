@@ -1,6 +1,26 @@
 #!/usr/bin/env node
 
 const assert = require("assert/strict");
+const fs = require("fs");
+const path = require("path");
+
+const ltdbTreePath = path.join(
+  __dirname,
+  "..",
+  "etc",
+  "ltdb",
+  "web",
+  "static",
+  "js",
+  "ltdb-tree.js"
+);
+
+if (!fs.existsSync(ltdbTreePath)) {
+  throw new Error(
+    `Missing ${ltdbTreePath}; run scripts/build-ltdb.sh to populate etc/ltdb`
+  );
+}
+
 const {
   boxWidthForLabel,
   classifyNode,
@@ -10,7 +30,7 @@ const {
   parseDerivation,
   rootShapePoints,
   typeHrefForNode,
-} = require("../assets/ltdb/ltdb-tree.js");
+} = require(ltdbTreePath);
 
 function collectLeaves(node, leaves = []) {
   if (node.leaf) {

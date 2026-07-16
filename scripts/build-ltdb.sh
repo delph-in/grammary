@@ -41,6 +41,7 @@ except KeyError:
 ## find METADATA
 files=$(find "${BUILD}" -type f -name "METADATA")
 
+mkdir "${BUILD}/DBS"
 
 for file in $files; do
     echo "Creating ltdb for: $file"
@@ -48,7 +49,7 @@ for file in $files; do
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
 	uv run python etc/ltdb/scripts/grm2db.py \
-	--outdir build/DBS --ace --doctest --grew "${file}" || true
+	--outdir "${BUILD}/DBS" --ace --doctest --grew "${file}" || true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi

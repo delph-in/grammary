@@ -6,11 +6,15 @@ set -e  # Exit immediately on any error
 
 BUILD="${1:-build}"  # Default to 'build' if not prov
 
+DBS="${BUILD}/DBS"   # compiled grammar databases and grew exports
+
 TMPDIR="etc/"
 
 mkdir -p "${TMPDIR}"
 
 LTDBDIR="${TMPDIR}/ltdb"
+
+WEBDB="${LTDBDIR}/web/db"  # where the LTDB app serves the databases from
 
 # Ensure required repositories are available
 if [ ! -d "${LTDBDIR}" ]; then
@@ -41,15 +45,15 @@ except KeyError:
 ## find METADATA
 files=$(find "${BUILD}" -type f -name "METADATA")
 
-mkdir "${BUILD}/DBS"
+mkdir -p "${DBS}"
 
 for file in $files; do
     echo "Creating ltdb for: $file"
     config_rel=$(get_toml "$file" "['ACE_CONFIG_FILE']")
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
-	uv run python etc/ltdb/scripts/grm2db.py \
-	--outdir "${BUILD}/DBS" --ace --doctest --grew "${file}" || true
+	uv run python "${LTDBDIR}/scripts/grm2db.py" \
+	--outdir "${DBS}" --ace --doctest --grew "${file}" || true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi
@@ -58,27 +62,27 @@ done
 
 echo
 echo "🚀 Successfully created the following grammars"
-find build/DBS -type f -name '*.db' -size +0c -exec du -h {} + | sort -h
+find "${DBS}" -type f -name '*.db' -size +0c -exec du -h {} + | sort -h
 
 echo "🚀 Successfully compiled the following grammars"
-find build/DBS -type f -name '*.dat' -size +0c -exec du -h {} + | sort -h
+find "${DBS}" -type f -name '*.dat' -size +0c -exec du -h {} + | sort -h
 
 echo
-echo "🏗️ Copying to etc/ltdb/web/db/"
-mkdir -p etc/ltdb/web/db
-find etc/ltdb/web/db -maxdepth 1 -type f \( -name '*.db' -o -name '*.dat' \) -delete
-find build/DBS -type f -name '*.db' -size +0c -exec cp {} etc/ltdb/web/db/ \;
-find build/DBS -type f -name '*.dat' -size +0c -exec cp {} etc/ltdb/web/db/ \;
-chmod 644 etc/ltdb/web/db/*.db etc/ltdb/web/db/*.dat 2>/dev/null || true
+echo "🏗️ Copying to ${WEBDB}/"
+mkdir -p "${WEBDB}"
+find "${WEBDB}" -maxdepth 1 -type f \( -name '*.db' -o -name '*.dat' \) -delete
+find "${DBS}" -type f -name '*.db' -size +0c -exec cp {} "${WEBDB}/" \;
+find "${DBS}" -type f -name '*.dat' -size +0c -exec cp {} "${WEBDB}/" \;
+chmod 644 "${WEBDB}"/*.db "${WEBDB}"/*.dat 2>/dev/null || true
 
 ## Merge the grew exports (grm2db.py --grew) into one corpora description
 ## read by `run.sh --grew-match`.  Graph paths inside each corpora.json are
-## absolute, so the export directories themselves stay in build/DBS.
-grew_exports=(build/DBS/*-grew/corpora.json)
+## absolute, so the export directories themselves stay in ${DBS}.
+grew_exports=("${DBS}"/*-grew/corpora.json)
 if [ -f "${grew_exports[0]}" ]; then
     echo "🌲 Merging ${#grew_exports[@]} grew exports" \
-	 "into etc/ltdb/web/db/grew_corpora.json"
-    uv run python - etc/ltdb/web/db/grew_corpora.json \
+	 "into ${WEBDB}/grew_corpora.json"
+    uv run python - "${WEBDB}/grew_corpora.json" \
 	"${grew_exports[@]}" <<'PY'
 import json
 import sys

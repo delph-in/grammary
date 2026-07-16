@@ -48,7 +48,7 @@ for file in $files; do
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
 	uv run python etc/ltdb/scripts/grm2db.py \
-	--outdir build/DBS --ace "${file}" --grew || true
+	--outdir build/DBS --ace --doctest --grew "${file}" || true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi

@@ -42,8 +42,18 @@ echo "🚀 Compile with ltdb"
 
 bash scripts/build-ltdb.sh "${BUILD}"
 
+# Step 5: Set up grew-match and precompile the grew corpora
+# (optional: needs grew/dune from opam; skipped with a warning otherwise)
+echo "🌲 Setting up grew-match"
+if [ -f etc/ltdb/web/db/grew_corpora.json ]; then
+  bash etc/ltdb/scripts/setup-grew-match.sh etc/ltdb/web/db/grew_corpora.json \
+    || echo "⚠️ grew-match setup failed (grew/dune missing?);" \
+            "rerun etc/ltdb/scripts/setup-grew-match.sh once installed"
+else
+  echo "⚠️ No grew corpora exported; skipping grew-match setup"
+fi
 
-# Step 5: Generate grammar table and summary
+# Step 6: Generate grammar table and summary
 echo "📋 Generating grammar table"
 mkdir -p docs
 uv run python scripts/generate_table.py \

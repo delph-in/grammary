@@ -47,8 +47,8 @@ bash scripts/build-ltdb.sh "${BUILD}"
 echo "🌲 Setting up grew-match"
 if [ -f etc/ltdb/web/db/grew_corpora.json ]; then
   bash etc/ltdb/scripts/setup-grew-match.sh etc/ltdb/web/db/grew_corpora.json \
-    || echo "⚠️ grew-match setup failed (grew/dune missing?);" \
-            "rerun etc/ltdb/scripts/setup-grew-match.sh once installed"
+    || echo "⚠️ grew-match setup failed (see message above); fix and rerun" \
+            "etc/ltdb/scripts/setup-grew-match.sh etc/ltdb/web/db/grew_corpora.json"
 else
   echo "⚠️ No grew corpora exported; skipping grew-match setup"
 fi

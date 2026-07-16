@@ -44,11 +44,18 @@ def download_projects(toml_path, output_dir, delete_archives=True):
             url = vcs.split(" ", 1)[1]
         elif vcs.startswith("git clone "):
             url = vcs.split(" ", 2)[2]
-            print(f"Cloning repo: {url}")
-            try:
-                subprocess.run(["git", "clone", url, "."], cwd=project_dir, check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"❌ Git clone failed for {project}: {e}")
+            if (project_dir / ".git").is_dir():
+                print(f"Updating existing repo: {url}")
+                try:
+                    subprocess.run(["git", "pull", "--ff-only"], cwd=project_dir, check=True)
+                except subprocess.CalledProcessError as e:
+                    print(f"❌ Git pull failed for {project}: {e}")
+            else:
+                print(f"Cloning repo: {url}")
+                try:
+                    subprocess.run(["git", "clone", url, "."], cwd=project_dir, check=True)
+                except subprocess.CalledProcessError as e:
+                    print(f"❌ Git clone failed for {project}: {e}")
             continue
         elif vcs.startswith("svn co ") or vcs.startswith("svn checkout "):
             # Handle SVN checkout commands

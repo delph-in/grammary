@@ -82,17 +82,6 @@ grew_exports=("${DBS}"/*-grew/corpora.json)
 if [ -f "${grew_exports[0]}" ]; then
     echo "🌲 Merging ${#grew_exports[@]} grew exports" \
 	 "into ${WEBDB}/grew_corpora.json"
-    uv run python - "${WEBDB}/grew_corpora.json" \
-	"${grew_exports[@]}" <<'PY'
-import json
-import sys
-
-merged_path, *corpora_paths = sys.argv[1:]
-corpora = []
-for path in corpora_paths:
-    with open(path) as f:
-        corpora.extend(json.load(f))
-with open(merged_path, "w") as f:
-    json.dump(corpora, f, indent=2)
-PY
+    uv run python "${LTDBDIR}/scripts/merge_grew_corpora.py" \
+	"${WEBDB}/grew_corpora.json" "${grew_exports[@]}"
 fi

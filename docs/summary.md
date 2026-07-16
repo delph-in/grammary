@@ -26,4 +26,4 @@
 | [Cantonese HPSG](https://github.com/neosome/yue) | yue_2026.03.12 | 26 | 123 | 0 |  | [db](https://github.com/delph-in/grammary/releases/download/latest/yue_2026.03.12.db.xz) [dat](https://github.com/delph-in/grammary/releases/download/latest/yue_2026.03.12.dat.xz) |
 | [Zhong (Mandarin Chinese Simplified)](https://github.com/delph-in/zhong) | zhong-zhs_2018.03.30 | 61 | 38,907 | 681 | MIT | [db](https://github.com/delph-in/grammary/releases/download/latest/zhong-zhs_2018.03.30.db.xz) [dat](https://github.com/delph-in/grammary/releases/download/latest/zhong-zhs_2018.03.30.dat.xz) |
 
-Built with [ltdb 860131c](https://github.com/fcbond/ltdb/commit/860131c) and ace-0.9.31.
+Built with [ltdb 2be6a2b](https://github.com/fcbond/ltdb/commit/2be6a2b) and ace-0.9.31.

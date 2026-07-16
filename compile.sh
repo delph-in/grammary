@@ -4,7 +4,7 @@ set -e  # Exit on error
 
 # Paths
 VENV_DIR=".venv"
-BUILD="build"
+BUILD="${1:-build}"  # build directory, default 'build'
 LTDB="etc/ltdb"
 
 

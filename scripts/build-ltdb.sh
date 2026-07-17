@@ -52,8 +52,10 @@ for file in $files; do
     config_rel=$(get_toml "$file" "['ACE_CONFIG_FILE']")
     if [[ -n "$config_rel" ]]; then
 	## only make compatible trees
+	## --jobs 0: parallel docstring tests sized to the machine
 	uv run python "${LTDBDIR}/scripts/grm2db.py" \
-	--outdir "${DBS}" --ace --doctest --grew "${file}" || true
+	--outdir "${DBS}" --ace --doctest --jobs 0 --grew "${file}" \
+	|| true
     else
 	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi

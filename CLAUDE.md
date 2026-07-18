@@ -20,6 +20,7 @@ GitHub Pages at `docs/`. It is the offline fallback when the live server is down
 | `docs/` | **GitHub Pages root.** Everything published to Pages lives here. Not a docs folder. |
 | `docs/ltdb/` | Frozen static LTDB mirror (generated; do not hand-edit). |
 | `scripts/` | Build and utility scripts for grammary (not part of the LTDB app). |
+| `grew_snippets/` | Per-grammar grew-match snippet HTML + `.req` files. Copied into `etc/ltdb/etc/grew_snippets/` by `compile.sh`. |
 | `grammary.toml` | Source of truth for grammar inventory (VCS URLs and release archives). |
 
 ## Build Pipeline
@@ -71,3 +72,22 @@ Which type statuses are frozen is controlled by `--statuses` (default: `lex-type
 
 `grammary.toml` lists every grammar with its VCS URL or release archive. It is the canonical list;
 `docs/summary.md` and `docs/grammary.md` are generated from it and from the compiled databases.
+
+Supported keys per grammar:
+- `vcs` — how to download (git clone / svn co / direct URL)
+- `trb` — separate treebank archive (wget URL)
+- `trb_gold` — directory name to symlink as `tsdb/gold` when archive has multiple top-level dirs
+- `parent` — if set, clone into `build/<parent>/<name>/` instead of `build/<name>/`;
+  used for sub-grammars that need to live inside their parent's directory tree
+
+## Grew-Match Snippets
+
+Per-grammar query snippet files are stored in `grew_snippets/` (tracked) and synced to
+`etc/ltdb/etc/grew_snippets/` by `compile.sh`. The file name matches the sanitized
+`SHORT_GRAMMAR_NAME` (hyphens → underscores), e.g. `grew_snippets/ERG.html`.
+
+`etc/ltdb/scripts/db2grew.py` adds `"snippets": grm_base` to each corpus entry so grew-match
+loads the grammar-specific snippet pane instead of `_default.html`.
+
+**Pending upstream patch**: the `snippets` field in `db2grew.py` was added locally
+(`etc/ltdb/` is gitignored). Push the change to `https://github.com/fcbond/ltdb`.

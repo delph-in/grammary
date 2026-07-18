@@ -52,9 +52,21 @@ python scripts/make_summary.py --db-dir build/DBS --tag 2026.03
 
 ## Setup
 
-You must install `subversion` to get the grammars that use svn
+Install system prerequisites first, then compile:
 
-$ bash compile.sh
+```bash
+bash setup.sh           # installs git, svn, wget, rsync, uv on Ubuntu/Debian
+bash setup.sh --grew-match   # also installs opam + grew for structural search
+bash compile.sh
+```
+
+`setup.sh` installs:
+- `git`, `subversion`, `curl`, `wget`, `rsync`, `build-essential` (via apt)
+- `uv` (Python package manager, user-level)
+- `--grew-match`: `opam` + an OCaml switch with `grew` and `dune`
+
+ACE (the grammar compiler) is downloaded automatically by `compile.sh` via
+`scripts/setup_ace.py` — no manual installation needed.
 
 
 ## Individual commands
@@ -96,10 +108,17 @@ example inventory. Unsupported operations link back to the live LTDB.
 
 Grammars are listed in the file `grammary.toml`
 
- * `vcs` is the way to download the grammar
- * `tree` is the treebank (if it is seperate, we only handle this for the SRG)
+ * `vcs` — how to download the grammar: `git clone`, `svn co`, or a direct URL
+ * `trb` — separate treebank archive (`wget <url>`), extracted to `tsdb/`
+ * `trb_gold` — directory name within the treebank archive to link as `tsdb/gold`
+   (needed when the archive contains multiple top-level directories, as with SRG)
+ * `parent` — grammar that this one must live inside; cloned to
+   `build/<parent>/<name>/` so relative TDL `../` paths resolve correctly
+   (e.g. `singlish-sg` lives inside `erg/`)
 
-A project will be used to make as many grammars as it has METADATA files
+A project will be used to make as many grammars as it has METADATA files.
+Grammars that set `parent` are cloned into `build/<parent>/<name>/` so that
+relative paths in their config files can reach the parent grammar's resources.
 
 #### size
 
@@ -111,9 +130,36 @@ Very rough distinctions so that people can have a general idea about how big the
 * matrix: matrix derived grammar with minimal changes
 
 
-### Make grew corpora
+### Grew-match: searching trees and DMRS
 
-*Unfinished*  We are working on making the trees and semantic searchable with grew
+After compilation, the gold treebanks are exported as grew JSON corpora under
+`build/DBS/`.  The following grammars currently export treebank corpora:
 
-First install `grew`: https://grew.fr/usage/install/
-and `grewpy`: https://grew.fr/usage/python/
+| Grammar | Trees | Notes |
+|---------|------:|-------|
+| ERG | 97,650 | main ERG Redwoods treebank |
+| erg-dict | 1,508 | ERG dictionary variant |
+| erg-singlish | 44 | Singlish sub-grammar of the ERG |
+| SRG | 2,677 | Spanish; separate `trb` archive in `grammary.toml` |
+| Jacy | 8,797 | Japanese Hinoki treebank |
+| INDRA | 2,861 | Indonesian (JATI + Cendana) |
+| KRG | 22 | Korean |
+| NorSource | 1,202 | Norwegian |
+| wambaya\_aux | 718 | Wambaya aux+vc grammar |
+| wambaya\_cmp | 717 | Wambaya arg-comp grammar |
+| zhong-zhs | 681 | Mandarin Chinese (Simplified) |
+
+To start grew-match alongside the LTDB (requires `--grew-match` setup above):
+
+```bash
+cd etc/ltdb
+bash run.sh --grew-match
+```
+
+Each grammar corpus gets its own snippet pane loaded from
+`grew_snippets/<SHORT_GRAMMAR_NAME>.html` (stored in grammary root, synced
+into `etc/ltdb/etc/grew_snippets/` by `compile.sh`), with example queries
+tailored to that grammar's rule and predicate names.  The generic fallback is
+`_default.html`.
+
+For full setup instructions see `etc/ltdb/doc/grew-match.md`.

@@ -16,3 +16,4 @@
 | yue |  | git clone https://github.com/neosome/yue.git |  |
 | hag |  | svn co http://svn.delph-in.net/trunk/llf/hag |  |
 | gg |  | svn co http://svn.delph-in.net/trunk/dfki/gg |  |
+| singlish-sg |  | git clone https://github.com/siewyeng/SinglishERG.git |  |

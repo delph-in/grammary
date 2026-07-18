@@ -1,0 +1,3 @@
+% Search for a surface token by form (Japanese script or romanised)
+
+pattern { T [form="犬"] }

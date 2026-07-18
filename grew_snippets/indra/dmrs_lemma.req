@@ -1,0 +1,4 @@
+% Search for a word by its lemma (surface form in pred)
+% e.g. abon, anjing, makan
+
+pattern { N [lemma="abon"] }

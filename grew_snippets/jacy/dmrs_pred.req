@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% Jacy surface predicates: _lemma_pos, e.g. _inu_n (dog), _hashiru_v (run)
+
+pattern { N [pred="_inu_n"] }

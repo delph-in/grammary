@@ -1,0 +1,4 @@
+% Search for a lexical entry by lexical type
+% Common NorSource lex-types: n-end-punct, decl-end-punct
+
+pattern { N [lextype="n-end-punct"] }

@@ -1,0 +1,4 @@
+% Search for a lexical entry by lexical type
+% Common KRG lex-types: n-prop, conj-lex, n-3rd-prop
+
+pattern { N [lextype="n-prop"] }

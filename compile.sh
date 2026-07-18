@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
+# compile.sh
+#
+# Full build: download all grammars, run LTDB, set up grew-match, and
+# generate the grammar table and summary.
+#
+# Usage: ./compile.sh [BUILD_DIR]
+#   BUILD_DIR  - output directory for downloaded grammars (default: build)
 
-set -e  # Exit on error
+set -euo pipefail
 
 # Paths
 VENV_DIR=".venv"
@@ -31,9 +38,9 @@ echo "🩹 Overlay local files"
 
 rsync -rv local/ "${BUILD}/"
 
-## Download the treebank for SRG
+## Download treebank archives (grammars with a 'trb' key in grammary.toml)
 echo "🌲 Download Treebanks"
-#bash scripts/add-treebanks.sh
+uv run python scripts/download_grammars.py --treebanks-only grammary.toml "${BUILD}"
 
 # make directory for external software
 mkdir -p etc
@@ -42,6 +49,12 @@ mkdir -p etc
 echo "🚀 Compile with ltdb"
 
 bash scripts/build-ltdb.sh "${BUILD}"
+
+# Overlay grammary-specific grew snippets into the ltdb etc directory.
+# The ltdb repo itself ships only generic snippet templates; per-grammar
+# HTML and .req files live in grew_snippets/ and are copied here.
+echo "🔧 Installing grew-match snippets"
+rsync -rv grew_snippets/ "${LTDB}/etc/grew_snippets/"
 
 # Step 5: Set up grew-match and precompile the grew corpora
 # (optional: needs grew/dune from opam; skipped with a warning otherwise)

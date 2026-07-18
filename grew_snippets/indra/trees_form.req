@@ -1,0 +1,4 @@
+% Search for a surface word form
+% e.g. anjing (dog), makan (eat), saya (I)
+
+pattern { N [form="anjing"] }

@@ -1,0 +1,4 @@
+% Search for a surface word form
+% e.g. Ola (name), prosent (percent)
+
+pattern { N [form="Ola"] }

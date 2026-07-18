@@ -1,0 +1,4 @@
+% Search for a lexical entry by lexical type
+% Common INDRA lex-types: common-noun-lex, proper-name-lex, conj-lex
+
+pattern { N [lextype="common-noun-lex"] }

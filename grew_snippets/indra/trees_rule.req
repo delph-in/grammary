@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Common INDRA rules: basic-head-opt-comp, adj-head-scop, head-adj-scop
+
+pattern { N [cat="basic-head-opt-comp"] }

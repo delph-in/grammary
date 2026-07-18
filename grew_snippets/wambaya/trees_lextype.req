@@ -1,0 +1,4 @@
+% Search for a lexical entry by lexical type
+% Common Wambaya lex-types: class-i-ii-noun-lex, inanimate-class-i-noun-lex
+
+pattern { N [lextype="class-i-ii-noun-lex"] }

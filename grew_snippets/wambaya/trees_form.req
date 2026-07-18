@@ -1,0 +1,4 @@
+% Search for a surface word form
+% e.g. abajabaja, yanganyangana
+
+pattern { N [form="abajabaja"] }

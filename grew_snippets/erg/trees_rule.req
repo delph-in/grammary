@@ -1,0 +1,5 @@
+% Search for a grammar rule by cat feature
+% Common ERG rules: sb-hd_mc_c (main clause), hd-cmp_u_c (head-complement),
+%   hd-adj_i_c (head-adjunct), sp-hd_n_c (specifier-head noun phrase)
+
+pattern { N [cat="sb-hd_mc_c"] }

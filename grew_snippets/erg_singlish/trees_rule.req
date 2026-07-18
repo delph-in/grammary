@@ -1,0 +1,5 @@
+% Search for a grammar rule by cat feature
+% Singlish-specific rules handle copula drop, aspect markers, and particles
+% ERG rules also apply: sb-hd_mc_c, hd-cmp_u_c, etc.
+
+pattern { N [cat="sb-hd_mc_c"] }

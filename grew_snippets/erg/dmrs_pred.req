@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% ERG surface predicates: _lemma_pos_sense, e.g. _dog_n_1, _bark_v_1
+
+pattern { N [pred="_dog_n_1"] }

@@ -1,0 +1,4 @@
+% Search for a lexical entry by lexical type
+% Common Zhong lex-types: v_np_sep_le, n_nosem_selected, loc-wh-pronoun
+
+pattern { N [lextype="v_np_sep_le"] }

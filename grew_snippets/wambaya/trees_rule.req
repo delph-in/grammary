@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Common Wambaya rules: head-subj, subj-head, head-comp-1
+
+pattern { N [cat="head-subj"] }

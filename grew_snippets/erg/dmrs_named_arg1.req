@@ -1,0 +1,4 @@
+% Predicates whose ARG1 is a named entity (proper name)
+% named_rel is the ERG abstract predicate for named entities
+
+pattern { V -[1=ARG1]-> N; N [pred="named"] }

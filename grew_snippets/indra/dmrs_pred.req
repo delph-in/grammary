@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% INDRA predicates: _lemma_pos_rel, e.g. _abon_n_rel, _makan_v_rel
+
+pattern { N [pred="_abon_n_rel"] }

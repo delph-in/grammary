@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Common Zhong rules: subj-head, head-comp, spr-head
+
+pattern { N [cat="subj-head"] }

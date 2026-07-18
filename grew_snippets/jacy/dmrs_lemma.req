@@ -1,0 +1,3 @@
+% Search surface predicates by lemma (Japanese romanised)
+
+pattern { N [lemma="inu"] }

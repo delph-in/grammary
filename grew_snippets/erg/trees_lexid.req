@@ -1,0 +1,4 @@
+% Search for a specific lexical entry by lexid
+% The lexid is the identifier from the grammar lexicon, e.g. dog_n1, bark_v1
+
+pattern { N [lexid="dog_n1"] }

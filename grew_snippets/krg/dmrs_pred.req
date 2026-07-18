@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% KRG predicates: _lemma_pos_rel, e.g. _학생_n_rel (student), _먹_v_rel (eat)
+
+pattern { N [pred="_학생_n_rel"] }

@@ -1,0 +1,4 @@
+% Search for a lexical type (annotated on lexical-entry nodes)
+% Use re"..." for regular expression matching
+
+pattern { N [lextype=re"n_.*_le"] }

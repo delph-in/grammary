@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Common NorSource rules: head-spec-def-quantor-rule, head-spec-quantor-q-rule
+
+pattern { N [cat="head-spec-def-quantor-rule"] }

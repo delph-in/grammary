@@ -1,0 +1,4 @@
+% Search for a word by its lemma
+% e.g. abajabaja, child, wash
+
+pattern { N [lemma="abajabaja"] }

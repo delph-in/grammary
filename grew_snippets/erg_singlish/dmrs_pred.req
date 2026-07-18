@@ -1,0 +1,5 @@
+% Search for a surface predicate by pred feature
+% Singlish-specific predicates include particles (lah, lor, mah, leh, hor)
+% Standard ERG predicates also apply: _dog_n_1, _eat_v_1, etc.
+
+pattern { N [pred="_lah_x"] }

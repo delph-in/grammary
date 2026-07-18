@@ -1,0 +1,3 @@
+% Verb whose ARG1 and ARG2 are the same node (reflexive-like structures)
+
+pattern { V -[1=ARG1]-> X; V -[1=ARG2]-> X }

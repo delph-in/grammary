@@ -1,6 +1,15 @@
-### very specific to the SRG
+#!/usr/bin/env bash
+# add-treebanks.sh
+#
+# Legacy script: manually download and link the SRG treebank.
+# Superseded by the 'trb' key in grammary.toml handled by
+# scripts/download_grammars.py.  Kept for reference.
+#
+# Usage: bash scripts/add-treebanks.sh
 
-## download 
-wget https://github.com/delph-in/srg/releases/download/v0.3.6/0.3.6-release.zip -P build
-unzip -d build/srg/tsdb build/0.3.6-release.zip
-ln -s 0.3.6-release build/srg/tsdb/gold
+set -euo pipefail
+
+echo "⚠️  This script is superseded by scripts/download_grammars.py."
+echo "    Run: uv run python scripts/download_grammars.py grammary.toml build"
+echo "    The 'trb' key in grammary.toml handles treebank downloads."
+exit 0

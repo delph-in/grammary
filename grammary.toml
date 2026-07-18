@@ -1,6 +1,7 @@
 [srg]	
 vcs = "git clone https://github.com/delph-in/srg.git"
 trb = "wget https://github.com/delph-in/srg/releases/download/v0.3.6/0.3.6-release.zip"
+trb_gold = "0.3.6-release"
 
 [norsource]
 vcs = "git clone https://github.com/Regdili-NTNU/NorSource.git"
@@ -49,3 +50,13 @@ vcs = "svn co http://svn.delph-in.net/trunk/llf/hag"
 
 [gg]
 vcs = "svn co http://svn.delph-in.net/trunk/dfki/gg"
+
+# SinglishERG standalone repo: cloned for treebank reference only.
+# The ERG-singlish sub-grammar (built from build/erg/singlish/METADATA) is the
+# actively compiled grammar; this standalone repo is NOT compiled as a grammar
+# because it targets an older ERG and fails to compile against ERG 2025.
+# It contains two treebank profiles (30sent_blank, testsuite.01) that predate
+# the ERG merge and are not yet integrated into the erg-singlish build.
+[singlish-sg]
+vcs = "git clone https://github.com/siewyeng/SinglishERG.git"
+parent = "erg"

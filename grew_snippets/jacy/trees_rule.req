@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Jacy rules: head-subj-rule, head-comp-rule, head-adj-rule, ...
+
+pattern { N [cat="head-subj-rule"] }

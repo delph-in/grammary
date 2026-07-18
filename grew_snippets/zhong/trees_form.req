@@ -1,0 +1,4 @@
+% Search for a surface word form
+% e.g. 吗 (question particle), 的 (de particle)
+
+pattern { N [form="吗"] }

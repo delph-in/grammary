@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% SRG surface predicates: _lemma_pos_sense, e.g. _perro_n_1 (dog), _correr_v_1 (run)
+
+pattern { N [pred="_perro_n_1"] }

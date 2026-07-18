@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% Wambaya predicates: _lemma_pos_rel, e.g. _wash_v_rel, _child_n_rel
+
+pattern { N [pred="_wash_v_rel"] }

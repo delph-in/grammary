@@ -1,0 +1,4 @@
+% Search for a word by its lemma
+% e.g. 吗 (question particle), 的 (de particle), 是 (be)
+
+pattern { N [lemma="吗"] }

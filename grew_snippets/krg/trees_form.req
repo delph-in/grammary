@@ -1,0 +1,4 @@
+% Search for a surface word form
+% e.g. 학생 (student), 선생 (teacher)
+
+pattern { N [form="학생"] }

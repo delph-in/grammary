@@ -1,0 +1,5 @@
+% Search for a surface predicate by pred feature
+% Zhong predicates: _lemma_pos_rel, e.g. 是_v_cop_rel (be), 有_v_rel (have)
+% or ERG-style: person_n_rel, thing_n_rel
+
+pattern { N [pred="是_v_cop_rel"] }

@@ -1,0 +1,4 @@
+% Search for a grammar rule by cat feature
+% Common KRG rules: subj-head, head-comp, head-adj
+
+pattern { N [cat="subj-head"] }

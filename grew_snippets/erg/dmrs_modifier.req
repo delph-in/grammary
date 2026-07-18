@@ -1,0 +1,4 @@
+% Shared-label modification (post=EQ): adjectival or adverbial modifier
+% post=EQ means modifier and head share the same label (in-situ modification)
+
+pattern { M -[1=MOD, post=EQ]-> H }

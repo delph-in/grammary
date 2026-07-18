@@ -1,0 +1,4 @@
+% Search surface predicates by lemma
+% Works for surface predicates only (_lemma_pos_sense); use pred for abstract ones
+
+pattern { N [lemma="dog"] }

@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% NorSource predicates: _lemma_pos_rel, e.g. _prosent_n_rel (percent), _spise_v_rel (eat)
+
+pattern { N [pred="_prosent_n_rel"] }

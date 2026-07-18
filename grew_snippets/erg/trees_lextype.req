@@ -1,0 +1,6 @@
+% Search for a lexical type (annotated on lexical-entry nodes)
+% Common ERG lex types: n_-_c_le (common noun), v_np_le (transitive verb),
+%   d_-_the_le (the), a_-_i-prd_le (intersective predicate adjective)
+% Regular expressions work: re"n_.*_le" matches all noun lex types
+
+pattern { N [lextype="n_-_c_le"] }

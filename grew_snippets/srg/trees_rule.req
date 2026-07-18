@@ -1,0 +1,6 @@
+% Search for a grammar rule by cat feature
+% SRG shares many rule names with the ERG:
+%   sb-hd_mc_c (main clause), hd-cmp_u_c (head-complement),
+%   hd-aj_scp_c (head-adjunct), sp-hd_n_c (specifier-head NP)
+
+pattern { N [cat="sb-hd_mc_c"] }

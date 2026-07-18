@@ -1,0 +1,4 @@
+% Quantifier restricting a singular noun (RSTR/H link to N [NUM="sg"])
+% ERG quantifiers: _the_q, _a_q, udef_q, every_q, ...
+
+pattern { Q -[1=RSTR]-> N; N [NUM="sg"] }

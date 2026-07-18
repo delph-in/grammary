@@ -120,11 +120,11 @@ class TestSelectedByLexids:
         sentences = [
             {"profile": "p1", "sid": 1, "wid": 0, "word": "the", "lexid": "det"},
             {"profile": "p1", "sid": 1, "wid": 1, "word": "cat", "lexid": "cat_n"},
-            {"profile": "p1", "sid": 2, "wid": 0, "word": "a",   "lexid": "det"},
+            {"profile": "p1", "sid": 2, "wid": 0, "word": "a", "lexid": "det"},
             {"profile": "p1", "sid": 2, "wid": 1, "word": "dog", "lexid": "dog_n"},
             {"profile": "p1", "sid": 3, "wid": 0, "word": "big", "lexid": "big_a"},
             {"profile": "p1", "sid": 3, "wid": 1, "word": "cat", "lexid": "cat_n"},
-            {"profile": "p1", "sid": 3, "wid": 2, "word": "runs","lexid": "run_v"},
+            {"profile": "p1", "sid": 3, "wid": 2, "word": "runs", "lexid": "run_v"},
         ]
         return _make_src(sentences)
 
@@ -175,8 +175,8 @@ class TestSelectedByType:
     def _setup(self) -> sqlite3.Connection:
         sentences = [
             {"profile": "p1", "sid": 1, "wid": 0, "word": "sleeps", "lexid": "sleep_v"},
-            {"profile": "p1", "sid": 2, "wid": 0, "word": "the",    "lexid": "det"},
-            {"profile": "p1", "sid": 2, "wid": 1, "word": "cat",    "lexid": "cat_n"},
+            {"profile": "p1", "sid": 2, "wid": 0, "word": "the", "lexid": "det"},
+            {"profile": "p1", "sid": 2, "wid": 1, "word": "cat", "lexid": "cat_n"},
             {"profile": "p1", "sid": 2, "wid": 2, "word": "sleeps", "lexid": "sleep_v"},
         ]
         conn = _make_src(sentences)
@@ -251,7 +251,7 @@ class TestGetSentenceData:
     def test_falls_back_to_joined_tokens(self):
         sentences = [
             {"profile": "p1", "sid": 1, "wid": 0, "word": "cats", "lexid": "cat_n"},
-            {"profile": "p1", "sid": 1, "wid": 1, "word": "run",  "lexid": "run_v"},
+            {"profile": "p1", "sid": 1, "wid": 1, "word": "run", "lexid": "run_v"},
         ]
         conn = _make_src(sentences)
         data = get_sentence_data(conn, "p1", 1)
@@ -441,9 +441,7 @@ class TestBuildOne:
         out = sqlite3.connect(out_path)
         tables = {
             r[0]
-            for r in out.execute(
-                "SELECT name FROM sqlite_master WHERE type='table'"
-            )
+            for r in out.execute("SELECT name FROM sqlite_master WHERE type='table'")
         }
         out.close()
         assert "examples" in tables

@@ -5,7 +5,13 @@ import argparse
 import toml
 
 
-def generate_md_table(toml_file, output_md):
+def generate_md_table(toml_file: str, output_md: str) -> None:
+    """Write a Markdown table of grammar name, size, source, and treebank fields.
+
+    Args:
+        toml_file: Path to the grammary TOML manifest.
+        output_md: Output path for the generated Markdown table.
+    """
     data = toml.load(toml_file)
 
     headers = ["Name", "Size", "Source", "Treebank"]

@@ -200,6 +200,7 @@ def build_one(
 
 
 def main() -> None:
+    """Build per-grammar type SQLite files from LTDB source databases."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--db-dir",
@@ -243,10 +244,15 @@ def main() -> None:
         build_one(src_path, out_path, args.lex_limit)
         if args.gzip:
             gz_path = Path(str(out_path) + ".gz")
-            with open(out_path, "rb") as f_in, gzip.open(gz_path, "wb", compresslevel=6) as f_out:
+            with (
+                open(out_path, "rb") as f_in,
+                gzip.open(gz_path, "wb", compresslevel=6) as f_out,
+            ):
                 shutil.copyfileobj(f_in, f_out)
             out_path.unlink()
-            print(f"{src_path.name}: {gz_path.stat().st_size / 1048576:.1f} MiB (gzipped)")
+            print(
+                f"{src_path.name}: {gz_path.stat().st_size / 1048576:.1f} MiB (gzipped)"
+            )
         else:
             print(f"{src_path.name}: {out_path.stat().st_size / 1048576:.1f} MiB")
 

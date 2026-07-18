@@ -1,22 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# build-ltdb.sh
+#
+# Download and run the LTDB toolchain over every grammar in BUILD/.
+# Outputs .db (type database) and .dat (ACE grammar) files to BUILD/DBS/.
+#
+# Usage: bash scripts/build-ltdb.sh [BUILD_DIR]
+#   BUILD_DIR  - directory containing downloaded grammars (default: build)
 
-### Script to parse the grammars with ltdb
+set -euo pipefail
 
-set -e  # Exit immediately on any error
-
-BUILD="${1:-build}"  # Default to 'build' if not prov
+BUILD="${1:-build}"  # build directory containing downloaded grammars
 
 DBS="${BUILD}/DBS"   # compiled grammar databases and grew exports
 
-TMPDIR="etc/"
+ETC_DIR="etc"
 
-mkdir -p "${TMPDIR}"
+mkdir -p "${ETC_DIR}"
 
-LTDBDIR="${TMPDIR}/ltdb"
+LTDBDIR="${ETC_DIR}/ltdb"
 
 WEBDB="${LTDBDIR}/web/db"  # where the LTDB app serves the databases from
 
-# Ensure required repositories are available
 if [ ! -d "${LTDBDIR}" ]; then
     git clone https://github.com/fcbond/ltdb.git "${LTDBDIR}"
 fi
@@ -42,25 +46,22 @@ except KeyError:
 
 
 
-## find METADATA
-files=$(find "${BUILD}" -type f -name "METADATA")
-
 mkdir -p "${DBS}"
 
-for file in $files; do
+# Process each METADATA file found under BUILD/
+while IFS= read -r file; do
     echo "Creating ltdb for: $file"
     config_rel=$(get_toml "$file" "['ACE_CONFIG_FILE']")
     if [[ -n "$config_rel" ]]; then
-	## only make compatible trees
-	## --jobs 0: parallel docstring tests sized to the machine
-	uv run python "${LTDBDIR}/scripts/grm2db.py" \
-	--outdir "${DBS}" --ace --doctest --jobs 0 --grew "${file}" \
-	|| true
+        # --jobs 0: parallel docstring tests sized to the machine
+        uv run python "${LTDBDIR}/scripts/grm2db.py" \
+            --outdir "${DBS}" --ace --doctest --jobs 0 --grew "${file}" \
+            || true
     else
-	echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
+        echo "⚠️ Skipping: missing ACE_CONFIG_FILE"
     fi
     echo
-done
+done < <(find "${BUILD}" -type f -name "METADATA")
 
 echo
 echo "🚀 Successfully created the following grammars"

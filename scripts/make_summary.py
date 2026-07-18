@@ -44,15 +44,15 @@ def render_table(rows: list[dict], base_url: str) -> str:
         "| ------- | ------- | ----: | ------: | ----: | ------- | -------- |",
     ]
     for r in rows:
-        name = f'[{r["name"]}]({r["website"]})' if r["website"] else r["name"]
+        name = f"[{r['name']}]({r['website']})" if r["website"] else r["name"]
         stem = r["version"]
         downloads = [f"[db]({base_url}/{stem}.db.xz)"]
         if r["has_dat"]:
             downloads.append(f"[dat]({base_url}/{stem}.dat.xz)")
         lines.append(
-            f'| {name} | {stem} | {r["rules"]:,}'
-            f' | {r["lexicon"]:,} | {r["trees"]:,} | {r["license"]}'
-            f' | {" ".join(downloads)} |'
+            f"| {name} | {stem} | {r['rules']:,}"
+            f" | {r['lexicon']:,} | {r['trees']:,} | {r['license']}"
+            f" | {' '.join(downloads)} |"
         )
     return "\n".join(lines) + "\n"
 
@@ -64,12 +64,18 @@ def get_ltdb_info(ltdb_dir: Path) -> str:
     try:
         commit = subprocess.check_output(
             ["git", "-C", str(ltdb_dir), "rev-parse", "--short", "HEAD"],
-            text=True, stderr=subprocess.DEVNULL,
+            text=True,
+            stderr=subprocess.DEVNULL,
         ).strip()
-        remote = subprocess.check_output(
-            ["git", "-C", str(ltdb_dir), "remote", "get-url", "origin"],
-            text=True, stderr=subprocess.DEVNULL,
-        ).strip().rstrip(".git")
+        remote = (
+            subprocess.check_output(
+                ["git", "-C", str(ltdb_dir), "remote", "get-url", "origin"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+            .strip()
+            .rstrip(".git")
+        )
         return f"[ltdb {commit}]({remote}/commit/{commit})"
     except subprocess.CalledProcessError:
         return "ltdb (unknown version)"
@@ -113,9 +119,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    base_url = (
-        f"https://github.com/{args.repo}/releases/download/{args.tag}"
-    )
+    base_url = f"https://github.com/{args.repo}/releases/download/{args.tag}"
 
     dbs = sorted(args.db_dir.glob("*.db")) if args.db_dir.is_dir() else []
     rows = [summarize_db(p, args.db_dir) for p in dbs]
@@ -125,9 +129,7 @@ def main() -> None:
 
     footer = f"\nBuilt with {ltdb_info} and {ace_info}.\n"
     content = (
-        f"# Grammar Summary — {args.tag}\n\n"
-        f"{render_table(rows, base_url)}"
-        f"{footer}"
+        f"# Grammar Summary — {args.tag}\n\n{render_table(rows, base_url)}{footer}"
     )
 
     if args.output:

@@ -148,6 +148,7 @@ def copy_mirror_assets(destination: Path) -> None:
 
 
 def main() -> None:
+    """Freeze the LTDB Flask app into a static mirror under docs/."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--destination",

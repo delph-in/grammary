@@ -159,9 +159,9 @@ def test_build_one_copies_non_lex_types_and_limited_lex_words(tmp_path: Path) ->
             ("rule", "rule", 1, 0),
         ]
         assert (
-            conn.execute(
-                "SELECT COUNT(*) FROM types WHERE typ = 'dog_n_1'"
-            ).fetchone()[0]
+            conn.execute("SELECT COUNT(*) FROM types WHERE typ = 'dog_n_1'").fetchone()[
+                0
+            ]
             == 0
         )
         row = conn.execute(

@@ -1,13 +1,19 @@
+"""Generate an HTML table from the grammary TOML manifest."""
+
 import toml
 
-def generate_html_table(toml_file, output_html):
+
+def generate_html_table(toml_file: str, output_html: str) -> None:
+    """Write an HTML table of grammar name, size, source, and treebank fields.
+
+    Args:
+        toml_file: Path to the grammary TOML manifest.
+        output_html: Output path for the generated HTML table.
+    """
     data = toml.load(toml_file)
 
-    # Keys to use in the table
     all_keys = "size vcs trb".split()
-
     headers = "Name Size Source Treebank".split()
-    rows = []
 
     with open(output_html, "w", encoding="utf-8") as out:
         out.write("<table>\n")
@@ -24,6 +30,7 @@ def generate_html_table(toml_file, output_html):
                 out.write(f"      <td>{val}</td>\n")
             out.write("    </tr>\n")
         out.write("  </tbody>\n</table>\n")
+
 
 if __name__ == "__main__":
     generate_html_table("grammary.toml", "grammary-table.md")

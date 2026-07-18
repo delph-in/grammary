@@ -75,7 +75,8 @@ def run_pydelphin(mrs_list: list[str]) -> list[dict | None]:
             d = _dmrs.from_mrs(m)
             j = json.loads(dmrsjson.encode(d))
             links = sorted(
-                (l["from"], l["to"], l["rargname"], l["post"]) for l in j["links"]
+                (lnk["from"], lnk["to"], lnk["rargname"], lnk["post"])
+                for lnk in j["links"]
             )
             results.append({"top": j.get("top"), "links": links})
         except Exception:
@@ -108,8 +109,8 @@ def run_node(mrs_list: list[str]) -> list[dict | None]:
 
 def compare(py: dict, js: dict) -> dict:
     """Return diff dict (empty = match)."""
-    py_l = set(tuple(l) for l in py["links"])
-    js_l = set(tuple(l) for l in js["links"])
+    py_l = set(tuple(lnk) for lnk in py["links"])
+    js_l = set(tuple(lnk) for lnk in js["links"])
     diffs = {}
     if py["top"] != js["top"]:
         diffs["top"] = {"py": py["top"], "js": js["top"]}
@@ -123,10 +124,12 @@ def main() -> None:
     """Run the full comparison."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db-dir", type=Path, default=DEFAULT_DB_DIR)
-    parser.add_argument("--verbose", action="store_true",
-                        help="Print every disagreement")
-    parser.add_argument("--output", type=Path, default=None,
-                        help="Write JSON report to this file")
+    parser.add_argument(
+        "--verbose", action="store_true", help="Print every disagreement"
+    )
+    parser.add_argument(
+        "--output", type=Path, default=None, help="Write JSON report to this file"
+    )
     args = parser.parse_args()
 
     print("Collecting MRS strings...", flush=True)
@@ -138,12 +141,12 @@ def main() -> None:
     print("Running pydelphin...", flush=True)
     py_results = run_pydelphin(mrs_strings)
     py_ok = sum(1 for r in py_results if r is not None)
-    print(f"  pydelphin: {py_ok} converted, {len(py_results)-py_ok} bailed")
+    print(f"  pydelphin: {py_ok} converted, {len(py_results) - py_ok} bailed")
 
     print("Running Node.js...", flush=True)
     js_results = run_node(mrs_strings)
     js_ok = sum(1 for r in js_results if r is not None)
-    print(f"  node: {js_ok} converted, {len(js_results)-js_ok} bailed")
+    print(f"  node: {js_ok} converted, {len(js_results) - js_ok} bailed")
 
     # Compare where both succeeded
     totals: dict[str, int] = defaultdict(int)
@@ -154,14 +157,20 @@ def main() -> None:
         totals["total"] += 1
         by_grammar[grammar]["total"] += 1
         if py is None:
-            totals["py_bail"] += 1; by_grammar[grammar]["py_bail"] += 1; continue
+            totals["py_bail"] += 1
+            by_grammar[grammar]["py_bail"] += 1
+            continue
         if js is None:
-            totals["js_bail"] += 1; by_grammar[grammar]["js_bail"] += 1; continue
+            totals["js_bail"] += 1
+            by_grammar[grammar]["js_bail"] += 1
+            continue
         diffs = compare(py, js)
         if not diffs:
-            totals["agree"] += 1; by_grammar[grammar]["agree"] += 1
+            totals["agree"] += 1
+            by_grammar[grammar]["agree"] += 1
         else:
-            totals["disagree"] += 1; by_grammar[grammar]["disagree"] += 1
+            totals["disagree"] += 1
+            by_grammar[grammar]["disagree"] += 1
             rec = {"grammar": grammar, "mrs": mrs_str, "diffs": diffs}
             disagreements.append(rec)
             if args.verbose:
@@ -172,15 +181,15 @@ def main() -> None:
     for grammar in sorted(by_grammar):
         g = by_grammar[grammar]
         comparable = g["agree"] + g["disagree"]
-        rate = f"{g['agree']/comparable*100:.1f}%" if comparable else "n/a"
+        rate = f"{g['agree'] / comparable * 100:.1f}%" if comparable else "n/a"
         print(
             f"  {grammar}: agree={g['agree']} disagree={g['disagree']} "
-            f"py_bail={g.get('py_bail',0)} js_bail={g.get('js_bail',0)} "
+            f"py_bail={g.get('py_bail', 0)} js_bail={g.get('js_bail', 0)} "
             f"({rate})"
         )
 
     comparable = totals["agree"] + totals["disagree"]
-    rate = f"{totals['agree']/comparable*100:.2f}%" if comparable else "n/a"
+    rate = f"{totals['agree'] / comparable * 100:.2f}%" if comparable else "n/a"
     print(
         f"\nTOTAL: agree={totals['agree']} disagree={totals['disagree']} "
         f"py_bail={totals['py_bail']} js_bail={totals['js_bail']} "
@@ -189,7 +198,7 @@ def main() -> None:
     print(f"Agreement rate (where both converted): {rate}")
 
     if disagreements:
-        print(f"\nFirst 3 disagreements:")
+        print("\nFirst 3 disagreements:")
         for rec in disagreements[:3]:
             print(f"  [{rec['grammar']}] {rec['diffs']}")
 

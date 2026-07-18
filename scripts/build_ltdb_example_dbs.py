@@ -259,9 +259,9 @@ def shared_example_selection(
     derivations, then performs a repair pass for any type still below its target.
     """
     candidates = collect_type_candidates(conn, type_rows, example_lim, candidate_limit)
-    by_sentence: dict[
-        tuple[str, int], dict[str, tuple[list[tuple[int, int]], str]]
-    ] = defaultdict(dict)
+    by_sentence: dict[tuple[str, int], dict[str, tuple[list[tuple[int, int]], str]]] = (
+        defaultdict(dict)
+    )
     for typ, selected in candidates.items():
         for key, spans, source in selected:
             if typ in by_sentence[key]:
@@ -272,9 +272,7 @@ def shared_example_selection(
 
     lengths = sentence_lengths(conn)
     deriv_lengths = derivation_lengths(conn)
-    available = {
-        typ: max(1, len(selected)) for typ, selected in candidates.items()
-    }
+    available = {typ: max(1, len(selected)) for typ, selected in candidates.items()}
     need = {
         typ: min(example_lim, len(selected)) for typ, selected in candidates.items()
     }
@@ -288,6 +286,7 @@ def shared_example_selection(
         key: tuple[str, int],
         coverage: dict[str, tuple[list[tuple[int, int]], str]],
     ) -> float:
+        """Return a gain/cost score for adding *key* to the chosen set."""
         gain = 0.0
         for typ in coverage:
             if need.get(typ, 0) > 0 and key not in chosen_keys[typ]:
@@ -475,10 +474,7 @@ def build_one(
                 src, type_rows, example_lim, candidate_limit
             )
             for typ, _status in type_rows:
-                selected = [
-                    (key, spans)
-                    for key, spans, _source in shared.get(typ, [])
-                ]
+                selected = [(key, spans) for key, spans, _source in shared.get(typ, [])]
                 source = "shared"
                 add_type_examples(out, src, typ, selected, source, cache)
         else:
@@ -602,7 +598,10 @@ def main() -> None:
         )
         if args.gzip:
             gz_path = Path(str(out_path) + ".gz")
-            with open(out_path, "rb") as f_in, gzip.open(gz_path, "wb", compresslevel=6) as f_out:
+            with (
+                open(out_path, "rb") as f_in,
+                gzip.open(gz_path, "wb", compresslevel=6) as f_out,
+            ):
                 shutil.copyfileobj(f_in, f_out)
             out_path.unlink()
             counts["bytes"] = gz_path.stat().st_size

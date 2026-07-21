@@ -72,10 +72,14 @@ find "${DBS}" -type f -name '*.dat' -size +0c -exec du -h {} + | sort -h
 echo
 echo "🏗️ Copying to ${WEBDB}/"
 mkdir -p "${WEBDB}"
-find "${WEBDB}" -maxdepth 1 -type f \( -name '*.db' -o -name '*.dat' \) -delete
+## .log files (grammar/docstring, ACE compile, grew export) are copied
+## too so the live web app can offer them for download; see
+## web/routes.py's download_log and etc/ltdb/doc/grew-match.md
+find "${WEBDB}" -maxdepth 1 -type f \( -name '*.db' -o -name '*.dat' -o -name '*.log' \) -delete
 find "${DBS}" -type f -name '*.db' -size +0c -exec cp {} "${WEBDB}/" \;
 find "${DBS}" -type f -name '*.dat' -size +0c -exec cp {} "${WEBDB}/" \;
-chmod 644 "${WEBDB}"/*.db "${WEBDB}"/*.dat 2>/dev/null || true
+find "${DBS}" -type f -name '*.log' -size +0c -exec cp {} "${WEBDB}/" \;
+chmod 644 "${WEBDB}"/*.db "${WEBDB}"/*.dat "${WEBDB}"/*.log 2>/dev/null || true
 
 ## Merge the grew exports (grm2db.py --grew) into one corpora description
 ## read by `run.sh --grew-match`.  Graph paths inside each corpora.json are

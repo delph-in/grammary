@@ -16,7 +16,7 @@ See [docs/summary.md](docs/summary.md) for a list of all the grammars, with thei
 
 ## Citations
 
-Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks. In *15th International Conference on Language Resources and Evaluation* (LREC 2026) (to appear)
+Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks. In *15th International Conference on Language Resources and Evaluation* (LREC 2026)
 
 Francis Bond and Dan Flickinger (2026). The DELPH-IN Grammary: a Curated Repository of Grammars and Treebanks (2026.03.15) [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.19040902>
 

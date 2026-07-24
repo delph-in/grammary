@@ -197,6 +197,10 @@ def main() -> None:
     args.destination = args.destination.resolve()
 
     os.environ["FULL_LTDB_BASE_URL"] = args.full_ltdb_base_url
+    # Grammary's home-page intro (see blurb.md); a deployment-specific
+    # customization ltdb itself knows nothing about (HOME_BLURB_FILE is
+    # unset, and thus a no-op, for any other install of the app).
+    os.environ.setdefault("HOME_BLURB_FILE", str(ROOT / "blurb.md"))
     all_non_lex = args.statuses == "all-non-lex"
     statuses = (
         set()

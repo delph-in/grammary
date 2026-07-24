@@ -70,5 +70,5 @@ uv run python scripts/make_summary.py \
 echo "Summary written to docs/summary.md"
 
 echo "To see the ltdb:"
-echo "cd ${LTDB}; bash run.sh [--grew-match]"
+echo "cd ${LTDB}; HOME_BLURB_FILE=$(pwd)/blurb.md bash run.sh [--grew-match]"
 echo

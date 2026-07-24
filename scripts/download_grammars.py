@@ -7,15 +7,15 @@ import zipfile
 from pathlib import Path
 from urllib.parse import urlparse
 
-def is_archive(filename):
-    return any(filename.endswith(ext) for ext in ['.zip', '.tar.gz', '.tgz'])
+def is_archive(filepath):
+    return zipfile.is_zipfile(filepath) or tarfile.is_tarfile(filepath)
 
 def unpack_archive(filepath, extract_to):
-    if filepath.suffix == ".zip":
+    if zipfile.is_zipfile(filepath):
         with zipfile.ZipFile(filepath, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
-    elif filepath.suffix == ".tgz" or filepath.suffixes[-2:] == ['.tar', '.gz']:
-        with tarfile.open(filepath, 'r:gz') as tar_ref:
+    elif tarfile.is_tarfile(filepath):
+        with tarfile.open(filepath, 'r:*') as tar_ref:
             tar_ref.extractall(extract_to)
     else:
         print(f"⚠️ Unknown archive format: {filepath}")
@@ -92,7 +92,7 @@ def download_projects(toml_path, output_dir, delete_archives=True):
             continue
 
         # Unpack if archive
-        if is_archive(dest_file.name):
+        if is_archive(dest_file):
             print(f"Unpacking {dest_file}...")
             success = unpack_archive(dest_file, project_dir)
             if success and delete_archives:

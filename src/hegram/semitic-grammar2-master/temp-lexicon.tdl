@@ -1,4 +1,0 @@
-myllih := poss-cmn-3pm-3sf-noun-lex &
-  [ STEM < "myllih" >,
-   SYNSEM.LKEYS.KEYREL.PRED _myll_n_rel ].
-

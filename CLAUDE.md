@@ -21,6 +21,8 @@ GitHub Pages at `docs/`. It is the offline fallback when the live server is down
 | `docs/ltdb/` | Frozen static LTDB mirror (generated; do not hand-edit). |
 | `scripts/` | Build and utility scripts for grammary (not part of the LTDB app). |
 | `grammary.toml` | Source of truth for grammar inventory (VCS URLs and release archives). |
+| `blurb.md` | Home-page intro shown on the live/static LTDB via `HOME_BLURB_FILE`; not part of the vendored ltdb tool (see below). |
+| `deploy/compling/` | Snapshot of files running the live deployment at compling.upol.cz that aren't part of any git-tracked app (grew-match's systemd unit, Apache conf, runner script). See its README. |
 
 ## Build Pipeline
 
@@ -31,6 +33,25 @@ GitHub Pages at `docs/`. It is the offline fallback when the live server is down
 
 The release workflow (`.github/workflows/release.yml`) automates step 1 on tag push and attaches
 each `.db` file individually to the GitHub Release.
+
+## Production Deployment (compling.upol.cz)
+
+`scripts/push_to_compling.sh upload` stages the app code, `blurb.md`, and every grammar DB in
+`etc/ltdb/web/db/` into `bond`'s home directory on the server (`~/ltdb-staging`, `~/db-staging`) —
+no `sudo`, nothing under `/var/www/ltdb` touched. Moving staged files into place, restarting
+`ltdb`, and any `sudo`-gated step is done by hand on the server (the script writes
+`~/ltdb-install.sh` there as a reviewed-before-you-run reference, not something to run blindly —
+a full DB sync can leave superseded grammar files, e.g. an old dated snapshot of a re-fetched
+grammar, behind).
+
+grew-match (structural corpus search) is deployed separately, as its own systemd service under
+`bond` (not `www-data` — entirely independent of `/var/www/ltdb`), reverse-proxied by Apache
+alongside the existing `/ltdb` proxy. The generic version of that setup — script, systemd unit,
+Apache conf, and the reasoning behind each piece — lives in the vendored tool itself
+(`etc/ltdb/scripts/run-grew-match-prod.sh`, `etc/ltdb/grew-match.service.example`,
+`etc/ltdb/grew-match-apache.conf.example`, and "Production deployment" in
+`etc/ltdb/doc/grew-match.md`); `deploy/compling/` has the exact (pre-parameterization) files
+actually installed on the server.
 
 ## The LTDB App and Mirror Routes
 

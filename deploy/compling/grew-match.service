@@ -1,0 +1,17 @@
+[Unit]
+Description=grew-match (structural search over LTDB treebanks)
+After=network.target
+
+[Service]
+Type=simple
+User=bond
+Group=bond
+WorkingDirectory=/home/bond/ltdb-staging
+Environment=HOME=/home/bond
+Environment=PATH=/home/bond/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/bond/ltdb-staging/scripts-prod/run-grew-match-prod.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

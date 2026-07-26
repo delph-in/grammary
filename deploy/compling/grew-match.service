@@ -9,7 +9,11 @@ Group=bond
 WorkingDirectory=/home/bond/ltdb-staging
 Environment=HOME=/home/bond
 Environment=PATH=/home/bond/.local/bin:/usr/local/bin:/usr/bin:/bin
-ExecStart=/home/bond/ltdb-staging/scripts-prod/run-grew-match-prod.sh
+Environment=GREW_CORPORA=/home/bond/db-staging/grew/grew_corpora.json
+Environment=GREW_PUBLIC_HOST=compling.upol.cz
+Environment=GREW_PUBLIC_BACKEND_URL=https://compling.upol.cz/grew-match-api/
+Environment=LTDB_BASE_URL=https://compling.upol.cz/ltdb
+ExecStart=/home/bond/ltdb-staging/scripts/run-grew-match-prod.sh
 Restart=always
 RestartSec=5
 

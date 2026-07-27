@@ -27,4 +27,4 @@
 | [Zhong (Mandarin Chinese Simplified)](https://github.com/delph-in/zhong) | zhong-zhs_2018.03.30 | 61 | 38,907 | 681 | MIT | [db](https://github.com/delph-in/grammary/releases/download/latest/zhong-zhs_2018.03.30.db.xz) [dat](https://github.com/delph-in/grammary/releases/download/latest/zhong-zhs_2018.03.30.dat.xz) |
 | [Zhong (Mandarin Chinese Traditional)](https://github.com/delph-in/zhong) | zhong-zht_2014-08-25_03:10:28_UTC | 56 | 1,113 | 0 | MIT | [db](https://github.com/delph-in/grammary/releases/download/latest/zhong-zht_2014-08-25_03:10:28_UTC.db.xz) [dat](https://github.com/delph-in/grammary/releases/download/latest/zhong-zht_2014-08-25_03:10:28_UTC.dat.xz) |
 
-Built with [ltdb 48e982b](https://github.com/fcbond/ltdb/commit/48e982b) and ace-0.9.31.
+Built with [ltdb 84457c2](https://github.com/fcbond/ltdb/commit/84457c2) and ace-0.9.31.

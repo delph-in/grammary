@@ -22,13 +22,21 @@ from build_ltdb_example_dbs import (
 
 
 def _make_src(
-    sentences: list[dict], types: list[dict] | None = None
+    sentences: list[dict],
+    types: list[dict] | None = None,
+    lexind: list[dict] | None = None,
 ) -> sqlite3.Connection:
     """Create an in-memory source database resembling the LTDB schema.
 
     Args:
         sentences: List of dicts with keys: profile, sid, wid, word, lexid.
         types: Optional list of dicts with keys: typ, status.
+        lexind: Optional list of dicts with keys: profile, sid, lexid, kara,
+            made. If omitted, one single-token row (kara=wid, made=wid+1) is
+            derived per sentence entry with a lexid -- the common case where
+            the lexical entry's raw-token span is the same as its wid. Pass
+            this explicitly to test a multiword entry, whose (kara, made)
+            span is wider than one and diverges from wid.
 
     Returns:
         Open in-memory SQLite connection.
@@ -46,6 +54,13 @@ def _make_src(
             word    TEXT NOT NULL,
             lexid   TEXT,
             PRIMARY KEY (profile, sid, wid)
+        );
+        CREATE TABLE lexind (
+            profile TEXT    NOT NULL,
+            sid     INTEGER NOT NULL,
+            lexid   TEXT    NOT NULL,
+            kara    INTEGER,
+            made    INTEGER
         );
         CREATE TABLE typind (
             profile TEXT    NOT NULL,
@@ -68,6 +83,23 @@ def _make_src(
         conn.execute(
             "INSERT INTO sent (profile, sid, wid, word, lexid) VALUES (?,?,?,?,?)",
             (s["profile"], s["sid"], s["wid"], s["word"], s.get("lexid")),
+        )
+    if lexind is None:
+        lexind = [
+            {
+                "profile": s["profile"],
+                "sid": s["sid"],
+                "lexid": s["lexid"],
+                "kara": s["wid"],
+                "made": s["wid"] + 1,
+            }
+            for s in sentences
+            if s.get("lexid")
+        ]
+    for lx in lexind:
+        conn.execute(
+            "INSERT INTO lexind (profile, sid, lexid, kara, made) VALUES (?,?,?,?,?)",
+            (lx["profile"], lx["sid"], lx["lexid"], lx["kara"], lx["made"]),
         )
     for t in types or []:
         conn.execute(
@@ -138,16 +170,33 @@ class TestSelectedByLexids:
         conn = self._setup()
         assert selected_by_lexids(conn, [], 10) == []
 
-    def test_span_is_single_token(self):
+    def test_span_matches_lexind_single_token(self):
         conn = self._setup()
         result = selected_by_lexids(conn, ["cat_n"], 10)
         for _, spans in result:
-            assert len(spans) == 1
-            start, end = spans[0]
-            assert end == start + 1
+            assert spans == [(1, 2)]
+
+    def test_span_matches_lexind_multiword_entry(self):
+        # a multiword lexical entry's (kara, made) span is wider than
+        # one and does not line up with its wid -- selected_by_lexids
+        # must return the real lexind span, not a hardcoded (wid, wid+1)
+        sentences = [
+            {"profile": "p1", "sid": 1, "wid": 0, "word": "the", "lexid": "det"},
+            {"profile": "p1", "sid": 1, "wid": 1, "word": "hikers'", "lexid": "hikers_a2"},
+            {"profile": "p1", "sid": 1, "wid": 2, "word": "hut", "lexid": "hut_n1"},
+        ]
+        lexind = [
+            {"profile": "p1", "sid": 1, "lexid": "det", "kara": 0, "made": 1},
+            {"profile": "p1", "sid": 1, "lexid": "hikers_a2", "kara": 1, "made": 3},
+            {"profile": "p1", "sid": 1, "lexid": "hut_n1", "kara": 3, "made": 4},
+        ]
+        conn = _make_src(sentences, lexind=lexind)
+        result = selected_by_lexids(conn, ["hikers_a2"], 10)
+        assert result == [(("p1", 1), [(1, 3)])]
 
     def test_wid_is_deterministic_min(self):
-        # cat_n appears at wid=1 in both sentences; MIN should always return 1
+        # cat_n appears at wid=1 in both sentences; MIN(kara) should
+        # always return 1 (kara mirrors wid for single-token entries)
         conn = self._setup()
         result = selected_by_lexids(conn, ["cat_n"], 10)
         for _, spans in result:
@@ -278,6 +327,7 @@ class TestBuildOne:
             CREATE TABLE gold (x);
             CREATE TABLE lex (x);
             CREATE TABLE lexfreq (x);
+            CREATE TABLE lexind (x);
             CREATE TABLE sent (x);
             CREATE TABLE types (x);
             CREATE TABLE typind (x);
@@ -297,6 +347,8 @@ class TestBuildOne:
             CREATE TABLE lexfreq (lexid TEXT PRIMARY KEY, freq INTEGER);
             CREATE TABLE sent (profile TEXT, sid INTEGER, wid INTEGER,
                                word TEXT, lexid TEXT, PRIMARY KEY(profile,sid,wid));
+            CREATE TABLE lexind (profile TEXT, sid INTEGER, lexid TEXT,
+                                 kara INTEGER, made INTEGER);
             CREATE TABLE typind (profile TEXT, sid INTEGER, typ TEXT,
                                  kara INTEGER, made INTEGER);
             CREATE TABLE gold (profile TEXT, sid INTEGER, sent TEXT,
@@ -359,6 +411,8 @@ class TestBuildOne:
             CREATE TABLE lexfreq (lexid TEXT PRIMARY KEY, freq INTEGER);
             CREATE TABLE sent (profile TEXT, sid INTEGER, wid INTEGER,
                                word TEXT, lexid TEXT, PRIMARY KEY(profile,sid,wid));
+            CREATE TABLE lexind (profile TEXT, sid INTEGER, lexid TEXT,
+                                 kara INTEGER, made INTEGER);
             CREATE TABLE typind (profile TEXT, sid INTEGER, typ TEXT,
                                  kara INTEGER, made INTEGER);
             CREATE TABLE gold (profile TEXT, sid INTEGER, sent TEXT,
@@ -367,6 +421,7 @@ class TestBuildOne:
             INSERT INTO lex VALUES ('cat_n', 'n_-_c_le');
             INSERT INTO sent VALUES ('p1', 1, 0, 'cats', 'cat_n');
             INSERT INTO sent VALUES ('p1', 1, 1, 'run',  'run_v');
+            INSERT INTO lexind VALUES ('p1', 1, 'cat_n', 0, 1);
             """
         )
         src.commit()
@@ -389,6 +444,8 @@ class TestBuildOne:
             CREATE TABLE lexfreq (lexid TEXT PRIMARY KEY, freq INTEGER);
             CREATE TABLE sent (profile TEXT, sid INTEGER, wid INTEGER,
                                word TEXT, lexid TEXT, PRIMARY KEY(profile,sid,wid));
+            CREATE TABLE lexind (profile TEXT, sid INTEGER, lexid TEXT,
+                                 kara INTEGER, made INTEGER);
             CREATE TABLE typind (profile TEXT, sid INTEGER, typ TEXT,
                                  kara INTEGER, made INTEGER);
             CREATE TABLE gold (profile TEXT, sid INTEGER, sent TEXT,
@@ -402,6 +459,10 @@ class TestBuildOne:
             src.execute(
                 "INSERT INTO sent VALUES (?,?,?,?,?)",
                 ("p1", i, 0, f"word{i}", f"lex{i}"),
+            )
+            src.execute(
+                "INSERT INTO lexind VALUES (?,?,?,?,?)",
+                ("p1", i, f"lex{i}", 0, 1),
             )
         src.commit()
         src.close()
@@ -428,6 +489,8 @@ class TestBuildOne:
             CREATE TABLE lexfreq (lexid TEXT PRIMARY KEY, freq INTEGER);
             CREATE TABLE sent (profile TEXT, sid INTEGER, wid INTEGER,
                                word TEXT, lexid TEXT, PRIMARY KEY(profile,sid,wid));
+            CREATE TABLE lexind (profile TEXT, sid INTEGER, lexid TEXT,
+                                 kara INTEGER, made INTEGER);
             CREATE TABLE typind (profile TEXT, sid INTEGER, typ TEXT,
                                  kara INTEGER, made INTEGER);
             CREATE TABLE gold (profile TEXT, sid INTEGER, sent TEXT,

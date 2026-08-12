@@ -34,20 +34,20 @@ CONTACT_EMAIL="lars.hellan@ntnu.no"
 GRAMMAR_NAME="Norwegian HPSG grammar"
 SHORT_GRAMMAR_NAME="NorSource"
 WEBSITE="http://www.typecraft.org/tc2wiki/Norwegian_HPSG_grammar_NorSource"
-DEMO_WEBSITE="https://regdili.hf.ntnu.no/linguisticAce/parse"
-#DOCUMENTATION_URL="http://www.typecraft.org/tc2wiki/Norwegian_HPSG_grammar_NorSource"
+DEMO_WEBSITE="http://august.hf.ntnu.no:8200/norsource"
+#DOCUMENTATION_URL=""
 ISSUE_TRACKER=""
 LICENSE="LGPLLR"
 
 ## You may optionally specify a release date for the grammar. If unspecified,
 ## the grammar catalogue script will attempt to extract a date from the
 ## Version.l(i)sp file.
-LATEST_RELEASE="2026"
+LATEST_RELEASE=""
 
 ## Citation data
 ## If this is not provided, the text of citation.bib or canonical.bib
 ## will be used in the Grammar Catalogue
-BIB_URL="http://www.typecraft.org/tc2wiki/Norwegian_HPSG_grammar_NorSource"
+BIB_URL=""
 PDF_URL=""
 CITE=""
 
@@ -55,7 +55,7 @@ CITE=""
 ## If this is not provided, it is automatically extracted from the
 ## local version control info. You only need to modify this if the
 ## version control URL you use locally is not the one you want published
-VCS="https://github.com/Regdili-NTNU/NorSource/"
+VCS=""
 
 ## Semi-colon separated list of required external resources 
 ## e.g.
@@ -103,4 +103,4 @@ ACE_CONFIG_FILE="ace/norsource_config.tdl"
 PROFILES=["norm_bon_776_complex_ad_ace", "norm_bon_776_igtest_ace", "norm_bon_776_mcp_ace"]
 
 ## Example sentences for demo
-EXAMPLES=["Mannen smiler.", "Ola er tre centimeter høyere enn Per."]
+EXAMPLES=["Hunden kommer til å bjeffe hvis Per ankommer."]

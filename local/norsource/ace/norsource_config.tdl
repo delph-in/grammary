@@ -1,0 +1,83 @@
+;;; files to load
+
+grammar-top               := "../pet.tdl".
+variable-property-mapping := "../semi.vpm".
+maxent-model              := "../bongram_776.mem".
+preprocessor              := "../rpp/simple_tokenizer.rpp".
+parse-node-labels         := "../labels.tdl".
+version                   := "../Version.lsp".
+freezer-megabytes         := 360.
+
+semantic-inteface-top-type := top.
+
+:begin :instance.
+:include "../pet/qc".
+:end :instance.
+;;
+;; old way
+quickcheck-instance := qc_paths_set.
+;;
+;; new way
+;;qc-structure := qc_unif_set_pack.
+
+;;; grammar internal properties
+orth-path                 := STEM.
+semantics-path            := SYNSEM LOCAL CONT.
+lex-rels-path             := SYNSEM LOCAL CONT RELS.
+lex-carg-path             := SYNSEM LKEYS KEYREL CARG.
+lex-pred-path             := SYNSEM LKEYS KEYREL PRED.
+rule-rels-path            := C-CONT RELS.
+
+parsing-roots             := root.
+generation-roots          := root.
+
+generation-ignore-rules   := "../lkb/nogen-rules.set".
+
+semarg-type               := semarg.
+list-type                 := list.
+cons-type                 := cons.
+null-type                 := null.
+diff-list-type            := diff-list.
+
+deleted-daughters := 
+  ARGS HEAD-DTR NON-HEAD-DTR.
+
+parsing-packing-restrictor := STEM RELS HCONS.
+
+generation-packing-restrictor := 
+  STEM RELS HCONS.
+
+;; faster generation
+index-accessibility-filtering := enabled.
+
+mrs-deleted-roles := 
+  WLINK CFROM CTO.
+
+label-path := LABEL-NAME.
+
+;; generic-les-for-semantic-index := generic_proper_ne generic_card_ne generic_ord_ne generic_dom_card_ne generic_dom_ord_ne generic_year_ne generic_date_ne generic_pl_noun_ne.
+generic-les-for-semantic-index := generic_card_ne generic_year_ne.
+
+;;
+;; token setting (from Woodley)
+token-mapping           := enabled.
+
+lexicon-tokens-path     := TOKENS +LIST.
+lexicon-last-token-path := TOKENS +LAST.
+token-type              := token.
+token-form-path         := +FORM.       ; [required] string for lexical lookup
+token-id-path           := +ID.         ; [optional] list of external ids
+token-from-path         := +FROM.       ; [optional] surface start position
+token-to-path           := +TO.         ; [optional] surface end position
+token-postags-path      := +TNT +TAGS.  ; [optional] list of POS tags
+token-posprobs-path     := +TNT +PRBS.  ; [optional] list of POS probabilities
+
+;; lattice mapping settings
+lattice-mapping-input-path    := +INPUT.
+lattice-mapping-output-path   := +OUTPUT.
+lattice-mapping-context-path  := +CONTEXT.
+lattice-mapping-position-path := +POSITION.
+
+;;; qeq between LTOP and GTOP
+top-hcons-type := none.
+

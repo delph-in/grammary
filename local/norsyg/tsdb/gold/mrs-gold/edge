@@ -1,0 +1,2063 @@
+437@1@root@4@1@0@3@@(428)@@
+428@1@main@3@1@0@3@@(427)@@
+427@1@extr-pres@3@1@0@3@@(426)@@
+426@1@verbal-c@3@1@0@3@@(417 85)@@
+417@1@expl-filler@3@1@0@2@@(10 12)@@
+10@1@start-punct@1@1@0@1@@(7)@@
+12@1@det-expl@1@1@1@2@@(8)@@
+85@1@pret-v1_infl_rule@2@1@2@3@@(22)@@
+22@1@regne_v@1@1@2@3@@(9)@@
+438@1@root@4@1@0@3@@(434)@@
+434@1@main@3@1@0@3@@(433)@@
+433@1@1np-extr@3@1@0@3@@(422)@@
+422@1@verbal-c@3@1@0@3@@(420 85)@@
+420@1@pop-nominal@3@1@0@2@@(418)@@
+418@1@nom-filler@3@1@0@2@@(10 13)@@
+13@1@det_q@1@1@1@2@@(8)@@
+439@1@root@4@1@0@3@@(435)@@
+435@1@main@3@1@0@3@@(432)@@
+432@1@arg2-extr-su@3@1@0@3@@(422)@@
+7@1@token [ +FORM "^" +FROM "11" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@1@token [ +FORM "Det" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Det" ]@0@0@1@2@@@@
+9@1@token [ +FORM "regnet" +FROM "4" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "regnet" ]@0@0@2@3@@@@
+396@2@root@4@1@0@3@@(395)@@
+395@2@main@3@1@0@3@@(394)@@
+394@2@1np-extr@3@1@0@3@@(393)@@
+393@2@verbal-c@3@1@0@3@@(392 75)@@
+392@2@pop-nominal@3@1@0@2@@(391)@@
+391@2@nom-filler@3@1@0@2@@(10 12)@@
+10@2@start-punct@1@1@0@1@@(7)@@
+12@2@abrams-pn@1@1@1@2@@(8)@@
+75@2@pret-v1_infl_rule@2@1@2@3@@(23)@@
+23@2@bjeffe_v@1@1@2@3@@(9)@@
+7@2@token [ +FORM "^" +FROM "15" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@2@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+9@2@token [ +FORM "bjeffet" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+559@3@root@4@1@0@4@@(558)@@
+558@3@main@3@1@0@4@@(556)@@
+556@3@arg2-idiom@3@1@0@4@@(555 37)@@
+555@3@1np-extr@3@1@0@3@@(553)@@
+553@3@verbal-c@3@1@0@3@@(552 89)@@
+552@3@pop-nominal@3@1@0@2@@(550)@@
+550@3@nom-filler@3@1@0@2@@(13 88)@@
+13@3@start-punct@1@1@0@1@@(9)@@
+88@3@def-sg-noun-neut_infl_rule@2@1@1@2@@(15)@@
+15@3@vindu-n-neut@1@1@1@2@@(10)@@
+89@3@pret-v1_infl_rule@2@1@2@3@@(21)@@
+21@3@åpne_v@1@1@2@3@@(11)@@
+37@3@seg-refl@1@1@3@4@@(12)@@
+9@3@token [ +FORM "^" +FROM "18" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@3@token [ +FORM "Vinduet" +FROM "0" +TO "7" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Vinduet" ]@0@0@1@2@@@@
+11@3@token [ +FORM "åpnet" +FROM "8" +TO "13" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "åpnet" ]@0@0@2@3@@@@
+12@3@token [ +FORM "seg" +FROM "14" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "seg" ]@0@0@3@4@@@@
+575@4@root@4@1@0@4@@(570)@@
+570@4@main@3@1@0@4@@(569)@@(573)
+573@4@main@3@5@0@4@@(572)@@
+572@4@arg2-extr-nom-non-su@3@1@0@4@@(571)@@
+571@4@pop-nominal@3@1@0@4@@(566)@@
+566@4@arg1-emb-nom@3@1@0@4@@(562 32)@@
+562@4@verbal-c@3@1@0@3@@(561 92)@@
+561@4@pop-nominal@3@1@0@2@@(560)@@
+560@4@nom-filler@3@1@0@2@@(13 15)@@
+13@4@start-punct@1@1@0@1@@(9)@@
+15@4@abrams-pn@1@1@1@2@@(10)@@
+92@4@pret-v1_infl_rule@2@1@2@3@@(26)@@
+26@4@jage_v@1@1@2@3@@(11)@@
+32@4@browne-pn@1@1@3@4@@(12)@@
+569@4@pop-nominal@3@1@0@4@@(568)@@
+568@4@arg2-emb-nom-non-su@3@1@0@4@@(564 32)@@
+564@4@1np-extr@3@1@0@3@@(562)@@
+9@4@token [ +FORM "^" +FROM "20" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@4@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+11@4@token [ +FORM "jaget" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+12@4@token [ +FORM "Browne" +FROM "13" +TO "19" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+786@5@root@4@1@0@5@@(779)@@
+779@5@main@3@1@0@5@@(778)@@(785)
+785@5@main@3@5@0@5@@(784)@@
+784@5@pop-nominal@3@1@0@5@@(765)@@
+765@5@arg2-emb-nom-non-su@3@1@0@5@@(764 127)@@
+764@5@pop-nominal@3@1@0@4@@(757)@@
+757@5@arg3-emb-non-su@3@1@0@4@@(752 42)@@
+752@5@1np-extr@3@1@0@3@@(749)@@
+749@5@verbal-c@3@1@0@3@@(748 125)@@
+748@5@pop-nominal@3@1@0@2@@(747)@@
+747@5@nom-filler@3@1@0@2@@(16 18)@@
+16@5@start-punct@1@1@0@1@@(11)@@
+18@5@abrams-pn@1@1@1@2@@(12)@@
+125@5@pret-v1_infl_rule@2@1@2@3@@(31)@@
+31@5@rekke_v@1@1@2@3@@(13)@@
+42@5@browne-pn@1@1@3@4@@(14)@@
+127@5@def-comm-noun-m1-m2_infl_rule@2@1@4@5@@(56)@@
+56@5@sigarett-n-masc@1@1@4@5@@(15)@@
+778@5@pop-nominal@3@1@0@5@@(772)@@
+772@5@arg2-emb-nom-non-su@3@1@0@5@@(767 127)@@
+767@5@arg3-extr-non-su@3@1@0@4@@(766)@@
+766@5@pop-nominal@3@1@0@4@@(755)@@
+755@5@arg1-emb-nom@3@1@0@4@@(749 42)@@
+787@5@root@4@1@0@5@@(783)@@
+783@5@main@3@1@0@5@@(782)@@
+782@5@arg2-extr-nom-non-su@3@1@0@5@@(781)@@
+781@5@pop-nominal@3@1@0@5@@(769)@@
+769@5@arg3-emb-non-su@3@1@0@5@@(766 127)@@
+11@5@token [ +FORM "^" +FROM "31" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@5@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@5@token [ +FORM "rakte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "rakte" ]@0@0@2@3@@@@
+14@5@token [ +FORM "Browne" +FROM "13" +TO "19" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+15@5@token [ +FORM "sigaretten" +FROM "20" +TO "30" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "sigaretten" ]@0@0@4@5@@@@
+1070@6@root@4@1@0@6@@(1017)@@
+1017@6@main@3@1@0@6@@(1016)@@(1025)
+1025@6@main@3@5@0@6@@(1024)@@
+1024@6@pop-no-nominal@3@1@0@6@@(1023)@@
+1023@6@pop-nominal@3@1@0@6@@(997)@@
+997@6@arg2-emb-nom-non-su@3@1@0@6@@(922 77)@@
+922@6@mod-emb-vbl@3@1@0@5@@(917 68)@@
+917@6@pop-nominal@3@1@0@4@@(910)@@
+910@6@arg2-emb-nom-non-su@3@1@0@4@@(904 139)@@
+904@6@1np-extr@3@1@0@3@@(901)@@
+901@6@verbal-c@3@1@0@3@@(900 137)@@
+900@6@pop-nominal@3@1@0@2@@(899)@@
+899@6@nom-filler@3@1@0@2@@(19 21)@@
+19@6@start-punct@1@1@0@1@@(13)@@
+21@6@abrams-pn@1@1@1@2@@(14)@@
+137@6@pret-v1_infl_rule@2@1@2@3@@(34)@@
+34@6@rekke_v@1@1@2@3@@(15)@@
+139@6@def-comm-noun-m1-m2_infl_rule@2@1@3@4@@(45)@@
+45@6@sigarett-n-masc@1@1@3@4@@(16)@@
+68@6@til_func@1@1@4@5@@(17)@@
+77@6@browne-pn@1@1@5@6@@(18)@@
+1016@6@pop-nominal@3@1@0@6@@(1015)@@
+1015@6@pop-no-nominal@3@1@0@6@@(1014)@@
+1014@6@pop-nominal@3@1@0@6@@(1005)@@
+1005@6@arg2-emb-nom-non-su@3@1@0@6@@(918 77)@@
+918@6@mod-emb-nom@3@1@0@5@@(910 68)@@
+1071@6@root@4@1@0@6@@(1019)@@
+1019@6@main@3@1@0@6@@(1018)@@
+1018@6@pop-nominal@3@1@0@6@@(1002)@@
+1002@6@arg4-emb-sel-np@3@1@0@6@@(920 77)@@
+920@6@prepsel@3@1@0@5@@(917 68)@@
+1072@6@root@4@1@0@6@@(1027)@@
+1027@6@main@3@1@0@6@@(1026)@@
+1026@6@pop-nominal@3@1@0@6@@(995)@@
+995@6@arg2-emb-nom-non-su@3@1@0@6@@(994 77)@@
+994@6@pop-nominal@3@1@0@5@@(992)@@
+992@6@pop-no-nominal@3@1@0@5@@(925)@@
+925@6@mod-emb-nom@3@1@0@5@@(909 68)@@
+909@6@arg3-emb-non-su@3@1@0@4@@(904 139)@@
+1073@6@root@4@1@0@6@@(1032)@@
+1032@6@main@3@1@0@6@@(1031)@@(1036)
+1036@6@main@3@5@0@6@@(1035)@@
+1035@6@arg2-extr-nom-non-su@3@1@0@6@@(1034)@@
+1034@6@pop-nominal@3@1@0@6@@(988)@@
+988@6@arg3-emb-non-su@3@1@0@6@@(985 77)@@
+985@6@pop-nominal@3@1@0@5@@(983)@@
+983@6@pop-no-nominal@3@1@0@5@@(928)@@
+928@6@mod-emb-nom@3@1@0@5@@(907 68)@@
+907@6@arg1-emb-nom@3@1@0@4@@(901 139)@@
+1031@6@pop-nominal@3@1@0@6@@(991)@@
+991@6@arg2-emb-nom-non-su@3@1@0@6@@(986 77)@@
+986@6@arg3-extr-non-su@3@1@0@5@@(985)@@
+1074@6@root@4@1@0@6@@(1042)@@
+1042@6@main@3@1@0@6@@(1041)@@(1056)
+1056@6@main@3@5@0@6@@(1055)@@
+1055@6@pop-no-nominal@3@1@0@6@@(1054)@@
+1054@6@pop-nominal@3@1@0@6@@(967)@@
+967@6@arg2-emb-nom-non-su@3@1@0@6@@(937 77)@@
+937@6@mod-emb-vbl@3@1@0@5@@(930 68)@@
+930@6@arg2-extr-nom-non-su@3@1@0@4@@(927)@@
+927@6@pop-nominal@3@1@0@4@@(907)@@
+1041@6@arg2-extr-nom-non-su@3@1@0@6@@(1039)@@
+1039@6@pop-nominal@3@1@0@6@@(1038)@@
+1038@6@pop-no-nominal@3@1@0@6@@(1037)@@
+1037@6@pop-nominal@3@1@0@6@@(984)@@
+984@6@arg2-emb-nom-non-su@3@1@0@6@@(928 77)@@
+1075@6@root@4@1@0@6@@(1045)@@
+1045@6@main@3@1@0@6@@(1044)@@
+1044@6@arg2-extr-nom-non-su@3@1@0@6@@(1043)@@
+1043@6@pop-nominal@3@1@0@6@@(980)@@
+980@6@arg4-emb-sel-np@3@1@0@6@@(931 77)@@
+931@6@prepsel@3@1@0@5@@(927 68)@@
+13@6@token [ +FORM "^" +FROM "35" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@6@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@6@token [ +FORM "rakte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "rakte" ]@0@0@2@3@@@@
+16@6@token [ +FORM "sigaretten" +FROM "13" +TO "23" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "sigaretten" ]@0@0@3@4@@@@
+17@6@token [ +FORM "til" +FROM "24" +TO "27" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "til" ]@0@0@4@5@@@@
+18@6@token [ +FORM "Browne" +FROM "28" +TO "34" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@5@6@@@@
+3880@7@root@4@1@0@11@@(3402)@@
+3402@7@main@3@1@0@11@@(3401)@@(3507)
+3507@7@main@3@5@0@11@@(3506)@@
+3506@7@pop-no-nominal@3@1@0@11@@(3504)@@(3615 3633)
+3615@7@pop-no-nominal@3@5@0@11@@(3614)@@
+3614@7@pop-nominal@3@1@0@11@@(3613)@@
+3613@7@pop-no-nominal@3@1@0@11@@(3611)@@
+3611@7@pop-no-nominal@3@1@0@11@@(2505)@@(3600 3620)
+3600@7@pop-no-nominal@3@5@0@11@@(2515)@@
+2515@7@verbal@3@1@0@11@@(2153 212)@@
+2153@7@expl-subj@3@1@0@10@@(1900 136)@@
+1900@7@binary-compl2@3@1@0@9@@(1823 129)@@
+1823@7@mod-emb-nom@3@1@0@8@@(1750 126)@@
+1750@7@arg2-emb-nom-non-su@3@1@0@7@@(1715 112)@@
+1715@7@mod-emb-vbl@3@1@0@6@@(1711 98)@@
+1711@7@arg2-extr-nom-non-su@3@1@0@5@@(1708)@@
+1708@7@pop-nominal@3@1@0@5@@(1691)@@
+1691@7@nominal@3@1@0@5@@(1674 211)@@
+1674@7@arg1-emb-nom@3@1@0@4@@(1670 72)@@
+1670@7@verbal-c@3@1@0@3@@(1669 209)@@
+1669@7@pop-nominal@3@1@0@2@@(1668)@@
+1668@7@nom-filler@3@1@0@2@@(34 36)@@
+34@7@start-punct@1@1@0@1@@(23)@@
+36@7@abrams-pn@1@1@1@2@@(24)@@
+209@7@pret-v1_infl_rule@2@1@2@3@@(47)@@
+47@7@vedde_v@1@1@2@3@@(25)@@
+72@7@en-card@1@1@3@4@@(26)@@
+211@7@indef-sg-noun-irule@2@1@4@5@@(86)@@
+86@7@sigarett-n-masc@1@1@4@5@@(27)@@
+98@7@med_func@1@1@5@6@@(28)@@
+112@7@browne-pn@1@1@6@7@@(29)@@
+126@7@på_func@1@1@7@8@@(30)@@
+129@7@at-comp@1@1@8@9@@(31)@@
+136@7@det-expl@1@1@9@10@@(32)@@
+212@7@pret-v1_infl_rule@2@1@10@11@@(146)@@
+146@7@regne_v@1@1@10@11@@(33)@@
+3620@7@pop-no-nominal@3@5@0@11@@(2498)@@
+2498@7@verbal@3@1@0@11@@(2496 212)@@
+2496@7@pop-nominal@3@1@0@10@@(2156)@@
+2156@7@arg1-emb-nom@3@1@0@10@@(1900 137)@@
+137@7@det_q@1@1@9@10@@(32)@@
+2505@7@verbal@3@1@0@11@@(2503 212)@@
+2503@7@pop-nominal@3@1@0@10@@(2155)@@
+2155@7@arg2-emb-nom-su@3@1@0@10@@(1900 137)@@
+3633@7@pop-no-nominal@3@5@0@11@@(3631)@@
+3631@7@pop-no-nominal@3@1@0@11@@(2484)@@(3622 3638)
+3622@7@pop-no-nominal@3@5@0@11@@(2494)@@
+2494@7@verbal@3@1@0@11@@(2158 212)@@
+2158@7@expl-subj@3@1@0@10@@(1897 136)@@
+1897@7@binary-compl2@3@1@0@9@@(1826 129)@@
+1826@7@mod-emb-vbl@3@1@0@8@@(1824 126)@@
+1824@7@pop-no-nominal@3@1@0@7@@(1822)@@
+1822@7@pop-nominal@3@1@0@7@@(1750)@@
+3638@7@pop-no-nominal@3@5@0@11@@(2477)@@
+2477@7@verbal@3@1@0@11@@(2475 212)@@
+2475@7@pop-nominal@3@1@0@10@@(2161)@@
+2161@7@arg1-emb-nom@3@1@0@10@@(1897 137)@@
+2484@7@verbal@3@1@0@11@@(2482 212)@@
+2482@7@pop-nominal@3@1@0@10@@(2160)@@
+2160@7@arg2-emb-nom-su@3@1@0@10@@(1897 137)@@
+3504@7@pop-no-nominal@3@1@0@11@@(2610)@@(3494 3512)
+3494@7@pop-no-nominal@3@5@0@11@@(2620)@@
+2620@7@verbal@3@1@0@11@@(2118 212)@@
+2118@7@expl-subj@3@1@0@10@@(1913 136)@@
+1913@7@binary-compl2@3@1@0@9@@(1812 129)@@
+1812@7@mod-emb-vbl@3@1@0@8@@(1808 126)@@
+1808@7@arg2-extr-nom-non-su@3@1@0@7@@(1805)@@
+1805@7@pop-nominal@3@1@0@7@@(1804)@@
+1804@7@pop-no-nominal@3@1@0@7@@(1802)@@
+1802@7@pop-nominal@3@1@0@7@@(1758)@@
+1758@7@arg2-emb-nom-non-su@3@1@0@7@@(1709 112)@@
+1709@7@mod-emb-nom@3@1@0@6@@(1691 98)@@
+3512@7@pop-no-nominal@3@5@0@11@@(2603)@@
+2603@7@verbal@3@1@0@11@@(2601 212)@@
+2601@7@pop-nominal@3@1@0@10@@(2121)@@
+2121@7@arg1-emb-nom@3@1@0@10@@(1913 137)@@
+2610@7@verbal@3@1@0@11@@(2608 212)@@
+2608@7@pop-nominal@3@1@0@10@@(2120)@@
+2120@7@arg2-emb-nom-su@3@1@0@10@@(1913 137)@@
+3401@7@arg2-extr-nom-non-su@3@1@0@11@@(3399)@@
+3399@7@pop-nominal@3@1@0@11@@(3398)@@
+3398@7@pop-no-nominal@3@1@0@11@@(3397)@@(3436)
+3436@7@pop-no-nominal@3@5@0@11@@(3434)@@
+3434@7@pop-no-nominal@3@1@0@11@@(2715)@@(3425 3441)
+3425@7@pop-no-nominal@3@5@0@11@@(2725)@@
+2725@7@verbal@3@1@0@11@@(2081 212)@@
+2081@7@expl-subj@3@1@0@10@@(1921 136)@@
+1921@7@binary-compl2@3@1@0@9@@(1806 129)@@
+1806@7@mod-emb-nom@3@1@0@8@@(1804 126)@@
+3441@7@pop-no-nominal@3@5@0@11@@(2708)@@
+2708@7@verbal@3@1@0@11@@(2706 212)@@
+2706@7@pop-nominal@3@1@0@10@@(2084)@@
+2084@7@arg1-emb-nom@3@1@0@10@@(1921 137)@@
+2715@7@verbal@3@1@0@11@@(2713 212)@@
+2713@7@pop-nominal@3@1@0@10@@(2083)@@
+2083@7@arg2-emb-nom-su@3@1@0@10@@(1921 137)@@
+3397@7@pop-nominal@3@1@0@11@@(3396)@@
+3396@7@pop-no-nominal@3@1@0@11@@(3394)@@
+3394@7@pop-no-nominal@3@1@0@11@@(2757)@@(3376 3410)
+3376@7@pop-no-nominal@3@5@0@11@@(2767)@@
+2767@7@verbal@3@1@0@11@@(2067 212)@@
+2067@7@expl-subj@3@1@0@10@@(1931 136)@@
+1931@7@binary-compl2@3@1@0@9@@(1803 129)@@
+1803@7@mod-emb-nom@3@1@0@8@@(1758 126)@@
+3410@7@pop-no-nominal@3@5@0@11@@(2750)@@
+2750@7@verbal@3@1@0@11@@(2748 212)@@
+2748@7@pop-nominal@3@1@0@10@@(2070)@@
+2070@7@arg1-emb-nom@3@1@0@10@@(1931 137)@@
+2757@7@verbal@3@1@0@11@@(2755 212)@@
+2755@7@pop-nominal@3@1@0@10@@(2069)@@
+2069@7@arg2-emb-nom-su@3@1@0@10@@(1931 137)@@
+3881@7@root@4@1@0@11@@(3659)@@
+3659@7@main@3@1@0@11@@(3658)@@(3725)
+3725@7@main@3@5@0@11@@(3724)@@
+3724@7@pop-no-nominal@3@1@0@11@@(3722)@@(3747)
+3747@7@pop-no-nominal@3@5@0@11@@(3746)@@
+3746@7@pop-nominal@3@1@0@11@@(3745)@@
+3745@7@pop-no-nominal@3@1@0@11@@(3743)@@
+3743@7@pop-no-nominal@3@1@0@11@@(2358)@@(3732 3752)
+3732@7@pop-no-nominal@3@5@0@11@@(2368)@@
+2368@7@verbal@3@1@0@11@@(2188 212)@@
+2188@7@expl-subj@3@1@0@10@@(1880 136)@@
+1880@7@binary-compl2@3@1@0@9@@(1836 129)@@
+1836@7@mod-emb-nom@3@1@0@8@@(1743 126)@@
+1743@7@arg2-emb-nom-non-su@3@1@0@7@@(1723 112)@@
+1723@7@mod-emb-vbl@3@1@0@6@@(1720 98)@@
+1720@7@pop-nominal@3@1@0@5@@(1688)@@
+1688@7@nominal@3@1@0@5@@(1677 211)@@
+1677@7@arg2-emb-nom-non-su@3@1@0@4@@(1672 72)@@
+1672@7@1np-extr@3@1@0@3@@(1670)@@
+3752@7@pop-no-nominal@3@5@0@11@@(2351)@@
+2351@7@verbal@3@1@0@11@@(2349 212)@@
+2349@7@pop-nominal@3@1@0@10@@(2191)@@
+2191@7@arg1-emb-nom@3@1@0@10@@(1880 137)@@
+2358@7@verbal@3@1@0@11@@(2356 212)@@
+2356@7@pop-nominal@3@1@0@10@@(2190)@@
+2190@7@arg2-emb-nom-su@3@1@0@10@@(1880 137)@@
+3722@7@pop-no-nominal@3@1@0@11@@(2379)@@(3712 3730)
+3712@7@pop-no-nominal@3@5@0@11@@(2389)@@
+2389@7@verbal@3@1@0@11@@(2183 212)@@
+2183@7@expl-subj@3@1@0@10@@(1884 136)@@
+1884@7@binary-compl2@3@1@0@9@@(1834 129)@@
+1834@7@mod-emb-vbl@3@1@0@8@@(1830 126)@@(1839)
+1839@7@mod-emb-vbl@3@5@0@8@@(1837 126)@@
+1837@7@pop-no-nominal@3@1@0@7@@(1835)@@
+1835@7@pop-nominal@3@1@0@7@@(1743)@@
+1830@7@pop-nominal@3@1@0@7@@(1829)@@
+1829@7@pop-no-nominal@3@1@0@7@@(1827)@@
+1827@7@pop-nominal@3@1@0@7@@(1746)@@
+1746@7@arg2-emb-nom-non-su@3@1@0@7@@(1721 112)@@
+1721@7@mod-emb-nom@3@1@0@6@@(1688 98)@@
+3730@7@pop-no-nominal@3@5@0@11@@(2372)@@
+2372@7@verbal@3@1@0@11@@(2370 212)@@
+2370@7@pop-nominal@3@1@0@10@@(2186)@@
+2186@7@arg1-emb-nom@3@1@0@10@@(1884 137)@@
+2379@7@verbal@3@1@0@11@@(2377 212)@@
+2377@7@pop-nominal@3@1@0@10@@(2185)@@
+2185@7@arg2-emb-nom-su@3@1@0@10@@(1884 137)@@
+3658@7@pop-nominal@3@1@0@11@@(3657)@@
+3657@7@pop-no-nominal@3@1@0@11@@(3656)@@(3677)
+3677@7@pop-no-nominal@3@5@0@11@@(3675)@@
+3675@7@pop-no-nominal@3@1@0@11@@(2442)@@(3666 3682)
+3666@7@pop-no-nominal@3@5@0@11@@(2452)@@
+2452@7@verbal@3@1@0@11@@(2168 212)@@
+2168@7@expl-subj@3@1@0@10@@(1889 136)@@
+1889@7@binary-compl2@3@1@0@9@@(1831 129)@@
+1831@7@mod-emb-nom@3@1@0@8@@(1829 126)@@
+3682@7@pop-no-nominal@3@5@0@11@@(2435)@@
+2435@7@verbal@3@1@0@11@@(2433 212)@@
+2433@7@pop-nominal@3@1@0@10@@(2171)@@
+2171@7@arg1-emb-nom@3@1@0@10@@(1889 137)@@
+2442@7@verbal@3@1@0@11@@(2440 212)@@
+2440@7@pop-nominal@3@1@0@10@@(2170)@@
+2170@7@arg2-emb-nom-su@3@1@0@10@@(1889 137)@@
+3656@7@pop-nominal@3@1@0@11@@(3655)@@
+3655@7@pop-no-nominal@3@1@0@11@@(3653)@@
+3653@7@pop-no-nominal@3@1@0@11@@(2463)@@(3640 3664)
+3640@7@pop-no-nominal@3@5@0@11@@(2473)@@
+2473@7@verbal@3@1@0@11@@(2163 212)@@
+2163@7@expl-subj@3@1@0@10@@(1893 136)@@
+1893@7@binary-compl2@3@1@0@9@@(1828 129)@@
+1828@7@mod-emb-nom@3@1@0@8@@(1746 126)@@
+3664@7@pop-no-nominal@3@5@0@11@@(2456)@@
+2456@7@verbal@3@1@0@11@@(2454 212)@@
+2454@7@pop-nominal@3@1@0@10@@(2166)@@
+2166@7@arg1-emb-nom@3@1@0@10@@(1893 137)@@
+2463@7@verbal@3@1@0@11@@(2461 212)@@
+2461@7@pop-nominal@3@1@0@10@@(2165)@@
+2165@7@arg2-emb-nom-su@3@1@0@10@@(1893 137)@@
+3882@7@root@4@1@0@11@@(3697)@@
+3697@7@main@3@1@0@11@@(3696)@@
+3696@7@pop-no-nominal@3@1@0@11@@(2410)@@(3705 3710)
+3705@7@pop-no-nominal@3@5@0@11@@(2400)@@
+2400@7@verbal@3@1@0@11@@(2398 212)@@
+2398@7@pop-nominal@3@1@0@10@@(2180)@@
+2180@7@arg2-emb-nom-su@3@1@0@10@@(1886 137)@@
+1886@7@binary-compl4@3@1@0@9@@(1833 129)@@
+1833@7@prepsel@3@1@0@8@@(1830 126)@@
+3710@7@pop-no-nominal@3@5@0@11@@(2393)@@
+2393@7@verbal@3@1@0@11@@(2391 212)@@
+2391@7@pop-nominal@3@1@0@10@@(2181)@@
+2181@7@arg1-emb-nom@3@1@0@10@@(1886 137)@@
+2410@7@verbal@3@1@0@11@@(2178 212)@@
+2178@7@expl-subj@3@1@0@10@@(1886 136)@@
+23@7@token [ +FORM "^" +FROM "54" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+24@7@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+25@7@token [ +FORM "veddet" +FROM "7" +TO "13" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "veddet" ]@0@0@2@3@@@@
+26@7@token [ +FORM "en" +FROM "14" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "en" ]@0@0@3@4@@@@
+27@7@token [ +FORM "sigarett" +FROM "17" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "sigarett" ]@0@0@4@5@@@@
+28@7@token [ +FORM "med" +FROM "26" +TO "29" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "med" ]@0@0@5@6@@@@
+29@7@token [ +FORM "Browne" +FROM "30" +TO "36" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@6@7@@@@
+30@7@token [ +FORM "på" +FROM "37" +TO "39" +ID diff-list [ LIST cons [ FIRST "7" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "på" ]@0@0@7@8@@@@
+31@7@token [ +FORM "at" +FROM "40" +TO "42" +ID diff-list [ LIST cons [ FIRST "8" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@8@9@@@@
+32@7@token [ +FORM "det" +FROM "43" +TO "46" +ID diff-list [ LIST cons [ FIRST "9" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "det" ]@0@0@9@10@@@@
+33@7@token [ +FORM "regnet" +FROM "47" +TO "53" +ID diff-list [ LIST cons [ FIRST "10" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "regnet" ]@0@0@10@11@@@@
+943@8@root@4@1@0@6@@(928)@@
+928@8@main@3@1@0@6@@(927)@@
+927@8@pop-no-nominal@3@1@0@6@@(926)@@(936 941)
+936@8@pop-no-nominal@3@5@0@6@@(916)@@
+916@8@verbal@3@1@0@6@@(914 128)@@
+914@8@pop-nominal@3@1@0@5@@(904)@@
+904@8@arg2-emb-nom-su@3@1@0@5@@(900 54)@@
+900@8@binary-compl2@3@1@0@4@@(897 46)@@
+897@8@1np-extr@3@1@0@3@@(895)@@
+895@8@verbal-c@3@1@0@3@@(894 126)@@
+894@8@pop-nominal@3@1@0@2@@(893)@@
+893@8@nom-filler@3@1@0@2@@(19 21)@@
+19@8@start-punct@1@1@0@1@@(13)@@
+21@8@abrams-pn@1@1@1@2@@(14)@@
+126@8@pret-v1_infl_rule@2@1@2@3@@(32)@@
+32@8@vite_v@1@1@2@3@@(15)@@
+46@8@at-comp@1@1@3@4@@(16)@@
+54@8@det_q@1@1@4@5@@(17)@@
+128@8@pret-v1_infl_rule@2@1@5@6@@(63)@@
+63@8@regne_v@1@1@5@6@@(18)@@
+941@8@pop-no-nominal@3@5@0@6@@(909)@@
+909@8@verbal@3@1@0@6@@(907 128)@@
+907@8@pop-nominal@3@1@0@5@@(905)@@
+905@8@arg1-emb-nom@3@1@0@5@@(900 54)@@
+926@8@verbal@3@1@0@6@@(902 128)@@
+902@8@expl-subj@3@1@0@5@@(900 53)@@
+53@8@det-expl@1@1@4@5@@(17)@@
+13@8@token [ +FORM "^" +FROM "28" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@8@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@8@token [ +FORM "visste" +FROM "7" +TO "13" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "visste" ]@0@0@2@3@@@@
+16@8@token [ +FORM "at" +FROM "14" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@3@4@@@@
+17@8@token [ +FORM "det" +FROM "17" +TO "20" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "det" ]@0@0@4@5@@@@
+18@8@token [ +FORM "regnet" +FROM "21" +TO "27" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "regnet" ]@0@0@5@6@@@@
+748@9@root@4@1@0@5@@(747)@@
+747@9@main@3@1@0@5@@(746)@@
+746@9@pop-no-nominal@3@1@0@5@@(744)@@
+744@9@verbal@3@1@0@5@@(743 125)@@
+743@9@arg1-unexpr@3@1@0@4@@(740)@@
+740@9@binary-2ip1@3@1@0@4@@(737 71)@@
+737@9@1np-extr@3@1@0@3@@(735)@@
+735@9@verbal-c@3@1@0@3@@(734 123)@@
+734@9@pop-nominal@3@1@0@2@@(733)@@
+733@9@nom-filler@3@1@0@2@@(16 18)@@
+16@9@start-punct@1@1@0@1@@(11)@@
+18@9@abrams-pn@1@1@1@2@@(12)@@
+123@9@pret-v2_infl_rule@2@1@2@3@@(29)@@
+29@9@mene_v@1@1@2@3@@(13)@@
+71@9@inf-comp@1@1@3@4@@(14)@@
+125@9@verb-infin_infl_rule@2@1@4@5@@(74)@@
+74@9@bjeffe_v@1@1@4@5@@(15)@@
+11@9@token [ +FORM "^" +FROM "22" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@9@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@9@token [ +FORM "mente" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "mente" ]@0@0@2@3@@@@
+14@9@token [ +FORM "å" +FROM "13" +TO "14" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "å" ]@0@0@3@4@@@@
+15@9@token [ +FORM "bjeffe" +FROM "15" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@4@5@@@@
+1063@10@root@4@1@0@7@@(1062)@@
+1062@10@main@3@1@0@7@@(1061)@@
+1061@10@pop-no-nominal@3@1@0@7@@(1060)@@
+1060@10@verbal@3@1@0@7@@(1055 162)@@
+1055@10@aux@3@1@0@6@@(1054 161)@@
+1054@10@pop-nominal@3@1@0@5@@(1053)@@
+1053@10@arg1-emb-nom@3@1@0@5@@(1050 84)@@
+1050@10@binary-compl2@3@1@0@4@@(1047 77)@@
+1047@10@1np-extr@3@1@0@3@@(1045)@@
+1045@10@verbal-c@3@1@0@3@@(1044 158)@@
+1044@10@pop-nominal@3@1@0@2@@(1043)@@
+1043@10@nom-filler@3@1@0@2@@(22 24)@@
+22@10@start-punct@1@1@0@1@@(15)@@
+24@10@abrams-pn@1@1@1@2@@(16)@@
+158@10@pret-v2_infl_rule@2@1@2@3@@(35)@@
+35@10@mene_v@1@1@2@3@@(17)@@
+77@10@at-comp@1@1@3@4@@(18)@@
+84@10@browne-pn@1@1@4@5@@(19)@@
+161@10@pret-v1_infl_rule@2@1@5@6@@(99)@@
+99@10@skulle-aux2@1@1@5@6@@(20)@@
+162@10@verb-infin_infl_rule@2@1@6@7@@(109)@@
+109@10@bjeffe_v@1@1@6@7@@(21)@@
+15@10@token [ +FORM "^" +FROM "37" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@10@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+17@10@token [ +FORM "mente" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "mente" ]@0@0@2@3@@@@
+18@10@token [ +FORM "at" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@3@4@@@@
+19@10@token [ +FORM "Browne" +FROM "16" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@4@5@@@@
+20@10@token [ +FORM "skulle" +FROM "23" +TO "29" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "skulle" ]@0@0@5@6@@@@
+21@10@token [ +FORM "bjeffe" +FROM "30" +TO "36" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@6@7@@@@
+892@11@root@4@1@0@6@@(889)@@
+889@11@main@3@1@0@6@@(888)@@(891)
+891@11@main@3@5@0@6@@(890)@@
+890@11@pop-nominal@3@1@0@6@@(875)@@
+875@11@nominal@3@1@0@6@@(873 120)@@
+873@11@arg2-emb-nom-non-su@3@1@0@5@@(869 41)@@
+869@11@1np-extr@3@1@0@4@@(867)@@
+867@11@verbal-c@3@1@0@4@@(866 118)@@
+866@11@pop-nominal@3@1@0@3@@(865)@@
+865@11@nominal@3@1@0@3@@(863 117)@@
+863@11@nom-filler@3@1@0@2@@(19 21)@@
+19@11@start-punct@1@1@0@1@@(13)@@
+21@11@hver@1@1@1@2@@(14)@@
+117@11@indef-sg-noun-irule@2@1@2@3@@(26)@@
+26@11@katt-n-masc@1@1@2@3@@(15)@@
+118@11@pret-v1_infl_rule@2@1@3@4@@(35)@@
+35@11@jage_v@1@1@3@4@@(16)@@
+41@11@en-card@1@1@4@5@@(17)@@
+120@11@indef-sg-noun-irule@2@1@5@6@@(55)@@
+55@11@hund-n-masc@1@1@5@6@@(18)@@
+888@11@arg2-extr-nom-non-su@3@1@0@6@@(887)@@
+887@11@pop-nominal@3@1@0@6@@(878)@@
+878@11@nominal@3@1@0@6@@(871 120)@@
+871@11@arg1-emb-nom@3@1@0@5@@(867 41)@@
+13@11@token [ +FORM "^" +FROM "24" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@11@token [ +FORM "Hver" +FROM "0" +TO "4" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hver" ]@0@0@1@2@@@@
+15@11@token [ +FORM "katt" +FROM "5" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katt" ]@0@0@2@3@@@@
+16@11@token [ +FORM "jaget" +FROM "10" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@3@4@@@@
+17@11@token [ +FORM "en" +FROM "16" +TO "18" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "en" ]@0@0@4@5@@@@
+18@11@token [ +FORM "hund" +FROM "19" +TO "23" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hund" ]@0@0@5@6@@@@
+582@12@root@4@1@0@4@@(578)@@
+578@12@main@3@1@0@4@@(577)@@
+577@12@1np-extr@3@1@0@4@@(576)@@
+576@12@verbal-c@3@1@0@4@@(575 104)@@
+575@12@pop-nominal@3@1@0@3@@(567)@@
+567@12@post-poss@3@1@0@3@@(564 35)@@
+564@12@nom-filler@3@1@0@2@@(13 103)@@
+13@12@start-punct@1@1@0@1@@(9)@@
+103@12@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@12@katt-n-masc@1@1@1@2@@(10)@@
+35@12@min@1@1@2@3@@(11)@@
+104@12@pret-v1_infl_rule@2@1@3@4@@(51)@@
+51@12@bjeffe_v@1@1@3@4@@(12)@@
+9@12@token [ +FORM "^" +FROM "19" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@12@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+11@12@token [ +FORM "min" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "min" ]@0@0@2@3@@@@
+12@12@token [ +FORM "bjeffet" +FROM "11" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@3@4@@@@
+591@13@root@4@1@0@4@@(588)@@
+588@13@main@3@1@0@4@@(587)@@(585)
+585@13@main@3@5@0@4@@(584)@@
+584@13@pop-nominal@3@1@0@4@@(583)@@
+583@13@arg2-emb-nom-non-su@3@1@0@4@@(579 41)@@
+579@13@1np-extr@3@1@0@3@@(577)@@
+577@13@verbal-c@3@1@0@3@@(576 105)@@
+576@13@pop-nominal@3@1@0@2@@(574)@@
+574@13@nom-filler@3@1@0@2@@(13 104)@@
+13@13@start-punct@1@1@0@1@@(9)@@
+104@13@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@13@katt-n-masc@1@1@1@2@@(10)@@
+105@13@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@13@jage_v@1@1@2@3@@(11)@@
+41@13@den-d1@1@1@3@4@@(12)@@
+587@13@arg2-extr-nom-non-su@3@1@0@4@@(586)@@
+586@13@pop-nominal@3@1@0@4@@(581)@@
+581@13@arg1-emb-nom@3@1@0@4@@(577 41)@@
+9@13@token [ +FORM "^" +FROM "17" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@13@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+11@13@token [ +FORM "jaget" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+12@13@token [ +FORM "den" +FROM "13" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "den" ]@0@0@3@4@@@@
+717@14@root@4@1@0@5@@(716)@@
+716@14@main@3@1@0@5@@(715)@@
+715@14@pop-nominal@3@1@0@5@@(714)@@
+714@14@arg2-emb-nom-non-su@3@1@0@5@@(712 45)@@
+712@14@1np-extr@3@1@0@3@@(710)@@
+710@14@verbal-c@3@1@0@3@@(709 102)@@
+709@14@pop-nominal@3@1@0@2@@(707)@@
+707@14@nom-filler@3@1@0@2@@(16 101)@@
+16@14@start-punct@1@1@0@1@@(11)@@
+101@14@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(18)@@
+18@14@katt-n-masc@1@1@1@2@@(12)@@
+102@14@pret-v1_infl_rule@2@1@2@3@@(38)@@
+38@14@jage_v@1@1@2@3@@(13)@@
+45@14@seg-refl-heavy@1@1@3@5@@(14 15)@@
+11@14@token [ +FORM "^" +FROM "22" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@14@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+13@14@token [ +FORM "jaget" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+14@14@token [ +FORM "seg" +FROM "13" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "seg" ]@0@0@3@4@@@@
+15@14@token [ +FORM "selv" +FROM "17" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "selv" ]@0@0@4@5@@@@
+588@15@root@4@1@0@4@@(583)@@
+583@15@main@3@1@0@4@@(582)@@
+582@15@pop-nominal@3@1@0@4@@(581)@@
+581@15@arg2-emb-nom-non-su@3@1@0@4@@(577 41)@@
+577@15@1np-extr@3@1@0@3@@(575)@@
+575@15@verbal-c@3@1@0@3@@(574 102)@@
+574@15@pop-nominal@3@1@0@2@@(572)@@
+572@15@nom-filler@3@1@0@2@@(13 101)@@
+13@15@start-punct@1@1@0@1@@(9)@@
+101@15@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@15@katt-n-masc@1@1@1@2@@(10)@@
+102@15@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@15@jage_v@1@1@2@3@@(11)@@
+41@15@en-card@1@1@3@4@@(12)@@
+589@15@root@4@1@0@4@@(586)@@
+586@15@main@3@1@0@4@@(585)@@
+585@15@arg2-extr-nom-non-su@3@1@0@4@@(584)@@
+584@15@pop-nominal@3@1@0@4@@(579)@@
+579@15@arg1-emb-nom@3@1@0@4@@(575 41)@@
+9@15@token [ +FORM "^" +FROM "16" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@15@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+11@15@token [ +FORM "jaget" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+12@15@token [ +FORM "en" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "en" ]@0@0@3@4@@@@
+396@16@root@4@1@0@3@@(395)@@
+395@16@main@3@1@0@3@@(394)@@
+394@16@1np-extr@3@1@0@3@@(393)@@
+393@16@verbal-c@3@1@0@3@@(392 75)@@
+392@16@pop-nominal@3@1@0@2@@(390)@@
+390@16@nom-filler@3@1@0@2@@(10 74)@@
+10@16@start-punct@1@1@0@1@@(7)@@
+74@16@indef-pl-m1-noun_infl_rule@2@1@1@2@@(12)@@
+12@16@katt-n-masc@1@1@1@2@@(8)@@
+75@16@pres_infl_rule@2@1@2@3@@(23)@@
+23@16@bjeffe_v@1@1@2@3@@(9)@@
+7@16@token [ +FORM "^" +FROM "15" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@16@token [ +FORM "Katter" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katter" ]@0@0@1@2@@@@
+9@16@token [ +FORM "bjeffer" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@2@3@@@@
+394@17@root@4@1@0@3@@(393)@@
+393@17@main@3@1@0@3@@(392)@@
+392@17@1np-extr@3@1@0@3@@(391)@@
+391@17@verbal-c@3@1@0@3@@(390 79)@@
+390@17@pop-nominal@3@1@0@2@@(389)@@
+389@17@nom-filler@3@1@0@2@@(10 12)@@
+10@17@start-punct@1@1@0@1@@(7)@@
+12@17@noen_q@1@1@1@2@@(8)@@
+79@17@pres_infl_rule@2@1@2@3@@(28)@@
+28@17@bjeffe_v@1@1@2@3@@(9)@@
+7@17@token [ +FORM "^" +FROM "13" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@17@token [ +FORM "Noen" +FROM "0" +TO "4" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Noen" ]@0@0@1@2@@@@
+9@17@token [ +FORM "bjeffer" +FROM "5" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@2@3@@@@
+11@18@token [ +FORM "^" +FROM "24" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@18@token [ +FORM "Noen" +FROM "0" +TO "4" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Noen" ]@0@0@1@2@@@@
+13@18@token [ +FORM "av" +FROM "5" +TO "7" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "av" ]@0@0@2@3@@@@
+14@18@token [ +FORM "kattene" +FROM "8" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kattene" ]@0@0@3@4@@@@
+15@18@token [ +FORM "bjeffer" +FROM "16" +TO "23" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@4@5@@@@
+566@19@root@4@1@0@4@@(565)@@
+565@19@main@3@1@0@4@@(564)@@
+564@19@1np-extr@3@1@0@4@@(563)@@
+563@19@verbal-c@3@1@0@4@@(562 99)@@
+562@19@pop-nominal@3@1@0@3@@(560)@@
+560@19@nominal@3@1@0@3@@(557 98)@@
+557@19@nom-filler@3@1@0@2@@(13 15)@@
+13@19@start-punct@1@1@0@1@@(9)@@
+15@19@hvilken_q@1@1@1@2@@(10)@@
+98@19@indef-sg-noun-irule@2@1@2@3@@(30)@@
+30@19@hund-n-masc@1@1@2@3@@(11)@@
+99@19@pret-v1_infl_rule@2@1@3@4@@(46)@@
+46@19@bjeffe_v@1@1@3@4@@(12)@@
+9@19@token [ +FORM "^" +FROM "21" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@19@token [ +FORM "Hvilken" +FROM "0" +TO "7" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hvilken" ]@0@0@1@2@@@@
+11@19@token [ +FORM "hund" +FROM "8" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hund" ]@0@0@2@3@@@@
+12@19@token [ +FORM "bjeffet" +FROM "13" +TO "20" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@3@4@@@@
+1282@20@root@4@1@0@8@@(1271)@@
+1271@20@main@3@1@0@8@@(1270)@@
+1270@20@pop-no-nominal@3@1@0@8@@(1269)@@
+1269@20@pop-nominal@3@1@0@8@@(1268)@@
+1268@20@pop-no-nominal@3@1@0@8@@(1267)@@
+1267@20@verbal@3@1@0@8@@(1266 147)@@
+1266@20@1np-extr@3@1@0@7@@(1221)@@
+1221@20@binary-rel@3@1@0@7@@(1216 82)@@
+1216@20@nominal@3@1@0@6@@(1191 146)@@
+1191@20@arg2-emb-nom-non-su@3@1@0@5@@(1189 50)@@
+1189@20@mod-emb-vbl@3@1@0@4@@(1184 47)@@
+1184@20@arg2-extr-su@3@1@0@3@@(1183)@@
+1183@20@verbal-c@3@1@0@3@@(1182 144)@@
+1182@20@pop-nominal@3@1@0@2@@(1181)@@
+1181@20@nom-filler@3@1@0@2@@(25 27)@@
+25@20@start-punct@1@1@0@1@@(17)@@
+27@20@abrams-pn@1@1@1@2@@(18)@@
+144@20@pret-v2_infl_rule@2@1@2@3@@(38)@@
+38@20@lure_v@1@1@2@3@@(19)@@
+47@20@på_func@1@1@3@4@@(20)@@
+50@20@hvilken_q@1@1@4@5@@(21)@@
+146@20@indef-sg-noun-irule@2@1@5@6@@(65)@@
+65@20@hund-n-masc@1@1@5@6@@(22)@@
+82@20@som_restr_relpron@1@1@6@7@@(23)@@
+147@20@pret-v1_infl_rule@2@1@7@8@@(92)@@
+92@20@bjeffe_v@1@1@7@8@@(24)@@
+1283@20@root@4@1@0@8@@(1274)@@
+1274@20@main@3@1@0@8@@(1273)@@
+1273@20@pop-nominal@3@1@0@8@@(1272)@@
+1272@20@pop-no-nominal@3@1@0@8@@(1263)@@
+1263@20@verbal@3@1@0@8@@(1262 147)@@
+1262@20@1np-extr@3@1@0@7@@(1229)@@
+1229@20@binary-rel@3@1@0@7@@(1213 82)@@
+1213@20@nominal@3@1@0@6@@(1193 146)@@
+1193@20@arg4-emb-sel-np@3@1@0@5@@(1187 50)@@
+1187@20@prepsel@3@1@0@4@@(1185 47)@@
+1185@20@1np-extr@3@1@0@3@@(1183)@@
+1284@20@root@4@1@0@8@@(1277)@@
+1277@20@main@3@1@0@8@@(1276)@@
+1276@20@pop-nominal@3@1@0@8@@(1275)@@
+1275@20@pop-no-nominal@3@1@0@8@@(1259)@@
+1259@20@verbal@3@1@0@8@@(1258 147)@@
+1258@20@1np-extr@3@1@0@7@@(1236)@@
+1236@20@binary-rel@3@1@0@7@@(1208 82)@@
+1208@20@nominal@3@1@0@6@@(1194 146)@@
+1194@20@arg4-wh@3@1@0@5@@(1187 50)@@
+17@20@token [ +FORM "^" +FROM "41" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+18@20@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+19@20@token [ +FORM "lurte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "lurte" ]@0@0@2@3@@@@
+20@20@token [ +FORM "på" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "på" ]@0@0@3@4@@@@
+21@20@token [ +FORM "hvilken" +FROM "16" +TO "23" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hvilken" ]@0@0@4@5@@@@
+22@20@token [ +FORM "hund" +FROM "24" +TO "28" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hund" ]@0@0@5@6@@@@
+23@20@token [ +FORM "som" +FROM "29" +TO "32" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "som" ]@0@0@6@7@@@@
+24@20@token [ +FORM "bjeffet" +FROM "33" +TO "40" +ID diff-list [ LIST cons [ FIRST "7" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@7@8@@@@
+1056@21@root@4@1@0@7@@(1055)@@
+1055@21@main@3@1@0@7@@(1054)@@
+1054@21@pop-no-nominal@3@1@0@7@@(1041)@@
+1041@21@verbal@3@1@0@7@@(1040 122)@@
+1040@21@pop-nominal@3@1@0@6@@(1039)@@
+1039@21@arg1-emb-nom@3@1@0@6@@(1024 54)@@
+1024@21@cadv-embedded@3@1@0@5@@(1022 47)@@
+1022@21@pop-no-nominal@3@1@0@4@@(1021)@@
+1021@21@mod-emb-vbl@3@1@0@4@@(1016 44)@@
+1016@21@arg2-extr-su@3@1@0@3@@(1015)@@
+1015@21@verbal-c@3@1@0@3@@(1014 120)@@
+1014@21@pop-nominal@3@1@0@2@@(1013)@@
+1013@21@nom-filler@3@1@0@2@@(22 24)@@
+22@21@start-punct@1@1@0@1@@(15)@@
+24@21@abrams-pn@1@1@1@2@@(16)@@
+120@21@pret-v2_infl_rule@2@1@2@3@@(35)@@
+35@21@lure_v@1@1@2@3@@(17)@@
+44@21@på_func@1@1@3@4@@(18)@@
+47@21@hvorvidt_func@1@1@4@5@@(19)@@
+54@21@browne-pn@1@1@5@6@@(20)@@
+122@21@pret-v1_infl_rule@2@1@6@7@@(68)@@
+68@21@bjeffe_v@1@1@6@7@@(21)@@
+15@21@token [ +FORM "^" +FROM "40" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@21@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+17@21@token [ +FORM "lurte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "lurte" ]@0@0@2@3@@@@
+18@21@token [ +FORM "på" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "på" ]@0@0@3@4@@@@
+19@21@token [ +FORM "hvorvidt" +FROM "16" +TO "24" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hvorvidt" ]@0@0@4@5@@@@
+20@21@token [ +FORM "Browne" +FROM "25" +TO "31" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@5@6@@@@
+21@21@token [ +FORM "bjeffet" +FROM "32" +TO "39" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@6@7@@@@
+907@22@root@4@1@0@6@@(906)@@
+906@22@main@3@1@0@6@@(905)@@
+905@22@1np-extr@3@1@0@6@@(901)@@
+901@22@verbal-c@3@1@0@6@@(900 132)@@
+900@22@pop-nominal@3@1@0@5@@(899)@@
+899@22@pop-no-nominal@3@1@0@5@@(898)@@
+898@22@arg2-extr-nom-non-su@3@1@0@5@@(894)@@
+894@22@verbal@3@1@0@5@@(893 130)@@
+893@22@pop-nominal@3@1@0@4@@(887)@@
+887@22@arg1-emb-nom@3@1@0@4@@(881 57)@@
+881@22@binary-rel@3@1@0@3@@(877 47)@@
+877@22@nom-filler@3@1@0@2@@(19 129)@@
+19@22@start-punct@1@1@0@1@@(13)@@
+129@22@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(21)@@
+21@22@hund-n-masc@1@1@1@2@@(14)@@
+47@22@som_restr_relpron@1@1@2@3@@(15)@@
+57@22@browne-pn@1@1@3@4@@(16)@@
+130@22@pret-v1_infl_rule@2@1@4@5@@(71)@@
+71@22@jage_v@1@1@4@5@@(17)@@
+132@22@pret-v1_infl_rule@2@1@5@6@@(77)@@
+77@22@bjeffe_v@1@1@5@6@@(18)@@
+13@22@token [ +FORM "^" +FROM "32" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@22@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@22@token [ +FORM "som" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "som" ]@0@0@2@3@@@@
+16@22@token [ +FORM "Browne" +FROM "11" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+17@22@token [ +FORM "jaget" +FROM "18" +TO "23" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@4@5@@@@
+18@22@token [ +FORM "bjeffet" +FROM "24" +TO "31" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@5@6@@@@
+925@23@root@4@1@0@6@@(915)@@
+915@23@main@3@1@0@6@@(914)@@
+914@23@pop-no-nominal@3@1@0@6@@(913)@@
+913@23@pop-nominal@3@1@0@6@@(911)@@
+911@23@arg2-emb-nom-non-su@3@1@0@6@@(890 68)@@
+890@23@mod-emb-vbl@3@1@0@5@@(888 65)@@
+888@23@verbal@3@1@0@4@@(887 132)@@
+887@23@arg2-extr-su@3@1@0@3@@(877)@@
+877@23@verbal-c-pass-aux@3@1@0@3@@(876 129)@@
+876@23@pop-nominal@3@1@0@2@@(874)@@
+874@23@nom-filler@3@1@0@2@@(19 128)@@
+19@23@start-punct@1@1@0@1@@(13)@@
+128@23@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(21)@@
+21@23@hund-n-masc@1@1@1@2@@(14)@@
+129@23@pret-v1_infl_rule@2@1@2@3@@(46)@@
+46@23@bli-aux@1@1@2@3@@(15)@@
+132@23@ppart-v1_infl_rule@2@1@3@4@@(59)@@
+59@23@jage_v@1@1@3@4@@(16)@@
+65@23@av_func@1@1@4@5@@(17)@@
+68@23@browne-pn@1@1@5@6@@(18)@@
+926@23@root@4@1@0@6@@(918)@@
+918@23@main@3@1@0@6@@(917)@@
+917@23@pop-no-nominal@3@1@0@6@@(916)@@
+916@23@pop-nominal@3@1@0@6@@(908)@@
+908@23@arg2-emb-nom-non-su@3@1@0@6@@(893 68)@@
+893@23@mod-emb-vbl@3@1@0@5@@(891 65)@@
+891@23@pop-no-nominal@3@1@0@4@@(885)@@
+885@23@mod-emb-vbl@3@1@0@4@@(879 133)@@
+879@23@arg2-extr-su@3@1@0@3@@(878)@@
+878@23@verbal-c@3@1@0@3@@(876 130)@@
+130@23@pret-v1_infl_rule@2@1@2@3@@(47)@@
+47@23@bli_v@1@1@2@3@@(15)@@
+133@23@part-indef-sg-adj_infl_rule@2@1@3@4@@(132)@@
+927@23@root@4@1@0@6@@(921)@@
+921@23@main@3@1@0@6@@(920)@@
+920@23@pop-no-nominal@3@1@0@6@@(919)@@
+919@23@pop-nominal@3@1@0@6@@(905)@@
+905@23@arg2-emb-nom-non-su@3@1@0@6@@(897 68)@@
+897@23@mod-emb-vbl@3@1@0@5@@(894 65)@@
+894@23@pop-nominal@3@1@0@4@@(883)@@
+883@23@arg2-emb-adj-non-su@3@1@0@4@@(880 133)@@
+880@23@1np-extr@3@1@0@3@@(878)@@
+928@23@root@4@1@0@6@@(924)@@
+924@23@main@3@1@0@6@@(923)@@
+923@23@pop-no-nominal@3@1@0@6@@(922)@@
+922@23@pop-nominal@3@1@0@6@@(902)@@
+902@23@arg2-emb-nom-non-su@3@1@0@6@@(900 68)@@
+900@23@mod-emb-vbl@3@1@0@5@@(898 65)@@
+898@23@pop-no-nominal@3@1@0@4@@(882)@@
+882@23@mod-emb-vbl@3@1@0@4@@(880 133)@@
+13@23@token [ +FORM "^" +FROM "27" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@23@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@23@token [ +FORM "ble" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ble" ]@0@0@2@3@@@@
+16@23@token [ +FORM "jaget" +FROM "11" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@3@4@@@@
+17@23@token [ +FORM "av" +FROM "17" +TO "19" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "av" ]@0@0@4@5@@@@
+18@23@token [ +FORM "Browne" +FROM "20" +TO "26" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@5@6@@@@
+13@24@token [ +FORM "^" +FROM "31" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@24@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@24@token [ +FORM "jaget" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+16@24@token [ +FORM "av" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "av" ]@0@0@3@4@@@@
+17@24@token [ +FORM "Browne" +FROM "16" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@4@5@@@@
+18@24@token [ +FORM "bjeffet" +FROM "23" +TO "30" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@5@6@@@@
+569@25@root@4@1@0@4@@(568)@@
+568@25@main@3@1@0@4@@(567)@@
+567@25@verbal@3@1@0@4@@(566 104)@@
+566@25@1np-extr@3@1@0@3@@(559)@@
+559@25@aux-c@3@1@0@3@@(558 101)@@
+558@25@pop-nominal@3@1@0@2@@(556)@@
+556@25@nom-filler@3@1@0@2@@(13 100)@@
+13@25@start-punct@1@1@0@1@@(9)@@
+100@25@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@25@hund-n-masc@1@1@1@2@@(10)@@
+101@25@pres_infl_rule@2@1@2@3@@(40)@@
+40@25@ha-aux@1@1@2@3@@(11)@@
+104@25@ppart-v1_infl_rule@2@1@3@4@@(48)@@
+48@25@bjeffe_v@1@1@3@4@@(12)@@
+9@25@token [ +FORM "^" +FROM "19" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@25@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+11@25@token [ +FORM "har" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "har" ]@0@0@2@3@@@@
+12@25@token [ +FORM "bjeffet" +FROM "11" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@3@4@@@@
+895@26@root@4@1@0@6@@(894)@@
+894@26@main@3@1@0@6@@(893)@@
+893@26@1np-extr@3@1@0@6@@(888)@@
+888@26@verbal-c@3@1@0@6@@(878 123)@@(890 886)
+890@26@verbal-c@3@5@0@6@@(872 123)@@
+872@26@coord-vp@3@1@0@5@@(870 64)@@
+870@26@verbal@3@1@0@4@@(867 122)@@
+867@26@arg2-extr-su@3@1@0@3@@(859)@@
+859@26@aux-c@3@1@0@3@@(858 120)@@
+858@26@pop-nominal@3@1@0@2@@(856)@@
+856@26@nom-filler@3@1@0@2@@(19 119)@@
+19@26@start-punct@1@1@0@1@@(13)@@
+119@26@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(21)@@
+21@26@hund-n-masc@1@1@1@2@@(14)@@
+120@26@pres_infl_rule@2@1@2@3@@(46)@@
+46@26@ha-aux@1@1@2@3@@(15)@@
+122@26@ppart-v1_infl_rule@2@1@3@4@@(55)@@
+55@26@drive_v@1@1@3@4@@(16)@@
+64@26@og-conj@1@1@4@5@@(17)@@
+123@26@pret-v1_infl_rule@2@1@5@6@@(67)@@
+67@26@bjeffe_v@1@1@5@6@@(18)@@
+886@26@verbal-c@3@5@0@6@@(883 123)@@
+883@26@coord-vp@3@1@0@5@@(880 64)@@
+880@26@pop-no-nominal@3@1@0@4@@(864)@@
+864@26@mod-emb-vbl@3@1@0@4@@(862 125)@@
+862@26@1np-extr@3@1@0@3@@(860)@@
+860@26@verbal-c@3@1@0@3@@(858 121)@@
+121@26@pres_infl_rule@2@1@2@3@@(47)@@
+47@26@ha_v@1@1@2@3@@(15)@@
+125@26@part-indef-sg-adj_infl_rule@2@1@3@4@@(122)@@
+878@26@coord-vp@3@1@0@5@@(874 64)@@
+874@26@pop-nominal@3@1@0@4@@(865)@@
+865@26@arg2-emb-adj-non-su@3@1@0@4@@(862 125)@@
+13@26@token [ +FORM "^" +FROM "29" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@26@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@26@token [ +FORM "har" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "har" ]@0@0@2@3@@@@
+16@26@token [ +FORM "drevet" +FROM "11" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "drevet" ]@0@0@3@4@@@@
+17@26@token [ +FORM "og" +FROM "18" +TO "20" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@4@5@@@@
+18@26@token [ +FORM "bjeffet" +FROM "21" +TO "28" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@5@6@@@@
+899@27@root@4@1@0@6@@(898)@@
+898@27@main@3@1@0@6@@(897)@@
+897@27@1np-extr@3@1@0@6@@(892)@@
+892@27@verbal-c@3@1@0@6@@(882 127)@@(894 890)
+894@27@verbal-c@3@5@0@6@@(876 127)@@
+876@27@coord-vp@3@1@0@5@@(874 68)@@
+874@27@verbal@3@1@0@4@@(871 126)@@
+871@27@arg2-extr-su@3@1@0@3@@(863)@@
+863@27@aux-c@3@1@0@3@@(862 124)@@
+862@27@pop-nominal@3@1@0@2@@(860)@@
+860@27@nom-filler@3@1@0@2@@(19 123)@@
+19@27@start-punct@1@1@0@1@@(13)@@
+123@27@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(21)@@
+21@27@hund-n-masc@1@1@1@2@@(14)@@
+124@27@pret-v1_infl_rule@2@1@2@3@@(46)@@
+46@27@ha-aux@1@1@2@3@@(15)@@
+126@27@ppart-v1_infl_rule@2@1@3@4@@(59)@@
+59@27@drive_v@1@1@3@4@@(16)@@
+68@27@og-conj@1@1@4@5@@(17)@@
+127@27@pret-v1_infl_rule@2@1@5@6@@(71)@@
+71@27@bjeffe_v@1@1@5@6@@(18)@@
+890@27@verbal-c@3@5@0@6@@(887 127)@@
+887@27@coord-vp@3@1@0@5@@(884 68)@@
+884@27@pop-no-nominal@3@1@0@4@@(868)@@
+868@27@mod-emb-vbl@3@1@0@4@@(866 129)@@
+866@27@1np-extr@3@1@0@3@@(864)@@
+864@27@verbal-c@3@1@0@3@@(862 125)@@
+125@27@pret-v1_infl_rule@2@1@2@3@@(47)@@
+47@27@ha_v@1@1@2@3@@(15)@@
+129@27@part-indef-sg-adj_infl_rule@2@1@3@4@@(126)@@
+882@27@coord-vp@3@1@0@5@@(878 68)@@
+878@27@pop-nominal@3@1@0@4@@(869)@@
+869@27@arg2-emb-adj-non-su@3@1@0@4@@(866 129)@@
+13@27@token [ +FORM "^" +FROM "31" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@27@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@27@token [ +FORM "hadde" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hadde" ]@0@0@2@3@@@@
+16@27@token [ +FORM "drevet" +FROM "13" +TO "19" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "drevet" ]@0@0@3@4@@@@
+17@27@token [ +FORM "og" +FROM "20" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@4@5@@@@
+18@27@token [ +FORM "bjeffet" +FROM "23" +TO "30" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@5@6@@@@
+567@28@root@4@1@0@4@@(565)@@
+565@28@main@3@1@0@4@@(564)@@(566)
+566@28@main@3@5@0@4@@(562)@@
+562@28@sadv@3@1@0@4@@(559 46)@@
+559@28@1np-extr@3@1@0@3@@(558)@@
+558@28@verbal-c@3@1@0@3@@(557 96)@@
+557@28@pop-nominal@3@1@0@2@@(555)@@
+555@28@nom-filler@3@1@0@2@@(13 95)@@
+13@28@start-punct@1@1@0@1@@(9)@@
+95@28@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@28@hund-n-masc@1@1@1@2@@(10)@@
+96@28@pres_infl_rule@2@1@2@3@@(40)@@
+40@28@bjeffe_v@1@1@2@3@@(11)@@
+46@28@nå_func@1@1@3@4@@(12)@@
+564@28@pop-no-nominal@3@1@0@4@@(563)@@
+563@28@mod-emb-vbl@3@1@0@4@@(559 46)@@
+9@28@token [ +FORM "^" +FROM "18" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@28@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+11@28@token [ +FORM "bjeffer" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@2@3@@@@
+12@28@token [ +FORM "nå" +FROM "15" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "nå" ]@0@0@3@4@@@@
+410@29@root@4@1@0@3@@(409)@@
+409@29@main@3@1@0@3@@(408)@@
+408@29@1np-extr@3@1@0@3@@(407)@@
+407@29@verbal-c@3@1@0@3@@(406 87)@@
+406@29@pop-nominal@3@1@0@2@@(405)@@
+405@29@nom-filler@3@1@0@2@@(10 12)@@
+10@29@start-punct@1@1@0@1@@(7)@@
+12@29@unknown_test@1@1@1@2@@(8)@@
+87@29@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@29@bjeffe_v@1@1@2@3@@(9)@@
+7@29@token [ +FORM "^" +FROM "19" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@29@token [ +FORM "Havehunden" +FROM "0" +TO "10" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Havehunden" ]@0@0@1@2@@@@
+9@29@token [ +FORM "bjeffet" +FROM "11" +TO "18" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+410@30@root@4@1@0@3@@(409)@@
+409@30@main@3@1@0@3@@(408)@@
+408@30@1np-extr@3@1@0@3@@(407)@@
+407@30@verbal-c@3@1@0@3@@(406 87)@@
+406@30@pop-nominal@3@1@0@2@@(405)@@
+405@30@nom-filler@3@1@0@2@@(10 12)@@
+10@30@start-punct@1@1@0@1@@(7)@@
+12@30@unknown_test@1@1@1@2@@(8)@@
+87@30@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@30@bjeffe_v@1@1@2@3@@(9)@@
+7@30@token [ +FORM "^" +FROM "26" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@30@token [ +FORM "Tobakkshavehunden" +FROM "0" +TO "17" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Tobakkshavehunden" ]@0@0@1@2@@@@
+9@30@token [ +FORM "bjeffet" +FROM "18" +TO "25" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+589@31@root@4@1@0@4@@(584)@@
+584@31@main@3@1@0@4@@(583)@@
+583@31@pop-nominal@3@1@0@4@@(576)@@
+576@31@arg2-emb-adj-non-su@3@1@0@4@@(574 105)@@
+574@31@1np-extr@3@1@0@3@@(572)@@
+572@31@verbal-c@3@1@0@3@@(569 104)@@
+569@31@pop-nominal@3@1@0@2@@(567)@@
+567@31@nom-filler@3@1@0@2@@(13 101)@@
+13@31@start-punct@1@1@0@1@@(9)@@
+101@31@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@31@katt-n-masc@1@1@1@2@@(10)@@
+104@31@pres_infl_rule@2@1@2@3@@(37)@@
+37@31@være_v@1@1@2@3@@(11)@@
+105@31@sg-comm-adj-irule@2@1@3@4@@(46)@@
+46@31@gammel-a@1@1@3@4@@(12)@@
+590@31@root@4@1@0@4@@(587)@@
+587@31@main@3@1@0@4@@(586)@@(588)
+588@31@main@3@5@0@4@@(585)@@
+585@31@pop-no-nominal@3@1@0@4@@(575)@@
+575@31@arg4-ap1@3@1@0@4@@(574 105)@@
+586@31@pop-nominal@3@1@0@4@@(575)@@
+9@31@token [ +FORM "^" +FROM "17" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@31@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+11@31@token [ +FORM "er" +FROM "7" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "er" ]@0@0@2@3@@@@
+12@31@token [ +FORM "gammel" +FROM "10" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gammel" ]@0@0@3@4@@@@
+743@32@root@4@1@0@5@@(742)@@
+742@32@main@3@1@0@5@@(741)@@
+741@32@pop-no-nominal@3@1@0@5@@(740)@@
+740@32@pop-nominal@3@1@0@5@@(734)@@
+734@32@arg2-emb-nom-non-su@3@1@0@5@@(727 116)@@
+727@32@mod-emb-vbl@3@1@0@4@@(722 49)@@
+722@32@arg2-extr-su@3@1@0@3@@(721)@@
+721@32@verbal-c@3@1@0@3@@(718 115)@@
+718@32@pop-nominal@3@1@0@2@@(716)@@
+716@32@nom-filler@3@1@0@2@@(16 112)@@
+16@32@start-punct@1@1@0@1@@(11)@@
+112@32@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(18)@@
+18@32@katt-n-masc@1@1@1@2@@(12)@@
+115@32@pres_infl_rule@2@1@2@3@@(40)@@
+40@32@være_v@1@1@2@3@@(13)@@
+49@32@i_func@1@1@3@4@@(14)@@
+116@32@def-comm-noun-m1-m2_infl_rule@2@1@4@5@@(52)@@
+52@32@have-n-masc@1@1@4@5@@(15)@@
+11@32@token [ +FORM "^" +FROM "18" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@32@token [ +FORM "Katten" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Katten" ]@0@0@1@2@@@@
+13@32@token [ +FORM "er" +FROM "7" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "er" ]@0@0@2@3@@@@
+14@32@token [ +FORM "i" +FROM "10" +TO "11" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "i" ]@0@0@3@4@@@@
+15@32@token [ +FORM "haven" +FROM "12" +TO "17" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "haven" ]@0@0@4@5@@@@
+883@33@root@4@1@0@6@@(881)@@
+881@33@main@3@1@0@6@@(880)@@(882)
+882@33@main@3@5@0@6@@(879)@@
+879@33@pop-no-nominal@3@1@0@6@@(877)@@
+877@33@arg4-ap1@3@1@0@6@@(876 127)@@
+876@33@extr-1ip@3@1@0@5@@(875)@@
+875@33@verbal-c@3@1@0@5@@(872 126)@@
+872@33@pop-no-nominal@3@1@0@4@@(871)@@
+871@33@pop-nominal@3@1@0@4@@(869)@@
+869@33@arg2-emb-nom-non-su@3@1@0@4@@(866 123)@@
+866@33@verbal@3@1@0@3@@(865 122)@@
+865@33@arg1-unexpr@3@1@0@2@@(862)@@
+862@33@comp-filler@3@1@0@2@@(19 21)@@
+19@33@start-punct@1@1@0@1@@(13)@@
+21@33@inf-comp@1@1@1@2@@(14)@@
+122@33@verb-infin_infl_rule@2@1@2@3@@(24)@@
+24@33@jage_v@1@1@2@3@@(15)@@
+123@33@def-comm-noun-m1-m2_infl_rule@2@1@3@4@@(27)@@
+27@33@katt-n-masc@1@1@3@4@@(16)@@
+126@33@pres_infl_rule@2@1@4@5@@(49)@@
+49@33@være_v@1@1@4@5@@(17)@@
+127@33@sg-neut-adj_infl_rule@2@1@5@6@@(58)@@
+58@33@gammel-a@1@1@5@6@@(18)@@
+880@33@pop-nominal@3@1@0@6@@(877)@@
+13@33@token [ +FORM "^" +FROM "25" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@33@token [ +FORM "Å" +FROM "0" +TO "1" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Å" ]@0@0@1@2@@@@
+15@33@token [ +FORM "jage" +FROM "2" +TO "6" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jage" ]@0@0@2@3@@@@
+16@33@token [ +FORM "katten" +FROM "7" +TO "13" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katten" ]@0@0@3@4@@@@
+17@33@token [ +FORM "er" +FROM "14" +TO "16" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "er" ]@0@0@4@5@@@@
+18@33@token [ +FORM "gammelt" +FROM "17" +TO "24" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gammelt" ]@0@0@5@6@@@@
+1050@34@root@4@1@0@7@@(1048)@@
+1048@34@main@3@1@0@7@@(1047)@@(1049)
+1049@34@main@3@5@0@7@@(1046)@@
+1046@34@pop-no-nominal@3@1@0@7@@(1044)@@
+1044@34@arg4-ap1@3@1@0@7@@(1043 150)@@
+1043@34@1cp-extr@3@1@0@6@@(1042)@@
+1042@34@verbal-c@3@1@0@6@@(1039 149)@@
+1039@34@pop-no-nominal@3@1@0@5@@(1038)@@
+1038@34@pop-nominal@3@1@0@5@@(1037)@@
+1037@34@arg2-emb-nom-non-su@3@1@0@5@@(1030 56)@@
+1030@34@verbal@3@1@0@4@@(1029 146)@@
+1029@34@pop-nominal@3@1@0@3@@(1027)@@
+1027@34@arg1-emb-nom@3@1@0@3@@(1024 145)@@
+1024@34@comp-filler@3@1@0@2@@(22 24)@@
+22@34@start-punct@1@1@0@1@@(15)@@
+24@34@at-comp@1@1@1@2@@(16)@@
+145@34@def-comm-noun-m1-m2_infl_rule@2@1@2@3@@(31)@@
+31@34@katt-n-masc@1@1@2@3@@(17)@@
+146@34@pres_infl_rule@2@1@3@4@@(51)@@
+51@34@jage_v@1@1@3@4@@(18)@@
+56@34@browne-pn@1@1@4@5@@(19)@@
+149@34@pres_infl_rule@2@1@5@6@@(72)@@
+72@34@være_v@1@1@5@6@@(20)@@
+150@34@sg-neut-adj_infl_rule@2@1@6@7@@(81)@@
+81@34@gammel-a@1@1@6@7@@(21)@@
+1047@34@pop-nominal@3@1@0@7@@(1044)@@
+15@34@token [ +FORM "^" +FROM "35" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@34@token [ +FORM "At" +FROM "0" +TO "2" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "At" ]@0@0@1@2@@@@
+17@34@token [ +FORM "katten" +FROM "3" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katten" ]@0@0@2@3@@@@
+18@34@token [ +FORM "jager" +FROM "10" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jager" ]@0@0@3@4@@@@
+19@34@token [ +FORM "Browne" +FROM "16" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@4@5@@@@
+20@34@token [ +FORM "er" +FROM "24" +TO "26" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "er" ]@0@0@5@6@@@@
+21@34@token [ +FORM "gammelt" +FROM "27" +TO "34" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gammelt" ]@0@0@6@7@@@@
+575@35@root@4@1@0@4@@(572)@@
+572@35@main@3@1@0@4@@(571)@@
+571@35@extr-mod@3@1@0@4@@(570)@@
+570@35@pop-nominal@3@1@0@4@@(569)@@
+569@35@arg1-emb-nom@3@1@0@4@@(564 102)@@
+564@35@verbal-c@3@1@0@3@@(563 100)@@
+563@35@pop-no-nominal@3@1@0@2@@(561)@@
+561@35@adv-filler@3@1@0@2@@(13 15)@@
+13@35@start-punct@1@1@0@1@@(9)@@
+15@35@når_func@1@1@1@2@@(10)@@
+100@35@pret-v1_infl_rule@2@1@2@3@@(22)@@
+22@35@bjeffe_v@1@1@2@3@@(11)@@
+102@35@def-comm-noun-m1-m2_infl_rule@2@1@3@4@@(28)@@
+28@35@hund-n-masc@1@1@3@4@@(12)@@
+9@35@token [ +FORM "^" +FROM "19" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@35@token [ +FORM "Når" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Når" ]@0@0@1@2@@@@
+11@35@token [ +FORM "bjeffet" +FROM "4" +TO "11" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+12@35@token [ +FORM "hunden" +FROM "12" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hunden" ]@0@0@3@4@@@@
+775@36@root@4@1@0@5@@(773)@@
+773@36@main@3@1@0@5@@(772)@@(769)
+769@36@main@3@5@0@5@@(768)@@
+768@36@1np-extr@3@1@0@5@@(767)@@
+767@36@verbal-c@3@1@0@5@@(766 113)@@
+766@36@pop-nominal@3@1@0@4@@(765)@@
+765@36@pop-no-nominal@3@1@0@4@@(764)@@
+764@36@pop-nominal@3@1@0@4@@(747)@@
+747@36@arg2-emb-nom-non-su@3@1@0@4@@(745 112)@@
+745@36@mod-emb-nom@3@1@0@3@@(733 27)@@
+733@36@nom-filler@3@1@0@2@@(16 18)@@
+16@36@start-punct@1@1@0@1@@(11)@@
+18@36@tre-card@1@1@1@2@@(12)@@
+27@36@av_func@1@1@2@3@@(13)@@
+112@36@def-pl-noun_infl_rule@2@1@3@4@@(30)@@
+30@36@hund-n-masc@1@1@3@4@@(14)@@
+113@36@pret-v1_infl_rule@2@1@4@5@@(56)@@
+56@36@bjeffe_v@1@1@4@5@@(15)@@
+772@36@1np-extr@3@1@0@5@@(759)@@
+759@36@verbal-c@3@1@0@5@@(758 113)@@
+758@36@pop-nominal@3@1@0@4@@(757)@@
+757@36@pop-no-nominal@3@1@0@4@@(756)@@
+756@36@pop-nominal@3@1@0@4@@(753)@@
+753@36@arg2-emb-nom-non-su@3@1@0@4@@(740 112)@@
+740@36@mod-emb-nom@3@1@0@3@@(735 27)@@
+735@36@nom-filler@3@1@0@2@@(16 109)@@
+109@36@indef-pl-n1_infl_rule@2@1@1@2@@(19)@@
+19@36@tre-n-neut@1@1@1@2@@(12)@@
+776@36@root@4@1@0@5@@(771)@@
+771@36@main@3@1@0@5@@(770)@@
+770@36@1np-extr@3@1@0@5@@(763)@@
+763@36@verbal-c@3@1@0@5@@(762 113)@@
+762@36@pop-nominal@3@1@0@4@@(761)@@
+761@36@pop-no-nominal@3@1@0@4@@(760)@@
+760@36@pop-nominal@3@1@0@4@@(750)@@
+750@36@arg2-emb-nom-non-su@3@1@0@4@@(742 112)@@
+742@36@mod-emb-nom@3@1@0@3@@(734 27)@@
+734@36@nom-filler@3@1@0@2@@(16 108)@@
+108@36@indef-sg-noun-irule@2@1@1@2@@(19)@@
+11@36@token [ +FORM "^" +FROM "23" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@36@token [ +FORM "Tre" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Tre" ]@0@0@1@2@@@@
+13@36@token [ +FORM "av" +FROM "4" +TO "6" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "av" ]@0@0@2@3@@@@
+14@36@token [ +FORM "hundene" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hundene" ]@0@0@3@4@@@@
+15@36@token [ +FORM "bjeffet" +FROM "15" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@4@5@@@@
+432@37@root@4@1@0@3@@(430)@@
+430@37@main@3@1@0@3@@(429)@@(426)
+426@37@main@3@5@0@3@@(425)@@
+425@37@1np-extr@3@1@0@3@@(424)@@
+424@37@verbal-c@3@1@0@3@@(423 76)@@
+423@37@pop-nominal@3@1@0@2@@(413)@@
+413@37@nom-filler@3@1@0@2@@(10 12)@@
+10@37@start-punct@1@1@0@1@@(7)@@
+12@37@tre-card@1@1@1@2@@(8)@@
+76@37@pres_infl_rule@2@1@2@3@@(21)@@
+21@37@bjeffe_v@1@1@2@3@@(9)@@
+429@37@1np-extr@3@1@0@3@@(419)@@
+419@37@verbal-c@3@1@0@3@@(418 76)@@
+418@37@pop-nominal@3@1@0@2@@(415)@@
+415@37@nom-filler@3@1@0@2@@(10 73)@@
+73@37@indef-pl-n1_infl_rule@2@1@1@2@@(13)@@
+13@37@tre-n-neut@1@1@1@2@@(8)@@
+433@37@root@4@1@0@3@@(428)@@
+428@37@main@3@1@0@3@@(427)@@
+427@37@1np-extr@3@1@0@3@@(421)@@
+421@37@verbal-c@3@1@0@3@@(420 76)@@
+420@37@pop-nominal@3@1@0@2@@(414)@@
+414@37@nom-filler@3@1@0@2@@(10 72)@@
+72@37@indef-sg-noun-irule@2@1@1@2@@(13)@@
+7@37@token [ +FORM "^" +FROM "12" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@37@token [ +FORM "Tre" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Tre" ]@0@0@1@2@@@@
+9@37@token [ +FORM "bjeffer" +FROM "4" +TO "11" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@2@3@@@@
+561@38@root@4@1@0@4@@(560)@@
+560@38@main@3@1@0@4@@(559)@@
+559@38@1np-extr@3@1@0@4@@(558)@@
+558@38@verbal-c@3@1@0@4@@(557 99)@@
+557@38@pop-nominal@3@1@0@3@@(555)@@
+555@38@nominal@3@1@0@3@@(553 98)@@
+553@38@nom-filler@3@1@0@2@@(13 97)@@
+13@38@start-punct@1@1@0@1@@(9)@@
+97@38@genitive_infl_rule@2@1@1@2@@(15)@@
+15@38@browne-pn@1@1@1@2@@(10)@@
+98@38@indef-sg-noun-irule@2@1@2@3@@(30)@@
+30@38@hund-n-masc@1@1@2@3@@(11)@@
+99@38@pres_infl_rule@2@1@3@4@@(46)@@
+46@38@bjeffe_v@1@1@3@4@@(12)@@
+9@38@token [ +FORM "^" +FROM "21" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@38@token [ +FORM "Brownes" +FROM "0" +TO "7" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Brownes" ]@0@0@1@2@@@@
+11@38@token [ +FORM "hund" +FROM "8" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hund" ]@0@0@2@3@@@@
+12@38@token [ +FORM "bjeffer" +FROM "13" +TO "20" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@3@4@@@@
+398@39@root@4@1@0@3@@(397)@@
+397@39@main@3@1@0@3@@(396)@@
+396@39@1np-extr@3@1@0@3@@(395)@@
+395@39@verbal-c@3@1@0@3@@(394 79)@@
+394@39@pop-nominal@3@1@0@2@@(393)@@
+393@39@nom-filler@3@1@0@2@@(10 78)@@
+10@39@start-punct@1@1@0@1@@(7)@@
+78@39@genitive_infl_rule@2@1@1@2@@(12)@@
+12@39@browne-pn@1@1@1@2@@(8)@@
+79@39@pres_infl_rule@2@1@2@3@@(27)@@
+27@39@bjeffe_v@1@1@2@3@@(9)@@
+7@39@token [ +FORM "^" +FROM "16" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@39@token [ +FORM "Brownes" +FROM "0" +TO "7" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Brownes" ]@0@0@1@2@@@@
+9@39@token [ +FORM "bjeffer" +FROM "8" +TO "15" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@2@3@@@@
+15@40@token [ +FORM "^" +FROM "33" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@40@token [ +FORM "To" +FROM "0" +TO "2" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "To" ]@0@0@1@2@@@@
+17@40@token [ +FORM "hundre" +FROM "3" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hundre" ]@0@0@2@3@@@@
+18@40@token [ +FORM "og" +FROM "10" +TO "12" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@3@4@@@@
+19@40@token [ +FORM "tjue" +FROM "13" +TO "17" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "tjue" ]@0@0@4@5@@@@
+20@40@token [ +FORM "hunder" +FROM "18" +TO "24" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hunder" ]@0@0@5@6@@@@
+21@40@token [ +FORM "bjeffer" +FROM "25" +TO "32" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffer" ]@0@0@6@7@@@@
+717@41@root@4@1@0@5@@(716)@@
+716@41@main@3@1@0@5@@(715)@@
+715@41@pop-no-nominal@3@1@0@5@@(714)@@
+714@41@pop-nominal@3@1@0@5@@(712)@@
+712@41@arg2-emb-nom-non-su@3@1@0@5@@(710 110)@@
+710@41@mod-emb-vbl@3@1@0@4@@(707 39)@@
+707@41@arg2-extr-su@3@1@0@3@@(706)@@
+706@41@verbal-c@3@1@0@3@@(705 108)@@
+705@41@pop-nominal@3@1@0@2@@(704)@@
+704@41@nom-filler@3@1@0@2@@(16 18)@@
+16@41@start-punct@1@1@0@1@@(11)@@
+18@41@abrams-pn@1@1@1@2@@(12)@@
+108@41@pret-v1_infl_rule@2@1@2@3@@(29)@@
+29@41@ankomme_v@1@1@2@3@@(13)@@
+39@41@med_func@1@1@3@4@@(14)@@
+110@41@indef-sg-noun-irule@2@1@4@5@@(53)@@
+53@41@bil-n-masc@1@1@4@5@@(15)@@
+11@41@token [ +FORM "^" +FROM "21" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@41@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@41@token [ +FORM "ankom" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@2@3@@@@
+14@41@token [ +FORM "med" +FROM "13" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "med" ]@0@0@3@4@@@@
+15@41@token [ +FORM "bil" +FROM "17" +TO "20" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bil" ]@0@0@4@5@@@@
+845@42@root@4@1@0@6@@(844)@@
+844@42@main@3@1@0@6@@(843)@@
+843@42@1np-extr@3@1@0@6@@(842)@@
+842@42@verbal-c@3@1@0@6@@(834 98)@@(840)
+840@42@verbal-c@3@5@0@6@@(837 98)@@
+837@42@coord-vp@3@1@0@5@@(829 42)@@
+829@42@part@3@1@0@4@@(827 38)@@
+827@42@1np-extr@3@1@0@3@@(825)@@
+825@42@verbal-c@3@1@0@3@@(824 97)@@
+824@42@pop-nominal@3@1@0@2@@(823)@@
+823@42@nom-filler@3@1@0@2@@(19 21)@@
+19@42@start-punct@1@1@0@1@@(13)@@
+21@42@abrams-pn@1@1@1@2@@(14)@@
+97@42@pret-v1_infl_rule@2@1@2@3@@(33)@@
+33@42@drive_v@1@1@2@3@@(15)@@
+38@42@på_func@1@1@3@4@@(16)@@
+42@42@og-conj@1@1@4@5@@(17)@@
+98@42@pret-v1_infl_rule@2@1@5@6@@(45)@@
+45@42@bjeffe_v@1@1@5@6@@(18)@@
+834@42@coord-vp@3@1@0@5@@(832 42)@@
+832@42@pop-no-nominal@3@1@0@4@@(831)@@
+831@42@mod-emb-vbl@3@1@0@4@@(826 38)@@
+826@42@arg2-extr-su@3@1@0@3@@(825)@@
+13@42@token [ +FORM "^" +FROM "26" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@42@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@42@token [ +FORM "drev" +FROM "7" +TO "11" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "drev" ]@0@0@2@3@@@@
+16@42@token [ +FORM "på" +FROM "12" +TO "14" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "på" ]@0@0@3@4@@@@
+17@42@token [ +FORM "og" +FROM "15" +TO "17" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@4@5@@@@
+18@42@token [ +FORM "bjeffet" +FROM "18" +TO "25" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@5@6@@@@
+786@43@root@4@1@0@5@@(771)@@
+771@43@main@3@1@0@5@@(764)@@(775)
+775@43@main@3@5@0@5@@(774)@@
+774@43@arg2-extr-nom-non-su@3@1@0@5@@(761)@@
+761@43@part@3@1@0@5@@(757 65)@@
+757@43@pop-nominal@3@1@0@4@@(747)@@
+747@43@arg1-emb-nom@3@1@0@4@@(743 135)@@
+743@43@verbal-c@3@1@0@3@@(742 133)@@
+742@43@pop-nominal@3@1@0@2@@(741)@@
+741@43@nom-filler@3@1@0@2@@(16 18)@@
+16@43@start-punct@1@1@0@1@@(11)@@
+18@43@browne-pn@1@1@1@2@@(12)@@
+133@43@pret-v1_infl_rule@2@1@2@3@@(32)@@
+32@43@presse_v@1@1@2@3@@(13)@@
+135@43@def-comm-noun-m1-m2_infl_rule@2@1@3@4@@(45)@@
+45@43@katt-n-masc@1@1@3@4@@(14)@@
+65@43@inn_func@1@1@4@5@@(15)@@
+764@43@part@3@1@0@5@@(759 65)@@
+759@43@arg2-extr-nom-non-su@3@1@0@4@@(757)@@
+787@43@root@4@1@0@5@@(773)@@
+773@43@main@3@1@0@5@@(772)@@(779)
+779@43@main@3@5@0@5@@(778)@@
+778@43@arg2-extr-nom-non-su@3@1@0@5@@(777)@@
+777@43@pop-nominal@3@1@0@5@@(776)@@
+776@43@pop-no-nominal@3@1@0@5@@(758)@@
+758@43@mod-emb-nom@3@1@0@5@@(747 65)@@
+772@43@pop-no-nominal@3@1@0@5@@(763)@@
+763@43@mod-emb-vbl@3@1@0@5@@(759 65)@@
+788@43@root@4@1@0@5@@(780)@@
+780@43@main@3@1@0@5@@(755)@@
+755@43@part@3@1@0@5@@(751 65)@@
+751@43@pop-nominal@3@1@0@4@@(749)@@
+749@43@arg2-emb-nom-non-su@3@1@0@4@@(745 135)@@
+745@43@1np-extr@3@1@0@3@@(743)@@
+789@43@root@4@1@0@5@@(782)@@
+782@43@main@3@1@0@5@@(781)@@(785)
+785@43@main@3@5@0@5@@(784)@@
+784@43@pop-nominal@3@1@0@5@@(783)@@
+783@43@pop-no-nominal@3@1@0@5@@(752)@@
+752@43@mod-emb-nom@3@1@0@5@@(749 65)@@
+781@43@pop-no-nominal@3@1@0@5@@(754)@@
+754@43@mod-emb-vbl@3@1@0@5@@(751 65)@@
+11@43@token [ +FORM "^" +FROM "26" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@43@token [ +FORM "Browne" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@1@2@@@@
+13@43@token [ +FORM "presset" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "presset" ]@0@0@2@3@@@@
+14@43@token [ +FORM "katten" +FROM "15" +TO "21" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katten" ]@0@0@3@4@@@@
+15@43@token [ +FORM "inn" +FROM "22" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "inn" ]@0@0@4@5@@@@
+772@44@root@4@1@0@5@@(767)@@
+767@44@main@3@1@0@5@@(766)@@
+766@44@pop-no-nominal@3@1@0@5@@(765)@@
+765@44@pop-nominal@3@1@0@5@@(756)@@
+756@44@arg2-emb-nom-non-su@3@1@0@5@@(749 135)@@
+749@44@mod-emb-vbl@3@1@0@4@@(745 45)@@
+745@44@1np-extr@3@1@0@3@@(743)@@
+743@44@verbal-c@3@1@0@3@@(742 133)@@
+742@44@pop-nominal@3@1@0@2@@(741)@@
+741@44@nom-filler@3@1@0@2@@(16 18)@@
+16@44@start-punct@1@1@0@1@@(11)@@
+18@44@browne-pn@1@1@1@2@@(12)@@
+133@44@pret-v1_infl_rule@2@1@2@3@@(32)@@
+32@44@presse_v@1@1@2@3@@(13)@@
+45@44@inn_func@1@1@3@4@@(14)@@
+135@44@def-comm-noun-m1-m2_infl_rule@2@1@4@5@@(67)@@
+67@44@katt-n-masc@1@1@4@5@@(15)@@
+773@44@root@4@1@0@5@@(769)@@
+769@44@main@3@1@0@5@@(768)@@
+768@44@pop-nominal@3@1@0@5@@(754)@@
+754@44@arg2-emb-nom-non-su@3@1@0@5@@(750 135)@@
+750@44@part@3@1@0@4@@(745 45)@@
+11@44@token [ +FORM "^" +FROM "26" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@44@token [ +FORM "Browne" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@1@2@@@@
+13@44@token [ +FORM "presset" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "presset" ]@0@0@2@3@@@@
+14@44@token [ +FORM "inn" +FROM "15" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "inn" ]@0@0@3@4@@@@
+15@44@token [ +FORM "katten" +FROM "19" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katten" ]@0@0@4@5@@@@
+715@45@root@4@1@0@5@@(714)@@
+714@45@main@3@1@0@5@@(712)@@
+712@45@arg2-extr-su@3@1@0@5@@(711)@@
+711@45@verbal-c@3@1@0@5@@(710 103)@@
+710@45@pop-nominal@3@1@0@4@@(709)@@
+709@45@pop-no-nominal@3@1@0@4@@(708)@@
+708@45@pop-nominal@3@1@0@4@@(706)@@
+706@45@arg2-emb-nom-non-su@3@1@0@4@@(704 35)@@
+704@45@mod-emb-nom@3@1@0@3@@(701 32)@@
+701@45@nom-filler@3@1@0@2@@(16 102)@@
+16@45@start-punct@1@1@0@1@@(11)@@
+102@45@def-sg-noun-neut_infl_rule@2@1@1@2@@(18)@@
+18@45@bilde-n-neut@1@1@1@2@@(12)@@
+32@45@av_func@1@1@2@3@@(13)@@
+35@45@abrams-pn@1@1@3@4@@(14)@@
+103@45@pret-v1_infl_rule@2@1@4@5@@(46)@@
+46@45@ankomme_v@1@1@4@5@@(15)@@
+11@45@token [ +FORM "^" +FROM "23" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@45@token [ +FORM "Bildet" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Bildet" ]@0@0@1@2@@@@
+13@45@token [ +FORM "av" +FROM "7" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "av" ]@0@0@2@3@@@@
+14@45@token [ +FORM "Abrams" +FROM "10" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@3@4@@@@
+15@45@token [ +FORM "ankom" +FROM "17" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@4@5@@@@
+777@46@root@4@1@0@5@@(762)@@
+762@46@main@3@1@0@5@@(761)@@
+761@46@pop-no-nominal@3@1@0@5@@(754)@@
+754@46@mod-emb-vbl@3@1@0@5@@(750 123)@@
+750@46@arg2-extr-nom-non-su@3@1@0@4@@(749)@@
+749@46@pop-nominal@3@1@0@4@@(740)@@
+740@46@arg1-emb-nom@3@1@0@4@@(736 122)@@
+736@46@verbal-c@3@1@0@3@@(735 120)@@
+735@46@pop-nominal@3@1@0@2@@(734)@@
+734@46@nom-filler@3@1@0@2@@(16 18)@@
+16@46@start-punct@1@1@0@1@@(11)@@
+18@46@abrams-pn@1@1@1@2@@(12)@@
+120@46@pret-v1_infl_rule@2@1@2@3@@(29)@@
+29@46@tørke_v@1@1@2@3@@(13)@@
+122@46@def-sg-noun-neut_infl_rule@2@1@3@4@@(36)@@
+36@46@bord-n-neut@1@1@3@4@@(14)@@
+123@46@sg-neut-adj_infl_rule@2@1@4@5@@(47)@@
+47@46@ren-a@1@1@4@5@@(15)@@
+778@46@root@4@1@0@5@@(774)@@
+774@46@main@3@1@0@5@@(773)@@(769 767 776)
+769@46@main@3@5@0@5@@(768)@@
+768@46@arg2-extr-nom-non-su@3@1@0@5@@(764)@@
+764@46@pop-no-nominal@3@1@0@5@@(751)@@
+751@46@arg4-ap2@3@1@0@5@@(749 123)@@
+767@46@main@3@5@0@5@@(766)@@
+766@46@arg2-extr-nom-non-su@3@1@0@5@@(765)@@
+765@46@pop-nominal@3@1@0@5@@(751)@@
+776@46@main@3@5@0@5@@(772)@@
+772@46@pop-no-nominal@3@1@0@5@@(746)@@
+746@46@arg4-ap2@3@1@0@5@@(744 123)@@
+744@46@pop-nominal@3@1@0@4@@(741)@@
+741@46@arg2-emb-nom-non-su@3@1@0@4@@(738 122)@@
+738@46@1np-extr@3@1@0@3@@(736)@@
+773@46@pop-nominal@3@1@0@5@@(746)@@
+779@46@root@4@1@0@5@@(771)@@
+771@46@main@3@1@0@5@@(770)@@
+770@46@pop-no-nominal@3@1@0@5@@(747)@@
+747@46@mod-emb-vbl@3@1@0@5@@(744 123)@@
+11@46@token [ +FORM "^" +FROM "26" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@46@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@46@token [ +FORM "tørket" +FROM "7" +TO "13" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "tørket" ]@0@0@2@3@@@@
+14@46@token [ +FORM "bordet" +FROM "14" +TO "20" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bordet" ]@0@0@3@4@@@@
+15@46@token [ +FORM "rent" +FROM "21" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "rent" ]@0@0@4@5@@@@
+13@47@token [ +FORM "^" +FROM "32" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@47@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@47@token [ +FORM "plasserte" +FROM "7" +TO "16" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "plasserte" ]@0@0@2@3@@@@
+16@47@token [ +FORM "Browne" +FROM "17" +TO "23" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+17@47@token [ +FORM "i" +FROM "24" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "i" ]@0@0@4@5@@@@
+18@47@token [ +FORM "haven" +FROM "26" +TO "31" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "haven" ]@0@0@5@6@@@@
+1465@48@root@4@1@0@9@@(1460)@@
+1460@48@main@3@1@0@9@@(1459)@@
+1459@48@pop-no-nominal@3@1@0@9@@(1458)@@(1456)
+1456@48@pop-no-nominal@3@5@0@9@@(1435)@@
+1435@48@verbal@3@1@0@9@@(1434 164)@@
+1434@48@pop-nominal@3@1@0@8@@(1398)@@
+1398@48@arg2-emb-nom-su@3@1@0@8@@(1379 88)@@
+1379@48@cadv-embedded@3@1@0@7@@(1375 83)@@
+1375@48@pop-no-nominal@3@1@0@6@@(1355)@@
+1355@48@verbal@3@1@0@6@@(1354 163)@@
+1354@48@arg1-unexpr@3@1@0@5@@(1332)@@
+1332@48@binary-4ip1@3@1@0@5@@(1317 77)@@
+1317@48@prepsel@3@1@0@4@@(1313 68)@@
+1313@48@1np-extr@3@1@0@3@@(1311)@@
+1311@48@verbal-c@3@1@0@3@@(1310 162)@@
+1310@48@pop-nominal@3@1@0@2@@(1308)@@
+1308@48@nom-filler@3@1@0@2@@(28 161)@@
+28@48@start-punct@1@1@0@1@@(19)@@
+161@48@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(30)@@
+30@48@hund-n-masc@1@1@1@2@@(20)@@
+162@48@pres_infl_rule@2@1@2@3@@(55)@@
+55@48@komme_v@1@1@2@3@@(21)@@
+68@48@til_func@1@1@3@4@@(22)@@
+77@48@inf-comp@1@1@4@5@@(23)@@
+163@48@verb-infin_infl_rule@2@1@5@6@@(80)@@
+80@48@bjeffe_v@1@1@5@6@@(24)@@
+83@48@hvis_func@1@1@6@7@@(25)@@
+88@48@browne-pn@1@1@7@8@@(26)@@
+164@48@pres_infl_rule@2@1@8@9@@(102)@@
+102@48@ankomme_v@1@1@8@9@@(27)@@
+1458@48@pop-no-nominal@3@1@0@9@@(1430)@@
+1430@48@verbal@3@1@0@9@@(1429 164)@@
+1429@48@pop-nominal@3@1@0@8@@(1401)@@
+1401@48@arg2-emb-nom-su@3@1@0@8@@(1376 88)@@
+1376@48@cadv-embedded@3@1@0@7@@(1355 83)@@
+19@48@token [ +FORM "^" +FROM "48" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+20@48@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+21@48@token [ +FORM "kommer" +FROM "7" +TO "13" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kommer" ]@0@0@2@3@@@@
+22@48@token [ +FORM "til" +FROM "14" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "til" ]@0@0@3@4@@@@
+23@48@token [ +FORM "å" +FROM "18" +TO "19" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "å" ]@0@0@4@5@@@@
+24@48@token [ +FORM "bjeffe" +FROM "20" +TO "26" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@5@6@@@@
+25@48@token [ +FORM "hvis" +FROM "27" +TO "31" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hvis" ]@0@0@6@7@@@@
+26@48@token [ +FORM "Browne" +FROM "32" +TO "38" +ID diff-list [ LIST cons [ FIRST "7" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@7@8@@@@
+27@48@token [ +FORM "ankommer" +FROM "39" +TO "47" +ID diff-list [ LIST cons [ FIRST "8" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankommer" ]@0@0@8@9@@@@
+708@49@root@4@1@0@5@@(707)@@
+707@49@main@3@1@0@5@@(705)@@
+705@49@arg2-extr-su@3@1@0@5@@(704)@@
+704@49@verbal-c@3@1@0@5@@(703 103)@@
+703@49@pop-nominal@3@1@0@4@@(702)@@
+702@49@conj-emb@3@1@0@4@@(701 33)@@
+701@49@conj-end-sat@3@1@0@3@@(699 30)@@
+699@49@nom-filler@3@1@0@2@@(16 18)@@
+16@49@start-punct@1@1@0@1@@(11)@@
+18@49@abrams-pn@1@1@1@2@@(12)@@
+30@49@og-conj@1@1@2@3@@(13)@@
+33@49@browne-pn@1@1@3@4@@(14)@@
+103@49@pret-v1_infl_rule@2@1@4@5@@(47)@@
+47@49@ankomme_v@1@1@4@5@@(15)@@
+11@49@token [ +FORM "^" +FROM "23" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@49@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@49@token [ +FORM "og" +FROM "7" +TO "9" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@2@3@@@@
+14@49@token [ +FORM "Browne" +FROM "10" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+15@49@token [ +FORM "ankom" +FROM "17" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@4@5@@@@
+13@50@token [ +FORM "^" +FROM "31" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@50@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@50@token [ +FORM "Browne" +FROM "8" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@2@3@@@@
+16@50@token [ +FORM "og" +FROM "15" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "og" ]@0@0@3@4@@@@
+17@50@token [ +FORM "hunden" +FROM "18" +TO "24" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "hunden" ]@0@0@4@5@@@@
+18@50@token [ +FORM "ankom" +FROM "25" +TO "30" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@5@6@@@@
+13@51@token [ +FORM "^" +FROM "32" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@51@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+15@51@token [ +FORM "bjeffet" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+16@51@token [ +FORM "gjorde" +FROM "16" +TO "22" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gjorde" ]@0@0@3@4@@@@
+17@51@token [ +FORM "den" +FROM "23" +TO "26" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "den" ]@0@0@4@5@@@@
+18@51@token [ +FORM "ikke" +FROM "27" +TO "31" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ikke" ]@0@0@5@6@@@@
+927@52@root@4@1@0@6@@(918)@@
+918@52@main@3@1@0@6@@(917)@@(926)
+926@52@main@3@5@0@6@@(925)@@
+925@52@pop-no-nominal@3@1@0@6@@(905)@@
+905@52@verbal@3@1@0@6@@(904 107)@@
+904@52@arg1-unexpr@3@1@0@5@@(894)@@
+894@52@binary-2ip1@3@1@0@5@@(889 51)@@
+889@52@arg3-extr-non-su@3@1@0@4@@(886)@@
+886@52@pop-nominal@3@1@0@4@@(868)@@
+868@52@arg1-emb-nom@3@1@0@4@@(862 37)@@
+862@52@verbal-c@3@1@0@3@@(860 104)@@(861)
+861@52@verbal-c@3@5@0@3@@(860 103)@@
+860@52@pop-nominal@3@1@0@2@@(859)@@
+859@52@nom-filler@3@1@0@2@@(19 21)@@
+19@52@start-punct@1@1@0@1@@(13)@@
+21@52@abrams-pn@1@1@1@2@@(14)@@
+103@52@pret-v1_infl_rule@2@1@2@3@@(32)@@
+32@52@love_v@1@1@2@3@@(15)@@
+104@52@pret-v2_infl_rule@2@1@2@3@@(32)@@
+37@52@browne-pn@1@1@3@4@@(16)@@
+51@52@inf-comp@1@1@4@5@@(17)@@
+107@52@verb-infin_infl_rule@2@1@5@6@@(54)@@
+54@52@bjeffe_v@1@1@5@6@@(18)@@
+917@52@pop-no-nominal@3@1@0@6@@(915)@@
+915@52@verbal@3@1@0@6@@(914 107)@@
+914@52@arg1-unexpr@3@1@0@5@@(885)@@
+885@52@binary-2ip1@3@1@0@5@@(883 51)@@
+883@52@pop-nominal@3@1@0@4@@(871)@@
+871@52@arg3-emb-non-su@3@1@0@4@@(865 37)@@
+865@52@1np-extr@3@1@0@3@@(862)@@
+928@52@root@4@1@0@6@@(924)@@
+924@52@main@3@1@0@6@@(923)@@
+923@52@pop-no-nominal@3@1@0@6@@(919)@@(921)
+921@52@pop-no-nominal@3@5@0@6@@(920)@@
+920@52@arg4-extr-np@3@1@0@6@@(910)@@
+910@52@verbal@3@1@0@6@@(909 107)@@
+909@52@arg1-unexpr@3@1@0@5@@(891)@@
+891@52@binary-2ip1@3@1@0@5@@(886 51)@@
+919@52@arg2-extr-inq-non-su@3@1@0@6@@(910)@@
+13@52@token [ +FORM "^" +FROM "29" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@52@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@52@token [ +FORM "lovte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "lovte" ]@0@0@2@3@@@@
+16@52@token [ +FORM "Browne" +FROM "13" +TO "19" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+17@52@token [ +FORM "å" +FROM "20" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "å" ]@0@0@4@5@@@@
+18@52@token [ +FORM "bjeffe" +FROM "22" +TO "28" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@5@6@@@@
+712@53@root@4@1@0@5@@(711)@@
+711@53@main@3@1@0@5@@(710)@@
+710@53@pop-no-nominal@3@1@0@5@@(708)@@
+708@53@verbal@3@1@0@5@@(707 99)@@
+707@53@arg1-unexpr@3@1@0@4@@(704)@@
+704@53@binary-2ip1@3@1@0@4@@(702 44)@@
+702@53@1np-extr@3@1@0@3@@(700)@@
+700@53@verbal-c@3@1@0@3@@(699 97)@@
+699@53@pop-nominal@3@1@0@2@@(698)@@
+698@53@nom-filler@3@1@0@2@@(16 18)@@
+16@53@start-punct@1@1@0@1@@(11)@@
+18@53@abrams-pn@1@1@1@2@@(12)@@
+97@53@pres_infl_rule@2@1@2@3@@(29)@@
+29@53@synes_v@1@1@2@3@@(13)@@
+44@53@inf-comp@1@1@3@4@@(14)@@
+99@53@verb-infin_infl_rule@2@1@4@5@@(47)@@
+47@53@bjeffe_v@1@1@4@5@@(15)@@
+11@53@token [ +FORM "^" +FROM "22" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@53@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@53@token [ +FORM "synes" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "synes" ]@0@0@2@3@@@@
+14@53@token [ +FORM "å" +FROM "13" +TO "14" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "å" ]@0@0@3@4@@@@
+15@53@token [ +FORM "bjeffe" +FROM "15" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@4@5@@@@
+1078@54@root@4@1@0@7@@(1074)@@
+1074@54@main@3@1@0@7@@(1073)@@
+1073@54@pop-no-nominal@3@1@0@7@@(1066)@@
+1066@54@verbal@3@1@0@7@@(1065 127)@@
+1065@54@pop-nominal@3@1@0@6@@(1054)@@
+1054@54@arg1-emb-nom@3@1@0@6@@(1045 59)@@
+1045@54@binary-compl2@3@1@0@5@@(1043 52)@@
+1043@54@pop-nominal@3@1@0@4@@(1021)@@
+1021@54@arg3-emb-non-su@3@1@0@4@@(1018 41)@@
+1018@54@extr-pres@3@1@0@3@@(1017)@@
+1017@54@verbal-c@3@1@0@3@@(1012 125)@@
+1012@54@expl-filler@3@1@0@2@@(22 24)@@
+22@54@start-punct@1@1@0@1@@(15)@@
+24@54@det-expl@1@1@1@2@@(16)@@
+125@54@pret-v1_infl_rule@2@1@2@3@@(34)@@
+34@54@plage_v@1@1@2@3@@(17)@@
+41@54@abrams-pn@1@1@3@4@@(18)@@
+52@54@at-comp@1@1@4@5@@(19)@@
+59@54@browne-pn@1@1@5@6@@(20)@@
+127@54@pret-v1_infl_rule@2@1@6@7@@(73)@@
+73@54@bjeffe_v@1@1@6@7@@(21)@@
+1079@54@root@4@1@0@7@@(1077)@@
+1077@54@main@3@1@0@7@@(1076)@@
+1076@54@pop-no-nominal@3@1@0@7@@(1075)@@
+1075@54@arg2-extr-inq-non-su@3@1@0@7@@(1062)@@
+1062@54@verbal@3@1@0@7@@(1061 127)@@
+1061@54@pop-nominal@3@1@0@6@@(1060)@@
+1060@54@arg1-emb-nom@3@1@0@6@@(1036 59)@@
+1036@54@binary-compl2@3@1@0@5@@(1034 52)@@
+1034@54@pop-nominal@3@1@0@4@@(1026)@@
+1026@54@arg3-emb-su@3@1@0@4@@(1016 41)@@
+1016@54@verbal-c@3@1@0@3@@(1015 125)@@
+1015@54@pop-nominal@3@1@0@2@@(1013)@@
+1013@54@nom-filler@3@1@0@2@@(22 25)@@
+25@54@det_q@1@1@1@2@@(16)@@
+15@54@token [ +FORM "^" +FROM "36" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@54@token [ +FORM "Det" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Det" ]@0@0@1@2@@@@
+17@54@token [ +FORM "plaget" +FROM "4" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "plaget" ]@0@0@2@3@@@@
+18@54@token [ +FORM "Abrams" +FROM "11" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@3@4@@@@
+19@54@token [ +FORM "at" +FROM "18" +TO "20" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@4@5@@@@
+20@54@token [ +FORM "Browne" +FROM "21" +TO "27" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@5@6@@@@
+21@54@token [ +FORM "bjeffet" +FROM "28" +TO "35" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@6@7@@@@
+1025@55@root@4@1@0@7@@(1024)@@
+1024@55@main@3@1@0@7@@(1023)@@
+1023@55@pop-no-nominal@3@1@0@7@@(1021)@@
+1021@55@verbal@3@1@0@7@@(1020 127)@@
+1020@55@arg1-unexpr@3@1@0@6@@(1016)@@
+1016@55@binary-2ip4@3@1@0@6@@(1015 74)@@
+1015@55@pop-nominal@3@1@0@5@@(1007)@@
+1007@55@arg4-emb-sel-np@3@1@0@5@@(1003 60)@@
+1003@55@prepsel@3@1@0@4@@(1001 51)@@
+1001@55@1np-extr@3@1@0@3@@(998)@@
+998@55@verbal-c@3@1@0@3@@(997 126)@@
+997@55@pop-nominal@3@1@0@2@@(996)@@
+996@55@nom-filler@3@1@0@2@@(22 24)@@
+22@55@start-punct@1@1@0@1@@(15)@@
+24@55@abrams-pn@1@1@1@2@@(16)@@
+126@55@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@55@overlate_v@1@1@2@3@@(17)@@
+51@55@til_func@1@1@3@4@@(18)@@
+60@55@browne-pn@1@1@4@5@@(19)@@
+74@55@inf-comp@1@1@5@6@@(20)@@
+127@55@verb-infin_infl_rule@2@1@6@7@@(77)@@
+77@55@bjeffe_v@1@1@6@7@@(21)@@
+15@55@token [ +FORM "^" +FROM "35" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@55@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+17@55@token [ +FORM "overlot" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "overlot" ]@0@0@2@3@@@@
+18@55@token [ +FORM "til" +FROM "15" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "til" ]@0@0@3@4@@@@
+19@55@token [ +FORM "Browne" +FROM "19" +TO "25" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@4@5@@@@
+20@55@token [ +FORM "å" +FROM "26" +TO "27" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "å" ]@0@0@5@6@@@@
+21@55@token [ +FORM "bjeffe" +FROM "28" +TO "34" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@6@7@@@@
+989@56@root@4@1@0@6@@(963)@@
+963@56@main@3@1@0@6@@(962)@@(966 971 977)
+966@56@main@3@5@0@6@@(965)@@
+965@56@pop-no-nominal@3@1@0@6@@(964)@@
+964@56@pop-nominal@3@1@0@6@@(934)@@
+934@56@arg2-emb-adj-non-su@3@1@0@6@@(889 119)@@
+889@56@mod-emb-vbl@3@1@0@5@@(884 52)@@
+884@56@pop-nominal@3@1@0@4@@(869)@@
+869@56@arg2-emb-nom-non-su@3@1@0@4@@(864 38)@@
+864@56@1np-extr@3@1@0@3@@(861)@@
+861@56@verbal-c@3@1@0@3@@(860 118)@@
+860@56@pop-nominal@3@1@0@2@@(859)@@
+859@56@nom-filler@3@1@0@2@@(19 21)@@
+19@56@start-punct@1@1@0@1@@(13)@@
+21@56@abrams-pn@1@1@1@2@@(14)@@
+118@56@pres_infl_rule@2@1@2@3@@(32)@@
+32@56@slå_v@1@1@2@3@@(15)@@
+38@56@browne-pn@1@1@3@4@@(16)@@
+52@56@som_func@1@1@4@5@@(17)@@
+119@56@sg-comm-adj-irule@2@1@5@6@@(63)@@
+63@56@gammel-a@1@1@5@6@@(18)@@
+971@56@main@3@5@0@6@@(970)@@
+970@56@arg2-extr-nom-non-su@3@1@0@6@@(969)@@
+969@56@pop-nominal@3@1@0@6@@(968)@@
+968@56@pop-no-nominal@3@1@0@6@@(967)@@
+967@56@pop-nominal@3@1@0@6@@(933)@@
+933@56@arg2-emb-adj-non-su@3@1@0@6@@(891 119)@@
+891@56@mod-emb-nom@3@1@0@5@@(867 52)@@
+867@56@arg1-emb-nom@3@1@0@4@@(861 38)@@
+977@56@main@3@5@0@6@@(976)@@
+976@56@pop-no-nominal@3@1@0@6@@(975)@@
+975@56@pop-nominal@3@1@0@6@@(924)@@
+924@56@arg2-emb-adj-non-su@3@1@0@6@@(899 119)@@
+899@56@mod-emb-vbl@3@1@0@5@@(893 52)@@
+893@56@arg2-extr-nom-non-su@3@1@0@4@@(890)@@
+890@56@pop-nominal@3@1@0@4@@(867)@@
+962@56@pop-nominal@3@1@0@6@@(961)@@
+961@56@pop-no-nominal@3@1@0@6@@(960)@@
+960@56@pop-nominal@3@1@0@6@@(938)@@
+938@56@arg2-emb-adj-non-su@3@1@0@6@@(885 119)@@
+885@56@mod-emb-nom@3@1@0@5@@(869 52)@@
+13@56@token [ +FORM "^" +FROM "30" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@56@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+15@56@token [ +FORM "slår" +FROM "7" +TO "11" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "slår" ]@0@0@2@3@@@@
+16@56@token [ +FORM "Browne" +FROM "12" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+17@56@token [ +FORM "som" +FROM "19" +TO "22" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "som" ]@0@0@4@5@@@@
+18@56@token [ +FORM "gammel" +FROM "23" +TO "29" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gammel" ]@0@0@5@6@@@@
+1369@57@root@4@1@0@8@@(1355)@@
+1355@57@main@3@1@0@8@@(1354)@@
+1354@57@pop-nominal@3@1@0@8@@(1353)@@
+1353@57@pop-no-nominal@3@1@0@8@@(1334)@@
+1334@57@verbal@3@1@0@8@@(1281 167)@@
+1281@57@aux@3@1@0@7@@(1280 163)@@
+1280@57@pop-nominal@3@1@0@6@@(1246)@@
+1246@57@arg1-emb-nom@3@1@0@6@@(1217 71)@@
+1217@57@binary-compl2-noun@3@1@0@5@@(1202 64)@@
+1202@57@arg2-emb-nom-non-su@3@1@0@4@@(1198 162)@@
+1198@57@1np-extr@3@1@0@3@@(1196)@@
+1196@57@verbal-c@3@1@0@3@@(1195 160)@@
+1195@57@pop-nominal@3@1@0@2@@(1194)@@
+1194@57@nom-filler@3@1@0@2@@(25 27)@@
+25@57@start-punct@1@1@0@1@@(17)@@
+27@57@abrams-pn@1@1@1@2@@(18)@@
+160@57@pret-v2_infl_rule@2@1@2@3@@(39)@@
+39@57@like_v@1@1@2@3@@(19)@@
+162@57@def-comm-noun-m1-m2_infl_rule@2@1@3@4@@(46)@@
+46@57@ide-n-masc@1@1@3@4@@(20)@@
+64@57@at-comp@1@1@4@5@@(21)@@
+71@57@browne-pn@1@1@5@6@@(22)@@
+163@57@pret-v1_infl_rule@2@1@6@7@@(85)@@
+85@57@kunne-aux2@1@1@6@7@@(23)@@
+167@57@verb-infin_infl_rule@2@1@7@8@@(111)@@
+111@57@bjeffe_v@1@1@7@8@@(24)@@
+1370@57@root@4@1@0@8@@(1360)@@
+1360@57@main@3@1@0@8@@(1359)@@
+1359@57@arg2-extr-nom-non-su@3@1@0@8@@(1357)@@
+1357@57@pop-nominal@3@1@0@8@@(1356)@@
+1356@57@pop-no-nominal@3@1@0@8@@(1329)@@
+1329@57@verbal@3@1@0@8@@(1289 167)@@
+1289@57@aux@3@1@0@7@@(1288 163)@@
+1288@57@pop-nominal@3@1@0@6@@(1243)@@
+1243@57@arg1-emb-nom@3@1@0@6@@(1221 71)@@
+1221@57@binary-compl2-noun@3@1@0@5@@(1200 64)@@
+1200@57@arg1-emb-nom@3@1@0@4@@(1196 162)@@
+1371@57@root@4@1@0@8@@(1366)@@
+1366@57@main@3@1@0@8@@(1365)@@
+1365@57@pop-no-nominal@3@1@0@8@@(1364)@@
+1364@57@arg2-extr-inq-non-su@3@1@0@8@@(1319)@@
+1319@57@verbal@3@1@0@8@@(1297 167)@@
+1297@57@aux@3@1@0@7@@(1296 163)@@
+1296@57@pop-nominal@3@1@0@6@@(1240)@@
+1240@57@arg1-emb-nom@3@1@0@6@@(1224 71)@@
+1224@57@binary-compl2@3@1@0@5@@(1220 64)@@
+1220@57@pop-nominal@3@1@0@4@@(1200)@@
+17@57@token [ +FORM "^" +FROM "42" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+18@57@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+19@57@token [ +FORM "likte" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "likte" ]@0@0@2@3@@@@
+20@57@token [ +FORM "ideen" +FROM "13" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ideen" ]@0@0@3@4@@@@
+21@57@token [ +FORM "at" +FROM "19" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@4@5@@@@
+22@57@token [ +FORM "Browne" +FROM "22" +TO "28" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@5@6@@@@
+23@57@token [ +FORM "kunne" +FROM "29" +TO "34" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kunne" ]@0@0@6@7@@@@
+24@57@token [ +FORM "bjeffe" +FROM "35" +TO "41" +ID diff-list [ LIST cons [ FIRST "7" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffe" ]@0@0@7@8@@@@
+1125@58@root@4@1@0@7@@(1105)@@
+1105@58@main@3@1@0@7@@(1104)@@
+1104@58@pop-no-nominal@3@1@0@7@@(1103)@@(1120 1122 1124)
+1120@58@pop-no-nominal@3@5@0@7@@(1119)@@
+1119@58@pop-nominal@3@1@0@7@@(1051)@@
+1051@58@arg2-emb-nom-non-su@3@1@0@7@@(1047 118)@@
+1047@58@mod-emb-vbl@3@1@0@6@@(1044 51)@@
+1044@58@pop-no-nominal@3@1@0@5@@(1042)@@
+1042@58@pop-nominal@3@1@0@5@@(1031)@@
+1031@58@arg2-emb-nom-non-su@3@1@0@5@@(1029 48)@@
+1029@58@mod-emb-vbl@3@1@0@4@@(1026 41)@@
+1026@58@1np-extr@3@1@0@3@@(1025)@@
+1025@58@verbal-c@3@1@0@3@@(1024 115)@@
+1024@58@pop-nominal@3@1@0@2@@(1023)@@
+1023@58@nom-filler@3@1@0@2@@(22 24)@@
+22@58@start-punct@1@1@0@1@@(15)@@
+24@58@abrams-pn@1@1@1@2@@(16)@@
+115@58@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@58@bjeffe_v@1@1@2@3@@(17)@@
+41@58@fra_func@1@1@3@4@@(18)@@
+48@58@ti-card@1@1@4@5@@(19)@@
+51@58@til_func@1@1@5@6@@(20)@@
+118@58@indef-pl-n1_infl_rule@2@1@6@7@@(61)@@
+61@58@tre-n-neut@1@1@6@7@@(21)@@
+1122@58@pop-no-nominal@3@5@0@7@@(1121)@@
+1121@58@pop-nominal@3@1@0@7@@(1050)@@
+1050@58@arg2-emb-nom-non-su@3@1@0@7@@(1047 117)@@
+117@58@indef-sg-noun-irule@2@1@6@7@@(61)@@
+1124@58@pop-no-nominal@3@5@0@7@@(1123)@@
+1123@58@pop-nominal@3@1@0@7@@(1049)@@
+1049@58@arg2-emb-nom-non-su@3@1@0@7@@(1047 60)@@
+60@58@tre-card@1@1@6@7@@(21)@@
+1103@58@pop-nominal@3@1@0@7@@(1102)@@
+1102@58@pop-no-nominal@3@1@0@7@@(1101)@@(1107 1109)
+1107@58@pop-no-nominal@3@5@0@7@@(1106)@@
+1106@58@pop-nominal@3@1@0@7@@(1061)@@
+1061@58@arg2-emb-nom-non-su@3@1@0@7@@(1043 117)@@
+1043@58@mod-emb-nom@3@1@0@6@@(1031 51)@@
+1109@58@pop-no-nominal@3@5@0@7@@(1108)@@
+1108@58@pop-nominal@3@1@0@7@@(1060)@@
+1060@58@arg2-emb-nom-non-su@3@1@0@7@@(1043 60)@@
+1101@58@pop-nominal@3@1@0@7@@(1062)@@
+1062@58@arg2-emb-nom-non-su@3@1@0@7@@(1043 118)@@
+15@58@token [ +FORM "^" +FROM "30" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@58@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+17@58@token [ +FORM "bjeffet" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+18@58@token [ +FORM "fra" +FROM "15" +TO "18" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "fra" ]@0@0@3@4@@@@
+19@58@token [ +FORM "ti" +FROM "19" +TO "21" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ti" ]@0@0@4@5@@@@
+20@58@token [ +FORM "til" +FROM "22" +TO "25" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "til" ]@0@0@5@6@@@@
+21@58@token [ +FORM "tre" +FROM "26" +TO "29" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "tre" ]@0@0@6@7@@@@
+820@59@root@4@1@0@5@@(815)@@
+815@59@main@3@1@0@5@@(814)@@
+814@59@pop-nominal@3@1@0@5@@(805)@@
+805@59@arg2-emb-adj-non-su@3@1@0@5@@(748 113)@@
+748@59@deg-pos@3@1@0@4@@(740 42)@@
+740@59@1np-extr@3@1@0@3@@(738)@@
+738@59@verbal-c@3@1@0@3@@(735 110)@@
+735@59@pop-nominal@3@1@0@2@@(734)@@
+734@59@nom-filler@3@1@0@2@@(16 18)@@
+16@59@start-punct@1@1@0@1@@(11)@@
+18@59@abrams-pn@1@1@1@2@@(12)@@
+110@59@pret-v2_infl_rule@2@1@2@3@@(31)@@
+31@59@være_v@1@1@2@3@@(13)@@
+42@59@meget-func@1@1@3@4@@(14)@@
+113@59@sg-comm-adj-irule@2@1@4@5@@(53)@@
+53@59@gammel-a@1@1@4@5@@(15)@@
+821@59@root@4@1@0@5@@(818)@@
+818@59@main@3@1@0@5@@(817)@@(819)
+819@59@main@3@5@0@5@@(816)@@
+816@59@pop-no-nominal@3@1@0@5@@(804)@@
+804@59@arg4-ap1@3@1@0@5@@(748 113)@@
+817@59@pop-nominal@3@1@0@5@@(804)@@
+11@59@token [ +FORM "^" +FROM "24" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@59@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@59@token [ +FORM "var" +FROM "7" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "var" ]@0@0@2@3@@@@
+14@59@token [ +FORM "meget" +FROM "11" +TO "16" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "meget" ]@0@0@3@4@@@@
+15@59@token [ +FORM "gammel" +FROM "17" +TO "23" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "gammel" ]@0@0@4@5@@@@
+751@60@root@4@1@0@5@@(745)@@
+745@60@main@3@1@0@5@@(744)@@
+744@60@pop-no-nominal@3@1@0@5@@(743)@@
+743@60@mod-emb-vbl@3@1@0@5@@(740 103)@@
+740@60@arg2-extr-inq-non-su@3@1@0@4@@(739)@@
+739@60@pop-nominal@3@1@0@4@@(728)@@
+728@60@arg1-emb-nom@3@1@0@4@@(723 102)@@
+723@60@verbal-c@3@1@0@3@@(722 99)@@
+722@60@pop-nominal@3@1@0@2@@(721)@@
+721@60@nom-filler@3@1@0@2@@(16 18)@@
+16@60@start-punct@1@1@0@1@@(11)@@
+18@60@abrams-pn@1@1@1@2@@(12)@@
+99@60@pret-v1_infl_rule@2@1@2@3@@(29)@@
+29@60@bjeffe_v@1@1@2@3@@(13)@@
+102@60@indef-pl-m1-noun_infl_rule@2@1@3@4@@(36)@@
+36@60@meget-n-masc@1@1@3@4@@(14)@@
+103@60@sg-neut-adj_infl_rule@2@1@4@5@@(46)@@
+46@60@svak_a@1@1@4@5@@(15)@@
+752@60@root@4@1@0@5@@(750)@@
+750@60@main@3@1@0@5@@(749)@@
+749@60@pop-no-nominal@3@1@0@5@@(736)@@
+736@60@mod-emb-vbl@3@1@0@5@@(734 103)@@(737)
+737@60@mod-emb-vbl@3@5@0@5@@(732 103)@@
+732@60@deg-pos@3@1@0@4@@(724 35)@@
+724@60@1np-extr@3@1@0@3@@(723)@@
+35@60@meget-func@1@1@3@4@@(14)@@
+734@60@pop-no-nominal@3@1@0@4@@(733)@@
+733@60@mod-emb-vbl@3@1@0@4@@(724 35)@@
+11@60@token [ +FORM "^" +FROM "27" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@60@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+13@60@token [ +FORM "bjeffet" +FROM "7" +TO "14" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffet" ]@0@0@2@3@@@@
+14@60@token [ +FORM "meget" +FROM "15" +TO "20" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "meget" ]@0@0@3@4@@@@
+15@60@token [ +FORM "svakt" +FROM "21" +TO "26" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "svakt" ]@0@0@4@5@@@@
+11@61@token [ +FORM "^" +FROM "34" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@61@token [ +FORM "Brownes" +FROM "0" +TO "7" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Brownes" ]@0@0@1@2@@@@
+13@61@token [ +FORM "kattejaging" +FROM "8" +TO "19" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kattejaging" ]@0@0@2@3@@@@
+14@61@token [ +FORM "plaget" +FROM "20" +TO "26" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "plaget" ]@0@0@3@4@@@@
+15@61@token [ +FORM "Abrams" +FROM "27" +TO "33" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@4@5@@@@
+1257@62@root@4@1@0@8@@(1255)@@
+1255@62@main@3@1@0@8@@(1254)@@
+1254@62@pop-no-nominal@3@1@0@8@@(1253)@@
+1253@62@pop-nominal@3@1@0@8@@(1246)@@
+1246@62@arg2-emb-nom-non-su@3@1@0@8@@(1235 143)@@
+1235@62@verbal@3@1@0@7@@(1234 141)@@
+1234@62@pop-nominal@3@1@0@6@@(1222)@@
+1222@62@arg1-emb-nom@3@1@0@6@@(1213 65)@@
+1213@62@binary-compl2@3@1@0@5@@(1211 58)@@
+1211@62@pop-nominal@3@1@0@4@@(1189)@@
+1189@62@arg3-emb-non-su@3@1@0@4@@(1186 44)@@
+1186@62@extr-pres@3@1@0@3@@(1185)@@
+1185@62@verbal-c@3@1@0@3@@(1180 139)@@
+1180@62@expl-filler@3@1@0@2@@(25 27)@@
+25@62@start-punct@1@1@0@1@@(17)@@
+27@62@det-expl@1@1@1@2@@(18)@@
+139@62@pret-v1_infl_rule@2@1@2@3@@(37)@@
+37@62@plage_v@1@1@2@3@@(19)@@
+44@62@browne-pn@1@1@3@4@@(20)@@
+58@62@at-comp@1@1@4@5@@(21)@@
+65@62@abrams-pn@1@1@5@6@@(22)@@
+141@62@pret-v1_infl_rule@2@1@6@7@@(76)@@
+76@62@jage_v@1@1@6@7@@(23)@@
+143@62@indef-pl-m1-noun_infl_rule@2@1@7@8@@(82)@@
+82@62@katt-n-masc@1@1@7@8@@(24)@@
+17@62@token [ +FORM "^" +FROM "41" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+18@62@token [ +FORM "Det" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Det" ]@0@0@1@2@@@@
+19@62@token [ +FORM "plaget" +FROM "4" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "plaget" ]@0@0@2@3@@@@
+20@62@token [ +FORM "Browne" +FROM "11" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@3@4@@@@
+21@62@token [ +FORM "at" +FROM "18" +TO "20" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "at" ]@0@0@4@5@@@@
+22@62@token [ +FORM "Abrams" +FROM "21" +TO "27" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@5@6@@@@
+23@62@token [ +FORM "jaget" +FROM "28" +TO "33" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@6@7@@@@
+24@62@token [ +FORM "katter" +FROM "34" +TO "40" +ID diff-list [ LIST cons [ FIRST "7" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katter" ]@0@0@7@8@@@@
+9@63@token [ +FORM "^" +FROM "16" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@63@token [ +FORM "Tredje" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Tredje" ]@0@0@1@2@@@@
+11@63@token [ +FORM "juni" +FROM "7" +TO "11" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "juni" ]@0@0@2@3@@@@
+12@63@token [ +FORM "kom" +FROM "12" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kom" ]@0@0@3@4@@@@
+1065@64@root@4@1@0@7@@(1051)@@
+1051@64@main@3@1@0@7@@(1050)@@(1056)
+1056@64@main@3@5@0@7@@(1055)@@
+1055@64@arg2-extr-nom-non-su@3@1@0@7@@(1054)@@
+1054@64@pop-nominal@3@1@0@7@@(1053)@@
+1053@64@pop-no-nominal@3@1@0@7@@(1052)@@
+1052@64@pop-nominal@3@1@0@7@@(1041)@@
+1041@64@arg2-emb-nom-non-su@3@1@0@7@@(1020 56)@@
+1020@64@deg-num@3@1@0@6@@(1001 51)@@
+1001@64@mod-emb-nom@3@1@0@5@@(991 48)@@
+991@64@arg1-emb-nom@3@1@0@4@@(987 45)@@
+987@64@verbal-c@3@1@0@3@@(986 107)@@
+986@64@pop-nominal@3@1@0@2@@(985)@@
+985@64@nom-filler@3@1@0@2@@(22 24)@@
+22@64@start-punct@1@1@0@1@@(15)@@
+24@64@abrams-pn@1@1@1@2@@(16)@@
+107@64@pret-v1_infl_rule@2@1@2@3@@(35)@@
+35@64@ankomme_v@1@1@2@3@@(17)@@
+45@64@ti-card@1@1@3@4@@(18)@@
+48@64@på_func@1@1@4@5@@(19)@@
+51@64@halv-mod@1@1@5@6@@(20)@@
+56@64@fire-card@1@1@6@7@@(21)@@
+1050@64@pop-no-nominal@3@1@0@7@@(1049)@@
+1049@64@pop-nominal@3@1@0@7@@(1042)@@
+1042@64@arg2-emb-nom-non-su@3@1@0@7@@(1016 56)@@
+1016@64@deg-num@3@1@0@6@@(1004 51)@@
+1004@64@mod-emb-vbl@3@1@0@5@@(1002 48)@@
+1002@64@arg2-extr-nom-non-su@3@1@0@4@@(1000)@@
+1000@64@pop-nominal@3@1@0@4@@(991)@@
+1066@64@root@4@1@0@7@@(1060)@@
+1060@64@main@3@1@0@7@@(1059)@@(1064)
+1064@64@main@3@5@0@7@@(1063)@@
+1063@64@pop-nominal@3@1@0@7@@(1062)@@
+1062@64@pop-no-nominal@3@1@0@7@@(1061)@@
+1061@64@pop-nominal@3@1@0@7@@(1037)@@
+1037@64@arg2-emb-nom-non-su@3@1@0@7@@(1032 56)@@
+1032@64@deg-num@3@1@0@6@@(996 51)@@
+996@64@mod-emb-nom@3@1@0@5@@(992 48)@@
+992@64@arg2-emb-nom-non-su@3@1@0@4@@(989 45)@@
+989@64@1np-extr@3@1@0@3@@(987)@@
+1059@64@pop-no-nominal@3@1@0@7@@(1058)@@
+1058@64@pop-nominal@3@1@0@7@@(1039)@@
+1039@64@arg2-emb-nom-non-su@3@1@0@7@@(1028 56)@@
+1028@64@deg-num@3@1@0@6@@(998 51)@@
+998@64@mod-emb-vbl@3@1@0@5@@(995 48)@@
+995@64@pop-nominal@3@1@0@4@@(992)@@
+15@64@token [ +FORM "^" +FROM "29" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+16@64@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+17@64@token [ +FORM "ankom" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@2@3@@@@
+18@64@token [ +FORM "ti" +FROM "13" +TO "15" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ti" ]@0@0@3@4@@@@
+19@64@token [ +FORM "på" +FROM "16" +TO "18" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "på" ]@0@0@4@5@@@@
+20@64@token [ +FORM "halv" +FROM "19" +TO "23" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "halv" ]@0@0@5@6@@@@
+21@64@token [ +FORM "fire" +FROM "24" +TO "28" +ID diff-list [ LIST cons [ FIRST "6" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "fire" ]@0@0@6@7@@@@
+11@65@token [ +FORM "^" +FROM "28" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+12@65@token [ +FORM "Browne" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Browne" ]@0@0@1@2@@@@
+13@65@token [ +FORM "ankom" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@2@3@@@@
+14@65@token [ +FORM "tirsdag" +FROM "13" +TO "20" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "tirsdag" ]@0@0@3@4@@@@
+15@65@token [ +FORM "morgen" +FROM "21" +TO "27" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "morgen" ]@0@0@4@5@@@@
+1119@66@root@4@1@0@6@@(1064)@@
+1064@66@main@3@1@0@6@@(1063)@@(1067)
+1067@66@main@3@5@0@6@@(1066)@@
+1066@66@pop-no-nominal@3@1@0@6@@(1065)@@
+1065@66@pop-nominal@3@1@0@6@@(1025)@@
+1025@66@arg2-emb-nom-non-su@3@1@0@6@@(927 122)@@
+927@66@mod-emb-vbl@3@1@0@5@@(924 55)@@
+924@66@pop-nominal@3@1@0@4@@(896)@@
+896@66@arg2-emb-nom-non-su@3@1@0@4@@(893 121)@@
+893@66@1np-extr@3@1@0@3@@(874)@@
+874@66@verbal-c@3@1@0@3@@(871 120)@@
+871@66@pop-nominal@3@1@0@2@@(869)@@
+869@66@nom-filler@3@1@0@2@@(19 22)@@
+19@66@start-punct@1@1@0@1@@(13)@@
+22@66@det_q@1@1@1@2@@(14)@@
+120@66@pret-v2_infl_rule@2@1@2@3@@(33)@@
+33@66@være_v@1@1@2@3@@(15)@@
+121@66@indef-pl-m1-noun_infl_rule@2@1@3@4@@(44)@@
+44@66@katt-n-masc@1@1@3@4@@(16)@@
+55@66@i_func@1@1@4@5@@(17)@@
+122@66@def-comm-noun-m1-m2_infl_rule@2@1@5@6@@(58)@@
+58@66@have-n-masc@1@1@5@6@@(18)@@
+1063@66@pop-nominal@3@1@0@6@@(1062)@@
+1062@66@pop-no-nominal@3@1@0@6@@(1061)@@
+1061@66@pop-nominal@3@1@0@6@@(1028)@@
+1028@66@arg2-emb-nom-non-su@3@1@0@6@@(925 122)@@
+925@66@mod-emb-nom@3@1@0@5@@(896 55)@@
+1120@66@root@4@1@0@6@@(1073)@@
+1073@66@main@3@1@0@6@@(1072)@@(1077)
+1077@66@main@3@5@0@6@@(1076)@@
+1076@66@pop-no-nominal@3@1@0@6@@(1075)@@
+1075@66@pop-nominal@3@1@0@6@@(1015)@@
+1015@66@arg2-emb-nom-non-su@3@1@0@6@@(934 122)@@
+934@66@mod-emb-vbl@3@1@0@5@@(931 55)@@
+931@66@arg2-extr-nom-non-su@3@1@0@4@@(929)@@
+929@66@pop-nominal@3@1@0@4@@(895)@@
+895@66@arg1-emb-nom@3@1@0@4@@(874 121)@@
+1072@66@arg2-extr-nom-non-su@3@1@0@6@@(1071)@@
+1071@66@pop-nominal@3@1@0@6@@(1070)@@
+1070@66@pop-no-nominal@3@1@0@6@@(1069)@@
+1069@66@pop-nominal@3@1@0@6@@(1019)@@
+1019@66@arg2-emb-nom-non-su@3@1@0@6@@(930 122)@@
+930@66@mod-emb-nom@3@1@0@5@@(895 55)@@
+1121@66@root@4@1@0@6@@(1100)@@
+1100@66@main@3@1@0@6@@(1099)@@(1103)
+1103@66@main@3@5@0@6@@(1102)@@
+1102@66@pop-no-nominal@3@1@0@6@@(1101)@@
+1101@66@pop-nominal@3@1@0@6@@(989)@@
+989@66@arg2-emb-nom-non-su@3@1@0@6@@(958 122)@@
+958@66@mod-emb-vbl@3@1@0@5@@(955 55)@@
+955@66@pop-nominal@3@1@0@4@@(883)@@
+883@66@arg2-emb-nom-non-su@3@1@0@4@@(878 121)@@
+878@66@extr-cleft@3@1@0@3@@(877)@@
+877@66@verbal-c@3@1@0@3@@(868 120)@@
+868@66@expl-filler@3@1@0@2@@(19 21)@@
+21@66@det-expl@1@1@1@2@@(14)@@
+1099@66@pop-nominal@3@1@0@6@@(1098)@@
+1098@66@pop-no-nominal@3@1@0@6@@(1097)@@
+1097@66@pop-nominal@3@1@0@6@@(992)@@
+992@66@arg2-emb-nom-non-su@3@1@0@6@@(956 122)@@
+956@66@mod-emb-nom@3@1@0@5@@(883 55)@@
+1122@66@root@4@1@0@6@@(1107)@@
+1107@66@main@3@1@0@6@@(1106)@@(1110)
+1110@66@main@3@5@0@6@@(1109)@@
+1109@66@pop-no-nominal@3@1@0@6@@(1108)@@
+1108@66@pop-nominal@3@1@0@6@@(982)@@
+982@66@arg2-emb-nom-non-su@3@1@0@6@@(963 122)@@
+963@66@mod-emb-vbl@3@1@0@5@@(960 55)@@
+960@66@pop-nominal@3@1@0@4@@(882)@@
+882@66@arg2-emb-nom-non-su@3@1@0@4@@(879 121)@@
+879@66@extr-pres@3@1@0@3@@(877)@@
+1106@66@pop-nominal@3@1@0@6@@(1105)@@
+1105@66@pop-no-nominal@3@1@0@6@@(1104)@@
+1104@66@pop-nominal@3@1@0@6@@(985)@@
+985@66@arg2-emb-nom-non-su@3@1@0@6@@(961 122)@@
+961@66@mod-emb-nom@3@1@0@5@@(882 55)@@
+13@66@token [ +FORM "^" +FROM "23" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+14@66@token [ +FORM "Det" +FROM "0" +TO "3" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Det" ]@0@0@1@2@@@@
+15@66@token [ +FORM "var" +FROM "4" +TO "7" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "var" ]@0@0@2@3@@@@
+16@66@token [ +FORM "katter" +FROM "8" +TO "14" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "katter" ]@0@0@3@4@@@@
+17@66@token [ +FORM "i" +FROM "15" +TO "16" +ID diff-list [ LIST cons [ FIRST "4" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "i" ]@0@0@4@5@@@@
+18@66@token [ +FORM "haven" +FROM "17" +TO "22" +ID diff-list [ LIST cons [ FIRST "5" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "haven" ]@0@0@5@6@@@@
+575@67@root@4@1@0@4@@(570)@@
+570@67@main@3@1@0@4@@(569)@@
+569@67@pop-nominal@3@1@0@4@@(567)@@
+567@67@arg2-emb-nom-non-su@3@1@0@4@@(563 37)@@
+563@67@1np-extr@3@1@0@3@@(561)@@
+561@67@verbal-c@3@1@0@3@@(559 94)@@
+559@67@pop-nominal@3@1@0@2@@(558)@@
+558@67@nom-filler@3@1@0@2@@(13 15)@@
+13@67@start-punct@1@1@0@1@@(9)@@
+15@67@noen_q@1@1@1@2@@(10)@@
+94@67@pret-v1_infl_rule@2@1@2@3@@(31)@@
+31@67@jage_v@1@1@2@3@@(11)@@
+37@67@abrams-pn@1@1@3@4@@(12)@@
+576@67@root@4@1@0@4@@(573)@@
+573@67@main@3@1@0@4@@(572)@@
+572@67@arg2-extr-nom-non-su@3@1@0@4@@(571)@@
+571@67@pop-nominal@3@1@0@4@@(565)@@
+565@67@arg1-emb-nom@3@1@0@4@@(561 37)@@
+9@67@token [ +FORM "^" +FROM "18" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@67@token [ +FORM "Noen" +FROM "0" +TO "4" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Noen" ]@0@0@1@2@@@@
+11@67@token [ +FORM "jaget" +FROM "5" +TO "10" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "jaget" ]@0@0@2@3@@@@
+12@67@token [ +FORM "Abrams" +FROM "11" +TO "17" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@3@4@@@@
+426@68@root@4@1@0@3@@(422)@@
+422@68@main@3@1@0@3@@(421)@@
+421@68@1np-extr@3@1@0@3@@(419)@@
+419@68@verbal-c@3@1@0@3@@(417 97)@@
+417@68@pop-nominal@3@1@0@2@@(416)@@
+416@68@nom-filler@3@1@0@2@@(10 12)@@
+10@68@start-punct@1@1@0@1@@(7)@@
+12@68@abrams-pn@1@1@1@2@@(8)@@
+97@68@pret-v1_infl_rule@2@1@2@3@@(24)@@
+24@68@kunne_v@1@1@2@3@@(9)@@
+7@68@token [ +FORM "^" +FROM "13" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+8@68@token [ +FORM "Abrams" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Abrams" ]@0@0@1@2@@@@
+9@68@token [ +FORM "kunne" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "kunne" ]@0@0@2@3@@@@
+592@69@root@4@1@0@4@@(586)@@
+586@69@main@3@1@0@4@@(585)@@
+585@69@pop-no-nominal@3@1@0@4@@(584)@@
+584@69@mod-emb-vbl@3@1@0@4@@(579 115)@@
+579@69@arg2-extr-su@3@1@0@3@@(578)@@
+578@69@verbal-c@3@1@0@3@@(577 113)@@
+577@69@pop-nominal@3@1@0@2@@(575)@@
+575@69@nom-filler@3@1@0@2@@(13 112)@@
+13@69@start-punct@1@1@0@1@@(9)@@
+112@69@def-comm-noun-m1-m2_infl_rule@2@1@1@2@@(15)@@
+15@69@hund-n-masc@1@1@1@2@@(10)@@
+113@69@pret-v1_infl_rule@2@1@2@3@@(40)@@
+40@69@ankomme_v@1@1@2@3@@(11)@@
+115@69@pres-part_infl_rule@2@1@3@4@@(50)@@
+50@69@bjeffe_v@1@1@3@4@@(12)@@
+593@69@root@4@1@0@4@@(588)@@
+588@69@main@3@1@0@4@@(587)@@
+587@69@pop-nominal@3@1@0@4@@(582)@@
+582@69@arg2-emb-adj-non-su@3@1@0@4@@(580 115)@@
+580@69@1np-extr@3@1@0@3@@(578)@@
+594@69@root@4@1@0@4@@(591)@@
+591@69@main@3@1@0@4@@(590)@@
+590@69@arg2-extr-nom-non-su@3@1@0@4@@(589)@@
+589@69@pop-nominal@3@1@0@4@@(581)@@
+581@69@arg1-emb-adj@3@1@0@4@@(578 115)@@
+9@69@token [ +FORM "^" +FROM "23" +TO "0" +ID diff-list [ LIST cons [ FIRST "0" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "^" ]@0@0@0@1@@@@
+10@69@token [ +FORM "Hunden" +FROM "0" +TO "6" +ID diff-list [ LIST cons [ FIRST "1" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "Hunden" ]@0@0@1@2@@@@
+11@69@token [ +FORM "ankom" +FROM "7" +TO "12" +ID diff-list [ LIST cons [ FIRST "2" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "ankom" ]@0@0@2@3@@@@
+12@69@token [ +FORM "bjeffende" +FROM "13" +TO "22" +ID diff-list [ LIST cons [ FIRST "3" REST list ] LAST list ] +POS pos [ +TAGS null +PRBS null ] +CLASS non_ne [ +INITIAL luk ] +TRAIT token_trait +PRED predsort +CARG "bjeffende" ]@0@0@3@4@@@@

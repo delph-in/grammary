@@ -75,6 +75,24 @@ ACE (the grammar compiler) is downloaded automatically by `compile.sh` via
 
 $ python scripts/download_grammars.py grammary.toml build
 
+### Check for new upstream grammar versions
+
+`scripts/check_grammar_updates.py` resolves the current upstream revision of
+every grammar in `grammary.toml` (git commit, SVN revision, or HTTP
+ETag/Last-Modified) and compares it against the committed baseline in
+`grammar_versions.json`.
+
+```bash
+uv run python scripts/check_grammar_updates.py            # report any drift
+uv run python scripts/check_grammar_updates.py --update   # refresh the baseline
+```
+
+The baseline records the revision each grammar was last **built** at; run
+`--update` and commit `grammar_versions.json` after rebuilding. The
+[`check-updates` workflow](.github/workflows/check-updates.yml) runs this weekly
+and opens a tracking issue when an upstream grammar has moved ahead of the
+baseline.
+
 ### Compile ltdb (and ACE .dat files) with
 
 $ bash scripts/build-ltdb.sh build

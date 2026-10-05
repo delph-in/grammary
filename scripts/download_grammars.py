@@ -7,6 +7,9 @@ Each TOML section is one grammar project.  Supported keys:
 * ``trb``    — separate treebank archive (``wget <url>``); unpacked into
                ``<output_dir>/<name>/tsdb/`` and linked as
                ``<output_dir>/<name>/tsdb/gold``.
+* ``trb_gold`` — directory within the treebank archive to link as
+               ``tsdb/gold`` (needed when the archive has multiple
+               top-level directories, as with SRG).
 * ``parent`` — if set, clone/download into ``<output_dir>/<parent>/<name>/``
                instead of ``<output_dir>/<name>/``.  Used for sub-grammars
                that must live inside their parent grammar's directory tree.
@@ -21,13 +24,20 @@ from urllib.parse import urlparse
 import toml
 
 
-def is_archive(filename: str) -> bool:
-    """Return True if *filename* has a recognised archive extension."""
-    return any(filename.endswith(ext) for ext in (".zip", ".tar.gz", ".tgz"))
+def is_archive(filepath: Path) -> bool:
+    """Return True if *filepath* is a zip or tar archive (detected by content).
+
+    Content-based detection (rather than extension matching) handles URLs
+    that download an archive with no recognisable suffix, such as the
+    Google Drive link used for HeGram.
+    """
+    return zipfile.is_zipfile(filepath) or tarfile.is_tarfile(filepath)
 
 
 def unpack_archive(filepath: Path, extract_to: Path) -> bool:
     """Unpack *filepath* into *extract_to*.
+
+    Archive type is detected by content, not by file extension.
 
     Args:
         filepath: Path to the archive file.
@@ -36,11 +46,11 @@ def unpack_archive(filepath: Path, extract_to: Path) -> bool:
     Returns:
         True on success, False if the format is unrecognised.
     """
-    if filepath.suffix == ".zip":
+    if zipfile.is_zipfile(filepath):
         with zipfile.ZipFile(filepath, "r") as zf:
             zf.extractall(extract_to)
-    elif filepath.suffix == ".tgz" or filepath.suffixes[-2:] == [".tar", ".gz"]:
-        with tarfile.open(filepath, "r:gz") as tf:
+    elif tarfile.is_tarfile(filepath):
+        with tarfile.open(filepath, "r:*") as tf:
             tf.extractall(extract_to)
     else:
         print(f"⚠️ Unknown archive format: {filepath}")
@@ -138,7 +148,7 @@ def download_vcs(project: str, info: dict, project_dir: Path) -> None:
     if not _download_file(url, dest_file):
         return
 
-    if is_archive(dest_file.name):
+    if is_archive(dest_file):
         print(f"Unpacking {dest_file}…")
         if unpack_archive(dest_file, project_dir):
             dest_file.unlink()

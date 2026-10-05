@@ -1,0 +1,21 @@
+[Unit]
+Description=grew-match (structural search over LTDB treebanks)
+After=network.target
+
+[Service]
+Type=simple
+User=bond
+Group=bond
+WorkingDirectory=/home/bond/ltdb-staging
+Environment=HOME=/home/bond
+Environment=PATH=/home/bond/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=GREW_CORPORA=/home/bond/db-staging/grew/grew_corpora.json
+Environment=GREW_PUBLIC_HOST=compling.upol.cz
+Environment=GREW_PUBLIC_BACKEND_URL=https://compling.upol.cz/grew-match-api/
+Environment=LTDB_BASE_URL=https://compling.upol.cz/ltdb
+ExecStart=/home/bond/ltdb-staging/scripts/run-grew-match-prod.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

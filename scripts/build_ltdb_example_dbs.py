@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB_DIR = ROOT / "build" / "DBS"
 DEFAULT_OUTPUT_DIR = ROOT / "docs" / "ltdb" / "db"
 DEFAULT_STATUSES = ("lex-type", "rule", "lex-rule", "root")
-REQUIRED_SOURCE_TABLES = {"gold", "lex", "lexfreq", "sent", "types", "typind"}
+REQUIRED_SOURCE_TABLES = {"gold", "lex", "lexfreq", "lexind", "sent", "types", "typind"}
 
 
 def holders(values) -> str:
@@ -114,10 +114,16 @@ def selected_by_lexids(
     lexids: list[str],
     limit: int,
 ) -> list[tuple[tuple[str, int], list[tuple[int, int]]]]:
-    """Select representative sentences for the given lexids.
+    """Select representative sentences for the given lexids via lexind.
 
-    Returns a list of ((profile, sid), [(wid, wid+1)]) pairs ordered by
+    Returns a list of ((profile, sid), [(kara, made)]) pairs ordered by
     sentence length. Uses LTDB's 20%-offset sampling strategy.
+
+    lexind's (kara, made) is the raw-token span pydelphin assigns a
+    preterminal; a plain (wid, wid+1) from sent.wid would be wrong for
+    any multiword lexical entry, whose raw-token span is wider than
+    one and whose wid no longer lines up 1:1 with raw-token position
+    (see gold2db.py's preterminal_rows in etc/ltdb).
     """
     if not lexids:
         return []
@@ -126,7 +132,7 @@ def selected_by_lexids(
         SELECT COUNT(*)
         FROM (
           SELECT DISTINCT profile, sid
-          FROM sent
+          FROM lexind
           WHERE lexid IN ({holders(lexids)})
         )
         """,
@@ -135,8 +141,10 @@ def selected_by_lexids(
     offset, limit = calculate_offset_limit(count, limit)
     rows = conn.execute(
         f"""
-        SELECT a.profile, a.sid, MIN(a.wid) AS wid, MAX(b.wid) AS max_wid
-        FROM sent AS a LEFT JOIN sent AS b
+        SELECT a.profile, a.sid,
+               MIN(a.kara) AS kara, MIN(a.made) AS made,
+               MAX(b.wid) AS max_wid
+        FROM lexind AS a LEFT JOIN sent AS b
           ON a.profile = b.profile AND a.sid = b.sid
         WHERE a.lexid IN ({holders(lexids)})
         GROUP BY a.profile, a.sid
@@ -145,7 +153,7 @@ def selected_by_lexids(
         """,
         lexids + [limit, offset],
     ).fetchall()
-    return [((profile, sid), [(wid, wid + 1)]) for profile, sid, wid, _ in rows]
+    return [((profile, sid), [(kara, made)]) for profile, sid, kara, made, _ in rows]
 
 
 def selected_by_type(

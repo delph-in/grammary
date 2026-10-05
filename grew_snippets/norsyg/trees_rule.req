@@ -1,0 +1,5 @@
+% Search for a grammar rule by cat feature
+% Norsyg is syntax-based; distinctive rules include nom-filler,
+% 1np-extr (NP extraction), verbal-c, pop-nominal
+
+pattern { N [cat="nom-filler"] }

@@ -1,0 +1,4 @@
+% Search for a surface predicate by pred feature
+% Norsyg predicates: _lemma_sense, e.g. _bjeffe_1 (bark), _hund_n (dog), _jage_12 (chase)
+
+pattern { N [pred="_bjeffe_1"] }

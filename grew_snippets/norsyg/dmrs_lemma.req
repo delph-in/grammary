@@ -1,0 +1,4 @@
+% Search for a lemma by lemma feature
+% Norsyg lemmas, e.g. hund (dog), katt (cat), og (and)
+
+pattern { N [lemma="hund"] }

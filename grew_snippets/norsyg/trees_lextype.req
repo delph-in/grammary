@@ -1,0 +1,5 @@
+% Search for a lexical type by lextype feature
+% Norsyg lexical types end in -lxm or -word, e.g. main-verb-lxm,
+% expletive-noun-phrase, at-complementizer-word
+
+pattern { N [lextype="main-verb-lxm"] }

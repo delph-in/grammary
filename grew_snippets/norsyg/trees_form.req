@@ -1,0 +1,4 @@
+% Search for a surface form by form feature
+% e.g. bjeffer (barks), Hunden (the dog), Katten (the cat)
+
+pattern { N [form="bjeffer"] }

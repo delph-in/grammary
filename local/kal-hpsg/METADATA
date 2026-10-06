@@ -1,0 +1,54 @@
+## -*- mode:shell-script -*-
+
+## Metadata for the Kalaallisut (West Greenlandic) HPSG grammar.
+## Upstream (https://github.com/alexhsu-nlp/kal-hpsg) ships an empty
+## METADATA; this overlay supplies the fields the LTDB build needs.
+
+## Grammar maintainers and contributors
+
+MAINTAINER="Chia-Hsiang Hsu"
+CONTRIBUTORS="Chia-Hsiang Hsu"
+CONTACT_EMAIL=""
+
+## Grammar name and web presence
+## Note: if SHORT_GRAMMAR_NAME is not defined, the directory name is used.
+
+GRAMMAR_NAME="Kalaallisut (West Greenlandic) HPSG grammar"
+SHORT_GRAMMAR_NAME="kal-hpsg"
+WEBSITE="https://github.com/alexhsu-nlp/kal-hpsg"
+DEMO_WEBSITE=""
+DOCUMENTATION_URL=""
+ISSUE_TRACKER="https://github.com/alexhsu-nlp/kal-hpsg/issues"
+LICENSE="MIT"
+
+## You may optionally specify a release date for the grammar. If unspecified,
+## the grammar catalogue script will attempt to extract a date from the
+## Version.l(i)sp file.
+LATEST_RELEASE=""
+
+## Citation data
+BIB_URL=""
+PDF_URL=""
+CITE=""
+
+## Version Control
+VCS="git clone https://github.com/alexhsu-nlp/kal-hpsg.git"
+
+## Semi-colon separated list of required external resources
+EXTERNAL_RESOURCES=""
+ASSOCIATED_RESOURCES=""
+
+## Grammar type
+GRAMMAR_TYPE="Experimental grammar"
+
+## Language identification
+## Iso-codes can be looked up at http://www.sil.org/iso639-3/codes.asp
+
+LANGUAGE_NAME="Kalaallisut"
+ISO_CODE="kal"
+
+## File locations of LKB script file and .grm file read by cheap
+## Paths relative to top of grammar directory
+
+LKB_SCRIPT_FILE="lkb/script"
+ACE_CONFIG_FILE="ace/config.tdl"

@@ -15,6 +15,7 @@
 | krg |  | git clone https://github.com/bond-lab/krg.git |  |
 | indra |  | git clone https://github.com/davidmoeljadi/INDRA.git |  |
 | yue |  | git clone https://github.com/neosome/yue.git |  |
+| kal-hpsg |  | git clone https://github.com/alexhsu-nlp/kal-hpsg.git |  |
 | hag |  | svn co http://svn.delph-in.net/trunk/llf/hag |  |
 | gg |  | svn co http://svn.delph-in.net/trunk/dfki/gg |  |
 | singlish-sg |  | git clone https://github.com/siewyeng/SinglishERG.git |  |

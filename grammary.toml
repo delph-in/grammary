@@ -45,6 +45,12 @@ vcs = "git clone https://github.com/davidmoeljadi/INDRA.git"
 [yue]
 vcs = "git clone https://github.com/neosome/yue.git"
 
+# Kalaallisut (West Greenlandic): a Matrix-derived HPSG fragment.  Upstream
+# ships an empty METADATA, so local/kal-hpsg/METADATA supplies the grammar
+# name, ACE config path and language codes.  No gold treebank yet (0 trees).
+[kal-hpsg]
+vcs = "git clone https://github.com/alexhsu-nlp/kal-hpsg.git"
+
 [hag]
 vcs = "svn co http://svn.delph-in.net/trunk/llf/hag"
 

@@ -11,9 +11,11 @@
 set -euo pipefail
 
 GREW_MATCH=0
+ANALYZERS=0
 for arg in "$@"; do
   case "$arg" in
     --grew-match) GREW_MATCH=1 ;;
+    --analyzers) ANALYZERS=1 ;;
     *) echo "Unknown argument: $arg" >&2; exit 1 ;;
   esac
 done
@@ -77,6 +79,30 @@ else
   echo "Grew-match NOT installed (re-run with --grew-match to add it)."
 fi
 
+if [[ "$ANALYZERS" -eq 1 ]]; then
+  echo
+  echo "==> Installing optional morphological analyzers for the parse demo"
+  # Light, easily-installed analyzers used by the LTDB parse-demo hook
+  # (etc/ltdb/web/preprocess.py). Heavier ones are documented, not installed.
+  echo "  • MeCab (Japanese / Jacy) via apt"
+  sudo apt-get install -y mecab mecab-ipadic-utf8 || \
+    echo "    (MeCab install failed; install it manually for Jacy)"
+  echo "  • jieba (Chinese / Zhong) into the project venv"
+  uv pip install jieba || echo "    (jieba install failed; 'uv pip install jieba')"
+  echo
+  echo "  Heavier analyzers are optional and must be installed by hand:"
+  echo "    - FreeLing 4.2 (Spanish / SRG): https://github.com/delph-in/docs/wiki/SrgTop"
+  echo "      then set SRG_YY_CMD to a command that prints a YY lattice for a sentence."
+  echo "    - KARMA (Kalaallisut / kal-hpsg): https://github.com/alexhsu-nlp/karma"
+  echo "      then set KARMA_CMD (and KARMA_MODE=yy|segment)."
+  echo "  The demo degrades gracefully: a grammar whose analyzer is absent still"
+  echo "  parses already-segmented input."
+else
+  echo
+  echo "Morphological analyzers NOT installed (re-run with --analyzers to add the"
+  echo "light ones: MeCab for Japanese, jieba for Chinese)."
+fi
+
 echo
 echo "==> Setup complete. Next step:"
 echo "    bash compile.sh"
@@ -85,3 +111,6 @@ echo "Notes:"
 echo "  • ACE (grammar compiler) is downloaded automatically by compile.sh"
 echo "  • subversion is required for the gg (German) and hag (Hausa) grammars"
 echo "  • grew-match is optional; see etc/ltdb/doc/grew-match.md for details"
+echo "  • morphological analyzers for the parse demo are optional; see the"
+echo "    'Morphological analyzers' section of README.md (--analyzers installs"
+echo "    the light ones: MeCab, jieba)"

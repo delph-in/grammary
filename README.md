@@ -181,3 +181,37 @@ tailored to that grammar's rule and predicate names.  The generic fallback is
 `_default.html`.
 
 For full setup instructions see `etc/ltdb/doc/grew-match.md`.
+
+
+### Morphological analyzers (parse demo)
+
+Some grammars delegate tokenization or morphology to an external analyzer and
+cannot be parsed from raw orthographic text. The LTDB parse demo runs a
+per-grammar analyzer on the input before handing it to ACE
+(`etc/ltdb/web/preprocess.py`, hooked into the `/parse` route). The grammar is
+matched by its `ISO_CODE` (falling back to `SHORT_GRAMMAR_NAME`):
+
+| Grammar | ISO | Analyzer | Install | Config | ACE input |
+|---------|-----|----------|---------|--------|-----------|
+| Jacy (Japanese) | `jpn` | MeCab `-O wakati` | `apt install mecab` | `MECAB_BIN` | segmented text |
+| Zhong (Chinese) | `cmn` | jieba | `uv pip install jieba` | — | segmented text |
+| SRG (Spanish) | `spa` | FreeLing 4.2 | manual | `SRG_YY_CMD` | YY lattice (`-y --yy-rules`) |
+| kal-hpsg (Kalaallisut) | `kal` | KARMA | manual | `KARMA_CMD`, `KARMA_MODE` | YY lattice / segmented |
+
+Everything is **optional and degrades gracefully**: grammars with tokenization
+compiled into the `.dat` (e.g. the ERG) are untouched, and if an analyzer's tool
+is not installed the demo still parses already-segmented input and shows a hint.
+Install the light analyzers with `bash setup.sh --analyzers`. Restrict which
+analyzers run with `LTDB_ANALYZERS` (comma-separated ISO codes); the "Analyze"
+checkbox in the demo lets a user bypass preprocessing to paste pre-segmented or
+YY input.
+
+`SRG_YY_CMD` / `KARMA_CMD` name a command that reads a sentence on stdin and
+prints ACE input on stdout (a YY lattice, or space-separated tokens for
+`KARMA_MODE=segment`). The SRG ships FreeLing→YY tooling under
+`build/srg/util/freeling_api/` and `build/srg/util/analyze-wrappers/srg-yy.sh`.
+
+> **Upstream note:** `etc/ltdb/` is a vendored copy of
+> <https://github.com/fcbond/ltdb>. The analyzer hook (`preprocess.py`, the
+> `/parse` change, the demo toggle) lives there; it is captured in
+> `patches/ltdb-morph-analyzers.patch` and should be pushed upstream.

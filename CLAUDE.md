@@ -81,6 +81,24 @@ Which type statuses are frozen is controlled by `--statuses` (default: `lex-type
 - `STATIC_MIRROR_STATUSES` — env var read by `routes.py`; controls which type pages get
   static-mirror-style links vs. fallback links to the live LTDB.
 - `FULL_LTDB_BASE_URL` — env var for the live LTDB base URL used in fallback links.
+- `LTDB_ANALYZERS`, `MECAB_BIN`, `SRG_YY_CMD`, `KARMA_CMD`, `KARMA_MODE` — env vars read by
+  `etc/ltdb/web/preprocess.py` to configure the optional parse-demo analyzers (see below).
+
+## Parse-Demo Morphological Analyzers
+
+The `/parse` route (`etc/ltdb/web/routes.py`) optionally runs a per-grammar morphological
+analyzer / segmenter on the input before ACE, via `etc/ltdb/web/preprocess.py`. Grammars are
+matched by `ISO_CODE` (fallback `SHORT_GRAMMAR_NAME`): `jpn`→MeCab, `cmn`→jieba (both emit
+space-separated tokens), `spa`→FreeLing and `kal`→KARMA (both emit a YY token lattice, so the
+route adds `-y`/`--yy-rules`). All analyzers are optional: if the tool is missing the route
+falls back to the raw input and returns a `note`; the demo's "Analyze" toggle sends
+`analyze=off` to bypass preprocessing. Grammars like the ERG have no registered analyzer and
+are unaffected. See the README "Morphological analyzers" section for the full table.
+
+**Pending upstream patch**: `preprocess.py`, the `/parse` hook, and the demo "Analyze" toggle
+were added locally (`etc/ltdb/` is gitignored). The change is captured in
+`patches/ltdb-morph-analyzers.patch` (see `patches/README.md`); push it to
+`https://github.com/fcbond/ltdb`.
 
 ## What the Mirror Does NOT Support
 

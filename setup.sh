@@ -89,12 +89,12 @@ if [[ "$ANALYZERS" -eq 1 ]]; then
     echo "    (MeCab install failed; install it manually for Jacy)"
   echo "  • jieba (Chinese / Zhong) into the project venv"
   uv pip install jieba || echo "    (jieba install failed; 'uv pip install jieba')"
+  echo "  • KARMA (Kalaallisut / kal-hpsg) into the project venv"
+  uv pip install "git+https://github.com/alexhsu-nlp/karma.git" || \
+    echo "    (KARMA install failed; 'uv pip install git+https://github.com/alexhsu-nlp/karma.git')"
   echo
-  echo "  Heavier analyzers are optional and must be installed by hand:"
-  echo "    - FreeLing 4.2 (Spanish / SRG): https://github.com/delph-in/docs/wiki/SrgTop"
-  echo "      then set SRG_YY_CMD to a command that prints a YY lattice for a sentence."
-  echo "    - KARMA (Kalaallisut / kal-hpsg): https://github.com/alexhsu-nlp/karma"
-  echo "      then set KARMA_CMD (and KARMA_MODE=yy|segment)."
+  echo "  FreeLing (Spanish / SRG) is heavier and installed separately:"
+  echo "    bash scripts/install_freeling.sh    # then export SRG_YY_CMD (it prints how)"
   echo "  The demo degrades gracefully: a grammar whose analyzer is absent still"
   echo "  parses already-segmented input."
 else

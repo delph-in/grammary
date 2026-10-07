@@ -8,8 +8,10 @@ are pushed upstream.
 ## `ltdb-morph-analyzers.patch`
 
 Adds optional per-grammar **morphological-analyzer / segmenter** support to the
-parse demo so grammars that need external tokenization (Japanese→MeCab,
-Chinese→jieba, Spanish→FreeLing, Kalaallisut→KARMA) can be parsed from raw text.
+parse demo so grammars that need external tokenization can be parsed from raw
+text: Japanese→MeCab, Chinese→jieba, Kalaallisut→KARMA (in-process Python
+package) produce segmented text; Spanish→FreeLing produces a YY lattice
+(`-y --yy-rules`).
 
 - `web/preprocess.py` — new pluggable analyzer registry (ISO-keyed), graceful
   fallback when a tool is absent.

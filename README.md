@@ -195,21 +195,24 @@ matched by its `ISO_CODE` (falling back to `SHORT_GRAMMAR_NAME`):
 |---------|-----|----------|---------|--------|-----------|
 | Jacy (Japanese) | `jpn` | MeCab `-O wakati` | `apt install mecab` | `MECAB_BIN` | segmented text |
 | Zhong (Chinese) | `cmn` | jieba | `uv pip install jieba` | — | segmented text |
-| SRG (Spanish) | `spa` | FreeLing 4.2 | manual | `SRG_YY_CMD` | YY lattice (`-y --yy-rules`) |
-| kal-hpsg (Kalaallisut) | `kal` | KARMA | manual | `KARMA_CMD`, `KARMA_MODE` | YY lattice / segmented |
+| SRG (Spanish) | `spa` | FreeLing 4.2 | `bash scripts/install_freeling.sh` | `SRG_YY_CMD` | YY lattice (`-y --yy-rules`) |
+| kal-hpsg (Kalaallisut) | `kal` | KARMA (in-process) | `uv pip install git+https://github.com/alexhsu-nlp/karma.git` | — | segmented text (morpheme `-`/`=` boundaries) |
 
 Everything is **optional and degrades gracefully**: grammars with tokenization
 compiled into the `.dat` (e.g. the ERG) are untouched, and if an analyzer's tool
 is not installed the demo still parses already-segmented input and shows a hint.
-Install the light analyzers with `bash setup.sh --analyzers`. Restrict which
-analyzers run with `LTDB_ANALYZERS` (comma-separated ISO codes); the "Analyze"
-checkbox in the demo lets a user bypass preprocessing to paste pre-segmented or
-YY input.
+Install the light analyzers (MeCab, jieba, KARMA) with `bash setup.sh
+--analyzers`; FreeLing is heavier and installed by `bash
+scripts/install_freeling.sh`. Restrict which analyzers run with
+`LTDB_ANALYZERS` (comma-separated ISO codes); the "Analyze" checkbox in the demo
+lets a user bypass preprocessing to paste pre-segmented or YY input.
 
-`SRG_YY_CMD` / `KARMA_CMD` name a command that reads a sentence on stdin and
-prints ACE input on stdout (a YY lattice, or space-separated tokens for
-`KARMA_MODE=segment`). The SRG ships FreeLing→YY tooling under
-`build/srg/util/freeling_api/` and `build/srg/util/analyze-wrappers/srg-yy.sh`.
+`SRG_YY_CMD` names a command that reads a sentence on stdin and prints a YY
+lattice on stdout; the SRG ships exactly such a FreeLing→YY wrapper at
+`build/srg/util/analyze-wrappers/srg-yy.sh` (and the FreeLing API under
+`build/srg/util/freeling_api/`). KARMA is a pure-Python package imported
+directly — no command needed; it emits morpheme-segmented text with `-`/`=`
+boundaries, which is what kal-hpsg's morphological rules expect.
 
 > **Upstream note:** `etc/ltdb/` is a vendored copy of
 > <https://github.com/fcbond/ltdb>. The analyzer hook (`preprocess.py`, the

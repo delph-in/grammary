@@ -1,9 +1,9 @@
 diff --git a/tests/test_preprocess.py b/tests/test_preprocess.py
 new file mode 100644
-index 0000000..dfee363
+index 0000000..cf057f7
 --- /dev/null
 +++ b/tests/test_preprocess.py
-@@ -0,0 +1,126 @@
+@@ -0,0 +1,186 @@
 +"""Unit tests for web.preprocess (the morphological-analyzer hook)."""
 +
 +from __future__ import annotations
@@ -127,9 +127,69 @@ index 0000000..dfee363
 +
 +
 +def test_command_analyzer_unset_is_unavailable(monkeypatch):
-+    monkeypatch.delenv("KARMA_CMD", raising=False)
-+    a = pp.CommandAnalyzer("KARMA", "KARMA_CMD")
++    monkeypatch.delenv("SRG_YY_CMD", raising=False)
++    a = pp.CommandAnalyzer("FreeLing", "SRG_YY_CMD")
 +    assert a.available() is False
++
++
++# --- KarmaAnalyzer (in-process Kalaallisut morphology) -------------------
++
++
++def _install_fake_karma(monkeypatch, result):
++    """Inject a fake `karma.encode_decode.parse_sentence` returning *result*."""
++    import sys
++    import types
++
++    class _ParseResult:
++        pass
++
++    pr = _ParseResult()
++    pr.result = result
++    enc = types.ModuleType("karma.encode_decode")
++    enc.parse_sentence = lambda text: pr
++    monkeypatch.setitem(sys.modules, "karma", types.ModuleType("karma"))
++    monkeypatch.setitem(sys.modules, "karma.encode_decode", enc)
++
++
++class _Morph:
++    """Stand-in for KARMA's MorphemeSeqData whose str() is the segmentation."""
++
++    def __init__(self, s):
++        self._s = s
++
++    def __str__(self):
++        return self._s
++
++
++def test_karma_run_takes_first_analysis_per_word(monkeypatch):
++    # word 1: single analysis; word 2: two analyses (ambiguous)
++    _install_fake_karma(
++        monkeypatch,
++        [[_Morph("inuk")], [_Morph("taku-vuq"), _Morph("taku=vuq")]],
++    )
++    r = pp.KarmaAnalyzer().run("Inuk takuvoq")
++    assert r.ace_input == "inuk taku-vuq"
++    assert r.tokens == ["inuk", "taku-vuq"]
++    assert r.yy is False
++    assert "multiple analyses" in (r.note or "")
++
++
++def test_karma_run_no_segmentation_falls_back(monkeypatch):
++    _install_fake_karma(monkeypatch, [[]])  # no analysis for the word
++    r = pp.KarmaAnalyzer().run("xyz")
++    assert r.ace_input == "xyz"
++    assert "no segmentation" in (r.note or "")
++
++
++def test_karma_available_reflects_importlib(monkeypatch):
++    monkeypatch.setattr(
++        pp.importlib.util,
++        "find_spec",
++        lambda name: object() if name == "karma" else None,
++    )
++    assert pp.KarmaAnalyzer().available() is True
++    monkeypatch.setattr(pp.importlib.util, "find_spec", lambda name: None)
++    assert pp.KarmaAnalyzer().available() is False
 diff --git a/tests/test_routes_unit.py b/tests/test_routes_unit.py
 index 0bfee90..bbad098 100644
 --- a/tests/test_routes_unit.py
@@ -276,10 +336,10 @@ index 0bfee90..bbad098 100644
 +        ]
 diff --git a/web/preprocess.py b/web/preprocess.py
 new file mode 100644
-index 0000000..65ca157
+index 0000000..a57964a
 --- /dev/null
 +++ b/web/preprocess.py
-@@ -0,0 +1,291 @@
+@@ -0,0 +1,340 @@
 +"""Optional per-grammar input preprocessing (morphological analysis / segmentation).
 +
 +Some DELPH-IN grammars delegate tokenization or morphology to an external
@@ -289,7 +349,8 @@ index 0000000..65ca157
 +* Zhong (Chinese, ISO ``cmn``): word segmentation via jieba.
 +* SRG (Spanish, ISO ``spa``): morphology + POS tags via FreeLing, fed to ACE as
 +  a YY token lattice (``-y --yy-rules``).
-+* kal-hpsg (Kalaallisut, ISO ``kal``): morpheme segmentation via KARMA.
++* kal-hpsg (Kalaallisut, ISO ``kal``): morpheme segmentation via the in-process
++  KARMA package.
 +
 +This module is a small pluggable registry.  :func:`preprocess_for` looks up an
 +analyzer for a grammar (by ISO code, falling back to its short name), runs it
@@ -492,15 +553,63 @@ index 0000000..65ca157
 +        )
 +
 +
++class KarmaAnalyzer:
++    """Kalaallisut morpheme segmentation via the in-process KARMA package.
++
++    KARMA (https://github.com/alexhsu-nlp/karma) is a pure-Python rule-based
++    morphological analyzer, imported and called directly — there is no CLI.  For
++    each word it may offer several analyses; we take the first (preferred) one.
++
++    Its output keeps morpheme boundaries as ``-`` (and ``=`` for enclitics)
++    *within* a word and separates words by spaces, which is exactly what the
++    kal-hpsg grammar's morphological rules expect (its REPP splits on space/tab/
++    ``=`` but not ``-``), and it also normalises orthography to the grammar's
++    underlying forms (e.g. ``illu`` → ``iglu``).  So the result is plain
++    segmented text, not a YY lattice.
++    """
++
++    name = "KARMA"
++
++    def available(self) -> bool:
++        """Return True if the karma package is importable."""
++        return importlib.util.find_spec("karma") is not None
++
++    def run(self, text: str) -> PreprocessResult:
++        """Segment *text* into the grammar's morpheme-boundary notation."""
++        from karma.encode_decode import parse_sentence
++
++        parsed = parse_sentence(text.lower())
++        segs: list[str] = []
++        multiple = False
++        for analyses in parsed.result:
++            if not analyses:  # a word KARMA could not analyze
++                continue
++            if len(analyses) > 1:
++                multiple = True
++            segs.append(str(analyses[0]))
++        if not segs:
++            return PreprocessResult(
++                ace_input=text,
++                analyzer=self.name,
++                note="KARMA produced no segmentation; parsing the raw input.",
++            )
++        note = (
++            "KARMA found multiple analyses; using the first for each word."
++            if multiple
++            else None
++        )
++        return PreprocessResult(
++            ace_input=" ".join(segs), tokens=segs, analyzer=self.name, note=note
++        )
++
++
 +def _build_registry() -> dict[str, Analyzer]:
 +    """Construct the default ISO-code → analyzer registry."""
 +    return {
 +        "jpn": MeCabAnalyzer(),
 +        "cmn": JiebaAnalyzer(),
 +        "spa": CommandAnalyzer("FreeLing", "SRG_YY_CMD", mode="yy", yy_rules=True),
-+        "kal": CommandAnalyzer(
-+            "KARMA", "KARMA_CMD", mode=os.environ.get("KARMA_MODE", "yy")
-+        ),
++        "kal": KarmaAnalyzer(),
 +    }
 +
 +

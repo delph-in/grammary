@@ -15,7 +15,8 @@
 #     replace grammars that have since been superseded, e.g.
 #     NorSource_Nov-06.* if your local build now uses a differently
 #     dated snapshot):
-#     bash ~/ltdb-install.sh
+#     bash ~/ltdb-install.sh              # deploy app + DBs
+#     bash ~/ltdb-install.sh --analyzers  # …and install the parse-demo analyzers
 #
 set -euo pipefail
 
@@ -71,7 +72,14 @@ ssh "$SERVER" 'cat > ~/ltdb-install.sh' << 'REMOTE'
 # files behind (e.g. NorSource_Nov-06.* if ~/db-staging now has a
 # differently dated NorSource snapshot instead); add --delete to the
 # web/db rsync below once you've confirmed nothing else depends on them.
+#
+# Usage: bash ~/ltdb-install.sh [--analyzers]
+#   --analyzers  also install the optional parse-demo morphological
+#                analyzers (MeCab, jieba, KARMA) and enable them in .env.
+#                FreeLing/Spanish is heavier and only referenced here.
 set -euo pipefail
+ANALYZERS=0
+[[ "${1:-}" == "--analyzers" ]] && ANALYZERS=1
 echo "==> Copying app code to /var/www/ltdb/ ..."
 sudo rsync -a --exclude='web/db' ~/ltdb-staging/ /var/www/ltdb/
 
@@ -90,6 +98,44 @@ if ! sudo grep -q '^HOME_BLURB_FILE=' /var/www/ltdb/.env 2>/dev/null; then
   echo 'HOME_BLURB_FILE=/var/www/ltdb/blurb.md' | sudo tee -a /var/www/ltdb/.env >/dev/null
 fi
 
+if [[ "$ANALYZERS" -eq 1 ]]; then
+  echo "==> Installing optional parse-demo morphological analyzers ..."
+  # Japanese (MeCab) — system package.
+  sudo apt-get update -qq
+  sudo apt-get install -y mecab mecab-ipadic-utf8 \
+    || echo "    (MeCab install failed; Japanese analysis stays unavailable)"
+
+  # Chinese (jieba) + Kalaallisut (KARMA, needs Python >= 3.12) go into the
+  # same Python environment the ltdb service runs. Override the guess with
+  # LTDB_PIP=/path/to/pip if these paths are wrong for this server.
+  PIP="${LTDB_PIP:-}"
+  if [[ -z "$PIP" ]]; then
+    for cand in /var/www/ltdb/.venv/bin/pip /var/www/ltdb/venv/bin/pip; do
+      [[ -x "$cand" ]] && PIP="$cand" && break
+    done
+  fi
+  if [[ -n "$PIP" ]]; then
+    echo "    using pip: $PIP"
+    sudo "$PIP" install jieba "git+https://github.com/alexhsu-nlp/karma.git" \
+      || echo "    (jieba/KARMA install failed; Chinese/Kalaallisut stay unavailable)"
+  else
+    echo "    ⚠️  Could not find the ltdb service's venv pip; set LTDB_PIP and"
+    echo "        re-run, or install by hand into that venv:"
+    echo "          <venv>/bin/pip install jieba git+https://github.com/alexhsu-nlp/karma.git"
+  fi
+
+  # Turn the analyzers on (idempotent); trim the ISO list to taste.
+  if ! sudo grep -q '^LTDB_ANALYZERS=' /var/www/ltdb/.env 2>/dev/null; then
+    echo 'LTDB_ANALYZERS=jpn,cmn,kal,spa' | sudo tee -a /var/www/ltdb/.env >/dev/null
+  fi
+
+  echo "    Spanish/FreeLing is separate and heavier:"
+  echo "      1) bash scripts/install_freeling.sh   (from a grammary checkout)"
+  echo "      2) place the SRG's build/srg/util tree where the app can reach it"
+  echo "      3) add to /var/www/ltdb/.env:"
+  echo "         SRG_YY_CMD=bash /var/www/ltdb/srg-util/analyze-wrappers/srg-yy.sh"
+fi
+
 echo "==> Restarting ltdb service..."
 sudo systemctl restart ltdb
 sudo systemctl status ltdb --no-pager | head -10
@@ -105,5 +151,7 @@ echo " Staging complete."
 echo ""
 echo " Nothing under /var/www/ltdb was touched. When ready, SSH into"
 echo " compling and move things into place yourself — see"
-echo " ~/ltdb-install.sh for a reviewed-before-you-run starting point."
+echo " ~/ltdb-install.sh for a reviewed-before-you-run starting point:"
+echo "     bash ~/ltdb-install.sh              # deploy app + DBs"
+echo "     bash ~/ltdb-install.sh --analyzers  # …and the parse-demo analyzers"
 echo "======================================================"

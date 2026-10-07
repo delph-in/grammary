@@ -28,3 +28,52 @@ this deployment is an instance of.
 
 The main LTDB app itself (not grew-match) is deployed via
 `scripts/push_to_compling.sh`; see that script's own header comment.
+
+## Deploying the app (and parse-demo analyzers)
+
+`scripts/push_to_compling.sh` must run from a machine that has **SSH access to
+`bond@compling.upol.cz`** and a checkout of this repo with a built
+`etc/ltdb/web/db/`. (If your workstation can't SSH in, pull this repo on a
+machine that can and run it there.) It is a two-step, no-surprises flow —
+step 1 only stages into `~/ltdb-staging` and `~/db-staging`; nothing under
+`/var/www/ltdb` changes until you run the reviewed install script yourself.
+
+**Step 1 — on a machine that can reach compling:**
+
+```bash
+bash scripts/push_to_compling.sh upload
+```
+
+Uploads the app code (including the parse-demo analyzer hook —
+`web/preprocess.py`, the `/parse` change, the demo toggle), `blurb.md`, and all
+grammar DBs, and writes a reference `~/ltdb-install.sh` on the server.
+
+**Step 2 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
+
+```bash
+bash ~/ltdb-install.sh              # deploy app code + grammar DBs, restart ltdb
+bash ~/ltdb-install.sh --analyzers  # …and install the morphological analyzers
+```
+
+`--analyzers` installs MeCab (apt), and jieba + KARMA into the ltdb service's
+Python env (override the auto-detected venv with `LTDB_PIP=/path/to/pip`), then
+adds `LTDB_ANALYZERS=jpn,cmn,kal,spa` to `/var/www/ltdb/.env` and restarts the
+service. That enables Japanese, Chinese, and Kalaallisut from raw text.
+
+The analyzer hook degrades gracefully, so deploying the app **before** installing
+any analyzer is safe — grammars simply expect pre-segmented input until their
+tool is present, and grammars like the ERG are unaffected.
+
+### Spanish / FreeLing (separate, heavier)
+
+`push_to_compling.sh` uploads only `web/db`, not `build/`, so the SRG's
+FreeLing→YY wrapper is not on the server. To enable Spanish:
+
+1. `bash scripts/install_freeling.sh` on the server (installs FreeLing 4.2).
+2. Copy the SRG's `build/srg/util/` tree somewhere the app can read (e.g.
+   `/var/www/ltdb/srg-util/`).
+3. Add to `/var/www/ltdb/.env` and restart `ltdb`:
+   `SRG_YY_CMD=bash /var/www/ltdb/srg-util/analyze-wrappers/srg-yy.sh`
+
+See the "Morphological analyzers" section of the top-level `README.md` for the
+full grammar→analyzer table and environment variables.

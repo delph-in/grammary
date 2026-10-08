@@ -7,9 +7,7 @@ Quick command reference. Full explanation: `deploy/compling/README.md`.
 ```bash
 bash setup.sh --analyzers                                   # 1. prereqs (once)
 bash compile.sh                                             # 2. build grammars (~hours)
-cd etc/ltdb && git apply ../../patches/ltdb-morph-analyzers.patch; cd ../..
-                                                            # 3. patch the app (see note)
-bash scripts/push_to_compling.sh upload                     # 4. stage on compling
+bash scripts/push_to_compling.sh upload                     # 3. stage on compling
 ```
 
 ## On compling (needs sudo)
@@ -23,13 +21,12 @@ bash ~/ltdb-install.sh --analyzers    # deploy app + DBs, install analyzers, res
 
 ## Notes
 
-- **Step 3** is only needed after a *fresh* `compile.sh` (it clones a clean
-  `fcbond/ltdb` without our changes). Check if already applied:
-  `git -C etc/ltdb apply --reverse --check patches/ltdb-morph-analyzers.patch`
+- The analyzer hook and grew `snippets` key are upstream in `fcbond/ltdb`, so the
+  `etc/ltdb` that `compile.sh` clones already has them — no patch step.
 - **App-only, no build?** Skip step 2; just ensure `etc/ltdb/web/db/` exists
   (empty is fine — the DB rsync has no `--delete`).
 - **Can't build + SSH on one box?** Build anywhere, copy `etc/ltdb/` (app +
-  `web/db`) to an SSH-capable machine, then run steps 4–5 there.
+  `web/db`) to an SSH-capable machine, then run steps 3–4 there.
 - **Analyzer env** (`/var/www/ltdb/.env`, set by `--analyzers`):
   `LTDB_ANALYZERS=jpn,cmn,kal,spa`; override the venv with `LTDB_PIP=/path/to/pip`.
 

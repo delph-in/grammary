@@ -216,5 +216,5 @@ boundaries, which is what kal-hpsg's morphological rules expect.
 
 > **Upstream note:** `etc/ltdb/` is a vendored copy of
 > <https://github.com/fcbond/ltdb>. The analyzer hook (`preprocess.py`, the
-> `/parse` change, the demo toggle) lives there; it is captured in
-> `patches/ltdb-morph-analyzers.patch` and should be pushed upstream.
+> `/parse` change, the demo toggle) is upstream (merged PR #61), so a fresh
+> `etc/ltdb` clone already includes it.

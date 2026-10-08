@@ -95,10 +95,8 @@ falls back to the raw input and returns a `note`; the demo's "Analyze" toggle se
 `analyze=off` to bypass preprocessing. Grammars like the ERG have no registered analyzer and
 are unaffected. See the README "Morphological analyzers" section for the full table.
 
-**Pending upstream patch**: `preprocess.py`, the `/parse` hook, and the demo "Analyze" toggle
-were added locally (`etc/ltdb/` is gitignored). The change is captured in
-`patches/ltdb-morph-analyzers.patch` (see `patches/README.md`); push it to
-`https://github.com/fcbond/ltdb`.
+This is upstream in `fcbond/ltdb` (merged PR #61), so a fresh `etc/ltdb` clone
+already has it — no local patch needed.
 
 ## What the Mirror Does NOT Support
 
@@ -125,8 +123,7 @@ Per-grammar query snippet files are stored in `grew_snippets/` (tracked) and syn
 `etc/ltdb/etc/grew_snippets/` by `compile.sh`. The file name matches the sanitized
 `SHORT_GRAMMAR_NAME` (hyphens → underscores), e.g. `grew_snippets/ERG.html`.
 
-`etc/ltdb/scripts/db2grew.py` adds `"snippets": grm_base` to each corpus entry so grew-match
-loads the grammar-specific snippet pane instead of `_default.html`.
-
-**Pending upstream patch**: the `snippets` field in `db2grew.py` was added locally
-(`etc/ltdb/` is gitignored). Push the change to `https://github.com/fcbond/ltdb`.
+`etc/ltdb/scripts/db2grew.py` adds a `"snippets"` key (the sanitized
+`SHORT_GRAMMAR_NAME`) to each corpus entry so grew-match loads the
+grammar-specific snippet pane instead of `_default.html`. This is upstream in
+`fcbond/ltdb` (merged PR #62).

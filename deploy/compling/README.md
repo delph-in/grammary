@@ -51,23 +51,17 @@ step 5 — step 4 only stages into `~/ltdb-staging` and `~/db-staging`.
    change and are happy to leave the server's grammars as they are (then just
    make sure `etc/ltdb/web/db/` exists — empty is fine; the DB rsync has no
    `--delete`).
-3. **Apply the analyzer patch to the app:**
-   ```bash
-   cd etc/ltdb && git apply ../../patches/ltdb-morph-analyzers.patch; cd ../..
-   ```
-   `compile.sh` clones a **clean** `fcbond/ltdb` into `etc/ltdb/` the first time,
-   which does *not* include our local changes — so apply the patch there before
-   uploading. If `etc/ltdb` already carries it, this errors harmlessly; test with
-   `git -C etc/ltdb apply --reverse --check patches/…` (success = already applied).
-4. **Stage on compling (needs SSH):** `bash scripts/push_to_compling.sh upload`
-5. **Install on compling (needs sudo):** `bash ~/ltdb-install.sh --analyzers`
-6. **Spanish / FreeLing:** optional, separate — see below.
+   (The analyzer hook and grew `snippets` key are upstream in `fcbond/ltdb`, so
+   the `etc/ltdb` that `compile.sh` clones already includes them — no patch step.)
+3. **Stage on compling (needs SSH):** `bash scripts/push_to_compling.sh upload`
+4. **Install on compling (needs sudo):** `bash ~/ltdb-install.sh --analyzers`
+5. **Spanish / FreeLing:** optional, separate — see below.
 
 The analyzer tools (MeCab, jieba, KARMA, FreeLing) install on the **server** in
-step 5, not on the build machine. The two commands below are steps 4 and 5 in
+step 4, not on the build machine. The two commands below are steps 3 and 4 in
 detail.
 
-**Step 4 — on a machine that can reach compling:**
+**Step 3 — on a machine that can reach compling:**
 
 ```bash
 bash scripts/push_to_compling.sh upload
@@ -77,7 +71,7 @@ Uploads the app code (including the parse-demo analyzer hook —
 `web/preprocess.py`, the `/parse` change, the demo toggle), `blurb.md`, and all
 grammar DBs, and writes a reference `~/ltdb-install.sh` on the server.
 
-**Step 5 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
+**Step 4 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
 
 ```bash
 bash ~/ltdb-install.sh              # deploy app code + grammar DBs, restart ltdb

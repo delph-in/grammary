@@ -220,7 +220,18 @@ def download_treebank(project: str, info: dict, project_dir: Path) -> None:
 
     # Archive may already be unpacked (e.g. from a previous partial run);
     # in that case just create the gold symlink without re-downloading.
-    if tsdb_dir.exists() and any(p.is_dir() for p in tsdb_dir.iterdir()):
+    # When trb_gold names the expected directory, check for that directory
+    # specifically rather than "any subdirectory at all" -- some grammars
+    # (e.g. SRG) ship their own tsdb/skeletons, tsdb/txt-id etc. directly in
+    # their `vcs` checkout, which satisfied the old "any directory" check
+    # and produced a gold symlink pointing at a directory that was never
+    # actually downloaded.
+    trb_gold = info.get("trb_gold")
+    if trb_gold:
+        already_unpacked = (tsdb_dir / trb_gold).is_dir()
+    else:
+        already_unpacked = tsdb_dir.exists() and any(p.is_dir() for p in tsdb_dir.iterdir())
+    if already_unpacked:
         print(f"Treebank archive already unpacked for {project}, creating gold link.")
         _link_gold(project, info, tsdb_dir, gold_link)
         return

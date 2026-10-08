@@ -91,9 +91,10 @@ analyzer / segmenter on the input before ACE, via `etc/ltdb/web/preprocess.py`. 
 matched by `ISO_CODE` (fallback `SHORT_GRAMMAR_NAME`): `jpn`→MeCab, `cmn`→jieba and
 `kal`→KARMA (in-process Python package) emit space-separated tokens; `spa`→FreeLing emits a
 YY token lattice, so the route adds `-y`/`--yy-rules`. All analyzers are optional: if the tool is missing the route
-falls back to the raw input and returns a `note`; the demo's "Analyze" toggle sends
-`analyze=off` to bypass preprocessing. Grammars like the ERG have no registered analyzer and
-are unaffected. See the README "Morphological analyzers" section for the full table.
+falls back to the raw input and returns a `note`; the demo's "Preprocess" toggle (shown only
+for a grammar with an analyzer actually installed) sends `analyze=off` to bypass preprocessing.
+Grammars like the ERG have no registered analyzer and are unaffected. See the README
+"Morphological analyzers" section for the full table.
 
 This is upstream in `fcbond/ltdb` (merged PR #61), so a fresh `etc/ltdb` clone
 already has it — no local patch needed.

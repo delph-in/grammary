@@ -13,12 +13,20 @@
 # Usage: bash scripts/install_freeling.sh
 #
 # Environment overrides:
-#   FREELING_DEB_URL   full URL to a freeling .deb (skip codename detection)
-#   FREELING_LANGS_URL full URL to the freeling-langs .deb
+#   FREELING_DEB_URL     full URL to a freeling .deb (skip codename detection)
+#   FREELING_LANGS_URL   full URL to the freeling-langs .deb
+#   FREELING_ICU70_URL   full URL to a libicu70 .deb (for distros, e.g. Ubuntu
+#                        24.04 "noble", whose repos only ship a newer libicu
+#                        and can't satisfy the jammy-built package's deps)
 
 set -euo pipefail
 
 BASE_URL="https://github.com/TALP-UPC/FreeLing/releases/download/4.2"
+# Jammy's libicu70 installs side by side with newer libicu majors (versioned
+# .so names, no Conflicts/Breaks against them), so fetching it from the
+# archive is a safe way to satisfy FreeLing's dependency on distros that no
+# longer ship it.
+ICU70_URL="http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu70_70.1-2ubuntu1_amd64.deb"
 
 command -v sudo >/dev/null 2>&1 || {
   echo "Error: sudo is required to install system packages" >&2
@@ -76,7 +84,23 @@ fi
 
 echo "==> Installing with apt (resolves dependencies)"
 sudo apt-get update -qq
+
+# The jammy-built package depends on libicu70, which newer Ubuntu releases
+# (e.g. 24.04 "noble") no longer carry in their repos. Fetch it from the
+# archive ourselves rather than let apt fail on the unmet dependency.
+if ! apt-cache policy libicu70 2>/dev/null | grep -q 'Candidate: [^(]'; then
+  icu70_url="${FREELING_ICU70_URL:-$ICU70_URL}"
+  echo "==> libicu70 not available via apt; downloading it directly"
+  echo "    $icu70_url"
+  wget -q -O "$tmpdir/libicu70.deb" "$icu70_url" || {
+    echo "Error: failed to download $icu70_url" >&2
+    echo "       Set FREELING_ICU70_URL to a libicu70 .deb for your arch." >&2
+    exit 1
+  }
+fi
+
 debs=("$tmpdir/freeling.deb")
+[[ -f "$tmpdir/libicu70.deb" ]] && debs+=("$tmpdir/libicu70.deb")
 [[ -f "$tmpdir/freeling-langs.deb" ]] && debs+=("$tmpdir/freeling-langs.deb")
 sudo apt-get install -y "${debs[@]}"
 
@@ -89,24 +113,30 @@ else
 fi
 
 # --- wiring guidance -------------------------------------------------------
-srg_yy="build/srg/util/analyze-wrappers/srg-yy.sh"
+# The SRG's own wrapper (build/srg/util/analyze-wrappers/srg-yy.sh) goes
+# through FreeLing's Python bindings, which need an exact Python ABI match
+# and a libfreeling.so built against the same boost_regex/ICU as the host --
+# neither holds on Ubuntu 24.04+. scripts/srg_freeling_yy.py gets the same
+# analysis through the plain `analyze` CLI instead, reusing the SRG's own
+# (unmodified) tag-override logic.
+srg_yy="scripts/srg_freeling_yy.py"
 cat <<EOF
 
 ==> Next: point the SRG analyzer at FreeLing
 
-The Spanish Resource Grammar ships a FreeLing->YY wrapper:
-    $srg_yy
-It reads one sentence per line on stdin and prints DELPH-IN YY tokens, which
-the LTDB parse demo feeds to ACE with '-y --yy-rules'. Enable it by exporting:
+$srg_yy reads one sentence on stdin and prints a DELPH-IN YY lattice line,
+which the LTDB parse demo feeds to ACE with '-y --yy-rules'. Enable it by
+exporting:
 
     export FREELINGDIR=/usr
-    export SRG_YY_CMD="bash \$(pwd)/$srg_yy"
+    export SRG_YY_CMD="python3 \$(pwd)/$srg_yy"
 
-(Downloaded grammars live under build/, so run the export from the repo root
-after compile.sh, or use an absolute path to the wrapper.)
+(Downloaded grammars live under build/, and $srg_yy imports modules straight
+from the SRG's build/srg/util/ checkout, so run the export from the repo root
+after compile.sh.)
 
 Quick check:
-    echo "el perro ladra" | bash $srg_yy
+    echo "el perro ladra" | python3 $srg_yy
 
 Then restart the LTDB server; the SRG parse demo will analyze raw Spanish.
 EOF

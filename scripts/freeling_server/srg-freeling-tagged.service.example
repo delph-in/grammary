@@ -1,0 +1,41 @@
+# Example systemd unit for the FreeLing server backing the SRG parse-demo
+# preprocessor's primary (tagged) analysis pass. See scripts/srg_freeling_yy.py
+# for why there are two of these (tagged vs morfo) and scripts/freeling_server/
+# README.md for the full setup.
+#
+# IPAddressDeny=any + IPAddressAllow=localhost restrict this service's network
+# access at the systemd/cgroup level: FreeLing's own server always binds
+# 0.0.0.0 (there is no config option to bind only to loopback), so without
+# this the server would be reachable from the network directly, bypassing the
+# LTDB app entirely. With it, only processes on this same host (e.g.
+# scripts/srg_freeling_yy.py, via analyzer_client) can reach it.
+#
+# Replace every REPLACE_* placeholder for your deployment, then:
+#   sudo cp srg-freeling-tagged.service.example /etc/systemd/system/srg-freeling-tagged.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now srg-freeling-tagged
+#   sudo systemctl status srg-freeling-tagged --no-pager
+
+[Unit]
+Description=FreeLing server (SRG parse-demo preprocessor, tagged pass)
+After=network.target
+
+[Service]
+Type=simple
+User=REPLACE_WITH_USER
+Group=REPLACE_WITH_USER
+Environment=FREELINGDIR=/usr
+
+ExecStartPre=/REPLACE/WITH/path/to/grammary/scripts/freeling_server/gen_server_cfg.sh 5031 /run/srg-freeling-tagged/es.cfg
+ExecStart=/usr/bin/analyze -f /run/srg-freeling-tagged/es.cfg --nocomp --nodate --noquant --rtk --outlv tagged --output json --flush
+Restart=on-failure
+RestartSec=5
+
+RuntimeDirectory=srg-freeling-tagged
+IPAddressDeny=any
+IPAddressAllow=localhost
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

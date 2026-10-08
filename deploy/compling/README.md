@@ -89,14 +89,22 @@ tool is present, and grammars like the ERG are unaffected.
 
 ### Spanish / FreeLing (separate, heavier)
 
-`push_to_compling.sh` uploads only `web/db`, not `build/`, so the SRG's
-FreeLing→YY wrapper is not on the server. To enable Spanish:
+`push_to_compling.sh` uploads only `web/db`, not `build/` or `scripts/`, so
+neither the SRG's own FreeLing→YY wrapper nor `scripts/srg_freeling_yy.py`
+(grammary's CLI-based replacement for it — see the "Morphological analyzers"
+section of the top-level `README.md` for why the SRG's own wrapper doesn't
+run on Ubuntu 24.04+) is on the server. To enable Spanish:
 
 1. `bash scripts/install_freeling.sh` on the server (installs FreeLing 4.2).
 2. Copy the SRG's `build/srg/util/` tree somewhere the app can read (e.g.
    `/var/www/ltdb/srg-util/`).
-3. Add to `/var/www/ltdb/.env` and restart `ltdb`:
-   `SRG_YY_CMD=bash /var/www/ltdb/srg-util/analyze-wrappers/srg-yy.sh`
+3. Copy `scripts/srg_freeling_yy.py` alongside it (e.g.
+   `/var/www/ltdb/srg_freeling_yy.py`).
+4. Add to `/var/www/ltdb/.env` and restart `ltdb`:
+   ```
+   SRG_UTIL_DIR=/var/www/ltdb/srg-util
+   SRG_YY_CMD=python3 /var/www/ltdb/srg_freeling_yy.py
+   ```
 
 See the "Morphological analyzers" section of the top-level `README.md` for the
 full grammar→analyzer table and environment variables.

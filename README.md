@@ -204,15 +204,36 @@ is not installed the demo still parses already-segmented input and shows a hint.
 Install the light analyzers (MeCab, jieba, KARMA) with `bash setup.sh
 --analyzers`; FreeLing is heavier and installed by `bash
 scripts/install_freeling.sh`. Restrict which analyzers run with
-`LTDB_ANALYZERS` (comma-separated ISO codes); the "Analyze" checkbox in the demo
-lets a user bypass preprocessing to paste already-segmented input.
+`LTDB_ANALYZERS` (comma-separated ISO codes); the "Preprocess" checkbox in the
+demo (shown only for a grammar with an analyzer actually installed) lets a
+user bypass preprocessing to paste already-segmented input.
 
 `SRG_YY_CMD` names a command that reads a sentence on stdin and prints a YY
-lattice on stdout; the SRG ships exactly such a FreeLing→YY wrapper at
-`build/srg/util/analyze-wrappers/srg-yy.sh` (and the FreeLing API under
-`build/srg/util/freeling_api/`). KARMA is a pure-Python package imported
-directly — no command needed; it emits morpheme-segmented text with `-`/`=`
-boundaries, which is what kal-hpsg's morphological rules expect.
+lattice on stdout. The SRG ships its own FreeLing→YY wrapper at
+`build/srg/util/analyze-wrappers/srg-yy.sh`, but that goes through FreeLing's
+Python bindings (`pyfreeling_api`), a compiled extension tied to one exact
+Python ABI; it won't load on Ubuntu 24.04+ (see
+`scripts/srg_freeling_yy.py`'s docstring for why — in short, neither the
+Python version nor `libfreeling.so`'s own boost_regex/ICU linkage matches).
+Use `scripts/srg_freeling_yy.py` instead: it gets the same analysis through
+the plain `analyze` CLI, then hands it to the SRG's own (unmodified)
+`override_tag`/`override_lemma` for the grammar-specific tag remapping, so
+that stays in sync with whatever SRG revision is checked out. It talks to
+two persistent FreeLing servers rather than spawning `analyze` fresh per
+request (~3s dictionary load each time otherwise) — see
+`scripts/freeling_server/README.md` for how those are set up, and
+`scripts/srg_freeling_yy.py`'s own docstring for a YY-lattice formatting fix
+needed for clitic-attached words (verified by actually parsing SRG treebank
+sentences with ACE: 0/120 preprocessing failures, parse rate rose from
+63% to 68% after the fix):
+
+    export SRG_FREELING_TAGGED_PORT=5031   # defaults shown; only needed if
+    export SRG_FREELING_MORFO_PORT=5032    # you changed the servers' ports
+    export SRG_YY_CMD="python3 $(pwd)/scripts/srg_freeling_yy.py"
+
+KARMA is a pure-Python package imported directly — no command needed; it
+emits morpheme-segmented text with `-`/`=` boundaries, which is what
+kal-hpsg's morphological rules expect.
 
 > **Upstream note:** `etc/ltdb/` is a vendored copy of
 > <https://github.com/fcbond/ltdb>. The analyzer hook (`preprocess.py`, the

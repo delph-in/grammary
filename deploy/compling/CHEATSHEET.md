@@ -34,8 +34,10 @@ bash ~/ltdb-install.sh --analyzers    # deploy app + DBs, install analyzers, res
 
 ```bash
 bash scripts/install_freeling.sh      # install FreeLing 4.2
-# copy the SRG's build/srg/util/ tree to e.g. /var/www/ltdb/srg-util/, then:
-echo 'SRG_YY_CMD=bash /var/www/ltdb/srg-util/analyze-wrappers/srg-yy.sh' \
+# copy the SRG's build/srg/util/ tree to e.g. /var/www/ltdb/srg-util/, and
+# scripts/srg_freeling_yy.py (CLI-based replacement for the SRG's own
+# Python-bindings wrapper, which doesn't run on 24.04+) alongside it, then:
+printf 'SRG_UTIL_DIR=/var/www/ltdb/srg-util\nSRG_YY_CMD=python3 /var/www/ltdb/srg_freeling_yy.py\n' \
   | sudo tee -a /var/www/ltdb/.env
 sudo systemctl restart ltdb
 ```

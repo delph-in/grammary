@@ -131,9 +131,14 @@ if [[ "$ANALYZERS" -eq 1 ]]; then
 
   echo "    Spanish/FreeLing is separate and heavier:"
   echo "      1) bash scripts/install_freeling.sh   (from a grammary checkout)"
-  echo "      2) place the SRG's build/srg/util tree where the app can reach it"
+  echo "      2) place the SRG's build/srg/util tree where the app can reach it,"
+  echo "         e.g. /var/www/ltdb/srg-util/, and copy scripts/srg_freeling_yy.py"
+  echo "         alongside it (the SRG's own wrapper needs FreeLing's Python"
+  echo "         bindings, which don't run on 24.04+; this one goes through the"
+  echo "         analyze CLI instead -- see README.md's analyzer table)"
   echo "      3) add to /var/www/ltdb/.env:"
-  echo "         SRG_YY_CMD=bash /var/www/ltdb/srg-util/analyze-wrappers/srg-yy.sh"
+  echo "         SRG_UTIL_DIR=/var/www/ltdb/srg-util"
+  echo "         SRG_YY_CMD=python3 /var/www/ltdb/srg_freeling_yy.py"
 fi
 
 echo "==> Restarting ltdb service..."

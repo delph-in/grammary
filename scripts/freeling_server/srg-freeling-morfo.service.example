@@ -1,0 +1,38 @@
+# Example systemd unit for the FreeLing server backing the SRG parse-demo
+# preprocessor's secondary (morfo) analysis pass -- used only to recover the
+# non-selected candidate analyses for <NoDisambiguate> words. See
+# scripts/srg_freeling_yy.py and scripts/freeling_server/README.md.
+#
+# Same IPAddressDeny/Allow rationale as srg-freeling-tagged.service.example:
+# FreeLing's server always binds 0.0.0.0, so this is what actually keeps it
+# off the network and reachable only from this host.
+#
+# Replace every REPLACE_* placeholder for your deployment, then:
+#   sudo cp srg-freeling-morfo.service.example /etc/systemd/system/srg-freeling-morfo.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now srg-freeling-morfo
+#   sudo systemctl status srg-freeling-morfo --no-pager
+
+[Unit]
+Description=FreeLing server (SRG parse-demo preprocessor, morfo pass)
+After=network.target
+
+[Service]
+Type=simple
+User=REPLACE_WITH_USER
+Group=REPLACE_WITH_USER
+Environment=FREELINGDIR=/usr
+
+ExecStartPre=/REPLACE/WITH/path/to/grammary/scripts/freeling_server/gen_server_cfg.sh 5032 /run/srg-freeling-morfo/es.cfg
+ExecStart=/usr/bin/analyze -f /run/srg-freeling-morfo/es.cfg --nocomp --nodate --noquant --outlv morfo --output json --flush
+Restart=on-failure
+RestartSec=5
+
+RuntimeDirectory=srg-freeling-morfo
+IPAddressDeny=any
+IPAddressAllow=localhost
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

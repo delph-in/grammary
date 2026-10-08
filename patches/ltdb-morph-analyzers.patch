@@ -1,9 +1,9 @@
 diff --git a/tests/test_preprocess.py b/tests/test_preprocess.py
 new file mode 100644
-index 0000000..cf057f7
+index 0000000..21b32e3
 --- /dev/null
 +++ b/tests/test_preprocess.py
-@@ -0,0 +1,186 @@
+@@ -0,0 +1,246 @@
 +"""Unit tests for web.preprocess (the morphological-analyzer hook)."""
 +
 +from __future__ import annotations
@@ -88,7 +88,9 @@ index 0000000..cf057f7
 +    monkeypatch.setitem(pp.REGISTRY, "jpn", _Stub("MeCab", exc=RuntimeError("boom")))
 +    r = pp.preprocess_for({"ISO_CODE": "jpn"}, "犬は猫")
 +    assert r.ace_input == "犬は猫"
-+    assert "failed" in (r.note or "")
++    assert r.analyzer == "MeCab"
++    assert r.note  # a generic note is present
++    assert "boom" not in (r.note or "")  # raw exception text is not leaked
 +
 +
 +def test_preprocess_disabled_by_env(monkeypatch):
@@ -101,6 +103,38 @@ index 0000000..cf057f7
 +    r = pp.preprocess_for({"ISO_CODE": "jpn"}, "犬は猫")
 +    assert r.ace_input == "犬は猫"
 +    assert r.analyzer is None
++
++
++class _BoomAvailable:
++    """Analyzer whose availability discovery itself raises."""
++
++    name = "Boom"
++
++    def available(self):
++        raise RuntimeError("secret /opt/path discovery failure")
++
++    def run(self, text):
++        return PreprocessResult(ace_input="unused", analyzer=self.name)
++
++
++def test_preprocess_available_exception_falls_back_without_500(monkeypatch):
++    monkeypatch.setitem(pp.REGISTRY, "jpn", _BoomAvailable())
++    r = pp.preprocess_for({"ISO_CODE": "jpn"}, "犬は猫")
++    assert r.ace_input == "犬は猫"  # graceful fallback, not an exception
++    assert r.analyzer == "Boom"
++    # the raw exception text (which can leak paths) is not sent to the client
++    assert "secret" not in (r.note or "")
++
++
++def test_preprocess_command_empty_output_falls_back(monkeypatch):
++    # spa uses CommandAnalyzer; `true` is available but prints nothing →
++    # run() raises → preprocess_for falls back to raw with no leaked YY flags
++    monkeypatch.setenv("SRG_YY_CMD", "true")
++    r = pp.preprocess_for({"ISO_CODE": "spa"}, "el perro ladra")
++    assert r.ace_input == "el perro ladra"
++    assert r.analyzer == "FreeLing"
++    assert r.extra_cmdargs == []
++    assert r.yy is False
 +
 +
 +# --- CommandAnalyzer (FreeLing / KARMA style) ----------------------------
@@ -130,6 +164,23 @@ index 0000000..cf057f7
 +    monkeypatch.delenv("SRG_YY_CMD", raising=False)
 +    a = pp.CommandAnalyzer("FreeLing", "SRG_YY_CMD")
 +    assert a.available() is False
++
++
++def test_command_analyzer_empty_output_raises(monkeypatch):
++    # exit 0 with no stdout must not hand ACE an empty sentence + YY flags
++    monkeypatch.setenv("SRG_YY_CMD", "true")
++    a = pp.CommandAnalyzer("FreeLing", "SRG_YY_CMD", mode="yy", yy_rules=True)
++    import pytest
++
++    with pytest.raises(ValueError):
++        a.run("el perro ladra")
++
++
++def test_command_analyzer_quoted_args(monkeypatch):
++    # shlex.split keeps quoted arguments together
++    monkeypatch.setenv("SRG_YY_CMD", 'printf "%s" "hi there"')
++    a = pp.CommandAnalyzer("FreeLing", "SRG_YY_CMD", mode="segment")
++    assert a._command() == ["printf", "%s", "hi there"]
 +
 +
 +# --- KarmaAnalyzer (in-process Kalaallisut morphology) -------------------
@@ -178,7 +229,16 @@ index 0000000..cf057f7
 +    _install_fake_karma(monkeypatch, [[]])  # no analysis for the word
 +    r = pp.KarmaAnalyzer().run("xyz")
 +    assert r.ace_input == "xyz"
-+    assert "no segmentation" in (r.note or "")
++    assert "could not segment" in (r.note or "")
++
++
++def test_karma_run_partial_failure_falls_back_to_raw(monkeypatch):
++    # one word analyzed, one not: must NOT drop the unknown word (that could
++    # yield a misleadingly successful parse of a shorter sentence)
++    _install_fake_karma(monkeypatch, [[_Morph("inuk")], []])
++    r = pp.KarmaAnalyzer().run("inuk qqq")
++    assert r.ace_input == "inuk qqq"  # raw, unchanged
++    assert "could not segment" in (r.note or "")
 +
 +
 +def test_karma_available_reflects_importlib(monkeypatch):
@@ -336,10 +396,10 @@ index 0bfee90..bbad098 100644
 +        ]
 diff --git a/web/preprocess.py b/web/preprocess.py
 new file mode 100644
-index 0000000..a57964a
+index 0000000..a41ee15
 --- /dev/null
 +++ b/web/preprocess.py
-@@ -0,0 +1,340 @@
+@@ -0,0 +1,361 @@
 +"""Optional per-grammar input preprocessing (morphological analysis / segmentation).
 +
 +Some DELPH-IN grammars delegate tokenization or morphology to an external
@@ -367,11 +427,15 @@ index 0000000..a57964a
 +from __future__ import annotations
 +
 +import importlib.util
++import logging
 +import os
++import shlex
 +import shutil
 +import subprocess
 +from dataclasses import dataclass, field
 +from typing import Protocol, runtime_checkable
++
++logger = logging.getLogger(__name__)
 +
 +# Map alternative / 2-letter ISO codes onto the canonical key used in REGISTRY.
 +_ISO_ALIASES = {
@@ -522,9 +586,13 @@ index 0000000..a57964a
 +        self._yy_rules = yy_rules
 +
 +    def _command(self) -> list[str]:
-+        """Return the configured command as an argv list, or [] if unset."""
++        """Return the configured command as an argv list, or [] if unset.
++
++        Parsed with :func:`shlex.split` so quoted arguments and paths
++        containing spaces survive.
++        """
 +        raw = os.environ.get(self._env_cmd, "").strip()
-+        return raw.split() if raw else []
++        return shlex.split(raw) if raw else []
 +
 +    def available(self) -> bool:
 +        """Return True if the command is configured and its program exists."""
@@ -542,6 +610,10 @@ index 0000000..a57964a
 +            check=True,
 +        )
 +        out = proc.stdout.strip()
++        if not out:
++            # Exit 0 but no output: don't hand ACE an empty sentence (with YY
++            # flags still set). Raise so preprocess_for() falls back to raw.
++            raise ValueError(f"{self.name} produced no output")
 +        if self._mode == "yy":
 +            extra = ["-y"] + (["--yy-rules"] if self._yy_rules else [])
 +            return PreprocessResult(
@@ -581,17 +653,21 @@ index 0000000..a57964a
 +        parsed = parse_sentence(text.lower())
 +        segs: list[str] = []
 +        multiple = False
++        unanalyzed = False
 +        for analyses in parsed.result:
 +            if not analyses:  # a word KARMA could not analyze
-+                continue
++                unanalyzed = True
++                break
 +            if len(analyses) > 1:
 +                multiple = True
 +            segs.append(str(analyses[0]))
-+        if not segs:
++        if unanalyzed or not segs:
++            # Dropping a word would leave a shorter sentence that could parse
++            # and look misleadingly successful; fall back to the raw input.
 +            return PreprocessResult(
 +                ace_input=text,
 +                analyzer=self.name,
-+                note="KARMA produced no segmentation; parsing the raw input.",
++                note="KARMA could not segment every word; parsing the raw input.",
 +            )
 +        note = (
 +            "KARMA found multiple analyses; using the first for each word."
@@ -663,25 +739,30 @@ index 0000000..a57964a
 +        return PreprocessResult(ace_input=text)
 +
 +    analyzer = REGISTRY[iso]
-+    if not analyzer.available():
-+        return PreprocessResult(
-+            ace_input=text,
-+            analyzer=analyzer.name,
-+            note=(
-+                f"{analyzer.name} is not installed on the server; "
-+                "enter already-segmented input, or install the analyzer."
-+            ),
-+        )
++    # Availability discovery (e.g. shutil.which, imports) can itself raise, so
++    # it is inside the guard — any failure degrades to the raw input rather than
++    # surfacing a 500. Notes are kept generic; details (which may include tool
++    # paths or configured arguments) are logged server-side, not sent to the client.
 +    try:
++        if not analyzer.available():
++            return PreprocessResult(
++                ace_input=text,
++                analyzer=analyzer.name,
++                note=(
++                    f"{analyzer.name} is not installed on the server; "
++                    "enter already-segmented input, or install the analyzer."
++                ),
++            )
 +        return analyzer.run(text)
-+    except Exception as exc:  # noqa: BLE001 - any tool failure degrades gracefully
++    except Exception:  # noqa: BLE001 - any tool failure degrades gracefully
++        logger.exception("analyzer %s failed; falling back to raw input", analyzer.name)
 +        return PreprocessResult(
 +            ace_input=text,
 +            analyzer=analyzer.name,
-+            note=f"{analyzer.name} failed ({exc}); parsing the raw input instead.",
++            note=f"{analyzer.name} could not analyze the input; parsing it as given.",
 +        )
 diff --git a/web/routes.py b/web/routes.py
-index 37d88b5..92c7acd 100644
+index 37d88b5..4b171a0 100644
 --- a/web/routes.py
 +++ b/web/routes.py
 @@ -45,6 +45,7 @@ from .db import (
@@ -715,24 +796,29 @@ index 37d88b5..92c7acd 100644
  @app.route("/demo")
  def demo():
      """Show the interactive parsing demo page."""
-@@ -732,6 +749,16 @@ def parse_sentence():
+@@ -732,6 +749,11 @@ def parse_sentence():
      if len(input_text) > MAX_PARSE_CHARS:
          return jsonify({"error": f"Input is too long (max {MAX_PARSE_CHARS} characters)"}), 400
  
-+    # Optionally run a per-grammar morphological analyzer / segmenter so that
-+    # grammars needing external tokenization (Japanese, Chinese, Spanish,
-+    # Kalaallisut, …) can be parsed from raw text. analyze=off lets a user paste
-+    # already-segmented or YY input and bypass preprocessing. Grammars without a
-+    # registered analyzer (e.g. the ERG) are unaffected.
-+    if request.form.get("analyze") == "off":
-+        pp = preprocess_for({}, input_text)
-+    else:
-+        pp = preprocess_for(grammar_meta(grm), input_text)
++    # analyze=off lets a user paste already-segmented input and skip the
++    # per-grammar analyzer; the analysis itself runs later, under the ACE
++    # concurrency guard, so it can't be used to spawn work before admission.
++    analyze_off = request.form.get("analyze") == "off"
 +
      results_raw = request.form.get("results", "5")
      try:
          n_results = int(results_raw)
-@@ -753,9 +780,10 @@ def parse_sentence():
+@@ -748,14 +770,20 @@ def parse_sentence():
+         return jsonify({"error": "ACE is busy; please try again in a moment."}), 503
+ 
+     try:
++        # Run the per-grammar analyzer / segmenter now that we hold an ACE
++        # slot, so external analyzer processes and in-process jieba/KARMA are
++        # bounded by the same admission control as parsing. Grammars without a
++        # registered analyzer (e.g. the ERG) pass through unchanged.
++        pp = preprocess_for({} if analyze_off else grammar_meta(grm), input_text)
+         # --udx=all annotates every node with its type (lexical type for
+         # lexemes, phrase type for rules); --rooted-derivations puts the
          # matching root condition at the top of the tree
          response = _ace.parse(
              dat,
@@ -757,7 +843,7 @@ index 37d88b5..92c7acd 100644
              "results": results,
              "errors": errors,
 diff --git a/web/templates/demo.html b/web/templates/demo.html
-index b686810..599dc01 100644
+index b686810..67b91a2 100644
 --- a/web/templates/demo.html
 +++ b/web/templates/demo.html
 @@ -79,6 +79,11 @@
@@ -767,7 +853,7 @@ index b686810..599dc01 100644
 +      <div class="form-check" id="analyzeToggleWrap">
 +        <input class="form-check-input" type="checkbox" id="wantAnalyze" checked>
 +        <label class="form-check-label" for="wantAnalyze">Analyze</label>
-+        <small class="text-muted ms-1" title="Run this grammar's morphological analyzer / segmenter (e.g. MeCab, jieba, FreeLing, KARMA) on the input before parsing. Uncheck to parse already-segmented or YY input as typed.">(?)</small>
++        <small class="text-muted ms-1" title="Run this grammar's morphological analyzer / segmenter (e.g. MeCab, jieba, FreeLing, KARMA) on the input before parsing. Uncheck to parse already-segmented input as typed.">(?)</small>
 +      </div>
      </div>
    </form>

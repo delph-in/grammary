@@ -205,7 +205,7 @@ Install the light analyzers (MeCab, jieba, KARMA) with `bash setup.sh
 --analyzers`; FreeLing is heavier and installed by `bash
 scripts/install_freeling.sh`. Restrict which analyzers run with
 `LTDB_ANALYZERS` (comma-separated ISO codes); the "Analyze" checkbox in the demo
-lets a user bypass preprocessing to paste pre-segmented or YY input.
+lets a user bypass preprocessing to paste already-segmented input.
 
 `SRG_YY_CMD` names a command that reads a sentence on stdin and prints a YY
 lattice on stdout; the SRG ships exactly such a FreeLing→YY wrapper at

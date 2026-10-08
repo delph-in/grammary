@@ -33,6 +33,9 @@ The main LTDB app itself (not grew-match) is deployed via
 
 ### Order of operations
 
+> Just the commands? See `deploy/compling/CHEATSHEET.md`.
+
+
 Steps 1–4 run on your **build machine**, which must also have SSH access to
 compling (step 4 uses rsync/ssh). Step 5 runs on compling. If no single machine
 can both build and SSH in, build on one and copy `etc/ltdb/` (app + `web/db`) to

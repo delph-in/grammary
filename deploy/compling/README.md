@@ -31,14 +31,40 @@ The main LTDB app itself (not grew-match) is deployed via
 
 ## Deploying the app (and parse-demo analyzers)
 
-`scripts/push_to_compling.sh` must run from a machine that has **SSH access to
-`bond@compling.upol.cz`** and a checkout of this repo with a built
-`etc/ltdb/web/db/`. (If your workstation can't SSH in, pull this repo on a
-machine that can and run it there.) It is a two-step, no-surprises flow —
-step 1 only stages into `~/ltdb-staging` and `~/db-staging`; nothing under
-`/var/www/ltdb` changes until you run the reviewed install script yourself.
+### Order of operations
 
-**Step 1 — on a machine that can reach compling:**
+Steps 1–4 run on your **build machine**, which must also have SSH access to
+compling (step 4 uses rsync/ssh). Step 5 runs on compling. If no single machine
+can both build and SSH in, build on one and copy `etc/ltdb/` (app + `web/db`) to
+an SSH-capable machine before step 4. Nothing on the server changes until
+step 5 — step 4 only stages into `~/ltdb-staging` and `~/db-staging`.
+
+1. **Prerequisites (once):** `bash setup.sh --analyzers`
+   — build tools + uv (the `--analyzers` extras only matter on the server, but
+   installing them here is harmless).
+2. **Build the grammars:** `bash compile.sh`
+   — downloads every grammar, compiles with ACE, and fills `build/DBS/` and
+   `etc/ltdb/web/db/`. Slow (~hours). Skip if you are shipping *only* the app
+   change and are happy to leave the server's grammars as they are (then just
+   make sure `etc/ltdb/web/db/` exists — empty is fine; the DB rsync has no
+   `--delete`).
+3. **Apply the analyzer patch to the app:**
+   ```bash
+   cd etc/ltdb && git apply ../../patches/ltdb-morph-analyzers.patch; cd ../..
+   ```
+   `compile.sh` clones a **clean** `fcbond/ltdb` into `etc/ltdb/` the first time,
+   which does *not* include our local changes — so apply the patch there before
+   uploading. If `etc/ltdb` already carries it, this errors harmlessly; test with
+   `git -C etc/ltdb apply --reverse --check patches/…` (success = already applied).
+4. **Stage on compling (needs SSH):** `bash scripts/push_to_compling.sh upload`
+5. **Install on compling (needs sudo):** `bash ~/ltdb-install.sh --analyzers`
+6. **Spanish / FreeLing:** optional, separate — see below.
+
+The analyzer tools (MeCab, jieba, KARMA, FreeLing) install on the **server** in
+step 5, not on the build machine. The two commands below are steps 4 and 5 in
+detail.
+
+**Step 4 — on a machine that can reach compling:**
 
 ```bash
 bash scripts/push_to_compling.sh upload
@@ -48,7 +74,7 @@ Uploads the app code (including the parse-demo analyzer hook —
 `web/preprocess.py`, the `/parse` change, the demo toggle), `blurb.md`, and all
 grammar DBs, and writes a reference `~/ltdb-install.sh` on the server.
 
-**Step 2 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
+**Step 5 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
 
 ```bash
 bash ~/ltdb-install.sh              # deploy app code + grammar DBs, restart ltdb

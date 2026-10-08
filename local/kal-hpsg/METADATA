@@ -36,7 +36,27 @@ VCS="git clone https://github.com/alexhsu-nlp/kal-hpsg.git"
 
 ## Semi-colon separated list of required external resources
 EXTERNAL_RESOURCES=""
-ASSOCIATED_RESOURCES=""
+ASSOCIATED_RESOURCES="https://github.com/alexhsu-nlp/karma; https://github.com/alexhsu-nlp/kal_igt_corpus_kalaallisut-sungiusaatit"
+
+## Example sentences shown in the LTDB parse demo. Raw orthographic surface
+## forms (not KARMA-segmented) -- KARMA runs as the demo's preprocessor and
+## expects ordinary typed text. Drawn from the kal_igt_corpus_kalaallisut-
+## sungiusaatit testsuite (see ASSOCIATED_RESOURCES above) and confirmed to
+## parse against this grammar.
+EXAMPLES = [ "Jensenikkut Maniitsumut tikipput.",
+    "Kutaa, qanoq ateqarpisi?",
+    "Kalaaliuvoq, kisianni qallunaatut oqaluttarpoq.",
+    "Immannguaq oqalussinnaavunga.",
+    "Sooq kalaallisut atuanngilatit?",
+    "Aamma allanik sutorpit?",
+    "Aqissit tingipput.",
+    "Biibi qallunaatut oqaluttarpoq.",
+    "Naluara.",
+    "Taava naalagiat tussiarput.",
+    "Ullumi sussavit?",
+    "Parnuuna innarpoq.",
+    "Nuliara kaffiliussaaq.",
+    "Sisimiut assut alianaapput." ]
 
 ## Grammar type
 GRAMMAR_TYPE="Experimental grammar"

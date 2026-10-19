@@ -20,21 +20,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install system dependencies
         run: sudo apt-get install -y subversion
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v7
 
       - name: Check for grammar updates
         id: check
         run: |
           set +e
-          uv run python scripts/check_grammar_updates.py --output report.md
-          echo "drift=$?" >> "$GITHUB_OUTPUT"
+          uv run --python 3.12 python scripts/check_grammar_updates.py --output report.md
+          rc=$?
           set -e
+          # Exit 1 means drift, but an uncaught exception also exits 1, so
+          # only trust it when the report was actually written.
+          if [ "$rc" -ne 0 ] && { [ "$rc" -ne 1 ] || [ ! -f report.md ]; }; then
+            echo "::error::check_grammar_updates.py failed (exit $rc)"
+            exit "$rc"
+          fi
+          echo "drift=$rc" >> "$GITHUB_OUTPUT"
 
       - name: Open or refresh tracking issue
         if: steps.check.outputs.drift == '1'

@@ -45,6 +45,12 @@ no `sudo`, nothing under `/var/www/ltdb` touched. Moving staged files into place
 a full DB sync can leave superseded grammar files, e.g. an old dated snapshot of a re-fetched
 grammar, behind).
 
+The same upload also sends the grew-match corpora (`build/DBS/*-grew/`, minus grew's
+`_build_grew` cache) to `~/db-staging/grew/`, with a `grew_corpora.json` whose absolute graph
+paths are rewritten for the server by `scripts/remote_grew_corpora.py`. The grew-match service
+reads that directory directly, so there is no separate install copy: `~/ltdb-install.sh`
+recompiles the corpora and restarts `grew-match` after restarting `ltdb`.
+
 grew-match (structural corpus search) is deployed separately, as its own systemd service under
 `bond` (not `www-data` — entirely independent of `/var/www/ltdb`), reverse-proxied by Apache
 alongside the existing `/ltdb` proxy. The generic version of that setup — script, systemd unit,

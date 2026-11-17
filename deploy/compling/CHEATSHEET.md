@@ -14,6 +14,7 @@ bash scripts/push_to_compling.sh upload                     # 3. stage on compli
 
 ```bash
 bash ~/ltdb-install.sh --analyzers    # deploy app + DBs, install analyzers, restart
+                                      # ltdb, recompile corpora + restart grew-match
 # (omit --analyzers to deploy app + DBs only)
 ```
 

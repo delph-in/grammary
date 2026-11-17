@@ -4,6 +4,10 @@
 # directories below (~/ltdb-staging, ~/db-staging) — nothing under
 # /var/www/ltdb is touched, and no sudo is used or required.
 #
+# The grew-match corpora (graph exports + a server-side corpora
+# description) go to ~/db-staging/grew, which the grew-match service
+# reads directly; it only picks them up when restarted in step 2.
+#
 # Run this in TWO steps:
 #
 #   STEP 1 — on this machine:
@@ -15,7 +19,8 @@
 #     replace grammars that have since been superseded, e.g.
 #     NorSource_Nov-06.* if your local build now uses a differently
 #     dated snapshot):
-#     bash ~/ltdb-install.sh              # deploy app + DBs
+#     bash ~/ltdb-install.sh              # deploy app + DBs, recompile
+#                                         # and restart grew-match
 #     bash ~/ltdb-install.sh --analyzers  # …and install the parse-demo analyzers
 #
 set -euo pipefail
@@ -26,12 +31,17 @@ LOCAL_APP="etc/ltdb"
 # (build/DBS itself can contain empty placeholders for failed builds)
 LOCAL_DBS="etc/ltdb/web/db"
 LOCAL_BLURB="blurb.md"
+# merged grew corpora description written by scripts/build-ltdb.sh
+LOCAL_GREW_CORPORA="$LOCAL_DBS/grew_corpora.json"
+# must be the directory of GREW_CORPORA in deploy/compling/grew-match.service
+REMOTE_GREW_DIR="/home/bond/db-staging/grew"
 
 usage() {
   echo "Usage: bash scripts/push_to_compling.sh upload"
   echo ""
-  echo "  upload   — stage app code, blurb.md, and all grammar DBs on"
-  echo "             compling (run on this machine; no sudo)"
+  echo "  upload   — stage app code, blurb.md, all grammar DBs, and the"
+  echo "             grew-match corpora on compling (run on this machine;"
+  echo "             no sudo)"
   echo ""
   echo "Then, when ready, SSH into compling and move things into place"
   echo "yourself (see ~/ltdb-install.sh, written by this script, for a"
@@ -61,6 +71,34 @@ ssh "$SERVER" "mkdir -p ~/db-staging"
 rsync -az --progress --include='*.db' --include='*.dat' --include='*.log' \
   --exclude='*' "$LOCAL_DBS/" "$SERVER:~/db-staging/"
 echo "    done."
+
+# ── grew-match corpora ──────────────────────────────────────────────────────────
+# The grew-match service reads its corpora straight from $REMOTE_GREW_DIR
+# (GREW_CORPORA in deploy/compling/grew-match.service), not from
+# /var/www/ltdb. Nothing changes for visitors until grew-match is restarted
+# (~/ltdb-install.sh does that), but there is no separate staging copy.
+# Graph paths in the corpora description are absolute, so they are
+# rewritten for the server; _build_grew (grew's compiled cache) is left
+# out and rebuilt there. The description goes up last so it never names
+# graphs that have not arrived yet.
+echo ""
+if [[ -f "$LOCAL_GREW_CORPORA" ]]; then
+  echo "==> Uploading grew-match corpora to $REMOTE_GREW_DIR/ ..."
+  grew_tmp="$(mktemp -d)"
+  trap 'rm -rf "$grew_tmp"' EXIT
+  python3 scripts/remote_grew_corpora.py "$LOCAL_GREW_CORPORA" \
+    "$REMOTE_GREW_DIR" "$grew_tmp/grew_corpora.json" > "$grew_tmp/exports"
+  ssh "$SERVER" "mkdir -p '$REMOTE_GREW_DIR'"
+  while IFS= read -r export_dir; do
+    rsync -az --exclude='_build_grew' --exclude='corpora.json' \
+      "$export_dir/" "$SERVER:$REMOTE_GREW_DIR/$(basename "$export_dir")/"
+  done < "$grew_tmp/exports"
+  rsync -az "$grew_tmp/grew_corpora.json" \
+    "$SERVER:$REMOTE_GREW_DIR/grew_corpora.json"
+  echo "    done ($(wc -l < "$grew_tmp/exports") grammar exports)."
+else
+  echo "==> No $LOCAL_GREW_CORPORA; skipping grew-match corpora."
+fi
 
 # ── Write a reference install script on compling ────────────────────────────────
 echo ""
@@ -145,6 +183,29 @@ echo "==> Restarting ltdb service..."
 sudo systemctl restart ltdb
 sudo systemctl status ltdb --no-pager | head -10
 
+# grew-match serves ~/db-staging/grew directly (see grew-match.service).
+# Compile the corpora first, as bond: the service's own start-up compile
+# has to finish inside its readiness wait, which a large changed corpus
+# (e.g. the ERG) would overrun.
+GREW_CORPORA_FILE="$HOME/db-staging/grew/grew_corpora.json"
+if [[ -f "$GREW_CORPORA_FILE" ]] \
+    && systemctl cat grew-match.service >/dev/null 2>&1; then
+  echo "==> Compiling grew-match corpora (no-op when up to date) ..."
+  (
+    cd ~/ltdb-staging
+    set +u
+    source scripts/opam-env.sh
+    set -u
+    corpusbank=grew_match_quick/local_files/corpusbank
+    mkdir -p "$corpusbank"
+    cp "$GREW_CORPORA_FILE" "$corpusbank/gmq_corpora.json"
+    grew compile -CORPUSBANK "$corpusbank"
+  )
+  echo "==> Restarting grew-match service..."
+  sudo systemctl restart grew-match
+  sudo systemctl status grew-match --no-pager | head -10
+fi
+
 echo ""
 echo "Done. https://compling.upol.cz/ltdb"
 REMOTE
@@ -157,6 +218,6 @@ echo ""
 echo " Nothing under /var/www/ltdb was touched. When ready, SSH into"
 echo " compling and move things into place yourself — see"
 echo " ~/ltdb-install.sh for a reviewed-before-you-run starting point:"
-echo "     bash ~/ltdb-install.sh              # deploy app + DBs"
+echo "     bash ~/ltdb-install.sh              # deploy app + DBs, refresh grew-match"
 echo "     bash ~/ltdb-install.sh --analyzers  # …and the parse-demo analyzers"
 echo "======================================================"

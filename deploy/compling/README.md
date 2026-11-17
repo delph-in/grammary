@@ -71,6 +71,14 @@ Uploads the app code (including the parse-demo analyzer hook —
 `web/preprocess.py`, the `/parse` change, the demo toggle), `blurb.md`, and all
 grammar DBs, and writes a reference `~/ltdb-install.sh` on the server.
 
+It also uploads the grew-match corpora to `~/db-staging/grew/`: each
+`build/DBS/<grammar>-grew/` export (without grew's `_build_grew` cache) plus a
+`grew_corpora.json` whose graph paths are rewritten for the server
+(`scripts/remote_grew_corpora.py`). The grew-match service reads this directory
+directly (`GREW_CORPORA` in `grew-match.service`), so there is no second copy
+to install; the running service keeps its already-loaded corpora until step 4
+recompiles them and restarts it.
+
 **Step 4 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
 
 ```bash

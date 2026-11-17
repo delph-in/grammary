@@ -72,6 +72,20 @@ rsync -az --progress --include='*.db' --include='*.dat' --include='*.log' \
   --exclude='*' "$LOCAL_DBS/" "$SERVER:~/db-staging/"
 echo "    done."
 
+# ── Stale-version check: manifest + helper ─────────────────────────────────────
+# ~/ltdb-install.sh uses these to find files of superseded grammar versions
+# (e.g. Norsyg_2602.* once Norsyg_2608 exists) and offer to delete them.
+# The manifest lists the stem of every grammar DB being deployed.
+echo ""
+echo "==> Uploading the current-grammar manifest and stale-file helper ..."
+manifest_tmp="$(mktemp)"
+trap 'rm -f "$manifest_tmp"' EXIT
+find "$LOCAL_DBS" -maxdepth 1 -type f -name '*.db' -printf '%f\n' \
+  | sed 's/\.db$//' | sort > "$manifest_tmp"
+rsync -az "$manifest_tmp" "$SERVER:~/db-staging/current_grammars.txt"
+rsync -az scripts/stale_grammar_files.py "$SERVER:~/ltdb-stale-check.py"
+echo "    done ($(wc -l < "$manifest_tmp") current grammars)."
+
 # ── grew-match corpora ──────────────────────────────────────────────────────────
 # The grew-match service reads its corpora straight from $REMOTE_GREW_DIR
 # (GREW_CORPORA in deploy/compling/grew-match.service), not from
@@ -85,7 +99,7 @@ echo ""
 if [[ -f "$LOCAL_GREW_CORPORA" ]]; then
   echo "==> Uploading grew-match corpora to $REMOTE_GREW_DIR/ ..."
   grew_tmp="$(mktemp -d)"
-  trap 'rm -rf "$grew_tmp"' EXIT
+  trap 'rm -f "$manifest_tmp"; rm -rf "$grew_tmp"' EXIT
   python3 scripts/remote_grew_corpora.py "$LOCAL_GREW_CORPORA" \
     "$REMOTE_GREW_DIR" "$grew_tmp/grew_corpora.json" > "$grew_tmp/exports"
   ssh "$SERVER" "mkdir -p '$REMOTE_GREW_DIR'"
@@ -106,10 +120,10 @@ echo "==> Writing ~/ltdb-install.sh on compling (reference only — review befor
 ssh "$SERVER" 'cat > ~/ltdb-install.sh' << 'REMOTE'
 #!/usr/bin/env bash
 # Reference install script, written by scripts/push_to_compling.sh.
-# Review before running — a full DB sync can leave superseded grammar
-# files behind (e.g. NorSource_Nov-06.* if ~/db-staging now has a
-# differently dated NorSource snapshot instead); add --delete to the
-# web/db rsync below once you've confirmed nothing else depends on them.
+# Review before running. It first lists files of superseded grammar
+# versions (e.g. NorSource_Nov-06.* once ~/db-staging has a differently
+# dated NorSource snapshot) in staging and in /var/www/ltdb/web/db and
+# asks whether to delete them; answering no leaves everything in place.
 #
 # Usage: bash ~/ltdb-install.sh [--analyzers]
 #   --analyzers  also install the optional parse-demo morphological
@@ -118,6 +132,41 @@ ssh "$SERVER" 'cat > ~/ltdb-install.sh' << 'REMOTE'
 set -euo pipefail
 ANALYZERS=0
 [[ "${1:-}" == "--analyzers" ]] && ANALYZERS=1
+# Offer to delete files of superseded grammar versions, before anything is
+# copied, so they are not re-installed from staging. Only an older version
+# of a grammar that is in the current manifest counts; grammars missing
+# from the manifest are never listed (see ~/ltdb-stale-check.py).
+MANIFEST="$HOME/db-staging/current_grammars.txt"
+if [[ -s "$MANIFEST" && -f "$HOME/ltdb-stale-check.py" ]]; then
+  echo "==> Checking for stale grammar versions ..."
+  mapfile -t stale < <(python3 "$HOME/ltdb-stale-check.py" "$MANIFEST" \
+    "$HOME/db-staging" "$HOME/db-staging/grew" /var/www/ltdb/web/db)
+  if (( ${#stale[@]} == 0 )); then
+    echo "    none found."
+  else
+    printf '    %s\n' "${stale[@]}"
+    reply=n
+    if [[ -t 0 ]]; then
+      read -r -p "    Delete these ${#stale[@]} stale items? [y/N] " reply
+    else
+      echo "    (not a terminal: leaving them in place)"
+    fi
+    if [[ "$reply" == [yY]* ]]; then
+      for item in "${stale[@]}"; do
+        # staging is bond's own; /var/www/ltdb needs sudo
+        if [[ -w "$(dirname "$item")" ]]; then
+          rm -rf -- "$item"
+        else
+          sudo rm -rf -- "$item"
+        fi
+      done
+      echo "    deleted."
+    else
+      echo "    kept."
+    fi
+  fi
+fi
+
 echo "==> Copying app code to /var/www/ltdb/ ..."
 sudo rsync -a --exclude='web/db' ~/ltdb-staging/ /var/www/ltdb/
 

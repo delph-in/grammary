@@ -79,6 +79,13 @@ directly (`GREW_CORPORA` in `grew-match.service`), so there is no second copy
 to install; the running service keeps its already-loaded corpora until step 4
 recompiles them and restarts it.
 
+Finally it writes `~/db-staging/current_grammars.txt` (the stems of the DBs
+being deployed) and `~/ltdb-stale-check.py`. Step 4 uses them to list files of
+superseded grammar versions (e.g. `Norsyg_2602.*` once `Norsyg_2608` exists) in
+`~/db-staging`, `~/db-staging/grew` and `/var/www/ltdb/web/db`, and asks before
+deleting them. Only an older version of a grammar that is being deployed is
+listed; a grammar missing from the manifest is left alone.
+
 **Step 4 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
 
 ```bash

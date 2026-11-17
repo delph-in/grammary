@@ -51,6 +51,12 @@ paths are rewritten for the server by `scripts/remote_grew_corpora.py`. The grew
 reads that directory directly, so there is no separate install copy: `~/ltdb-install.sh`
 recompiles the corpora and restarts `grew-match` after restarting `ltdb`.
 
+Stale versions: the upload also writes `~/db-staging/current_grammars.txt` (the stems of the
+DBs being deployed) and copies `scripts/stale_grammar_files.py` to `~/ltdb-stale-check.py`.
+`~/ltdb-install.sh` starts by listing files and grew exports of older versions of those grammars
+in `~/db-staging`, `~/db-staging/grew` and `/var/www/ltdb/web/db`, and asks before deleting them.
+Grammars absent from the manifest are never listed.
+
 grew-match (structural corpus search) is deployed separately, as its own systemd service under
 `bond` (not `www-data` — entirely independent of `/var/www/ltdb`), reverse-proxied by Apache
 alongside the existing `/ltdb` proxy. The generic version of that setup — script, systemd unit,

@@ -55,7 +55,11 @@ Stale versions: the upload also writes `~/db-staging/current_grammars.txt` (the 
 DBs being deployed) and copies `scripts/stale_grammar_files.py` to `~/ltdb-stale-check.py`.
 `~/ltdb-install.sh` starts by listing files and grew exports of older versions of those grammars
 in `~/db-staging`, `~/db-staging/grew` and `/var/www/ltdb/web/db`, and asks before deleting them.
-Grammars absent from the manifest are never listed.
+Grammars absent from the manifest are never listed. The same check runs locally
+(`scripts/clean_stale_grammars.sh`, where "current" is the newest build of each
+`SHORT_GRAMMAR_NAME` in `build/DBS`): in `scripts/build-ltdb.sh` after the grammars are built
+and before anything is copied or summarised, and at the start of the upload over `build/DBS`
+and `etc/ltdb/web/db`. It only prompts on a terminal; unattended runs list and keep.
 
 grew-match (structural corpus search) is deployed separately, as its own systemd service under
 `bond` (not `www-data` — entirely independent of `/var/www/ltdb`), reverse-proxied by Apache

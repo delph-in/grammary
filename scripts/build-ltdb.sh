@@ -63,6 +63,14 @@ while IFS= read -r file; do
     echo
 done < <(find "${BUILD}" -type f -name "METADATA")
 
+# Offer to delete files of superseded grammar versions from ${DBS} before
+# they are copied to the web app, merged into the grew corpora, or listed
+# in docs/summary.md (all of which happen after this point). Only asks on
+# a terminal; an unattended build just lists them.
+echo
+bash scripts/clean_stale_grammars.sh "${DBS}" \
+    || echo "⚠️ Stale-version check failed; continuing with the build output as is"
+
 echo
 echo "🚀 Successfully created the following grammars"
 find "${DBS}" -type f -name '*.db' -size +0c -exec du -h {} + | sort -h

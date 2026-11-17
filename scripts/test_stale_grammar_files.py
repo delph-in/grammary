@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+import sqlite3
 from pathlib import Path
 
 from scripts import stale_grammar_files as sgf
@@ -84,3 +86,36 @@ def test_read_manifest_ignores_blank_lines(tmp_path: Path) -> None:
     manifest.write_text("Norsyg_2608\n\n ERG_2025 \n", encoding="utf-8")
 
     assert sgf.read_manifest(manifest) == {"Norsyg_2608", "ERG_2025"}
+
+
+def _make_db(path: Path, name: str, mtime: int) -> None:
+    with sqlite3.connect(path) as conn:
+        conn.execute("CREATE TABLE meta (att TEXT, val TEXT)")
+        conn.execute("INSERT INTO meta VALUES ('SHORT_GRAMMAR_NAME', ?)", (name,))
+    os.utime(path, (mtime, mtime))
+
+
+def test_newest_stems_keeps_latest_build_per_grammar(tmp_path: Path) -> None:
+    _make_db(tmp_path / "Norsyg_2602.db", "Norsyg", 100)
+    _make_db(tmp_path / "Norsyg_2608.db", "Norsyg", 200)
+    _make_db(tmp_path / "ERG_2025.db", "ERG", 50)
+
+    assert sgf.newest_stems(tmp_path) == {"Norsyg_2608", "ERG_2025"}
+
+
+def test_newest_stems_groups_by_recorded_name_not_prefix(tmp_path: Path) -> None:
+    # both share the "wambaya" prefix but are different grammars
+    _make_db(tmp_path / "wambaya_aux_2009.db", "wambaya_aux", 100)
+    _make_db(tmp_path / "wambaya_cmp_2009.db", "wambaya_cmp", 200)
+
+    current = sgf.newest_stems(tmp_path)
+
+    assert current == {"wambaya_aux_2009", "wambaya_cmp_2009"}
+    assert sgf.find_stale([tmp_path], current) == []
+
+
+def test_newest_stems_ignores_empty_placeholder(tmp_path: Path) -> None:
+    _make_db(tmp_path / "Norsyg_2608.db", "Norsyg", 100)
+    (tmp_path / "Norsyg_2609.db").write_bytes(b"")
+
+    assert sgf.newest_stems(tmp_path) == {"Norsyg_2608"}

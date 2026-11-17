@@ -86,6 +86,13 @@ superseded grammar versions (e.g. `Norsyg_2602.*` once `Norsyg_2608` exists) in
 deleting them. Only an older version of a grammar that is being deployed is
 listed; a grammar missing from the manifest is left alone.
 
+Before uploading anything, the script runs the same check locally
+(`scripts/clean_stale_grammars.sh`) on `build/DBS` and `etc/ltdb/web/db`
+(current = the newest build of each `SHORT_GRAMMAR_NAME` in `build/DBS`) and
+asks before deleting. If it removes entries, regenerate `docs/summary.md`.
+`scripts/build-ltdb.sh` runs the same check on `build/DBS` right after
+building, so a full `compile.sh` normally leaves nothing for the upload to find.
+
 **Step 4 — on compling (needs sudo), after reviewing `~/ltdb-install.sh`:**
 
 ```bash

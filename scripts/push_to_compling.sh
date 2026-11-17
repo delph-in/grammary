@@ -4,6 +4,9 @@
 # directories below (~/ltdb-staging, ~/db-staging) — nothing under
 # /var/www/ltdb is touched, and no sudo is used or required.
 #
+# It first offers to delete local files of superseded grammar versions
+# (build/DBS and etc/ltdb/web/db), so they are not uploaded again.
+#
 # The grew-match corpora (graph exports + a server-side corpora
 # description) go to ~/db-staging/grew, which the grew-match service
 # reads directly; it only picks them up when restarted in step 2.
@@ -30,6 +33,8 @@ LOCAL_APP="etc/ltdb"
 # already filtered to non-empty .db/.dat/.log by scripts/build-ltdb.sh
 # (build/DBS itself can contain empty placeholders for failed builds)
 LOCAL_DBS="etc/ltdb/web/db"
+# build output; its newest .db per grammar defines the current versions
+LOCAL_BUILD_DBS="build/DBS"
 LOCAL_BLURB="blurb.md"
 # merged grew corpora description written by scripts/build-ltdb.sh
 LOCAL_GREW_CORPORA="$LOCAL_DBS/grew_corpora.json"
@@ -50,6 +55,13 @@ usage() {
 }
 
 [[ ${1:-} == "upload" ]] || usage
+
+# ── Local stale-version check ─────────────────────────────────────────────────
+# Before anything is uploaded, offer to delete local files of superseded
+# grammar versions, so they are not uploaded again.
+bash scripts/clean_stale_grammars.sh --refresh-derived \
+  "$LOCAL_BUILD_DBS" "$LOCAL_DBS"
+echo ""
 
 # ── App code ──────────────────────────────────────────────────────────────────
 echo "==> Uploading app code to ~/ltdb-staging/ ..."
@@ -139,7 +151,8 @@ ANALYZERS=0
 MANIFEST="$HOME/db-staging/current_grammars.txt"
 if [[ -s "$MANIFEST" && -f "$HOME/ltdb-stale-check.py" ]]; then
   echo "==> Checking for stale grammar versions ..."
-  mapfile -t stale < <(python3 "$HOME/ltdb-stale-check.py" "$MANIFEST" \
+  mapfile -t stale < <(python3 "$HOME/ltdb-stale-check.py" \
+    --manifest "$MANIFEST" \
     "$HOME/db-staging" "$HOME/db-staging/grew" /var/www/ltdb/web/db)
   if (( ${#stale[@]} == 0 )); then
     echo "    none found."

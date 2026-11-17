@@ -23,10 +23,9 @@ import argparse
 import json
 import logging
 import subprocess
+import tomllib
 import urllib.request
 from pathlib import Path
-
-import toml
 
 logger = logging.getLogger(__name__)
 
@@ -123,7 +122,8 @@ def load_baseline(path: Path) -> dict[str, str]:
 
 def collect_revisions(toml_path: Path) -> dict[str, str]:
     """Resolve the current upstream revision of every grammar in *toml_path*."""
-    config = toml.load(toml_path)
+    with toml_path.open("rb") as f:
+        config = tomllib.load(f)
     revisions: dict[str, str] = {}
     for name, info in config.items():
         if not isinstance(info, dict):
